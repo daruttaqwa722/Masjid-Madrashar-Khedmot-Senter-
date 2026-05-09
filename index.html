@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>মসজিদ মাদ্রাসার খেদমত সেন্টার</title>
-  <link rel="icon" href="khedmot.jpg" >
+<title>মসজিদ-মাদ্রাসার খেদমত সেন্টার</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
@@ -218,12 +217,12 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       </div>
       <a class="btn anim-item" href="https://wa.me/message/3T5Z7CFFDAJBL1" target="_blank" style="animation-delay:.45s">
         <div class="btn-icon">💬</div>
-        <div class="btn-text">আমাদের হোয়াটসঅ্যাপ প্রোফাইল</div>
+        <div class="btn-text">আমাদের হোয়াটসঅ্যাপ লিংক</div>
         <div class="btn-arrow">›</div>
       </a>
       <a class="btn anim-item" href="https://whatsapp.com/channel/0029VbD4Jr90VycNzIs5nM0c" target="_blank" style="animation-delay:.52s">
         <div class="btn-icon">📢</div>
-        <div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল</div>
+        <div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল লিংক</div>
         <div class="btn-arrow">›</div>
       </a>
     </div>
@@ -238,7 +237,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
         <div class="btn-text">আমাদের ফেসবুক পেইজ লিংক</div>
         <div class="btn-arrow">›</div>
       </a>
-      <a class="btn anim-item" href="" target="_blank" style="animation-delay:.72s">
+      <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.72s">
         <div class="btn-icon">👥</div>
         <div class="btn-text">আমাদের ফেসবুক গ্রুপ লিংক</div>
         <div class="btn-arrow">›</div>
@@ -474,21 +473,24 @@ function toast(msg,type=''){
    আপনার Firebase Console → Project Settings থেকে
    নিচের config-এ আপনার তথ্য বসান
 ────────────────────────────────────────────────*/
- const firebaseConfig = {
-  apiKey: "AIzaSyCrwV0SeX3toXhcNbFJTyP3omP2WFIHIc0",
-  authDomain: "jihadul-islam.firebaseapp.com",
-  projectId: "jihadul-islam",
-  storageBucket: "jihadul-islam.firebasestorage.app",
-  messagingSenderId: "1060395149435",
-  appId: "1:1060395149435:web:618685240d5a77c75b1ade"
+const firebaseConfig = {
+  apiKey:            "AIzaSyAcTJsg367e4AMSIII6HsRIIFbACoP7dqA",
+  authDomain:        "khedmot-senter.firebaseapp.com",
+  projectId:         "khedmot-senter",
+  storageBucket:     "khedmot-senter.firebasestorage.app",
+  messagingSenderId: "762215417966",
+  appId:             "1:762215417966:web:e63b5c2cce97693e8ebe7f",
+  measurementId:     "G-1RZCLEJHK2"
 };
-    
-  
+
+let db=null,unsubscribe=null;
+try{firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){console.warn('Firebase:',e);}
+
 /* ─── PASSWORDS ─────────────────────────────────
    এখানে পাসওয়ার্ড পরিবর্তন করুন
 ────────────────────────────────────────────────*/
-const COMM_PWD  = "ismail722";   // ← কমিউনিটি পাসওয়ার্ড
-const ADMIN_PWD = "@JiHaDuL@"; // ← অ্যাডমিন পাসওয়ার্ড
+const COMM_PWD  = "khedmot2025";   // ← কমিউনিটি পাসওয়ার্ড
+const ADMIN_PWD = "admin@khedmot"; // ← অ্যাডমিন পাসওয়ার্ড
 
 let curUser=null,isAdmin=false;
 
@@ -536,21 +538,38 @@ function publishPost(){
   if(!txt){toast('পোস্ট লিখুন','red');return;}
   const btn=document.getElementById('publish-btn');
   btn.disabled=true;btn.textContent='Publishing…';
-  db.collection('posts').add({text:txt,author:curUser,timestamp:firebase.firestore.FieldValue.serverTimestamp()})
-    .then(()=>{document.getElementById('post-textarea').value='';updateChar();btn.disabled=false;btn.textContent='Publish Post';toast('পোস্ট প্রকাশিত হয়েছে ✓','green');})
-    .catch(e=>{btn.disabled=false;btn.textContent='Publish Post';toast('Error: '+e.message,'red');});
+  const now=new Date();
+  db.collection('posts').add({
+    text:txt,
+    author:curUser,
+    timeStr:now.toLocaleString('bn-BD'),
+    created:now.getTime()
+  })
+  .then(()=>{
+    document.getElementById('post-textarea').value='';
+    updateChar();
+    btn.disabled=false;
+    btn.textContent='Publish Post';
+    toast('পোস্ট প্রকাশিত হয়েছে ✓','green');
+  })
+  .catch(e=>{
+    btn.disabled=false;
+    btn.textContent='Publish Post';
+    toast('সমস্যা হয়েছে','red');
+    alert('Error: '+e.code+' — '+e.message);
+  });
 }
 function loadPosts(){
   if(!db){document.getElementById('posts-container').innerHTML=noPosts();return;}
   if(unsubscribe)unsubscribe();
-  unsubscribe=db.collection('posts').orderBy('timestamp','desc').onSnapshot(snap=>{
+  unsubscribe=db.collection('posts').orderBy('created','desc').onSnapshot(snap=>{
     const c=document.getElementById('posts-container');
     document.getElementById('posts-count').textContent=snap.size;
     if(snap.empty){c.innerHTML=noPosts();return;}
     c.innerHTML='';
     snap.forEach(doc=>{
       const d=doc.data();
-      const ts=d.timestamp?d.timestamp.toDate().toLocaleString('bn-BD'):'—';
+      const ts=d.timeStr||'—';
       const el=document.createElement('div');el.className='post-card';
       el.innerHTML=`<div class="post-text">${esc(d.text)}</div><div class="post-time">${ts}</div>${isAdmin?`<button class="delete-post-btn" onclick="delPost('${doc.id}')">✕</button>`:''}`;
       c.appendChild(el);
