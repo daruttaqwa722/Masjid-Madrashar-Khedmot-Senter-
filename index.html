@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>মসজিদ-মাদ্রাসার খেদমত সেন্টার</title>
-
-  <link rel="icon" href="shikkha.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
@@ -178,7 +176,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 <div class="home-page">
   <div class="header">
     <div class="emblem">&#9728;</div>
-    <h1>মসজিদ মাদ্রাসার খেদমত</h>
+    <h1>মসজিদ মাদ্রাসার খেদমত</h1>
     <p>সব গুরুত্বপূর্ণ লিংক এক জায়গায়</p>
   </div>
   <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
@@ -218,7 +216,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
     <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.65s">
       <div class="btn-icon">&#128196;</div><div class="btn-text">আমাদের ফেসবুক পেইজ লিংক</div><div class="btn-arrow">&#8250;</div>
     </a>
-    <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.72s">
+    <a class="btn anim-item" href="https://www.facebook.com/share/g/1BCyorfCey/" target="_blank" style="animation-delay:.72s">
       <div class="btn-icon">&#128101;</div><div class="btn-text">আমাদের ফেসবুক গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
     </a>
     <a class="btn anim-item" href="https://www.messenger.com/channel/HafizQuriJihadulislam" target="_blank" style="animation-delay:.79s">
@@ -454,14 +452,14 @@ function delPost(id){
 function noPostsHTML(){return'<div class="no-posts"><span>&#128332;</span>No Posts Yet<br><small style="margin-top:8px;display:block">The community board is empty.</small></div>';}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-var imgB64=null;
+var selectedFile=null;
 function previewImg(inp){
   var f=inp.files[0];if(!f)return;
-  if(f.size>2097152){toast('ফটো ২MB এর বেশি হবে না','red');return;}
+  if(f.size>10485760){toast('ফটো ১০MB এর বেশি হবে না','red');return;}
+  selectedFile=f;
   var r=new FileReader();
   r.onload=function(e){
-    imgB64=e.target.result;
-    document.getElementById('img-pe').src=imgB64;
+    document.getElementById('img-pe').src=e.target.result;
     document.getElementById('img-pw').style.display='block';
     document.getElementById('img-cap').style.display='block';
     document.getElementById('pub-img-btn').style.display='block';
@@ -469,15 +467,32 @@ function previewImg(inp){
   r.readAsDataURL(f);
 }
 function publishImg(){
-  if(!imgB64){toast('ফটো সিলেক্ট করুন','red');return;}
+  if(!selectedFile){toast('ফটো সিলেক্ট করুন','red');return;}
   if(!db){toast('Firebase error','red');return;}
   var cap=document.getElementById('img-cap').value.trim();
   var btn=document.getElementById('pub-img-btn');
   btn.disabled=true;btn.textContent='আপলোড হচ্ছে...';
-  var now=new Date();
-  db.collection('photos').add({imgData:imgB64,caption:cap,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()})
+
+  var formData=new FormData();
+  formData.append('file',selectedFile);
+  formData.append('upload_preset','masjid_upload');
+  formData.append('cloud_name','dlwk33bws');
+
+  fetch('https://api.cloudinary.com/v1_1/dlwk33bws/image/upload',{method:'POST',body:formData})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data.secure_url){throw new Error('আপলোড ব্যর্থ হয়েছে');}
+    var now=new Date();
+    return db.collection('photos').add({
+      imgUrl:data.secure_url,
+      caption:cap,
+      author:curUser,
+      timeStr:now.toLocaleString('bn-BD'),
+      created:now.getTime()
+    });
+  })
   .then(function(){
-    imgB64=null;
+    selectedFile=null;
     document.getElementById('img-file').value='';
     document.getElementById('img-pw').style.display='none';
     document.getElementById('img-cap').style.display='none';
@@ -486,7 +501,11 @@ function publishImg(){
     btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';
     toast('ফটো হোম পেজে যোগ হয়েছে','green');
   })
-  .catch(function(e){btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
+  .catch(function(e){
+    btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';
+    toast('সমস্যা হয়েছে','red');
+    alert(e.message);
+  });
 }
 
 function loadHomePhotos(){
@@ -500,7 +519,7 @@ function loadHomePhotos(){
       var d=doc.data();
       var card=document.createElement('div');card.className='photo-card';
       var dBtn=isAdmin?'<button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">&#10005;</button>':'';
-      card.innerHTML='<img src="'+d.imgData+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>'+dBtn;
+      card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>'+dBtn;
       g.appendChild(card);
     });
   });
