@@ -3,799 +3,545 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bulk Post Manager</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>মসজিদ-মাদ্রাসার খেদমত সেন্টার</title>
+
+  <link rel="icon" href="shikkha.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #0f1117;
-    --bg2: #171c27;
-    --bg3: #1e2535;
-    --border: #2a3148;
-    --border2: #3a4460;
-    --text: #e8eaf2;
-    --text2: #8a93b0;
-    --text3: #5a6380;
-    --accent: #4f7cff;
-    --accent-dim: rgba(79,124,255,0.12);
-    --danger: #ff4f6a;
-    --danger-dim: rgba(255,79,106,0.1);
-    --warning: #ffb84f;
-    --warning-dim: rgba(255,184,79,0.1);
-    --success: #3dd68c;
-    --success-dim: rgba(61,214,140,0.1);
-    --mono: 'IBM Plex Mono', monospace;
-    --sans: 'IBM Plex Sans', sans-serif;
-    --radius: 8px;
-    --radius-lg: 12px;
-  }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* HEADER */
-  header {
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 100;
-  }
-  .logo {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .header-sep { flex: 1; }
-  .post-count {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text3);
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-  .post-count span { color: var(--accent); font-weight: 500; }
-
-  /* MAIN LAYOUT */
-  .layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    min-height: calc(100vh - 56px);
-  }
-
-  /* LEFT PANEL: editor */
-  .editor-panel {
-    border-right: 1px solid var(--border);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-  .panel-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 0.25rem;
-  }
-  textarea#postInput {
-    width: 100%;
-    min-height: 260px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 13px;
-    line-height: 1.8;
-    padding: 1rem 1.25rem;
-    resize: vertical;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  textarea#postInput:focus {
-    border-color: var(--accent);
-  }
-  textarea#postInput::placeholder {
-    color: var(--text3);
-  }
-
-  /* CHAR / LINE COUNT */
-  .meta-bar {
-    display: flex;
-    gap: 1.5rem;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-  }
-  .meta-bar b { color: var(--text2); }
-
-  /* SUBMIT BUTTON */
-  .btn-submit {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.5rem;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.15s, transform 0.1s;
-    align-self: flex-start;
-  }
-  .btn-submit:hover { opacity: 0.88; }
-  .btn-submit:active { transform: scale(0.98); }
-  .btn-submit svg { flex-shrink: 0; }
-
-  /* WARNING BOX */
-  #warningBox {
-    display: none;
-    background: var(--warning-dim);
-    border: 1px solid rgba(255,184,79,0.35);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem;
-  }
-  #warningBox.visible { display: block; }
-  .warn-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 500;
-    color: var(--warning);
-    font-size: 14px;
-    margin-bottom: 1rem;
-  }
-  .warn-item {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 0.85rem 1rem;
-    margin-bottom: 0.75rem;
-    font-size: 13px;
-  }
-  .warn-item:last-child { margin-bottom: 0; }
-  .warn-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .badge-pct {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--warning);
-    background: rgba(255,184,79,0.15);
-    border: 1px solid rgba(255,184,79,0.3);
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-  .badge-id {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-    background: var(--bg3);
-    padding: 2px 8px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
-  .warn-matches {
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.6;
-  }
-  .match-line {
-    display: inline-block;
-    background: rgba(255,184,79,0.08);
-    border-left: 2px solid var(--warning);
-    padding: 2px 8px;
-    margin: 2px 0;
-    border-radius: 0 3px 3px 0;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--warning);
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-  .warn-actions {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 1rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--border);
-  }
-  .btn-force {
-    padding: 0.5rem 1rem;
-    background: var(--warning);
-    color: #0f1117;
-    border: none;
-    border-radius: var(--radius);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
-  .btn-force:hover { opacity: 0.85; }
-  .btn-cancel {
-    padding: 0.5rem 1rem;
-    background: transparent;
-    color: var(--text2);
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .btn-cancel:hover { background: var(--bg3); }
-
-  /* SUCCESS TOAST */
-  #toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--success-dim);
-    border: 1px solid rgba(61,214,140,0.35);
-    color: var(--success);
-    padding: 0.75rem 1.25rem;
-    border-radius: var(--radius);
-    font-size: 13px;
-    font-weight: 500;
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: none;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  #toast.show { opacity: 1; transform: translateY(0); }
-
-  /* RIGHT PANEL: posts list */
-  .posts-panel {
-    padding: 2rem;
-    overflow-y: auto;
-  }
-  .posts-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.25rem;
-  }
-  .empty-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: var(--text3);
-    font-size: 13px;
-    font-family: var(--mono);
-  }
-  .empty-state .empty-icon {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 0.75rem;
-    opacity: 0.3;
-  }
-
-  /* POST CARD */
-  .post-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem;
-    margin-bottom: 0.75rem;
-    transition: border-color 0.2s;
-    animation: slideIn 0.25s ease;
-  }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .post-card:hover { border-color: var(--border2); }
-  .post-card-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin-bottom: 0.6rem;
-  }
-  .post-card-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-  }
-  .post-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    background: var(--accent-dim);
-    padding: 2px 7px;
-    border-radius: 4px;
-    border: 1px solid rgba(79,124,255,0.25);
-  }
-  .post-date {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-  }
-  .post-lines {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-    background: var(--bg3);
-    padding: 2px 7px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
-  .post-body {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.7;
-    white-space: pre-wrap;
-    word-break: break-word;
-    max-height: 120px;
-    overflow: hidden;
-    position: relative;
-  }
-  .post-body.expanded { max-height: none; }
-  .post-body::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 36px;
-    background: linear-gradient(transparent, var(--bg2));
-    pointer-events: none;
-  }
-  .post-body.expanded::after { display: none; }
-  .post-expand {
-    font-size: 11px;
-    color: var(--accent);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px 0;
-    margin-top: 4px;
-    font-family: var(--mono);
-    display: block;
-  }
-  .post-expand:hover { text-decoration: underline; }
-  .btn-delete {
-    flex-shrink: 0;
-    width: 30px;
-    height: 30px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text3);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-  }
-  .btn-delete:hover {
-    background: var(--danger-dim);
-    color: var(--danger);
-    border-color: rgba(255,79,106,0.35);
-  }
-
-  /* CONFIRM DIALOG */
-  .confirm-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
-  .confirm-overlay.visible {
-    opacity: 1;
-    pointer-events: all;
-  }
-  .confirm-box {
-    background: var(--bg2);
-    border: 1px solid var(--border2);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    width: 340px;
-    max-width: 90vw;
-  }
-  .confirm-box h3 {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-  .confirm-box p {
-    font-size: 13px;
-    color: var(--text2);
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-  }
-  .confirm-actions {
-    display: flex;
-    gap: 0.6rem;
-    justify-content: flex-end;
-  }
-  .btn-danger {
-    padding: 0.5rem 1rem;
-    background: var(--danger);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
-  .btn-danger:hover { opacity: 0.85; }
-
-  @media (max-width: 800px) {
-    .layout { grid-template-columns: 1fr; }
-    .editor-panel { border-right: none; border-bottom: 1px solid var(--border); }
-  }
+:root{--gold:#d4a843;--gold-light:#f0c96a;--gold-dim:#9a7428;--green:#22c55e;--green-glow:rgba(34,197,94,0.25);--bg-deep:#050d1a;--bg-card:rgba(255,255,255,0.04);--bg-card-hover:rgba(255,255,255,0.07);--border:rgba(212,168,67,0.2);--border-hover:rgba(212,168,67,0.55);--text-muted:#8fa0b8;--text-body:#ccd9ea}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:white}
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(212,168,67,.12) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 80% 110%,rgba(34,197,94,.08) 0%,transparent 60%),linear-gradient(180deg,#050d1a 0%,#081525 50%,#050d1a 100%)}
+.bg-layer::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.04) 1px,transparent 1px);background-size:60px 60px}
+.particle{position:fixed;border-radius:50%;background:var(--gold-light);opacity:0;pointer-events:none;animation:drift linear infinite}
+@keyframes drift{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.6}90%{opacity:.3}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+.screen{display:none;position:relative;z-index:1;min-height:100vh}
+.screen.active{display:block}
+.back-bar{position:sticky;top:0;z-index:100;padding:14px 20px;backdrop-filter:blur(20px);background:rgba(5,13,26,.85);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.back-btn{display:flex;align-items:center;gap:8px;background:rgba(212,168,67,.1);border:1px solid var(--border);color:var(--gold);padding:8px 16px;border-radius:8px;font-family:'Noto Sans Bengali',sans-serif;font-size:13px;cursor:pointer;transition:all .25s}
+.back-btn:hover{background:rgba(212,168,67,.2);border-color:var(--border-hover)}
+.back-title{color:var(--text-muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home-page{max-width:560px;margin:0 auto;padding:48px 20px 80px}
+.header{text-align:center;margin-bottom:44px;animation:fadeDown .8s ease both}
+.emblem{width:88px;height:88px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,rgba(212,168,67,.15),rgba(212,168,67,.05));border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 0 40px rgba(212,168,67,.12),inset 0 0 20px rgba(212,168,67,.06);position:relative}
+.emblem::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px dashed rgba(212,168,67,.25);animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.header h1{font-family:'Noto Serif Bengali',serif;font-size:clamp(22px,5vw,28px);font-weight:700;color:#fff;line-height:1.4;text-shadow:0 0 30px rgba(212,168,67,.3)}
+.header p{margin-top:10px;font-size:14px;color:var(--text-muted);font-weight:300}
+.divider{display:flex;align-items:center;gap:12px;margin:0 auto 32px;width:220px}
+.divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
+.divider-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 8px var(--gold)}
+.section{margin-bottom:28px}
+.section-label{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:0 4px}
+.section-label-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.section-label span{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.btn{display:flex;align-items:center;gap:14px;background:var(--bg-card);color:#fff;padding:16px 20px;margin:10px 0;text-decoration:none;border-radius:14px;font-size:15px;font-family:'Noto Sans Bengali',sans-serif;font-weight:500;line-height:1.5;border:1px solid var(--border);transition:all .35s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;backdrop-filter:blur(10px);cursor:pointer;width:100%;text-align:inherit}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,168,67,.06) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.btn:hover{background:var(--bg-card-hover);border-color:var(--border-hover);transform:translateY(-3px) scale(1.015);box-shadow:0 12px 32px rgba(0,0,0,.4),0 0 0 1px rgba(212,168,67,.2);color:#fff}
+.btn:hover::before{opacity:1}
+.btn:active{transform:translateY(-1px) scale(1.005)}
+.btn-green{background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(34,197,94,.08));border-color:rgba(34,197,94,.35)}
+.btn-green:hover{background:linear-gradient(135deg,rgba(34,197,94,.28),rgba(34,197,94,.14));border-color:rgba(34,197,94,.7);box-shadow:0 12px 32px rgba(0,0,0,.4),0 0 20px var(--green-glow)}
+.btn-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);transition:transform .3s ease}
+.btn:hover .btn-icon{transform:scale(1.1) rotate(-5deg)}
+.btn-text{flex:1;text-align:right}
+.btn-arrow{opacity:.4;font-size:12px;transition:all .3s ease;flex-shrink:0}
+.btn:hover .btn-arrow{opacity:.9;transform:translateX(4px)}
+.home-footer{text-align:center;margin-top:50px;color:rgba(139,160,184,.45);font-size:12px}
+.home-footer-ornament{font-size:18px;display:block;margin-bottom:8px;opacity:.5}
+/* STATS */
+.stats-card{background:linear-gradient(135deg,rgba(212,168,67,.1),rgba(212,168,67,.04));border:1px solid var(--border-hover);border-radius:16px;padding:20px;margin-bottom:28px;display:none}
+.stats-card.show{display:block}
+.stats-card h3{color:var(--gold);font-size:14px;margin-bottom:14px;font-weight:600}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat-box{background:rgba(0,0,0,.2);border-radius:10px;padding:14px;text-align:center}
+.stat-num{font-size:28px;font-weight:700;color:#fff;display:block}
+.stat-label{font-size:11px;color:var(--text-muted);margin-top:4px}
+/* HOME PHOTOS */
+.home-photos-section{margin-top:36px}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.photo-card{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);position:relative;transition:transform .3s,border-color .3s}
+.photo-card:hover{transform:scale(1.02);border-color:var(--border-hover)}
+.photo-card img{width:100%;height:160px;object-fit:cover;display:block}
+.photo-caption-text{padding:8px 12px;font-size:12px;color:var(--text-muted)}
+.del-photo-btn{position:absolute;top:8px;right:8px;background:rgba(239,68,68,.85);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;display:none;align-items:center;justify-content:center}
+.photo-card:hover .del-photo-btn{display:flex}
+/* NEWS */
+.news-content{max-width:700px;margin:0 auto;padding:32px 20px 80px}
+.news-hero{text-align:center;padding:36px 20px 28px;margin-bottom:20px;background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.03));border:1px solid var(--border);border-radius:20px;position:relative;overflow:hidden}
+.news-hero::before{content:'';position:absolute;top:-20px;right:-20px;font-size:100px;opacity:.05;transform:rotate(15deg)}
+.news-hero h1{font-family:'Noto Serif Bengali',serif;font-size:clamp(20px,4.5vw,26px);font-weight:700;color:#fff;margin-bottom:12px;line-height:1.4;text-shadow:0 0 30px rgba(212,168,67,.3)}
+.news-hero .admin-name{color:var(--gold);font-size:15px;font-weight:600;display:block;margin-bottom:6px}
+.news-hero .admin-role{color:var(--text-muted);font-size:13px}
+.news-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px;backdrop-filter:blur(10px)}
+.news-card h3{font-family:'Noto Serif Bengali',serif;font-size:17px;font-weight:700;color:var(--gold);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.news-card p{color:var(--text-body);font-size:14.5px;line-height:1.85;margin-bottom:10px}
+.news-card p:last-child{margin-bottom:0}
+.news-list{list-style:none;padding:0}
+.news-list li{color:var(--text-body);font-size:14.5px;line-height:1.85;padding:5px 0;display:flex;align-items:flex-start;gap:10px}
+.news-list li::before{content:'✔️';flex-shrink:0;margin-top:2px}
+.highlight-box{background:linear-gradient(135deg,rgba(212,168,67,.1),rgba(212,168,67,.04));border:1px solid var(--border-hover);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--gold-light);font-size:14.5px;line-height:1.85}
+.contact-card{background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(34,197,94,.05));border:1px solid rgba(34,197,94,.35);border-radius:16px;padding:24px;margin-bottom:16px;text-align:center}
+.contact-card .phone{font-size:22px;font-weight:700;color:var(--green);letter-spacing:.05em;margin:8px 0;display:block}
+.contact-card p{color:var(--text-body);font-size:14px}
+.whatsapp-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c3e);color:#fff;text-decoration:none;padding:14px 28px;border-radius:12px;font-family:'Noto Sans Bengali',sans-serif;font-size:15px;font-weight:600;margin-top:12px;box-shadow:0 4px 20px rgba(37,211,102,.3);transition:all .3s ease}
+.whatsapp-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
+.news-footer-text{text-align:center;color:var(--text-muted);font-size:13px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+/* CENTER */
+.center-wrap{max-width:600px;margin:0 auto;padding:32px 20px 80px}
+.bismillah-banner{text-align:center;padding:20px;margin-bottom:24px;background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.03));border:1px solid var(--border);border-radius:16px}
+.bismillah-ar{font-size:22px;color:var(--gold);display:block;margin-bottom:4px;letter-spacing:.05em}
+.bismillah-en{font-size:12px;color:var(--text-muted)}
+.login-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:32px 24px;margin-bottom:20px;backdrop-filter:blur(10px)}
+.login-title{font-family:'Noto Serif Bengali',serif;font-size:20px;color:#fff;text-align:center;margin-bottom:8px;font-weight:700}
+.login-subtitle{text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:24px}
+.field-label{font-size:13px;color:var(--gold);margin-bottom:6px;display:block;font-weight:500}
+.field-input{width:100%;padding:13px 16px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;color:#fff;font-family:'Noto Sans Bengali',sans-serif;font-size:14px;margin-bottom:16px;transition:border-color .25s,box-shadow .25s;outline:none}
+.field-input:focus{border-color:var(--border-hover);box-shadow:0 0 0 3px rgba(212,168,67,.1)}
+.field-input::placeholder{color:rgba(139,160,184,.5)}
+.login-btn-main{width:100%;padding:14px;background:linear-gradient(135deg,rgba(34,197,94,.25),rgba(34,197,94,.12));border:1px solid rgba(34,197,94,.4);border-radius:10px;color:#fff;font-family:'Noto Sans Bengali',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s ease}
+.login-btn-main:hover{background:linear-gradient(135deg,rgba(34,197,94,.35),rgba(34,197,94,.2));border-color:rgba(34,197,94,.7);transform:translateY(-1px)}
+.or-divider{text-align:center;color:var(--text-muted);font-size:12px;margin:16px 0;position:relative}
+.or-divider::before,.or-divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--border)}
+.or-divider::before{left:0}.or-divider::after{right:0}
+.admin-toggle{background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:'Noto Sans Bengali',sans-serif;font-size:13px;padding:10px;border-radius:10px;width:100%;cursor:pointer;transition:all .25s}
+.admin-toggle:hover{border-color:var(--border-hover);color:var(--gold)}
+.admin-panel-inner{margin-top:14px;display:none}
+.admin-panel-inner.open{display:block}
+.admin-login-btn{width:100%;padding:12px;background:linear-gradient(135deg,rgba(212,168,67,.15),rgba(212,168,67,.05));border:1px solid var(--border);border-radius:10px;color:var(--gold);font-family:'Noto Sans Bengali',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s}
+.admin-login-btn:hover{background:rgba(212,168,67,.25)}
+.pwd-note{text-align:center;margin-top:16px;background:rgba(212,168,67,.06);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:12.5px;color:var(--text-muted);line-height:1.7}
+.pwd-note a{color:var(--gold);text-decoration:none}
+#community-view{display:none}
+#community-view.show{display:block}
+.community-header{display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:20px}
+.user-badge{display:flex;align-items:center;gap:10px}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),rgba(212,168,67,.3));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px}
+.user-name{font-size:14px;font-weight:600;color:#fff}
+.user-role{font-size:11px;color:var(--text-muted);margin-top:2px}
+.signout-btn{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:8px 14px;border-radius:8px;font-family:'Noto Sans Bengali',sans-serif;font-size:13px;cursor:pointer;transition:all .25s}
+.signout-btn:hover{background:rgba(239,68,68,.2)}
+#admin-post-area{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px;display:none}
+#admin-post-area h3{color:var(--gold);font-size:16px;margin-bottom:14px}
+#post-textarea{width:100%;height:140px;padding:13px 16px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;color:#fff;font-family:'Noto Sans Bengali',sans-serif;font-size:14px;resize:vertical;outline:none;transition:border-color .25s}
+#post-textarea:focus{border-color:var(--border-hover)}
+.char-count{font-size:11px;color:var(--text-muted);text-align:right;margin-top:6px}
+.dup-warning{display:none;background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.4);border-radius:10px;padding:12px 16px;margin-top:10px;font-size:13px;color:#fde047;line-height:1.6}
+.dup-warning.show{display:block}
+.img-upload-area{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
+.img-upload-label{font-size:13px;color:var(--gold);display:block;margin-bottom:8px;font-weight:500}
+.img-upload-btn{display:flex;align-items:center;gap:8px;background:rgba(212,168,67,.08);border:1px dashed var(--border);border-radius:10px;padding:12px 16px;color:var(--text-muted);font-family:'Noto Sans Bengali',sans-serif;font-size:13px;cursor:pointer;transition:all .25s;width:100%}
+.img-upload-btn:hover{border-color:var(--border-hover);color:var(--gold-light)}
+.img-preview-wrap{margin-top:10px;display:none}
+.img-preview-wrap img{width:100%;max-height:200px;object-fit:cover;border-radius:10px}
+.img-cap-input{width:100%;padding:10px 14px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;color:#fff;font-family:'Noto Sans Bengali',sans-serif;font-size:13px;margin-top:8px;outline:none;display:none}
+.img-cap-input:focus{border-color:var(--border-hover)}
+.publish-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.publish-btn{padding:13px;background:linear-gradient(135deg,rgba(34,197,94,.25),rgba(34,197,94,.1));border:1px solid rgba(34,197,94,.4);border-radius:10px;color:#fff;font-family:'Noto Sans Bengali',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s}
+.publish-btn:hover{background:linear-gradient(135deg,rgba(34,197,94,.35),rgba(34,197,94,.18))}
+.publish-btn:disabled{opacity:.5;cursor:not-allowed}
+.publish-img-btn{padding:13px;background:linear-gradient(135deg,rgba(212,168,67,.2),rgba(212,168,67,.08));border:1px solid var(--border);border-radius:10px;color:var(--gold);font-family:'Noto Sans Bengali',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;display:none}
+.publish-img-btn:hover{background:rgba(212,168,67,.3)}
+.publish-img-btn:disabled{opacity:.5;cursor:not-allowed}
+.posts-section h3{color:var(--gold);font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.posts-count{background:rgba(212,168,67,.15);border:1px solid var(--border);border-radius:20px;padding:2px 10px;font-size:12px}
+.post-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:12px;position:relative;transition:border-color .25s;animation:fadeUp .4s ease both}
+.post-card:hover{border-color:var(--border-hover)}
+.post-text{color:var(--text-body);font-size:14.5px;line-height:1.85;white-space:pre-wrap}
+.post-time{font-size:11px;color:var(--text-muted);margin-top:10px}
+.delete-post-btn{position:absolute;top:14px;right:14px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .25s;opacity:0}
+.post-card:hover .delete-post-btn{opacity:1}
+.delete-post-btn:hover{background:rgba(239,68,68,.25)}
+.no-posts{text-align:center;padding:48px 20px;background:var(--bg-card);border:1px dashed var(--border);border-radius:14px;color:var(--text-muted);font-size:14px}
+.no-posts span{display:block;font-size:36px;margin-bottom:12px;opacity:.5}
+.posts-loading{text-align:center;padding:40px;color:var(--text-muted);font-size:14px}
+.spinner{width:32px;height:32px;margin:0 auto 12px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:rotate .8s linear infinite}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.anim-item{opacity:0;animation:fadeUp .55s ease both}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(20,40,60,.95);border:1px solid var(--border);color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;z-index:9999;opacity:0;transition:all .35s ease;pointer-events:none;backdrop-filter:blur(20px);white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.green{border-color:rgba(34,197,94,.5)}
+.toast.red{border-color:rgba(239,68,68,.5)}
 </style>
 </head>
 <body>
+<div class="bg-layer"></div>
+<div id="toast" class="toast"></div>
 
-<header>
-  <div class="logo">&#9632; PostCheck</div>
-  <div class="header-sep"></div>
-  <div class="post-count">Active posts: <span id="headerCount">0</span></div>
-</header>
+<!-- HOME -->
+<div id="screen-home" class="screen active">
+<div class="home-page">
+  <div class="header">
+    <div class="emblem">&#9728;</div>
+    <h1>মসজিদ মাদ্রাসার খেদমত</h>
+    <p>সব গুরুত্বপূর্ণ লিংক এক জায়গায়</p>
+  </div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
 
-<div class="layout">
-  <!-- LEFT: Editor -->
-  <div class="editor-panel">
-    <div>
-      <div class="panel-label">New Post</div>
-      <textarea id="postInput" placeholder="এখানে পোস্টের টেক্সট লিখুন...
-প্রতিটি লাইনে আলাদা তথ্য রাখতে পারেন।
-সবকিছু একসাথে সাবমিট হবে।"></textarea>
-      <div class="meta-bar" style="margin-top: 0.5rem;">
-        <span><b id="lineCount">0</b> লাইন</span>
-        <span><b id="charCount">0</b> অক্ষর</span>
-        <span><b id="wordCount">0</b> শব্দ</span>
-      </div>
+  <div class="stats-card" id="home-stats">
+    <h3>&#128202; ভিজিটর পরিসংখ্যান (শুধু Admin)</h3>
+    <div class="stats-grid">
+      <div class="stat-box"><span class="stat-num" id="s-today">...</span><div class="stat-label">আজকের ভিজিটর</div></div>
+      <div class="stat-box"><span class="stat-num" id="s-total">...</span><div class="stat-label">মোট ভিজিটর</div></div>
+      <div class="stat-box"><span class="stat-num" id="s-yest">...</span><div class="stat-label">গতকালের ভিজিটর</div></div>
+      <div class="stat-box"><span class="stat-num" id="s-month">...</span><div class="stat-label">এই মাসে</div></div>
     </div>
+  </div>
 
-    <!-- Warning box -->
-    <div id="warningBox">
-      <div class="warn-header">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L14.5 13.5H1.5L8 1.5Z" stroke="#ffb84f" stroke-width="1.4" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="9.5" stroke="#ffb84f" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.5" r="0.7" fill="#ffb84f"/></svg>
-        Similarity Warning — এই পোস্টের সাথে আগের পোস্টের মিল পাওয়া গেছে
-      </div>
-      <div id="warningList"></div>
-      <div class="warn-actions">
-        <button class="btn-force" onclick="forceSubmit()">তারপরেও পোস্ট করুন</button>
-        <button class="btn-cancel" onclick="cancelSubmit()">বাতিল করুন</button>
-      </div>
-    </div>
-
-    <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">
-      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1v13M1 7.5h13" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
-      পোস্ট সাবমিট করুন
+  <div class="section">
+    <div class="section-label anim-item" style="animation-delay:.1s"><span>&#127760; ওয়েবসাইট</span><div class="section-label-line"></div></div>
+    <button class="btn btn-green anim-item" onclick="showScreen('news')" style="animation-delay:.2s">
+      <div class="btn-icon">&#128203;</div><div class="btn-text">খেদমত সম্পর্কে বিস্তারিত জেনেনিন এবং ওয়েবসাইট পাসওয়ার্ড সংগ্রহ করেনিন।</div><div class="btn-arrow">&#8250;</div>
+    </button>
+    <button class="btn btn-green anim-item" onclick="showScreen('center')" style="animation-delay:.3s">
+      <div class="btn-icon">&#128332;</div><div class="btn-text">প্রতিদিন ১০০ থেকে ২০০+ মসজিদ মাদ্রাসার খেদমতের পোস্টগুলো একসাথে দেখেনিন</div><div class="btn-arrow">&#8250;</div>
     </button>
   </div>
 
-  <!-- RIGHT: Posts list -->
-  <div class="posts-panel">
-    <div class="posts-header">
-      <div class="panel-label" style="margin-bottom:0">Active Posts</div>
+  <div class="section">
+    <div class="section-label anim-item" style="animation-delay:.35s"><span>&#128241; WhatsApp</span><div class="section-label-line"></div></div>
+    <a class="btn anim-item" href="https://wa.me/message/3T5Z7CFFDAJBL1" target="_blank" style="animation-delay:.45s">
+      <div class="btn-icon">&#128172;</div><div class="btn-text">আমাদের হোয়াটসঅ্যাপ লিংক</div><div class="btn-arrow">&#8250;</div>
+    </a>
+    <a class="btn anim-item" href="https://whatsapp.com/channel/0029VbD4Jr90VycNzIs5nM0c" target="_blank" style="animation-delay:.52s">
+      <div class="btn-icon">&#128226;</div><div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল</div><div class="btn-arrow">&#8250;</div>
+    </a>
+  </div>
+
+  <div class="section">
+    <div class="section-label anim-item" style="animation-delay:.58s"><span>&#128216; Facebook</span><div class="section-label-line"></div></div>
+    <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.65s">
+      <div class="btn-icon">&#128196;</div><div class="btn-text">আমাদের ফেসবুক পেইজ লিংক</div><div class="btn-arrow">&#8250;</div>
+    </a>
+    <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.72s">
+      <div class="btn-icon">&#128101;</div><div class="btn-text">আমাদের ফেসবুক গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
+    </a>
+    <a class="btn anim-item" href="https://www.messenger.com/channel/HafizQuriJihadulislam" target="_blank" style="animation-delay:.79s">
+      <div class="btn-icon">&#9889;</div><div class="btn-text">আমাদের মেসেঞ্জার গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
+    </a>
+  </div>
+
+  <div id="home-photos-sec" style="display:none;margin-top:36px">
+    <div class="section-label"><span>&#128444; ফটো গ্যালারি</span><div class="section-label-line"></div></div>
+    <div class="photo-grid" id="home-photo-grid"></div>
+  </div>
+
+  <div class="home-footer" style="margin-top:40px">
+    <span class="home-footer-ornament">&#10022; &#10022; &#10022;</span>
+    সমস্ত লিংক সক্রিয় ও আপডেটেড
+  </div>
+</div>
+</div>
+
+<!-- NEWS -->
+<div id="screen-news" class="screen">
+  <div class="back-bar">
+    <button class="back-btn" onclick="showScreen('home')">&#8592; হোমে ফিরুন</button>
+    <span class="back-title">খেদমত সেন্টার &mdash; বিস্তারিত তথ্য</span>
+  </div>
+  <div class="news-content">
+    <div class="news-hero">
+      <h1>মসজিদ-মাদ্রাসার খেদমত সেন্টার</h1>
+      <span class="admin-name">হাফেজ ক্বারী মোহাম্মদ জিহাদুল ইসলাম</span>
+      <span class="admin-role">মসজিদ মাদ্রাসার খেদমত সেন্টার গ্রুপের এডমিন</span>
     </div>
-    <div id="postsList">
-      <div class="empty-state">
-        <span class="empty-icon">◫</span>
-        কোনো পোস্ট নেই। প্রথম পোস্ট সাবমিট করুন।
+    <div class="news-card"><h3>&#128332; মসজিদ-মাদ্রাসার খেদমত খুঁজছেন?</h3><p>মসজিদ-মাদ্রাসার খেদমত নিতে আগ্রহী ভাইদের জন্য গুরুত্বপূর্ণ বার্তা। অনুগ্রহ করে সম্পূর্ণ পোস্টি ধৈর্য সহকারে পড়ুন।</p><p>প্রতিদিন ১০০ থেকে ২০০+ নতুন খেদমতের পোস্ট দেখুন এবং আপনার পছন্দ অনুযায়ী ভালো মানের বেতন, কাছের ঠিকানায় ও সুন্দর পরিবেশে খেদমত নির্বাচন করুন।</p><p>ইনশাআল্লাহ এখন থেকে আপনার জন্য উপযুক্ত খেদমত খুঁজে নেওয়া আরো সহজ হবে আমাদের ওয়েবসাইটে।</p></div>
+    <div class="news-card"><h3>&#10067; কেন অনেকেই ভালো খেদমত থেকে বঞ্চিত হন?</h3><p>বর্তমান সময়ে অনেক ভাই অল্প কিছু খেদমতের পোস্ট দেখেই দ্রুত খেদমতে যোগদান করে ফেলেন। কিন্তু পরে দেখা যায় বেতন কম, জায়গা দূরে, সুযোগ-সুবিধা সীমিত অথবা পরিবেশ অনুকূল নয়।</p><p>ফলে অনেকেই বাধ্য হয়ে কষ্টের মধ্যেই খেদমত চালিয়ে যান। অথচ চেষ্টা করলে ভালো মানের খেদমত নিতে পারতেন।</p></div>
+    <div class="news-card"><h3>&#9878; খেদমত নেওয়ার আগে কেন যাচাই-বাছাই জরুরি?</h3><p>একজন মানুষ যখন বেশি সংখ্যক খেদমতের পোস্ট দেখতে পারে, তখন তার সামনে ভালো সুযোগ বেছে নেওয়ার পথও থাকে।</p><ul class="news-list"><li>ভালো মানের বেতন পাওয়ার সম্ভাবনা বাড়ে।</li><li>নিজের কাছাকাছি ঠিকানায় খেদমত পাওয়া সহজ হয়।</li><li>উন্নত সুযোগ-সুবিধা পাওয়ার সম্ভাবনা বৃদ্ধি পায়।</li><li>এবং ভবিষ্যতে আফসোস করার সম্ভাবনা কমে যায়।</li></ul></div>
+    <div class="news-card"><h3>&#11088; আমাদের ওয়েবসাইটে আপনি যেসব সুবিধা পাবেন</h3><ul class="news-list"><li>প্রতিদিন নতুন নতুন খেদমতের পোস্ট</li><li>বিভিন্ন জেলার খেদমতের তথ্য</li><li>ভালো মানের বেতনের খেদমত খুঁজে নেওয়ার সুযোগ</li><li>কাছের ঠিকানায় খেদমত নেওয়ার সুযোগ</li><li>উন্নত সুযোগ-সুবিধাসম্পন্ন খেদমত বেছে নেওয়ার সুযোগ</li><li>সময় ও কষ্ট বাঁচানোর সুযোগ</li><li>এক জায়গায় শতশত খেদমতের পোস্ট দেখার সুবিধা</li><li>নিয়মিত মসজিদ মাদ্রাসার খেদমতের আপডেট</li></ul></div>
+    <div class="news-card"><h3>&#128161; একটি ভালো খেদমত আপনার জীবন বদলে দিতে পারে</h3><div class="highlight-box">ভালো বেতনের খেদমত একজন মানুষের পরিবারকে স্বচ্ছল করতে পারে।</div><div class="highlight-box">কাছের ঠিকানার খেদমত একজন মানুষের কষ্ট কমিয়ে দিতে পারে।</div><div class="highlight-box">সুন্দর পরিবেশে খেদমত করলে মন শান্ত থাকে এবং কাজের মধ্যেও প্রশান্তি আসে।</div><p style="margin-top:12px">এজন্য খেদমত নেওয়ার আগে শতশত খেদমত যাচাই-বাছাই করা অত্যন্ত গুরুত্বপূর্ণ।</p></div>
+    <div class="news-card"><h3>&#128204; বিশেষভাবে লক্ষ্য করুন</h3><p>মসজিদের খেদমতের তুলনায় মাদ্রাসার খেদমতের খবর অনেক বেশি আসে। কারণ মসজিদের তুলনায় মাদ্রাসার সংখ্যা অনেক অনেক বেশি।</p></div>
+    <div class="news-card"><h3>&#128274; পাসওয়ার্ড সিস্টেম কেন রাখা হয়েছে?</h3><p>আমাদের ওয়েবসাইটে শুধুমাত্র আগ্রহী ও সিরিয়াস ব্যক্তিরাই যুক্ত হতে পারেন। পাসওয়ার্ড ছাড়া ওয়েবসাইটে প্রবেশ করা সম্ভব নয়।</p><div class="highlight-box" style="text-align:center;font-size:16px;font-weight:700">হোয়াটসঅ্যাপ: 01408764722</div><p style="margin-top:12px">এর বিনিময়ে আমরা আপনাদের কাছ থেকে ২০০ টাকা পরিশ্রমিক বিনিময় নিয়ে থাকি।</p></div>
+    <div class="news-card"><h3>&#128176; কেন ২০০ টাকা পরিশ্রমিক বিনিময় নেওয়া হয়?</h3><p>প্রতিদিন শতশত খেদমতের পোস্ট নিয়ে কাজ করা সহজ নয়। প্রতিদিন ২৪ ঘন্টা অনলাইনে কানেক্ট থেকে কাজ করতে হয়। আমরা কয়েকজন টিম মিলে একসাথে কাজ করি। এই পরিশ্রমের বিনিময়ে মাত্র ২০০ টাকা হাদিয়া গ্রহণ করি।</p></div>
+    <div class="news-card"><h3>&#127873; ২০০ টাকার বিনিময়ে আপনি কী পাচ্ছেন?</h3><p>মাত্র ২০০ টাকার বিনিময়ে শতশত খেদমতের পোস্ট দেখার সুযোগ পাচ্ছেন।</p><div class="highlight-box">অর্থাৎ অল্প টাকার বিনিময়ে বড় উপকার লাভ করতে পারবেন ইনশাআল্লাহ।</div></div>
+    <div class="news-card"><h3>&#128197; কতদিন পর্যন্ত ভিজিট করতে পারবেন?</h3><p>আপনাকে যে পাসওয়ার্ড দেওয়া হবে সেটা দিয়ে <strong style="color:var(--gold)">সর্বনিম্ন ১০ দিন</strong> থেকে <strong style="color:var(--gold)">সর্বোচ্চ ৩০ দিন</strong> ভিজিট করতে পারবেন।</p></div>
+    <div class="news-card"><h3>&#127974; পাসওয়ার্ড যেভাবে সংগ্রহ করবেন</h3><p>বিকাশ অথবা নগদে ২০০ টাকা পাঠাবেন। পাঠানোর নাম্বারের শেষ ৪ সংখ্যা হোয়াটসঅ্যাপে পাঠাবেন। সাথে সাথে পাসওয়ার্ড পাবেন।</p><div class="highlight-box" style="text-align:center;font-size:16px;font-weight:700">বিকাশ, নগদ ও হোয়াটসঅ্যাপ<br><span style="font-size:22px;color:var(--green)">01408764722</span></div></div>
+    <div class="news-card"><h3>&#127919; আমাদের উদ্দেশ্য</h3><p>যারা মসজিদ ও মাদ্রাসার খেদমত খুঁজছেন তাদের জন্য একটি নির্ভরযোগ্য মাধ্যম তৈরি করা, যাতে তারা সহজে ভালো মানের খেদমত খুঁজে পান।</p></div>
+    <div class="contact-card"><p>যোগাযোগ করতে এখনই WhatsApp করুন</p><span class="phone">01408764722</span><br><a class="whatsapp-btn" href="https://wa.me/8801408764722" target="_blank">&#128172; WhatsApp করুন</a></div>
+    <div class="news-footer-text">আল্লাহ তায়ালা আমাদের সকলকে উত্তম রিজিক ও উত্তম খেদমত দান করুন। আমীন।<br><br>&copy; 2026 মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
+  </div>
+</div>
+
+<!-- CENTER -->
+<div id="screen-center" class="screen">
+  <div class="back-bar">
+    <button class="back-btn" onclick="showScreen('home')">&#8592; হোমে ফিরুন</button>
+    <span class="back-title">মসজিদ মাদ্রাসার চাকরি</span>
+  </div>
+  <div class="center-wrap">
+    <div class="bismillah-banner">
+      <span class="bismillah-ar">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616; &#1575;&#1604;&#1604;&#1617;&#1607;&#1616; &#1575;&#1604;&#1585;&#1617;&#1581;&#1618;&#1605;&#1614;&#1606;&#1616; &#1575;&#1604;&#1585;&#1617;&#1581;&#1616;&#1610;&#1605;&#1616;</span>
+      <span class="bismillah-en">In the name of Allah, the Most Gracious, the Most Merciful</span>
+    </div>
+    <div id="login-panel">
+      <div class="login-card">
+        <div class="login-title">মসজিদ মাদ্রাসার চাকরি</div>
+        <div class="login-subtitle">পরিচালনায় &mdash; হাফেজ ক্বারী জিহাদুল ইসলাম</div>
+        <label class="field-label">আপনার নাম</label>
+        <input id="member-name" class="field-input" type="text" placeholder="আপনার নাম লিখুন">
+        <label class="field-label">Community Password</label>
+        <input id="community-pwd" class="field-input" type="password" placeholder="এডমিনের দেওয়া পাসওয়ার্ডটি লিখুন">
+        <button class="login-btn-main" onclick="memberLogin()">লগইন করুন</button>
+        <div class="or-divider">অথবা</div>
+        <button class="admin-toggle" onclick="toggleAdm()">&#9876; Admin Panel</button>
+        <div class="admin-panel-inner" id="adm-panel">
+          <label class="field-label" style="margin-top:14px">Admin Password</label>
+          <input id="admin-pwd" class="field-input" type="password" placeholder="Admin password">
+          <button class="admin-login-btn" onclick="adminLogin()">Access Admin Panel &#9876;</button>
+        </div>
+        <div class="pwd-note">পাসওয়ার্ড সংগ্রহ করতে যোগাযোগ করুন।<br><a href="https://wa.me/8801408764722" target="_blank">WHATSAPP 01408764722</a></div>
+      </div>
+    </div>
+    <div id="community-view">
+      <div class="community-header">
+        <div class="user-badge">
+          <div class="user-avatar" id="uavatar">&#128100;</div>
+          <div><div class="user-name" id="uname">&mdash;</div><div class="user-role" id="urole">Member</div></div>
+        </div>
+        <button class="signout-btn" onclick="signOut()">Sign Out</button>
+      </div>
+      <div id="admin-post-area">
+        <h3>&#9881; Admin Control Panel</h3>
+        <textarea id="post-textarea" placeholder="নতুন খেদমতের পোস্ট লিখুন..." maxlength="2000" oninput="updateChar();checkDup()"></textarea>
+        <div class="char-count"><span id="char-count">0</span> / 2000</div>
+        <div class="dup-warning" id="dup-warning">&#9888; সতর্কতা! এরকম একটি পোস্ট ইতিমধ্যে আছে। একই পোস্ট দুইবার দিলে মানুষ বিরক্ত হবে। তারপরও পোস্ট করতে চাইলে করুন।</div>
+        <div class="img-upload-area">
+          <span class="img-upload-label">&#128247; হোম পেজে ফটো যোগ করুন (ঐচ্ছিক)</span>
+          <button class="img-upload-btn" onclick="document.getElementById('img-file').click()">&#128193; ফটো সিলেক্ট করুন</button>
+          <input type="file" id="img-file" accept="image/*" style="display:none" onchange="previewImg(this)">
+          <div class="img-preview-wrap" id="img-pw"><img id="img-pe" src="" alt=""></div>
+          <input type="text" id="img-cap" class="img-cap-input" placeholder="ফটোর ক্যাপশন লিখুন (ঐচ্ছিক)">
+        </div>
+        <div class="publish-row">
+          <button class="publish-btn" id="pub-btn" onclick="publishPost()">&#128221; পোস্ট করুন</button>
+          <button class="publish-img-btn" id="pub-img-btn" onclick="publishImg()">&#128444; ফটো পোস্ট করুন</button>
+        </div>
+      </div>
+      <div class="posts-section">
+        <h3>Community Posts <span class="posts-count" id="posts-count">0</span></h3>
+        <div id="posts-container"><div class="posts-loading"><div class="spinner"></div>Loading posts...</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Delete confirm dialog -->
-<div class="confirm-overlay" id="confirmOverlay">
-  <div class="confirm-box">
-    <h3>পোস্ট মুছে ফেলুন?</h3>
-    <p>এই পোস্টটি সম্পূর্ণভাবে মুছে যাবে এবং ভবিষ্যতে similarity check-এ আর ব্যবহার হবে না।</p>
-    <div class="confirm-actions">
-      <button class="btn-cancel" onclick="closeConfirm()">বাতিল</button>
-      <button class="btn-danger" onclick="confirmDelete()">মুছে ফেলুন</button>
-    </div>
-  </div>
-</div>
-
-<!-- Toast -->
-<div id="toast">
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#3dd68c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  <span id="toastMsg">পোস্ট সফলভাবে যোগ হয়েছে!</span>
-</div>
-
 <script>
-const STORAGE_KEY = 'postcheck_posts';
-let posts = [];
-let pendingText = '';
-let deleteTargetId = null;
+for(var i=0;i<18;i++){var p=document.createElement('div');p.className='particle';var s=Math.random()*3+1;p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*18+12)+'s;animation-delay:'+Math.random()*12+'s;';document.body.appendChild(p);}
 
-/* ── INIT ─────────────────────────────────────────── */
-function init() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try { posts = JSON.parse(saved); } catch(e) { posts = []; }
+function showScreen(n){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById('screen-'+n).classList.add('active');window.scrollTo(0,0);}
+function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
+
+var fcfg={apiKey:"AIzaSyAcTJsg367e4AMSIII6HsRIIFbACoP7dqA",authDomain:"khedmot-senter.firebaseapp.com",projectId:"khedmot-senter",storageBucket:"khedmot-senter.firebasestorage.app",messagingSenderId:"762215417966",appId:"1:762215417966:web:e63b5c2cce97693e8ebe7f"};
+var db=null,unsub=null;
+try{firebase.initializeApp(fcfg);db=firebase.firestore();}catch(e){}
+
+var CPWD="ismail722",APWD="@JiHaDuL@";
+var curUser=null,isAdmin=false,allTxt=[];
+
+window.addEventListener('load',function(){
+  trackVisitor();
+  loadHomePhotos();
+  if(localStorage.getItem('kh_adm')==='1'){
+    curUser='Administrator';isAdmin=true;
+    document.getElementById('home-stats').classList.add('show');
+    loadStats();
   }
-  renderAll();
-  updateMeta();
-}
-
-function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-}
-
-/* ── TEXT META ────────────────────────────────────── */
-document.getElementById('postInput').addEventListener('input', updateMeta);
-function updateMeta() {
-  const v = document.getElementById('postInput').value;
-  const lines = v === '' ? 0 : v.split('\n').filter(l => l.trim()).length;
-  const chars = v.length;
-  const words = v.trim() === '' ? 0 : v.trim().split(/\s+/).length;
-  document.getElementById('lineCount').textContent = lines;
-  document.getElementById('charCount').textContent = chars;
-  document.getElementById('wordCount').textContent = words;
-}
-
-/* ── SIMILARITY ENGINE ────────────────────────────── */
-function tokenize(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\u0980-\u09FF\s]/g, ' ')
-    .split(/\s+/)
-    .filter(Boolean);
-}
-
-function ngramSet(tokens, n) {
-  const set = new Set();
-  for (let i = 0; i <= tokens.length - n; i++) {
-    set.add(tokens.slice(i, i + n).join(' '));
-  }
-  return set;
-}
-
-function jaccardNgram(textA, textB) {
-  const tokA = tokenize(textA);
-  const tokB = tokenize(textB);
-  if (!tokA.length || !tokB.length) return 0;
-
-  let score = 0, weight = 0;
-
-  for (const n of [1, 2, 3]) {
-    const w = n === 1 ? 0.3 : n === 2 ? 0.4 : 0.3;
-    const sA = ngramSet(tokA, n);
-    const sB = ngramSet(tokB, n);
-    if (!sA.size && !sB.size) continue;
-    const inter = [...sA].filter(x => sB.has(x)).length;
-    const union = new Set([...sA, ...sB]).size;
-    score += w * (union ? inter / union : 0);
-    weight += w;
-  }
-
-  return weight ? score / weight : 0;
-}
-
-function findMatchingLines(textA, textB) {
-  const linesA = textA.split('\n').map(l => l.trim()).filter(Boolean);
-  const linesB = textB.split('\n').map(l => l.trim()).filter(Boolean);
-  const matches = [];
-  for (const la of linesA) {
-    for (const lb of linesB) {
-      const sim = jaccardNgram(la, lb);
-      if (sim >= 0.7) {
-        const entry = la.length > lb.length ? la : lb;
-        if (!matches.includes(entry)) matches.push(entry);
-      }
-    }
-  }
-  return matches;
-}
-
-/* ── HANDLE SUBMIT ────────────────────────────────── */
-function handleSubmit() {
-  const text = document.getElementById('postInput').value.trim();
-  if (!text) return;
-
-  const warnings = [];
-  for (const post of posts) {
-    const sim = jaccardNgram(text, post.text);
-    if (sim >= 0.90) {
-      const matchedLines = findMatchingLines(text, post.text);
-      warnings.push({ post, sim, matchedLines });
-    }
-  }
-
-  if (warnings.length > 0) {
-    pendingText = text;
-    showWarning(warnings);
-    return;
-  }
-
-  addPost(text);
-}
-
-function showWarning(warnings) {
-  const box = document.getElementById('warningBox');
-  const list = document.getElementById('warningList');
-  list.innerHTML = '';
-
-  for (const w of warnings) {
-    const pct = Math.round(w.sim * 100);
-    const dateStr = new Date(w.post.createdAt).toLocaleString('bn-BD', {
-      day: '2-digit', month: '2-digit', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    });
-
-    const matchHTML = w.matchedLines.length
-      ? w.matchedLines.slice(0, 6).map(l => `<span class="match-line">${escHtml(l.slice(0,80))}${l.length>80?'…':''}</span>`).join('\n')
-      : '<span style="color:var(--text3);font-size:11px">পুরো পোস্টের গঠন মিলে যাচ্ছে</span>';
-
-    list.innerHTML += `
-      <div class="warn-item">
-        <div class="warn-meta">
-          <span class="badge-pct">${pct}% মিল</span>
-          <span class="badge-id">Post #${w.post.num}</span>
-          <span style="font-size:11px;color:var(--text3)">${dateStr}</span>
-        </div>
-        <div class="warn-matches">
-          <div style="font-size:11px;color:var(--text3);margin-bottom:4px">মিল পাওয়া অংশ:</div>
-          ${matchHTML}
-        </div>
-      </div>`;
-  }
-
-  box.classList.add('visible');
-  box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  document.getElementById('submitBtn').style.display = 'none';
-}
-
-function forceSubmit() {
-  hideWarning();
-  addPost(pendingText);
-  pendingText = '';
-}
-
-function cancelSubmit() {
-  hideWarning();
-  pendingText = '';
-}
-
-function hideWarning() {
-  document.getElementById('warningBox').classList.remove('visible');
-  document.getElementById('submitBtn').style.display = '';
-}
-
-/* ── ADD POST ─────────────────────────────────────── */
-function addPost(text) {
-  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  const num = (posts.length > 0 ? Math.max(...posts.map(p => p.num)) : 0) + 1;
-  posts.unshift({ id, num, text, createdAt: Date.now() });
-  save();
-  renderAll();
-  document.getElementById('postInput').value = '';
-  updateMeta();
-  showToast('পোস্ট সফলভাবে যোগ হয়েছে!');
-}
-
-/* ── DELETE ───────────────────────────────────────── */
-function askDelete(id) {
-  deleteTargetId = id;
-  document.getElementById('confirmOverlay').classList.add('visible');
-}
-function closeConfirm() {
-  deleteTargetId = null;
-  document.getElementById('confirmOverlay').classList.remove('visible');
-}
-function confirmDelete() {
-  if (!deleteTargetId) return;
-  posts = posts.filter(p => p.id !== deleteTargetId);
-  save();
-  renderAll();
-  closeConfirm();
-  showToast('পোস্ট মুছে ফেলা হয়েছে।');
-}
-
-/* ── RENDER ───────────────────────────────────────── */
-function renderAll() {
-  document.getElementById('headerCount').textContent = posts.length;
-  const container = document.getElementById('postsList');
-
-  if (posts.length === 0) {
-    container.innerHTML = `<div class="empty-state"><span class="empty-icon">◫</span>কোনো পোস্ট নেই। প্রথম পোস্ট সাবমিট করুন।</div>`;
-    return;
-  }
-
-  container.innerHTML = posts.map(p => {
-    const lines = p.text.split('\n').filter(l => l.trim()).length;
-    const words = p.text.trim().split(/\s+/).length;
-    const dateStr = new Date(p.createdAt).toLocaleString('bn-BD', {
-      day: '2-digit', month: '2-digit',
-      hour: '2-digit', minute: '2-digit'
-    });
-    const isLong = p.text.length > 300;
-
-    return `
-      <div class="post-card" id="card-${p.id}">
-        <div class="post-card-header">
-          <div class="post-card-meta">
-            <span class="post-num">#${p.num}</span>
-            <span class="post-date">${dateStr}</span>
-            <span class="post-lines">${lines} লাইন · ${words} শব্দ</span>
-          </div>
-          <button class="btn-delete" onclick="askDelete('${p.id}')" title="মুছে ফেলুন">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 3h9M5 3V2h3v1M4 3v8h5V3H4z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        <div class="post-body${isLong ? '' : ' expanded'}" id="body-${p.id}">${escHtml(p.text)}</div>
-        ${isLong ? `<button class="post-expand" onclick="toggleExpand('${p.id}')">আরো দেখুন ▾</button>` : ''}
-      </div>`;
-  }).join('');
-}
-
-function toggleExpand(id) {
-  const body = document.getElementById('body-' + id);
-  const btn = body.nextElementSibling;
-  if (body.classList.contains('expanded')) {
-    body.classList.remove('expanded');
-    btn.textContent = 'আরো দেখুন ▾';
-  } else {
-    body.classList.add('expanded');
-    btn.textContent = 'কম দেখুন ▴';
-  }
-}
-
-/* ── TOAST ────────────────────────────────────────── */
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  document.getElementById('toastMsg').textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
-}
-
-/* ── UTIL ─────────────────────────────────────────── */
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-/* Close confirm on overlay click */
-document.getElementById('confirmOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeConfirm();
 });
 
-init();
+function memberLogin(){
+  var n=document.getElementById('member-name').value.trim();
+  var p=document.getElementById('community-pwd').value.trim();
+  if(!n){toast('আপনার নাম লিখুন','red');return;}
+  if(p!==CPWD){toast('পাসওয়ার্ড সঠিক নয়','red');return;}
+  curUser=n;isAdmin=false;enterComm();
+}
+function adminLogin(){
+  var p=document.getElementById('admin-pwd').value.trim();
+  if(p!==APWD){toast('Admin password সঠিক নয়','red');return;}
+  curUser='Administrator';isAdmin=true;
+  localStorage.setItem('kh_adm','1');
+  document.getElementById('home-stats').classList.add('show');
+  loadStats();
+  enterComm();
+}
+function enterComm(){
+  document.getElementById('login-panel').style.display='none';
+  var cv=document.getElementById('community-view');
+  cv.classList.add('show');cv.style.display='block';
+  document.getElementById('uname').textContent=curUser;
+  document.getElementById('urole').textContent=isAdmin?'Administrator':'Community Member';
+  document.getElementById('uavatar').textContent=isAdmin?'&#9876;':'&#128100;';
+  if(isAdmin)document.getElementById('admin-post-area').style.display='block';
+  loadPosts();
+}
+function signOut(){
+  curUser=null;isAdmin=false;
+  localStorage.removeItem('kh_adm');
+  document.getElementById('home-stats').classList.remove('show');
+  if(unsub){unsub();unsub=null;}
+  document.getElementById('login-panel').style.display='block';
+  var cv=document.getElementById('community-view');
+  cv.classList.remove('show');cv.style.display='none';
+  document.getElementById('admin-post-area').style.display='none';
+  ['member-name','community-pwd','admin-pwd'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('posts-container').innerHTML='<div class="posts-loading"><div class="spinner"></div>Loading posts...</div>';
+}
+function toggleAdm(){document.getElementById('adm-panel').classList.toggle('open');}
+function updateChar(){document.getElementById('char-count').textContent=document.getElementById('post-textarea').value.length;}
+
+function checkDup(){
+  var txt=document.getElementById('post-textarea').value.trim().toLowerCase();
+  if(txt.length<30){document.getElementById('dup-warning').classList.remove('show');return;}
+  var found=allTxt.some(function(t){return simScore(txt,t.toLowerCase())>0.65;});
+  if(found)document.getElementById('dup-warning').classList.add('show');
+  else document.getElementById('dup-warning').classList.remove('show');
+}
+function simScore(a,b){
+  var longer=a.length>=b.length?a:b,shorter=a.length>=b.length?b:a;
+  if(longer.length===0)return 1;
+  var m=longer.length,n=shorter.length,dp=[],i,j;
+  for(i=0;i<=m;i++){dp[i]=[];for(j=0;j<=n;j++)dp[i][j]=i===0?j:j===0?i:0;}
+  for(i=1;i<=m;i++)for(j=1;j<=n;j++)dp[i][j]=longer[i-1]===shorter[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+  return(longer.length-dp[m][n])/longer.length;
+}
+
+function publishPost(){
+  if(!db){toast('Firebase error','red');return;}
+  var txt=document.getElementById('post-textarea').value.trim();
+  if(!txt){toast('পোস্ট লিখুন','red');return;}
+  var btn=document.getElementById('pub-btn');
+  btn.disabled=true;btn.textContent='Publishing...';
+  var now=new Date();
+  db.collection('posts').add({text:txt,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()})
+  .then(function(){
+    document.getElementById('post-textarea').value='';
+    updateChar();
+    document.getElementById('dup-warning').classList.remove('show');
+    btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';
+    toast('পোস্ট প্রকাশিত হয়েছে','green');
+  })
+  .catch(function(e){btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
+}
+
+function loadPosts(){
+  if(!db){document.getElementById('posts-container').innerHTML=noPostsHTML();return;}
+  if(unsub)unsub();
+  unsub=db.collection('posts').orderBy('created','desc').onSnapshot(function(snap){
+    allTxt=[];
+    var c=document.getElementById('posts-container');
+    document.getElementById('posts-count').textContent=snap.size;
+    if(snap.empty){c.innerHTML=noPostsHTML();return;}
+    c.innerHTML='';
+    snap.forEach(function(doc){
+      var d=doc.data();
+      if(d.text)allTxt.push(d.text);
+      var el=document.createElement('div');el.className='post-card';
+      var delBtn=isAdmin?'<button class="delete-post-btn" onclick="delPost(\''+doc.id+'\')">&#10005;</button>':'';
+      el.innerHTML='<div class="post-text">'+esc(d.text||'')+'</div><div class="post-time">'+(d.timeStr||'')+'</div>'+delBtn;
+      c.appendChild(el);
+    });
+  },function(e){document.getElementById('posts-container').innerHTML='<div class="no-posts"><span>&#9888;</span>লোড হয়নি: '+e.message+'</div>';});
+}
+function delPost(id){
+  if(!confirm('এই পোস্টটি ডিলিট করবেন?'))return;
+  db.collection('posts').doc(id).delete().then(function(){toast('ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
+}
+function noPostsHTML(){return'<div class="no-posts"><span>&#128332;</span>No Posts Yet<br><small style="margin-top:8px;display:block">The community board is empty.</small></div>';}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+var imgB64=null;
+function previewImg(inp){
+  var f=inp.files[0];if(!f)return;
+  if(f.size>2097152){toast('ফটো ২MB এর বেশি হবে না','red');return;}
+  var r=new FileReader();
+  r.onload=function(e){
+    imgB64=e.target.result;
+    document.getElementById('img-pe').src=imgB64;
+    document.getElementById('img-pw').style.display='block';
+    document.getElementById('img-cap').style.display='block';
+    document.getElementById('pub-img-btn').style.display='block';
+  };
+  r.readAsDataURL(f);
+}
+function publishImg(){
+  if(!imgB64){toast('ফটো সিলেক্ট করুন','red');return;}
+  if(!db){toast('Firebase error','red');return;}
+  var cap=document.getElementById('img-cap').value.trim();
+  var btn=document.getElementById('pub-img-btn');
+  btn.disabled=true;btn.textContent='আপলোড হচ্ছে...';
+  var now=new Date();
+  db.collection('photos').add({imgData:imgB64,caption:cap,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()})
+  .then(function(){
+    imgB64=null;
+    document.getElementById('img-file').value='';
+    document.getElementById('img-pw').style.display='none';
+    document.getElementById('img-cap').style.display='none';
+    document.getElementById('img-cap').value='';
+    document.getElementById('pub-img-btn').style.display='none';
+    btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';
+    toast('ফটো হোম পেজে যোগ হয়েছে','green');
+  })
+  .catch(function(e){btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
+}
+
+function loadHomePhotos(){
+  if(!db)return;
+  db.collection('photos').orderBy('created','desc').onSnapshot(function(snap){
+    var g=document.getElementById('home-photo-grid');
+    var s=document.getElementById('home-photos-sec');
+    if(snap.empty){s.style.display='none';return;}
+    s.style.display='block';g.innerHTML='';
+    snap.forEach(function(doc){
+      var d=doc.data();
+      var card=document.createElement('div');card.className='photo-card';
+      var dBtn=isAdmin?'<button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">&#10005;</button>':'';
+      card.innerHTML='<img src="'+d.imgData+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>'+dBtn;
+      g.appendChild(card);
+    });
+  });
+}
+function delPhoto(id){
+  if(!confirm('এই ফটো ডিলিট করবেন?'))return;
+  db.collection('photos').doc(id).delete().then(function(){toast('ফটো ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
+}
+
+function trackVisitor(){
+  if(!db)return;
+  var today=new Date().toISOString().slice(0,10);
+  if(sessionStorage.getItem('v_'+today))return;
+  sessionStorage.setItem('v_'+today,'1');
+  var ref=db.collection('visitors').doc(today);
+  ref.get().then(function(doc){
+    if(doc.exists)ref.update({count:doc.data().count+1});
+    else ref.set({count:1,date:today});
+  }).catch(function(){});
+}
+
+function loadStats(){
+  if(!db)return;
+  var today=new Date().toISOString().slice(0,10);
+  var yest=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  var mon=today.slice(0,7);
+  db.collection('visitors').get().then(function(snap){
+    var tc=0,yc=0,mc=0,tot=0;
+    snap.forEach(function(doc){
+      var cnt=doc.data().count||0;
+      tot+=cnt;
+      if(doc.id===today)tc=cnt;
+      if(doc.id===yest)yc=cnt;
+      if(doc.id.startsWith(mon))mc+=cnt;
+    });
+    document.getElementById('s-today').textContent=tc;
+    document.getElementById('s-yest').textContent=yc;
+    document.getElementById('s-month').textContent=mc;
+    document.getElementById('s-total').textContent=tot;
+  }).catch(function(){});
+}
 </script>
 </body>
 </html>
