@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>মসজিদ-মাদ্রাসার খেদমত সেন্টার</title>
+
+ <link rel="icon" href="shikkha.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
@@ -222,7 +224,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       </a>
       <a class="btn anim-item" href="https://whatsapp.com/channel/0029VbD4Jr90VycNzIs5nM0c" target="_blank" style="animation-delay:.52s">
         <div class="btn-icon">📢</div>
-        <div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল লিংক</div>
+        <div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল</div>
         <div class="btn-arrow">›</div>
       </a>
     </div>
@@ -237,7 +239,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
         <div class="btn-text">আমাদের ফেসবুক পেইজ লিংক</div>
         <div class="btn-arrow">›</div>
       </a>
-      <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.72s">
+      <a class="btn anim-item" href="" target="_blank" style="animation-delay:.72s">
         <div class="btn-icon">👥</div>
         <div class="btn-text">আমাদের ফেসবুক গ্রুপ লিংক</div>
         <div class="btn-arrow">›</div>
@@ -395,7 +397,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
         <input id="member-name" class="field-input" type="text" placeholder="আপনার নাম লিখুন">
 
         <label class="field-label">Community Password</label>
-        <input id="community-pwd" class="field-input" type="password" placeholder="পাসওয়ার্ড লিখুন">
+        <input id="community-pwd" class="field-input" type="password" placeholder="এডমিনের দেওয়া পাসওয়ার্ডটি লিখুন">
 
         <button class="login-btn-main" onclick="memberLogin()">লগইন করুন</button>
 
@@ -489,8 +491,8 @@ try{firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){con
 /* ─── PASSWORDS ─────────────────────────────────
    এখানে পাসওয়ার্ড পরিবর্তন করুন
 ────────────────────────────────────────────────*/
-const COMM_PWD  = "khedmot2025";   // ← কমিউনিটি পাসওয়ার্ড
-const ADMIN_PWD = "admin@khedmot"; // ← অ্যাডমিন পাসওয়ার্ড
+const COMM_PWD  = "ismail722";   // ← কমিউনিটি পাসওয়ার্ড
+const ADMIN_PWD = "@HafizQuriJihadulislam@"; // ← অ্যাডমিন পাসওয়ার্ড
 
 let curUser=null,isAdmin=false;
 
