@@ -50,7 +50,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 .btn:hover .btn-arrow{opacity:.9;transform:translateX(4px)}
 .home-footer{text-align:center;margin-top:50px;color:rgba(139,160,184,.45);font-size:12px}
 .home-footer-ornament{font-size:18px;display:block;margin-bottom:8px;opacity:.5}
-/* STATS */
 .stats-card{background:linear-gradient(135deg,rgba(212,168,67,.1),rgba(212,168,67,.04));border:1px solid var(--border-hover);border-radius:16px;padding:20px;margin-bottom:28px;display:none}
 .stats-card.show{display:block}
 .stats-card h3{color:var(--gold);font-size:14px;margin-bottom:14px;font-weight:600}
@@ -58,16 +57,14 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 .stat-box{background:rgba(0,0,0,.2);border-radius:10px;padding:14px;text-align:center}
 .stat-num{font-size:28px;font-weight:700;color:#fff;display:block}
 .stat-label{font-size:11px;color:var(--text-muted);margin-top:4px}
-/* HOME PHOTOS */
 .home-photos-section{margin-top:36px}
-.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.photo-grid{display:grid;grid-template-columns:1fr;gap:12px}
 .photo-card{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);position:relative;transition:transform .3s,border-color .3s}
 .photo-card:hover{transform:scale(1.02);border-color:var(--border-hover)}
-.photo-card img{width:100%;height:160px;object-fit:cover;display:block}
+.photo-card img{width:100%;height:auto;object-fit:cover;display:block}
 .photo-caption-text{padding:8px 12px;font-size:12px;color:var(--text-muted)}
 .del-photo-btn{position:absolute;top:8px;right:8px;background:rgba(239,68,68,.85);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;display:none;align-items:center;justify-content:center}
 .photo-card:hover .del-photo-btn{display:flex}
-/* NEWS */
 .news-content{max-width:700px;margin:0 auto;padding:32px 20px 80px}
 .news-hero{text-align:center;padding:36px 20px 28px;margin-bottom:20px;background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.03));border:1px solid var(--border);border-radius:20px;position:relative;overflow:hidden}
 .news-hero::before{content:'';position:absolute;top:-20px;right:-20px;font-size:100px;opacity:.05;transform:rotate(15deg)}
@@ -88,7 +85,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 .whatsapp-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c3e);color:#fff;text-decoration:none;padding:14px 28px;border-radius:12px;font-family:'Noto Sans Bengali',sans-serif;font-size:15px;font-weight:600;margin-top:12px;box-shadow:0 4px 20px rgba(37,211,102,.3);transition:all .3s ease}
 .whatsapp-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
 .news-footer-text{text-align:center;color:var(--text-muted);font-size:13px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
-/* CENTER */
 .center-wrap{max-width:600px;margin:0 auto;padding:32px 20px 80px}
 .bismillah-banner{text-align:center;padding:20px;margin-bottom:24px;background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.03));border:1px solid var(--border);border-radius:16px}
 .bismillah-ar{font-size:22px;color:var(--gold);display:block;margin-bottom:4px;letter-spacing:.05em}
@@ -170,8 +166,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 <body>
 <div class="bg-layer"></div>
 <div id="toast" class="toast"></div>
-
-<!-- HOME -->
 <div id="screen-home" class="screen active">
 <div class="home-page">
   <div class="header">
@@ -180,7 +174,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
     <p>সব গুরুত্বপূর্ণ লিংক এক জায়গায়</p>
   </div>
   <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
-
   <div class="stats-card" id="home-stats">
     <h3>&#128202; ভিজিটর পরিসংখ্যান (শুধু Admin)</h3>
     <div class="stats-grid">
@@ -190,7 +183,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       <div class="stat-box"><span class="stat-num" id="s-month">...</span><div class="stat-label">এই মাসে</div></div>
     </div>
   </div>
-
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.1s"><span>&#127760; ওয়েবসাইট</span><div class="section-label-line"></div></div>
     <button class="btn btn-green anim-item" onclick="showScreen('news')" style="animation-delay:.2s">
@@ -200,7 +192,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       <div class="btn-icon">&#128332;</div><div class="btn-text">প্রতিদিন ১০০ থেকে ২০০+ মসজিদ মাদ্রাসার খেদমতের পোস্টগুলো একসাথে দেখেনিন</div><div class="btn-arrow">&#8250;</div>
     </button>
   </div>
-
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.35s"><span>&#128241; WhatsApp</span><div class="section-label-line"></div></div>
     <a class="btn anim-item" href="https://wa.me/message/3T5Z7CFFDAJBL1" target="_blank" style="animation-delay:.45s">
@@ -210,7 +201,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       <div class="btn-icon">&#128226;</div><div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল</div><div class="btn-arrow">&#8250;</div>
     </a>
   </div>
-
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.58s"><span>&#128216; Facebook</span><div class="section-label-line"></div></div>
     <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.65s">
@@ -223,20 +213,16 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       <div class="btn-icon">&#9889;</div><div class="btn-text">আমাদের মেসেঞ্জার গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
     </a>
   </div>
-
   <div id="home-photos-sec" style="display:none;margin-top:36px">
     <div class="section-label"><span>&#128444; ফটো গ্যালারি</span><div class="section-label-line"></div></div>
     <div class="photo-grid" id="home-photo-grid"></div>
   </div>
-
   <div class="home-footer" style="margin-top:40px">
     <span class="home-footer-ornament">&#10022; &#10022; &#10022;</span>
     সমস্ত লিংক সক্রিয় ও আপডেটেড
   </div>
 </div>
 </div>
-
-<!-- NEWS -->
 <div id="screen-news" class="screen">
   <div class="back-bar">
     <button class="back-btn" onclick="showScreen('home')">&#8592; হোমে ফিরুন</button>
@@ -264,8 +250,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
     <div class="news-footer-text">আল্লাহ তায়ালা আমাদের সকলকে উত্তম রিজিক ও উত্তম খেদমত দান করুন। আমীন।<br><br>&copy; 2026 মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
   </div>
 </div>
-
-<!-- CENTER -->
 <div id="screen-center" class="screen">
   <div class="back-bar">
     <button class="back-btn" onclick="showScreen('home')">&#8592; হোমে ফিরুন</button>
@@ -327,240 +311,39 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
     </div>
   </div>
 </div>
-
 <script>
 for(var i=0;i<18;i++){var p=document.createElement('div');p.className='particle';var s=Math.random()*3+1;p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*18+12)+'s;animation-delay:'+Math.random()*12+'s;';document.body.appendChild(p);}
-
 function showScreen(n){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById('screen-'+n).classList.add('active');window.scrollTo(0,0);}
 function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
-
 var fcfg={apiKey:"AIzaSyAcTJsg367e4AMSIII6HsRIIFbACoP7dqA",authDomain:"khedmot-senter.firebaseapp.com",projectId:"khedmot-senter",storageBucket:"khedmot-senter.firebasestorage.app",messagingSenderId:"762215417966",appId:"1:762215417966:web:e63b5c2cce97693e8ebe7f"};
 var db=null,unsub=null;
 try{firebase.initializeApp(fcfg);db=firebase.firestore();}catch(e){}
-
 var CPWD="ismail722",APWD="@JiHaDuL@";
 var curUser=null,isAdmin=false,allTxt=[];
-
 window.addEventListener('load',function(){
-  trackVisitor();
-  loadHomePhotos();
-  if(localStorage.getItem('kh_adm')==='1'){
-    curUser='Administrator';isAdmin=true;
-    document.getElementById('home-stats').classList.add('show');
-    loadStats();
-  }
+  trackVisitor();loadHomePhotos();
+  if(localStorage.getItem('kh_adm')==='1'){curUser='Administrator';isAdmin=true;document.getElementById('home-stats').classList.add('show');loadStats();}
 });
-
-function memberLogin(){
-  var n=document.getElementById('member-name').value.trim();
-  var p=document.getElementById('community-pwd').value.trim();
-  if(!n){toast('আপনার নাম লিখুন','red');return;}
-  if(p!==CPWD){toast('পাসওয়ার্ড সঠিক নয়','red');return;}
-  curUser=n;isAdmin=false;enterComm();
-}
-function adminLogin(){
-  var p=document.getElementById('admin-pwd').value.trim();
-  if(p!==APWD){toast('Admin password সঠিক নয়','red');return;}
-  curUser='Administrator';isAdmin=true;
-  localStorage.setItem('kh_adm','1');
-  document.getElementById('home-stats').classList.add('show');
-  loadStats();
-  enterComm();
-}
-function enterComm(){
-  document.getElementById('login-panel').style.display='none';
-  var cv=document.getElementById('community-view');
-  cv.classList.add('show');cv.style.display='block';
-  document.getElementById('uname').textContent=curUser;
-  document.getElementById('urole').textContent=isAdmin?'Administrator':'Community Member';
-  document.getElementById('uavatar').textContent=isAdmin?'&#9876;':'&#128100;';
-  if(isAdmin)document.getElementById('admin-post-area').style.display='block';
-  loadPosts();
-}
-function signOut(){
-  curUser=null;isAdmin=false;
-  localStorage.removeItem('kh_adm');
-  document.getElementById('home-stats').classList.remove('show');
-  if(unsub){unsub();unsub=null;}
-  document.getElementById('login-panel').style.display='block';
-  var cv=document.getElementById('community-view');
-  cv.classList.remove('show');cv.style.display='none';
-  document.getElementById('admin-post-area').style.display='none';
-  ['member-name','community-pwd','admin-pwd'].forEach(function(id){document.getElementById(id).value='';});
-  document.getElementById('posts-container').innerHTML='<div class="posts-loading"><div class="spinner"></div>Loading posts...</div>';
-}
+function memberLogin(){var n=document.getElementById('member-name').value.trim();var p=document.getElementById('community-pwd').value.trim();if(!n){toast('আপনার নাম লিখুন','red');return;}if(p!==CPWD){toast('পাসওয়ার্ড সঠিক নয়','red');return;}curUser=n;isAdmin=false;enterComm();}
+function adminLogin(){var p=document.getElementById('admin-pwd').value.trim();if(p!==APWD){toast('Admin password সঠিক নয়','red');return;}curUser='Administrator';isAdmin=true;localStorage.setItem('kh_adm','1');document.getElementById('home-stats').classList.add('show');loadStats();enterComm();}
+function enterComm(){document.getElementById('login-panel').style.display='none';var cv=document.getElementById('community-view');cv.classList.add('show');cv.style.display='block';document.getElementById('uname').textContent=curUser;document.getElementById('urole').textContent=isAdmin?'Administrator':'Community Member';document.getElementById('uavatar').textContent=isAdmin?'&#9876;':'&#128100;';if(isAdmin)document.getElementById('admin-post-area').style.display='block';loadPosts();}
+function signOut(){curUser=null;isAdmin=false;localStorage.removeItem('kh_adm');document.getElementById('home-stats').classList.remove('show');if(unsub){unsub();unsub=null;}document.getElementById('login-panel').style.display='block';var cv=document.getElementById('community-view');cv.classList.remove('show');cv.style.display='none';document.getElementById('admin-post-area').style.display='none';['member-name','community-pwd','admin-pwd'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('posts-container').innerHTML='<div class="posts-loading"><div class="spinner"></div>Loading posts...</div>';}
 function toggleAdm(){document.getElementById('adm-panel').classList.toggle('open');}
 function updateChar(){document.getElementById('char-count').textContent=document.getElementById('post-textarea').value.length;}
-
-function checkDup(){
-  var txt=document.getElementById('post-textarea').value.trim().toLowerCase();
-  if(txt.length<30){document.getElementById('dup-warning').classList.remove('show');return;}
-  var found=allTxt.some(function(t){return simScore(txt,t.toLowerCase())>0.65;});
-  if(found)document.getElementById('dup-warning').classList.add('show');
-  else document.getElementById('dup-warning').classList.remove('show');
-}
-function simScore(a,b){
-  var longer=a.length>=b.length?a:b,shorter=a.length>=b.length?b:a;
-  if(longer.length===0)return 1;
-  var m=longer.length,n=shorter.length,dp=[],i,j;
-  for(i=0;i<=m;i++){dp[i]=[];for(j=0;j<=n;j++)dp[i][j]=i===0?j:j===0?i:0;}
-  for(i=1;i<=m;i++)for(j=1;j<=n;j++)dp[i][j]=longer[i-1]===shorter[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
-  return(longer.length-dp[m][n])/longer.length;
-}
-
-function publishPost(){
-  if(!db){toast('Firebase error','red');return;}
-  var txt=document.getElementById('post-textarea').value.trim();
-  if(!txt){toast('পোস্ট লিখুন','red');return;}
-  var btn=document.getElementById('pub-btn');
-  btn.disabled=true;btn.textContent='Publishing...';
-  var now=new Date();
-  db.collection('posts').add({text:txt,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()})
-  .then(function(){
-    document.getElementById('post-textarea').value='';
-    updateChar();
-    document.getElementById('dup-warning').classList.remove('show');
-    btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';
-    toast('পোস্ট প্রকাশিত হয়েছে','green');
-  })
-  .catch(function(e){btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
-}
-
-function loadPosts(){
-  if(!db){document.getElementById('posts-container').innerHTML=noPostsHTML();return;}
-  if(unsub)unsub();
-  unsub=db.collection('posts').orderBy('created','desc').onSnapshot(function(snap){
-    allTxt=[];
-    var c=document.getElementById('posts-container');
-    document.getElementById('posts-count').textContent=snap.size;
-    if(snap.empty){c.innerHTML=noPostsHTML();return;}
-    c.innerHTML='';
-    snap.forEach(function(doc){
-      var d=doc.data();
-      if(d.text)allTxt.push(d.text);
-      var el=document.createElement('div');el.className='post-card';
-      var delBtn=isAdmin?'<button class="delete-post-btn" onclick="delPost(\''+doc.id+'\')">&#10005;</button>':'';
-      el.innerHTML='<div class="post-text">'+esc(d.text||'')+'</div><div class="post-time">'+(d.timeStr||'')+'</div>'+delBtn;
-      c.appendChild(el);
-    });
-  },function(e){document.getElementById('posts-container').innerHTML='<div class="no-posts"><span>&#9888;</span>লোড হয়নি: '+e.message+'</div>';});
-}
-function delPost(id){
-  if(!confirm('এই পোস্টটি ডিলিট করবেন?'))return;
-  db.collection('posts').doc(id).delete().then(function(){toast('ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
-}
+function checkDup(){var txt=document.getElementById('post-textarea').value.trim().toLowerCase();if(txt.length<30){document.getElementById('dup-warning').classList.remove('show');return;}var found=allTxt.some(function(t){return simScore(txt,t.toLowerCase())>0.65;});if(found)document.getElementById('dup-warning').classList.add('show');else document.getElementById('dup-warning').classList.remove('show');}
+function simScore(a,b){var longer=a.length>=b.length?a:b,shorter=a.length>=b.length?b:a;if(longer.length===0)return 1;var m=longer.length,n=shorter.length,dp=[],i,j;for(i=0;i<=m;i++){dp[i]=[];for(j=0;j<=n;j++)dp[i][j]=i===0?j:j===0?i:0;}for(i=1;i<=m;i++)for(j=1;j<=n;j++)dp[i][j]=longer[i-1]===shorter[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);return(longer.length-dp[m][n])/longer.length;}
+function publishPost(){if(!db){toast('Firebase error','red');return;}var txt=document.getElementById('post-textarea').value.trim();if(!txt){toast('পোস্ট লিখুন','red');return;}var btn=document.getElementById('pub-btn');btn.disabled=true;btn.textContent='Publishing...';var now=new Date();db.collection('posts').add({text:txt,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()}).then(function(){document.getElementById('post-textarea').value='';updateChar();document.getElementById('dup-warning').classList.remove('show');btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';toast('পোস্ট প্রকাশিত হয়েছে','green');}).catch(function(e){btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});}
+function loadPosts(){if(!db){document.getElementById('posts-container').innerHTML=noPostsHTML();return;}if(unsub)unsub();unsub=db.collection('posts').orderBy('created','desc').onSnapshot(function(snap){allTxt=[];var c=document.getElementById('posts-container');document.getElementById('posts-count').textContent=snap.size;if(snap.empty){c.innerHTML=noPostsHTML();return;}c.innerHTML='';snap.forEach(function(doc){var d=doc.data();if(d.text)allTxt.push(d.text);var el=document.createElement('div');el.className='post-card';var delBtn=isAdmin?'<button class="delete-post-btn" onclick="delPost(\''+doc.id+'\')">&#10005;</button>':'';el.innerHTML='<div class="post-text">'+esc(d.text||'')+'</div><div class="post-time">'+(d.timeStr||'')+'</div>'+delBtn;c.appendChild(el);});},function(e){document.getElementById('posts-container').innerHTML='<div class="no-posts"><span>&#9888;</span>লোড হয়নি: '+e.message+'</div>';});}
+function delPost(id){if(!confirm('এই পোস্টটি ডিলিট করবেন?'))return;db.collection('posts').doc(id).delete().then(function(){toast('ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});}
 function noPostsHTML(){return'<div class="no-posts"><span>&#128332;</span>No Posts Yet<br><small style="margin-top:8px;display:block">The community board is empty.</small></div>';}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
 var selectedFile=null;
-function previewImg(inp){
-  var f=inp.files[0];if(!f)return;
-  if(f.size>10485760){toast('ফটো ১০MB এর বেশি হবে না','red');return;}
-  selectedFile=f;
-  var r=new FileReader();
-  r.onload=function(e){
-    document.getElementById('img-pe').src=e.target.result;
-    document.getElementById('img-pw').style.display='block';
-    document.getElementById('img-cap').style.display='block';
-    document.getElementById('pub-img-btn').style.display='block';
-  };
-  r.readAsDataURL(f);
-}
-function publishImg(){
-  if(!selectedFile){toast('ফটো সিলেক্ট করুন','red');return;}
-  if(!db){toast('Firebase error','red');return;}
-  var cap=document.getElementById('img-cap').value.trim();
-  var btn=document.getElementById('pub-img-btn');
-  btn.disabled=true;btn.textContent='আপলোড হচ্ছে...';
-
-  var formData=new FormData();
-  formData.append('file',selectedFile);
-  formData.append('upload_preset','masjid_upload');
-  formData.append('cloud_name','dlwk33bws');
-
-  fetch('https://api.cloudinary.com/v1_1/dlwk33bws/image/upload',{method:'POST',body:formData})
-  .then(function(r){return r.json();})
-  .then(function(data){
-    if(!data.secure_url){throw new Error('আপলোড ব্যর্থ হয়েছে');}
-    var now=new Date();
-    return db.collection('photos').add({
-      imgUrl:data.secure_url,
-      caption:cap,
-      author:curUser,
-      timeStr:now.toLocaleString('bn-BD'),
-      created:now.getTime()
-    });
-  })
-  .then(function(){
-    selectedFile=null;
-    document.getElementById('img-file').value='';
-    document.getElementById('img-pw').style.display='none';
-    document.getElementById('img-cap').style.display='none';
-    document.getElementById('img-cap').value='';
-    document.getElementById('pub-img-btn').style.display='none';
-    btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';
-    toast('ফটো হোম পেজে যোগ হয়েছে','green');
-  })
-  .catch(function(e){
-    btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';
-    toast('সমস্যা হয়েছে','red');
-    alert(e.message);
-  });
-}
-
-function loadHomePhotos(){
-  if(!db)return;
-  db.collection('photos').orderBy('created','desc').onSnapshot(function(snap){
-    var g=document.getElementById('home-photo-grid');
-    var s=document.getElementById('home-photos-sec');
-    if(snap.empty){s.style.display='none';return;}
-    s.style.display='block';g.innerHTML='';
-    snap.forEach(function(doc){
-      var d=doc.data();
-      var card=document.createElement('div');card.className='photo-card';
-      var dBtn=isAdmin?'<button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">&#10005;</button>':'';
-      card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>'+dBtn;
-      g.appendChild(card);
-    });
-  });
-}
-function delPhoto(id){
-  if(!confirm('এই ফটো ডিলিট করবেন?'))return;
-  db.collection('photos').doc(id).delete().then(function(){toast('ফটো ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
-}
-
-function trackVisitor(){
-  if(!db)return;
-  var today=new Date().toISOString().slice(0,10);
-  if(sessionStorage.getItem('v_'+today))return;
-  sessionStorage.setItem('v_'+today,'1');
-  var ref=db.collection('visitors').doc(today);
-  ref.get().then(function(doc){
-    if(doc.exists)ref.update({count:doc.data().count+1});
-    else ref.set({count:1,date:today});
-  }).catch(function(){});
-}
-
-function loadStats(){
-  if(!db)return;
-  var today=new Date().toISOString().slice(0,10);
-  var yest=new Date(Date.now()-86400000).toISOString().slice(0,10);
-  var mon=today.slice(0,7);
-  db.collection('visitors').get().then(function(snap){
-    var tc=0,yc=0,mc=0,tot=0;
-    snap.forEach(function(doc){
-      var cnt=doc.data().count||0;
-      tot+=cnt;
-      if(doc.id===today)tc=cnt;
-      if(doc.id===yest)yc=cnt;
-      if(doc.id.startsWith(mon))mc+=cnt;
-    });
-    document.getElementById('s-today').textContent=tc;
-    document.getElementById('s-yest').textContent=yc;
-    document.getElementById('s-month').textContent=mc;
-    document.getElementById('s-total').textContent=tot;
-  }).catch(function(){});
-}
+function previewImg(inp){var f=inp.files[0];if(!f)return;if(f.size>10485760){toast('ফটো ১০MB এর বেশি হবে না','red');return;}selectedFile=f;var r=new FileReader();r.onload=function(e){document.getElementById('img-pe').src=e.target.result;document.getElementById('img-pw').style.display='block';document.getElementById('img-cap').style.display='block';document.getElementById('pub-img-btn').style.display='block';};r.readAsDataURL(f);}
+function publishImg(){if(!selectedFile){toast('ফটো সিলেক্ট করুন','red');return;}if(!db){toast('Firebase error','red');return;}var cap=document.getElementById('img-cap').value.trim();var btn=document.getElementById('pub-img-btn');btn.disabled=true;btn.textContent='আপলোড হচ্ছে...';var formData=new FormData();formData.append('file',selectedFile);formData.append('upload_preset','masjid_upload');formData.append('cloud_name','dlwk33bws');fetch('https://api.cloudinary.com/v1_1/dlwk33bws/image/upload',{method:'POST',body:formData}).then(function(r){return r.json();}).then(function(data){if(!data.secure_url){throw new Error('আপলোড ব্যর্থ হয়েছে');}var now=new Date();return db.collection('photos').add({imgUrl:data.secure_url,caption:cap,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()});}).then(function(){selectedFile=null;document.getElementById('img-file').value='';document.getElementById('img-pw').style.display='none';document.getElementById('img-cap').style.display='none';document.getElementById('img-cap').value='';document.getElementById('pub-img-btn').style.display='none';btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';toast('ফটো হোম পেজে যোগ হয়েছে','green');}).catch(function(e){btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});}
+function loadHomePhotos(){if(!db)return;db.collection('photos').orderBy('created','desc').onSnapshot(function(snap){var g=document.getElementById('home-photo-grid');var s=document.getElementById('home-photos-sec');if(snap.empty){s.style.display='none';return;}s.style.display='block';g.innerHTML='';snap.forEach(function(doc){var d=doc.data();var card=document.createElement('div');card.className='photo-card';var dBtn=isAdmin?'<button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">&#10005;</button>':'';card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>'+dBtn;g.appendChild(card);});});}
+function delPhoto(id){if(!confirm('এই ফটো ডিলিট করবেন?'))return;db.collection('photos').doc(id).delete().then(function(){toast('ফটো ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});}
+function trackVisitor(){if(!db)return;var today=new Date().toISOString().slice(0,10);if(sessionStorage.getItem('v_'+today))return;sessionStorage.setItem('v_'+today,'1');var ref=db.collection('visitors').doc(today);ref.get().then(function(doc){if(doc.exists)ref.update({count:doc.data().count+1});else ref.set({count:1,date:today});}).catch(function(){});}
+function loadStats(){if(!db)return;var today=new Date().toISOString().slice(0,10);var yest=new Date(Date.now()-86400000).toISOString().slice(0,10);var mon=today.slice(0,7);db.collection('visitors').get().then(function(snap){var tc=0,yc=0,mc=0,tot=0;snap.forEach(function(doc){var cnt=doc.data().count||0;tot+=cnt;if(doc.id===today)tc=cnt;if(doc.id===yest)yc=cnt;if(doc.id.startsWith(mon))mc+=cnt;});document.getElementById('s-today').textContent=tc;document.getElementById('s-yest').textContent=yc;document.getElementById('s-month').textContent=mc;document.getElementById('s-total').textContent=tot;}).catch(function(){});}
 </script>
 </body>
 </html>
