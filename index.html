@@ -12,6 +12,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow-x:hidden}
 body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:white}
+body.no-copy{-webkit-user-select:none;-moz-user-select:none;user-select:none}
 .bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(212,168,67,.12) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 80% 110%,rgba(34,197,94,.08) 0%,transparent 60%),linear-gradient(180deg,#050d1a 0%,#081525 50%,#050d1a 100%)}
 .bg-layer::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.04) 1px,transparent 1px);background-size:60px 60px}
 .particle{position:fixed;border-radius:50%;background:var(--gold-light);opacity:0;pointer-events:none;animation:drift linear infinite}
@@ -54,28 +55,19 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 .stats-card{background:linear-gradient(135deg,rgba(212,168,67,.1),rgba(212,168,67,.04));border:1px solid var(--border-hover);border-radius:16px;padding:20px;margin-bottom:28px;display:none}
 .stats-card.show{display:block}
 .stats-card h3{color:var(--gold);font-size:14px;margin-bottom:14px;font-weight:600}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.photo-grid{display:grid;grid-template-columns:1fr;gap:12px}
 .stat-box{background:rgba(0,0,0,.2);border-radius:10px;padding:14px;text-align:center}
 .stat-num{font-size:28px;font-weight:700;color:#fff;display:block}
 .stat-label{font-size:11px;color:var(--text-muted);margin-top:4px}
-/* HOME PHOTOS — ডিলিট বাটন নেই */
+/* HOME PHOTOS */
 .home-photos-section{margin-top:36px}
-.photo-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .photo-card{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);position:relative;transition:transform .3s,border-color .3s}
 .photo-card:hover{transform:scale(1.02);border-color:var(--border-hover)}
 .photo-card img{width:100%;height:auto;display:block}
 .photo-caption-text{padding:8px 12px;font-size:12px;color:var(--text-muted)}
-
-/* ADMIN PHOTO GRID — শুধু admin panel-এর ভেতরে */
-.admin-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.admin-photo-card{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);position:relative;transition:transform .3s,border-color .3s}
-.admin-photo-card:hover{transform:scale(1.02);border-color:var(--border-hover)}
-.admin-photo-card img{width:100%;height:140px;object-fit:cover;display:block}
-.admin-photo-caption{padding:6px 10px;font-size:12px;color:var(--text-muted)}
-/* ডিলিট বাটন শুধু admin-photo-card এ */
-.del-photo-btn{position:absolute;top:8px;right:8px;background:rgba(239,68,68,.85);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:13px;display:none;align-items:center;justify-content:center}
-.admin-photo-card:hover .del-photo-btn{display:flex}
-
+.del-photo-btn{position:absolute;top:8px;right:8px;background:rgba(239,68,68,.85);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;display:none;align-items:center;justify-content:center}
+.photo-card:hover .del-photo-btn{display:flex}
 /* NEWS */
 .news-content{max-width:700px;margin:0 auto;padding:32px 20px 80px}
 .news-hero{text-align:center;padding:36px 20px 28px;margin-bottom:20px;background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.03));border:1px solid var(--border);border-radius:20px;position:relative;overflow:hidden}
@@ -129,6 +121,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 .user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),rgba(212,168,67,.3));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px}
 .user-name{font-size:14px;font-weight:600;color:#fff}
 .user-role{font-size:11px;color:var(--text-muted);margin-top:2px}
+.session-lbl{font-size:11px;color:var(--text-muted);margin-top:2px}
 .signout-btn{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:8px 14px;border-radius:8px;font-family:'Noto Sans Bengali',sans-serif;font-size:13px;cursor:pointer;transition:all .25s}
 .signout-btn:hover{background:rgba(239,68,68,.2)}
 #admin-post-area{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px;display:none}
@@ -166,10 +159,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 .no-posts span{display:block;font-size:36px;margin-bottom:12px;opacity:.5}
 .posts-loading{text-align:center;padding:40px;color:var(--text-muted);font-size:14px}
 .spinner{width:32px;height:32px;margin:0 auto 12px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:rotate .8s linear infinite}
-/* Admin photo manage section */
-.admin-photos-section{margin-top:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:18px}
-.admin-photos-section h4{color:var(--gold);font-size:14px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.no-admin-photos{color:var(--text-muted);font-size:13px;text-align:center;padding:20px}
 @keyframes rotate{to{transform:rotate(360deg)}}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
@@ -178,6 +167,25 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.green{border-color:rgba(34,197,94,.5)}
 .toast.red{border-color:rgba(239,68,68,.5)}
+/* ══ নতুন CSS (ইউজার ম্যানেজমেন্ট) ══ */
+#user-mgmt-area{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px;display:none}
+#user-mgmt-area h3{color:var(--gold);font-size:16px;margin-bottom:14px}
+.uf-wrap{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
+.uf-wrap h4{color:var(--gold);font-size:13px;margin-bottom:12px;font-weight:600}
+.create-user-btn{width:100%;padding:12px;background:linear-gradient(135deg,rgba(212,168,67,.2),rgba(212,168,67,.08));border:1px solid var(--border);border-radius:10px;color:var(--gold);font-family:'Noto Sans Bengali',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;margin-top:4px}
+.create-user-btn:hover{background:rgba(212,168,67,.3)}
+.ul-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.ul-info{flex:1;min-width:0}
+.ul-name{font-size:14px;color:#fff;font-weight:500}
+.ul-mob{font-size:12px;color:var(--text-muted);margin-top:2px}
+.ul-exp{font-size:11px;margin-top:3px}
+.ul-exp.ok{color:var(--green)}
+.ul-exp.no{color:#ef4444}
+.ul-btns{display:flex;gap:6px;flex-shrink:0}
+.ext-btn{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--green);padding:6px 10px;border-radius:6px;font-family:'Noto Sans Bengali',sans-serif;font-size:12px;cursor:pointer;transition:all .25s}
+.ext-btn:hover{background:rgba(34,197,94,.2)}
+.del-user-btn{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:6px;font-family:'Noto Sans Bengali',sans-serif;font-size:12px;cursor:pointer;transition:all .25s}
+.del-user-btn:hover{background:rgba(239,68,68,.2)}
 </style>
 </head>
 <body>
@@ -237,7 +245,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
     </a>
   </div>
 
-  <!-- হোমপেজ ফটো গ্যালারি — ডিলিট বাটন নেই, সবাই দেখতে পাবে -->
   <div id="home-photos-sec" style="display:none;margin-top:36px">
     <div class="section-label"><span>&#128444; ফটো গ্যালারি</span><div class="section-label-line"></div></div>
     <div class="photo-grid" id="home-photo-grid"></div>
@@ -271,7 +278,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
     <div class="news-card"><h3>&#128274; পাসওয়ার্ড সিস্টেম কেন রাখা হয়েছে?</h3><p>আমাদের ওয়েবসাইটে শুধুমাত্র আগ্রহী ও সিরিয়াস ব্যক্তিরাই যুক্ত হতে পারেন। পাসওয়ার্ড ছাড়া ওয়েবসাইটে প্রবেশ করা সম্ভব নয়।</p><div class="highlight-box" style="text-align:center;font-size:16px;font-weight:700">হোয়াটসঅ্যাপ: 01408764722</div><p style="margin-top:12px">এর বিনিময়ে আমরা আপনাদের কাছ থেকে ২০০ টাকা পরিশ্রমিক বিনিময় নিয়ে থাকি।</p></div>
     <div class="news-card"><h3>&#128176; কেন ২০০ টাকা পরিশ্রমিক বিনিময় নেওয়া হয়?</h3><p>প্রতিদিন শতশত খেদমতের পোস্ট নিয়ে কাজ করা সহজ নয়। প্রতিদিন ২৪ ঘন্টা অনলাইনে কানেক্ট থেকে কাজ করতে হয়। আমরা কয়েকজন টিম মিলে একসাথে কাজ করি। এই পরিশ্রমের বিনিময়ে মাত্র ২০০ টাকা হাদিয়া গ্রহণ করি।</p></div>
     <div class="news-card"><h3>&#127873; ২০০ টাকার বিনিময়ে আপনি কী পাচ্ছেন?</h3><p>মাত্র ২০০ টাকার বিনিময়ে শতশত খেদমতের পোস্ট দেখার সুযোগ পাচ্ছেন।</p><div class="highlight-box">অর্থাৎ অল্প টাকার বিনিময়ে বড় উপকার লাভ করতে পারবেন ইনশাআল্লাহ।</div></div>
-    <div class="news-card"><h3>&#128197; কতদিন পর্যন্ত ভিজিট করতে পারবেন?</h3><p>আপনাকে যে পাসওয়ার্ড দেওয়া হবে সেটা দিয়ে <strong style="color:var(--gold)">সর্বনিম্ন ১০ দিন</strong> থেকে <strong style="color:var(--gold)">সর্বোচ্চ ৩০ দিন</strong> ভিজিট করতে পারবেন।</p></div>
+    <div class="news-card"><h3>&#128197; কতদিন পর্যন্ত ভিজিট করতে পারবেন?</h3><p>আপনাকে যে পাসওয়ার্ড দেওয়া হবে সেটা দিয়ে <strong style="color:var(--gold)">সর্বনিম্ন 15 দিন</strong> থেকে <strong style="color:var(--gold)">সর্বোচ্চ 20 দিন</strong> ভিজিট করতে পারবেন।</p></div>
     <div class="news-card"><h3>&#127974; পাসওয়ার্ড যেভাবে সংগ্রহ করবেন</h3><p>বিকাশ অথবা নগদে ২০০ টাকা পাঠাবেন। পাঠানোর নাম্বারের শেষ ৪ সংখ্যা হোয়াটসঅ্যাপে পাঠাবেন। সাথে সাথে পাসওয়ার্ড পাবেন।</p><div class="highlight-box" style="text-align:center;font-size:16px;font-weight:700">বিকাশ, নগদ ও হোয়াটসঅ্যাপ<br><span style="font-size:22px;color:var(--green)">01408764722</span></div></div>
     <div class="news-card"><h3>&#127919; আমাদের উদ্দেশ্য</h3><p>যারা মসজিদ ও মাদ্রাসার খেদমত খুঁজছেন তাদের জন্য একটি নির্ভরযোগ্য মাধ্যম তৈরি করা, যাতে তারা সহজে ভালো মানের খেদমত খুঁজে পান।</p></div>
     <div class="contact-card"><p>যোগাযোগ করতে এখনই WhatsApp করুন</p><span class="phone">01408764722</span><br><a class="whatsapp-btn" href="https://wa.me/8801408764722" target="_blank">&#128172; WhatsApp করুন</a></div>
@@ -294,10 +301,11 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       <div class="login-card">
         <div class="login-title">মসজিদ মাদ্রাসার চাকরি</div>
         <div class="login-subtitle">পরিচালনায় &mdash; হাফেজ ক্বারী জিহাদুল ইসলাম</div>
-        <label class="field-label">আপনার নাম</label>
-        <input id="member-name" class="field-input" type="text" placeholder="আপনার নাম লিখুন">
-        <label class="field-label">Community Password</label>
-        <input id="community-pwd" class="field-input" type="password" placeholder="এডমিনের দেওয়া পাসওয়ার্ডটি লিখুন">
+        <!-- ★ মোবাইল নম্বর + পাসওয়ার্ড দিয়ে লগইন (নতুন ইউজার সিস্টেম) -->
+        <label class="field-label">মোবাইল নম্বর</label>
+        <input id="member-mobile" class="field-input" type="tel" placeholder="মোবাইল নম্বর লিখুন">
+        <label class="field-label">পাসওয়ার্ড</label>
+        <input id="member-pwd" class="field-input" type="password" placeholder="এডমিনের দেওয়া পাসওয়ার্ডটি লিখুন">
         <button class="login-btn-main" onclick="memberLogin()">লগইন করুন</button>
         <div class="or-divider">অথবা</div>
         <button class="admin-toggle" onclick="toggleAdm()">&#9876; Admin Panel</button>
@@ -313,7 +321,12 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
       <div class="community-header">
         <div class="user-badge">
           <div class="user-avatar" id="uavatar">&#128100;</div>
-          <div><div class="user-name" id="uname">&mdash;</div><div class="user-role" id="urole">Member</div></div>
+          <div>
+            <div class="user-name" id="uname">&mdash;</div>
+            <div class="user-role" id="urole">Member</div>
+            <!-- ★ Admin session countdown -->
+            <div class="session-lbl" id="sess-lbl"></div>
+          </div>
         </div>
         <button class="signout-btn" onclick="signOut()">Sign Out</button>
       </div>
@@ -333,15 +346,25 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
           <button class="publish-btn" id="pub-btn" onclick="publishPost()">&#128221; পোস্ট করুন</button>
           <button class="publish-img-btn" id="pub-img-btn" onclick="publishImg()">&#128444; ফটো পোস্ট করুন</button>
         </div>
-
-        <!-- Admin-only ফটো ম্যানেজ সেকশন — ডিলিট বাটন এখানেই শুধু -->
-        <div class="admin-photos-section" id="admin-photos-section">
-          <h4>&#128444; পোস্ট করা ফটোগুলো পরিচালনা করুন</h4>
-          <div class="admin-photo-grid" id="admin-photo-grid">
-            <div class="no-admin-photos">ফটো লোড হচ্ছে...</div>
-          </div>
-        </div>
       </div>
+
+      <!-- ★ নতুন ইউজার ম্যানেজমেন্ট সেকশন (Admin-only, আগের কিছু স্পর্শ করা হয়নি) -->
+      <div id="user-mgmt-area">
+        <h3>&#128101; ইউজার ম্যানেজমেন্ট</h3>
+        <div class="uf-wrap">
+          <h4>&#10133; নতুন ইউজার তৈরি করুন (২০ দিন মেয়াদ)</h4>
+          <label class="field-label">নাম</label>
+          <input id="nu-name" class="field-input" type="text" placeholder="ইউজারের নাম লিখুন">
+          <label class="field-label">মোবাইল নম্বর</label>
+          <input id="nu-mob" class="field-input" type="tel" placeholder="মোবাইল নম্বর লিখুন">
+          <label class="field-label">পাসওয়ার্ড</label>
+          <input id="nu-pwd" class="field-input" type="text" placeholder="পাসওয়ার্ড সেট করুন">
+          <button class="create-user-btn" onclick="createUser()">&#10003; ইউজার তৈরি করুন</button>
+        </div>
+        <div style="color:var(--gold);font-size:13px;margin-bottom:10px;font-weight:600">&#128101; বর্তমান ইউজার তালিকা</div>
+        <div id="ul-wrap"><div style="color:var(--text-muted);text-align:center;padding:16px;font-size:13px">&#8987; লোড হচ্ছে...</div></div>
+      </div>
+
       <div class="posts-section">
         <h3>Community Posts <span class="posts-count" id="posts-count">0</span></h3>
         <div id="posts-container"><div class="posts-loading"><div class="spinner"></div>Loading posts...</div></div>
@@ -351,75 +374,214 @@ body{font-family:'Noto Sans Bengali',sans-serif;background:var(--bg-deep);color:
 </div>
 
 <script>
+/* ── Particles ── */
 for(var i=0;i<18;i++){var p=document.createElement('div');p.className='particle';var s=Math.random()*3+1;p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*18+12)+'s;animation-delay:'+Math.random()*12+'s;';document.body.appendChild(p);}
 
-function showScreen(n){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById('screen-'+n).classList.add('active');window.scrollTo(0,0);}
-function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
-
+/* ── Firebase (অরিজিনাল কনফিগ) ── */
 var fcfg={apiKey:"AIzaSyAcTJsg367e4AMSIII6HsRIIFbACoP7dqA",authDomain:"khedmot-senter.firebaseapp.com",projectId:"khedmot-senter",storageBucket:"khedmot-senter.firebasestorage.app",messagingSenderId:"762215417966",appId:"1:762215417966:web:e63b5c2cce97693e8ebe7f"};
 var db=null,unsub=null;
 try{firebase.initializeApp(fcfg);db=firebase.firestore();}catch(e){}
 
-var CPWD="ismail722",APWD="@JiHaDuL@";
+/* ── State ── */
 var curUser=null,isAdmin=false,allTxt=[];
+var sessInterval=null;
+var ADM_12H=12*3600*1000; /* 12 ঘন্টা */
 
+/* ══ কপি প্রটেকশন (সাধারণ ইউজার) ══ */
+function blockCopy(e){e.preventDefault();}
+function applyCopyGuard(){
+  if(!isAdmin){
+    document.body.classList.add('no-copy');
+    document.addEventListener('contextmenu',blockCopy);
+    document.addEventListener('copy',blockCopy);
+    document.addEventListener('selectstart',blockCopy);
+  }else{
+    document.body.classList.remove('no-copy');
+    document.removeEventListener('contextmenu',blockCopy);
+    document.removeEventListener('copy',blockCopy);
+    document.removeEventListener('selectstart',blockCopy);
+  }
+}
+
+/* ── Helpers (অরিজিনাল) ── */
+function showScreen(n){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById('screen-'+n).classList.add('active');window.scrollTo(0,0);}
+function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
+
+/* ── Page Load ── */
 window.addEventListener('load',function(){
   trackVisitor();
-  // হোমপেজে ফটো লোড — ডিলিট বাটন ছাড়া (সবার জন্য)
-loadHomePhotos();
-  if(localStorage.getItem('kh_adm')==='1'){
+  loadHomePhotos();
+  /* Admin ১২ঘন্টা সেশন রিস্টোর */
+  var at=parseInt(localStorage.getItem('kh_adm_time')||'0');
+  if(localStorage.getItem('kh_adm')==='1'&&at&&(Date.now()-at)<ADM_12H){
     curUser='Administrator';isAdmin=true;
     document.getElementById('home-stats').classList.add('show');
     loadStats();
-    enterComm();
   }
 });
 
-function memberLogin(){
-  var n=document.getElementById('member-name').value.trim();
-  var p=document.getElementById('community-pwd').value.trim();
-  if(!n){toast('আপনার নাম লিখুন','red');return;}
-  if(p!==CPWD){toast('পাসওয়ার্ড সঠিক নয়','red');return;}
-  curUser=n;isAdmin=false;enterComm();
+/* ══ Admin Session Timer (১২ ঘন্টা) ══ */
+function startSessTimer(){
+  updateSessLbl();
+  if(sessInterval)clearInterval(sessInterval);
+  sessInterval=setInterval(function(){
+    var at=parseInt(localStorage.getItem('kh_adm_time')||'0');
+    var rem=ADM_12H-(Date.now()-at);
+    if(rem<=0){clearInterval(sessInterval);toast('Admin সেশন শেষ হয়েছে। আবার লগইন করুন।','red');setTimeout(signOut,2500);}
+    else updateSessLbl();
+  },60000);
 }
+function updateSessLbl(){
+  var el=document.getElementById('sess-lbl');if(!el)return;
+  var at=parseInt(localStorage.getItem('kh_adm_time')||'0');
+  var rem=ADM_12H-(Date.now()-at);
+  if(rem<=0){el.textContent='সেশন শেষ';return;}
+  var h=Math.floor(rem/3600000),m=Math.floor((rem%3600000)/60000);
+  el.textContent='⏱ '+h+'ঘ '+m+'মি বাকি';
+}
+
+/* ══ Member Login → Firebase users collection ══ */
+function memberLogin(){
+  var mob=document.getElementById('member-mobile').value.trim();
+  var pwd=document.getElementById('member-pwd').value.trim();
+  if(!mob){toast('মোবাইল নম্বর দিন','red');return;}
+  if(!pwd){toast('পাসওয়ার্ড দিন','red');return;}
+  if(!db){toast('Firebase সংযোগ নেই','red');return;}
+  db.collection('users').where('mobile','==',mob).get()
+    .then(function(snap){
+      if(snap.empty){toast('এই মোবাইল নম্বরে কোনো অ্যাকাউন্ট নেই','red');return;}
+      var doc=snap.docs[0],d=doc.data();
+      if(d.password!==pwd){toast('পাসওয়ার্ড সঠিক নয়','red');return;}
+      if(d.expiresAt&&Date.now()>d.expiresAt){toast('অ্যাকাউন্টের মেয়াদ শেষ। Admin-এর সাথে যোগাযোগ করুন।','red');return;}
+      curUser=d.name||mob;isAdmin=false;
+      applyCopyGuard();
+      enterComm();
+    })
+    .catch(function(){toast('সংযোগ সমস্যা, আবার চেষ্টা করুন','red');});
+}
+
+/* ══ Admin Login → Firebase config/admin (পাসওয়ার্ড কোডে নেই) ══ */
 function adminLogin(){
   var p=document.getElementById('admin-pwd').value.trim();
-  if(p!==APWD){toast('Admin password সঠিক নয়','red');return;}
-  curUser='Administrator';isAdmin=true;
-  localStorage.setItem('kh_adm','1');
-  document.getElementById('home-stats').classList.add('show');
-  loadStats();
-  enterComm();
+  if(!p){toast('পাসওয়ার্ড দিন','red');return;}
+  if(!db){toast('Firebase সংযোগ নেই','red');return;}
+  db.collection('config').doc('admin').get()
+    .then(function(doc){
+      if(!doc.exists||!doc.data().password){toast('Firebase-এ Admin পাসওয়ার্ড সেট নেই','red');return;}
+      if(doc.data().password!==p){toast('Admin password সঠিক নয়','red');return;}
+      curUser='Administrator';isAdmin=true;
+      localStorage.setItem('kh_adm','1');
+      localStorage.setItem('kh_adm_time',String(Date.now()));
+      applyCopyGuard();
+      document.getElementById('home-stats').classList.add('show');
+      loadStats();
+      enterComm();
+    })
+    .catch(function(){toast('Firebase সংযোগ সমস্যা','red');});
 }
+
+/* ── enterComm (অরিজিনাল + নতুন অংশ) ── */
 function enterComm(){
   document.getElementById('login-panel').style.display='none';
   var cv=document.getElementById('community-view');
   cv.classList.add('show');cv.style.display='block';
   document.getElementById('uname').textContent=curUser;
   document.getElementById('urole').textContent=isAdmin?'Administrator':'Community Member';
-  document.getElementById('uavatar').textContent=isAdmin?'⚔':'👤';
+  document.getElementById('uavatar').textContent=isAdmin?'&#9876;':'&#128100;';
   if(isAdmin){
     document.getElementById('admin-post-area').style.display='block';
-    // Admin panel এ ডিলিট সহ ফটো লোড করো
-    loadAdminPhotos();
+    document.getElementById('user-mgmt-area').style.display='block';
+    startSessTimer();
+    loadUserList();
   }
   loadPosts();
 }
+
+/* ── signOut (অরিজিনাল + নতুন) ── */
 function signOut(){
   curUser=null;isAdmin=false;
   localStorage.removeItem('kh_adm');
+  localStorage.removeItem('kh_adm_time');
+  if(sessInterval){clearInterval(sessInterval);sessInterval=null;}
   document.getElementById('home-stats').classList.remove('show');
   if(unsub){unsub();unsub=null;}
+  /* কপি আনলক */
+  document.body.classList.remove('no-copy');
+  document.removeEventListener('contextmenu',blockCopy);
+  document.removeEventListener('copy',blockCopy);
+  document.removeEventListener('selectstart',blockCopy);
   document.getElementById('login-panel').style.display='block';
   var cv=document.getElementById('community-view');
   cv.classList.remove('show');cv.style.display='none';
   document.getElementById('admin-post-area').style.display='none';
-  ['member-name','community-pwd','admin-pwd'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('user-mgmt-area').style.display='none';
+  document.getElementById('sess-lbl').textContent='';
+  ['member-mobile','member-pwd','admin-pwd'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('posts-container').innerHTML='<div class="posts-loading"><div class="spinner"></div>Loading posts...</div>';
 }
 function toggleAdm(){document.getElementById('adm-panel').classList.toggle('open');}
-function updateChar(){document.getElementById('char-count').textContent=document.getElementById('post-textarea').value.length;}
 
+/* ══ ইউজার তৈরি (Admin Panel) ══ */
+function createUser(){
+  var name=document.getElementById('nu-name').value.trim();
+  var mob=document.getElementById('nu-mob').value.trim();
+  var pwd=document.getElementById('nu-pwd').value.trim();
+  if(!name||!mob||!pwd){toast('সব তথ্য পূরণ করুন','red');return;}
+  if(!db){toast('Firebase error','red');return;}
+  db.collection('users').where('mobile','==',mob).get()
+    .then(function(snap){
+      if(!snap.empty){toast('এই মোবাইল নম্বর ইতিমধ্যে আছে','red');return Promise.reject('dup');}
+      var now=Date.now();
+      return db.collection('users').add({name:name,mobile:mob,password:pwd,createdAt:now,expiresAt:now+20*24*3600000});
+    })
+    .then(function(ref){
+      if(!ref)return;
+      document.getElementById('nu-name').value='';
+      document.getElementById('nu-mob').value='';
+      document.getElementById('nu-pwd').value='';
+      toast(name+' — ইউজার তৈরি হয়েছে (২০ দিন মেয়াদ)','green');
+      loadUserList();
+    })
+    .catch(function(e){if(e!=='dup')toast('সমস্যা হয়েছে','red');});
+}
+function loadUserList(){
+  if(!db)return;
+  var c=document.getElementById('ul-wrap');
+  c.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:16px;font-size:13px">&#8987; লোড হচ্ছে...</div>';
+  db.collection('users').orderBy('createdAt','desc').get()
+    .then(function(snap){
+      if(snap.empty){c.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:16px;font-size:13px">কোনো ইউজার নেই</div>';return;}
+      c.innerHTML='';
+      snap.forEach(function(doc){
+        var d=doc.data(),now=Date.now();
+        var exp=d.expiresAt&&now>d.expiresAt;
+        var dL=d.expiresAt?Math.max(0,Math.ceil((d.expiresAt-now)/86400000)):0;
+        var et=exp?'মেয়াদ শেষ':(dL+' দিন বাকি');
+        var ec=exp?'no':'ok';
+        var row=document.createElement('div');row.className='ul-item';
+        row.innerHTML='<div class="ul-info"><div class="ul-name">'+esc(d.name||'')+'</div><div class="ul-mob">&#128241; '+esc(d.mobile||'')+'</div><div class="ul-exp '+ec+'">&#9200; '+et+'</div></div><div class="ul-btns"><button class="ext-btn" onclick="extendUser(\''+doc.id+'\')">+১০ দিন</button><button class="del-user-btn" onclick="deleteUser(\''+doc.id+'\')">মুছুন</button></div>';
+        c.appendChild(row);
+      });
+    })
+    .catch(function(){c.innerHTML='<div style="color:#ef4444;text-align:center;padding:16px;font-size:13px">লোড হয়নি</div>';});
+}
+function extendUser(id){
+  db.collection('users').doc(id).get().then(function(doc){
+    if(!doc.exists)return;
+    var cur=doc.data().expiresAt||Date.now();
+    return db.collection('users').doc(id).update({expiresAt:Math.max(cur,Date.now())+10*24*3600000});
+  }).then(function(){toast('মেয়াদ ১০ দিন বাড়ানো হয়েছে','green');loadUserList();})
+  .catch(function(){toast('সমস্যা হয়েছে','red');});
+}
+function deleteUser(id){
+  if(!confirm('এই ইউজার ডিলিট করবেন?'))return;
+  db.collection('users').doc(id).delete()
+    .then(function(){toast('ইউজার ডিলিট হয়েছে','green');loadUserList();})
+    .catch(function(){toast('সমস্যা হয়েছে','red');});
+}
+
+/* ── Posts (অরিজিনাল হুবহু) ── */
+function updateChar(){document.getElementById('char-count').textContent=document.getElementById('post-textarea').value.length;}
 function checkDup(){
   var txt=document.getElementById('post-textarea').value.trim().toLowerCase();
   if(txt.length<30){document.getElementById('dup-warning').classList.remove('show');return;}
@@ -435,7 +597,6 @@ function simScore(a,b){
   for(i=1;i<=m;i++)for(j=1;j<=n;j++)dp[i][j]=longer[i-1]===shorter[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
   return(longer.length-dp[m][n])/longer.length;
 }
-
 function publishPost(){
   if(!db){toast('Firebase error','red');return;}
   var txt=document.getElementById('post-textarea').value.trim();
@@ -448,12 +609,11 @@ function publishPost(){
     document.getElementById('post-textarea').value='';
     updateChar();
     document.getElementById('dup-warning').classList.remove('show');
-    btn.disabled=false;btn.textContent='📝 পোস্ট করুন';
+    btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';
     toast('পোস্ট প্রকাশিত হয়েছে','green');
   })
-  .catch(function(e){btn.disabled=false;btn.textContent='📝 পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
+  .catch(function(e){btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
 }
-
 function loadPosts(){
   if(!db){document.getElementById('posts-container').innerHTML=noPostsHTML();return;}
   if(unsub)unsub();
@@ -467,20 +627,20 @@ function loadPosts(){
       var d=doc.data();
       if(d.text)allTxt.push(d.text);
       var el=document.createElement('div');el.className='post-card';
-      // পোস্ট ডিলিট বাটন শুধু admin এর জন্য
       var delBtn=isAdmin?'<button class="delete-post-btn" onclick="delPost(\''+doc.id+'\')">&#10005;</button>':'';
       el.innerHTML='<div class="post-text">'+esc(d.text||'')+'</div><div class="post-time">'+(d.timeStr||'')+'</div>'+delBtn;
       c.appendChild(el);
     });
-  },function(e){document.getElementById('posts-container').innerHTML='<div class="no-posts"><span>⚠</span>লোড হয়নি: '+e.message+'</div>';});
+  },function(e){document.getElementById('posts-container').innerHTML='<div class="no-posts"><span>&#9888;</span>লোড হয়নি: '+e.message+'</div>';});
 }
 function delPost(id){
   if(!confirm('এই পোস্টটি ডিলিট করবেন?'))return;
   db.collection('posts').doc(id).delete().then(function(){toast('ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
 }
-function noPostsHTML(){return'<div class="no-posts"><span>📜</span>No Posts Yet<br><small style="margin-top:8px;display:block">The community board is empty.</small></div>';}
+function noPostsHTML(){return'<div class="no-posts"><span>&#128332;</span>No Posts Yet<br><small style="margin-top:8px;display:block">The community board is empty.</small></div>';}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
+/* ── Photo Upload (অরিজিনাল হুবহু) ── */
 var selectedFile=null;
 function previewImg(inp){
   var f=inp.files[0];if(!f)return;
@@ -501,24 +661,16 @@ function publishImg(){
   var cap=document.getElementById('img-cap').value.trim();
   var btn=document.getElementById('pub-img-btn');
   btn.disabled=true;btn.textContent='আপলোড হচ্ছে...';
-
   var formData=new FormData();
   formData.append('file',selectedFile);
   formData.append('upload_preset','masjid_upload');
   formData.append('cloud_name','dlwk33bws');
-
   fetch('https://api.cloudinary.com/v1_1/dlwk33bws/image/upload',{method:'POST',body:formData})
   .then(function(r){return r.json();})
   .then(function(data){
     if(!data.secure_url){throw new Error('আপলোড ব্যর্থ হয়েছে');}
     var now=new Date();
-    return db.collection('photos').add({
-      imgUrl:data.secure_url,
-      caption:cap,
-      author:curUser,
-      timeStr:now.toLocaleString('bn-BD'),
-      created:now.getTime()
-    });
+    return db.collection('photos').add({imgUrl:data.secure_url,caption:cap,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()});
   })
   .then(function(){
     selectedFile=null;
@@ -527,73 +679,33 @@ function publishImg(){
     document.getElementById('img-cap').style.display='none';
     document.getElementById('img-cap').value='';
     document.getElementById('pub-img-btn').style.display='none';
-    btn.disabled=false;btn.textContent='🖼 ফটো পোস্ট করুন';
+    btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';
     toast('ফটো হোম পেজে যোগ হয়েছে','green');
-    // ফটো পোস্ট হওয়ার পর admin list রিফ্রেশ
-    loadAdminPhotos();
   })
-  .catch(function(e){
-    btn.disabled=false;btn.textContent='🖼 ফটো পোস্ট করুন';
-    toast('সমস্যা হয়েছে','red');
-    alert(e.message);
-  });
+  .catch(function(e){btn.disabled=false;btn.textContent='&#128444; ফটো পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
 }
-
-/* ══════════════════════════════════════════════════
-   হোমপেজ ফটো গ্যালারি — ডিলিট বাটন নেই
-   সবাই (admin ও সাধারণ ইউজার) দেখতে পাবে
-   ══════════════════════════════════════════════════ */
 function loadHomePhotos(){
   if(!db)return;
   db.collection('photos').orderBy('created','desc').onSnapshot(function(snap){
     var g=document.getElementById('home-photo-grid');
     var s=document.getElementById('home-photos-sec');
     if(snap.empty){s.style.display='none';return;}
-    s.style.display='block';
-    g.innerHTML='';
+    s.style.display='block';g.innerHTML='';
     snap.forEach(function(doc){
       var d=doc.data();
-      var card=document.createElement('div');
-      card.className='photo-card';
-      // ডিলিট বাটন নেই — শুধু ছবি ও ক্যাপশন
-      card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>';
+      var card=document.createElement('div');card.className='photo-card';
+      var dBtn=isAdmin?'<button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">&#10005;</button>':'';
+      card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>'+dBtn;
       g.appendChild(card);
     });
   });
 }
-
-/* ══════════════════════════════════════════════════
-   Admin Panel ফটো ম্যানেজমেন্ট — ডিলিট বাটন আছে
-   শুধু Admin লগইন করলে দেখা যাবে
-   ══════════════════════════════════════════════════ */
-function loadAdminPhotos(){
-  if(!db||!isAdmin)return;
-  db.collection('photos').orderBy('created','desc').onSnapshot(function(snap){
-    var g=document.getElementById('admin-photo-grid');
-    if(snap.empty){
-      g.innerHTML='<div class="no-admin-photos">এখনো কোনো ফটো নেই</div>';
-      return;
-    }
-    g.innerHTML='';
-    snap.forEach(function(doc){
-      var d=doc.data();
-      var card=document.createElement('div');
-      card.className='admin-photo-card';
-      // ডিলিট বাটন শুধু এখানে — admin panel এর ভেতরে
-      card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="admin-photo-caption">'+(d.caption||'(ক্যাপশন নেই)')+'</div><button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">&#10005;</button>';
-      g.appendChild(card);
-    });
-  });
-}
-
 function delPhoto(id){
-  if(!isAdmin){toast('শুধু Admin ডিলিট করতে পারবে','red');return;}
   if(!confirm('এই ফটো ডিলিট করবেন?'))return;
-  db.collection('photos').doc(id).delete()
-    .then(function(){toast('ফটো ডিলিট হয়েছে','green');})
-    .catch(function(e){toast(e.message,'red');});
+  db.collection('photos').doc(id).delete().then(function(){toast('ফটো ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
 }
 
+/* ── Visitor Tracking (অরিজিনাল হুবহু) ── */
 function trackVisitor(){
   if(!db)return;
   var today=new Date().toISOString().slice(0,10);
@@ -605,7 +717,6 @@ function trackVisitor(){
     else ref.set({count:1,date:today});
   }).catch(function(){});
 }
-
 function loadStats(){
   if(!db)return;
   var today=new Date().toISOString().slice(0,10);
