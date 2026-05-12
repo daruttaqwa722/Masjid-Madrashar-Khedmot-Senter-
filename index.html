@@ -413,10 +413,11 @@ window.addEventListener('load',function(){
   loadHomePhotos();
   /* Admin ১২ঘন্টা সেশন রিস্টোর */
   var at=parseInt(localStorage.getItem('kh_adm_time')||'0');
-  if(localStorage.getItem('kh_adm')==='1'&&at&&(Date.now()-at)<ADM_12H){
+if(localStorage.getItem('kh_adm')==='1'&&at&&(Date.now()-at)<ADM_12H){
     curUser='Administrator';isAdmin=true;
     document.getElementById('home-stats').classList.add('show');
     loadStats();
+    enterComm();
   }
 });
 
@@ -464,20 +465,14 @@ function memberLogin(){
 function adminLogin(){
   var p=document.getElementById('admin-pwd').value.trim();
   if(!p){toast('পাসওয়ার্ড দিন','red');return;}
-  if(!db){toast('Firebase সংযোগ নেই','red');return;}
-  db.collection('config').doc('admin').get()
-    .then(function(doc){
-      if(!doc.exists||!doc.data().password){toast('Firebase-এ Admin পাসওয়ার্ড সেট নেই','red');return;}
-      if(doc.data().password!==p){toast('Admin password সঠিক নয়','red');return;}
-      curUser='Administrator';isAdmin=true;
-      localStorage.setItem('kh_adm','1');
-      localStorage.setItem('kh_adm_time',String(Date.now()));
-      applyCopyGuard();
-      document.getElementById('home-stats').classList.add('show');
-      loadStats();
-      enterComm();
-    })
-    .catch(function(){toast('Firebase সংযোগ সমস্যা','red');});
+  if(p!=='@JiHaDuL@'){toast('Admin password সঠিক নয়','red');return;}
+  curUser='Administrator';isAdmin=true;
+  localStorage.setItem('kh_adm','1');
+  localStorage.setItem('kh_adm_time',String(Date.now()));
+  applyCopyGuard();
+  document.getElementById('home-stats').classList.add('show');
+  loadStats();
+  enterComm();
 }
 
 /* ── enterComm (অরিজিনাল + নতুন অংশ) ── */
