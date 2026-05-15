@@ -802,6 +802,123 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 
 /* ════ SELECTION ════ */
 ::selection { background: rgba(201,168,76,0.22); color: var(--gold-pale); }
+
+/* ════ PREVIEW SCREEN ════ */
+.preview-wrap { max-width: 680px; margin: 0 auto; padding: 28px 18px 80px; }
+
+.preview-banner {
+  background: linear-gradient(135deg, rgba(201,168,76,0.13), rgba(15,140,78,0.08));
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-card);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+.preview-banner h2 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 17px;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.preview-banner p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.preview-banner .get-pwd-btn {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 11px 26px;
+  background: linear-gradient(145deg, rgba(15,140,78,0.35), rgba(15,140,78,0.15));
+  border: 1px solid rgba(15,140,78,0.5);
+  border-radius: var(--radius-pill);
+  color: var(--text-white);
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+  box-shadow: var(--shadow-green-btn);
+}
+.preview-banner .get-pwd-btn:hover {
+  background: linear-gradient(145deg, rgba(15,140,78,0.5), rgba(15,140,78,0.28));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(15,140,78,0.42);
+}
+
+.preview-post-card {
+  background: var(--glass-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s;
+  animation: fadeUp 0.45s var(--ease-out) both;
+}
+.preview-post-card:hover {
+  border-color: var(--border-mid);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.preview-post-text {
+  color: var(--text-body);
+  font-size: 14.5px;
+  line-height: 1.88;
+  white-space: pre-wrap;
+}
+.preview-post-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* মাস্কড নাম্বার হাইলাইট */
+.masked-num {
+  display: inline-block;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.28);
+  border-radius: 6px;
+  padding: 1px 8px;
+  color: var(--gold-bright);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 14px;
+}
+
+/* পাসওয়ার্ড হিন্ট বাজ */
+.pwd-hint-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.22);
+  border-radius: var(--radius-pill);
+  padding: 2px 10px;
+  font-size: 11.5px;
+  color: #f87171;
+  font-weight: 600;
+  margin-left: 6px;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.pwd-hint-inline:hover {
+  background: rgba(239,68,68,0.16);
+}
+
+.preview-count-bar {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px; color: var(--text-muted); font-size: 13px;
+}
+.preview-count-badge {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 3px 13px; font-size: 13px; color: var(--gold);
+}
 </style>
 </head>
 <body>
@@ -831,10 +948,13 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.1s"><span>&#127760; ওয়েবসাইট</span><div class="section-label-line"></div></div>
     <button class="btn btn-green anim-item" onclick="showScreen('news')" style="animation-delay:.2s">
-      <div class="btn-icon">&#128203;</div><div class="btn-text">খেদমত সম্পর্কে বিস্তারিত জেনেনিন এবং ওয়েবসাইট পাসওয়ার্ড সংগ্রহ করেনিন।</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon">&#128203;</div><div class="btn-text">সুবিধা সম্পর্কে জানুন<br>পাসওয়ার্ড সংগ্রহ করুন</div><div class="btn-arrow">&#8250;</div>
     </button>
     <button class="btn btn-green anim-item" onclick="showScreen('center')" style="animation-delay:.3s">
-      <div class="btn-icon">&#128332;</div><div class="btn-text">প্রতিদিন ১০০ থেকে ২০০+ মসজিদ মাদ্রাসার খেদমতের পোস্টগুলো একসাথে দেখেনিন</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon">&#128274;</div><div class="btn-text">পাসওয়ার্ড সহ পোস্ট দেখুন<br>নাম্বার সম্পূর্ণ দেখাবে</div><div class="btn-arrow">&#8250;</div>
+    </button>
+    <button class="btn anim-item" onclick="showScreen('preview');loadPreviewPosts();" style="animation-delay:.38s">
+      <div class="btn-icon">&#128065;</div><div class="btn-text">পাসওয়ার্ড ছাড়া পোস্ট দেখুন<br>নাম্বার আংশিক দেখাবে</div><div class="btn-arrow">&#8250;</div>
     </button>
   </div>
 
@@ -1016,6 +1136,32 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
   </div>
 </div>
 
+<!-- PREVIEW (পাসওয়ার্ড ছাড়া আংশিক দেখা) -->
+<div id="screen-preview" class="screen">
+  <div class="back-bar">
+    <button class="back-btn" onclick="showScreen('home')">&#8592; হোমে ফিরুন</button>
+    <span class="back-title">খেদমতের পোস্ট &mdash; পূর্বরূপ</span>
+  </div>
+  <div class="preview-wrap">
+
+    <div class="preview-banner">
+      <h2>&#128274; নাম্বার আংশিকভাবে দেখানো হচ্ছে</h2>
+      <p>এখানে পোস্টের ভেতরের যোগাযোগের নাম্বারগুলোর শেষের ৩টি সংখ্যা লুকানো আছে।<br>
+      সম্পূর্ণ নাম্বার সহ সব পোস্ট দেখতে পাসওয়ার্ড সংগ্রহ করুন।</p>
+      <a class="get-pwd-btn" href="https://wa.me/8801408764722" target="_blank">&#128172; পাসওয়ার্ড সংগ্রহ করুন (WhatsApp)</a>
+    </div>
+
+    <div class="preview-count-bar">
+      &#128203; মোট পোস্ট: <span class="preview-count-badge" id="preview-count">০</span>
+    </div>
+
+    <div id="preview-posts-container">
+      <div class="posts-loading"><div class="spinner"></div>লোড হচ্ছে...</div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 /* ── Particles ── */
 for(var i=0;i<22;i++){var p=document.createElement('div');p.className='particle';var s=Math.random()*3.5+1;p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*20+14)+'s;animation-delay:'+Math.random()*14+'s;';document.body.appendChild(p);}
@@ -1047,11 +1193,20 @@ function applyCopyGuard(){
 }
 
 /* ── Helpers (অরিজিনাল) ── */
-function showScreen(n){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById('screen-'+n).classList.add('active');window.scrollTo(0,0);}
+function showScreen(n){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('screen-'+n).classList.add('active');
+  window.scrollTo(0,0);
+}
 function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
 
 /* ── Page Load ── */
 window.addEventListener('load',function(){
+  /* সব জায়গায় কপি বন্ধ */
+  document.body.classList.add('no-copy');
+  document.addEventListener('contextmenu',blockCopy);
+  document.addEventListener('copy',blockCopy);
+  document.addEventListener('selectstart',blockCopy);
   trackVisitor();
   loadHomePhotos();
   /* Admin ১২ঘন্টা সেশন রিস্টোর */
@@ -1276,6 +1431,129 @@ function delPost(id){
 }
 function noPostsHTML(){return'<div class="no-posts"><span>&#128332;</span>No Posts Yet<br><small style="margin-top:8px;display:block">The community board is empty.</small></div>';}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ══ নাম্বার মাস্কিং ফাংশন ══
+   যেকোনো ফরম্যাটের বাংলাদেশি মোবাইল নাম্বার ধরে শেষ ৩ ডিজিট লুকায় */
+function maskNumbers(text){
+  var hint='<span class="pwd-hint-inline" onclick="showScreen(\'home\');showScreen(\'news\')">&#128274; সম্পূর্ণ নাম্বার দেখতে পাসওয়ার্ড সংগ্রহ করুন</span>';
+
+  /* শেষের ৩টি ডিজিট (ইংরেজি বা বাংলা) X দিয়ে বদলে দেয়, বাকি ফরম্যাট অক্ষুণ্ণ রাখে */
+  function maskLast3(str){
+    var count=0,arr=str.split('');
+    for(var i=arr.length-1;i>=0;i--){
+      if(/[\d\u09E6-\u09EF]/.test(arr[i])){
+        arr[i]='X';count++;
+        if(count===3)break;
+      }
+    }
+    return arr.join('');
+  }
+
+  /* স্পেস/হাইফেন বাদ দিয়ে শুধু ডিজিট বের করে */
+  function digitsOnly(str){
+    return str.replace(/[\s\-\(\)\.]/g,'');
+  }
+
+  /* ১. ইংরেজি নাম্বার — সব ফরম্যাট:
+        01XXXXXXXXX
+        01X XXXXXXXX | 01X-XXXXXXXX
+        +8801XXXXXXXXX | 008801XXXXXXXXX | 8801XXXXXXXXX
+        +880 1X XXXXXXXX | +880-1X-XXXXXXXX ইত্যাদি */
+  text=text.replace(
+    /(?:\+?8{2}0?[\s\-]?)?0[\s\-]?1[\s\-]?[3-9](?:[\s\-]?\d){8}/g,
+    function(match){
+      var d=digitsOnly(match);
+      /* দেশকোড ছাড়া: 01XXXXXXXXX (11 ডিজিট) */
+      if(/^01[3-9]\d{8}$/.test(d)){
+        return '<span class="masked-num">'+maskLast3(match)+'</span>'+hint;
+      }
+      /* +880 বা 880 বা 0088 সহ: 8801XXXXXXXXX বা 08801XXXXXXXXX (13-14 ডিজিট) */
+      if(/^(?:880|0880|00880)1[3-9]\d{8}$/.test(d)){
+        return '<span class="masked-num">'+maskLast3(match)+'</span>'+hint;
+      }
+      return match;
+    }
+  );
+
+  /* ২. +880 দিয়ে শুরু যেখানে 0 নেই মাঝে: +8801XXXXXXXXX সরাসরি */
+  text=text.replace(
+    /\+880[\s\-]?1[\s\-]?[3-9](?:[\s\-]?\d){8}/g,
+    function(match){
+      var d=digitsOnly(match).replace(/^\+/,'');
+      if(/^8801[3-9]\d{8}$/.test(d)){
+        return '<span class="masked-num">'+maskLast3(match)+'</span>'+hint;
+      }
+      return match;
+    }
+  );
+
+  /* ৩. বাংলা নাম্বার — সব ফরম্যাট:
+        ০১XXXXXXXXX
+        ০১X XXXXXXXX | ০১X-XXXXXXXX
+        +৮৮০১XXXXXXXXX | ৮৮০১XXXXXXXXX | ০০৮৮০১XXXXXXXXX
+        +৮৮০ ০১X XXXXXXXX ইত্যাদি */
+  text=text.replace(
+    /(?:\+?[৮৮][৮৮][০][\s\-]?)?[০][\s\-]?[১][\s\-]?[৩৪৫৬৭৮৯](?:[\s\-]?[০-৯]){8}/g,
+    function(match){
+      var d=match.replace(/[\s\-]/g,'').replace(/^\+/,'');
+      /* দেশকোড ছাড়া: ০১XXXXXXXXX */
+      if(/^০১[৩৪৫৬৭৮৯][০-৯]{8}$/.test(d)){
+        return '<span class="masked-num">'+maskLast3(match)+'</span>'+hint;
+      }
+      /* ৮৮০ দেশকোড সহ: ৮৮০০১XXXXXXXXX */
+      if(/^(?:৮৮০|০৮৮০|০০৮৮০)০?১[৩৪৫৬৭৮৯][০-৯]{8}$/.test(d)){
+        return '<span class="masked-num">'+maskLast3(match)+'</span>'+hint;
+      }
+      return match;
+    }
+  );
+
+  /* ৩ক. +৮৮০ দিয়ে শুরু — সরাসরি ০ ছাড়া: +৮৮০১XXXXXXXXX */
+  text=text.replace(
+    /\+৮৮০[\s\-]?১[\s\-]?[৩৪৫৬৭৮৯](?:[\s\-]?[০-৯]){8}/g,
+    function(match){
+      var d=match.replace(/[\s\-]/g,'').replace(/^\+/,'');
+      if(/^৮৮০১[৩৪৫৬৭৮৯][০-৯]{8}$/.test(d)){
+        return '<span class="masked-num">'+maskLast3(match)+'</span>'+hint;
+      }
+      return match;
+    }
+  );
+
+  return text;
+}
+
+/* ══ Preview Posts লোড (পাসওয়ার্ড ছাড়া, নাম্বার মাস্কড) ══ */
+var previewUnsub=null;
+function loadPreviewPosts(){
+  if(!db){document.getElementById('preview-posts-container').innerHTML=noPostsHTML();return;}
+  if(previewUnsub){previewUnsub();previewUnsub=null;}
+  var c=document.getElementById('preview-posts-container');
+  c.innerHTML='<div class="posts-loading"><div class="spinner"></div>লোড হচ্ছে...</div>';
+  previewUnsub=db.collection('posts').orderBy('created','desc').onSnapshot(function(snap){
+    document.getElementById('preview-count').textContent=snap.size;
+    if(snap.empty){c.innerHTML=noPostsHTML();return;}
+    c.innerHTML='';
+    snap.forEach(function(doc){
+      var d=doc.data();
+      var rawText=d.text||'';
+      /* নাম্বার মাস্ক করার জন্য HTML entity ছাড়া কাজ করি,
+         তারপর নিরাপদভাবে escape করে নাম্বার রিপ্লেস করি */
+      var escapedText=rawText
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;');
+      var maskedText=maskNumbers(escapedText);
+      var card=document.createElement('div');
+      card.className='preview-post-card';
+      card.innerHTML='<div class="preview-post-text">'+maskedText+'</div>'
+                    +'<div class="preview-post-time">'+(d.timeStr||'')+'</div>';
+      c.appendChild(card);
+    });
+  },function(e){
+    c.innerHTML='<div class="no-posts"><span>&#9888;</span>লোড হয়নি: '+e.message+'</div>';
+  });
+}
 
 /* ── Photo Upload (অরিজিনাল হুবহু) ── */
 var selectedFile=null;
