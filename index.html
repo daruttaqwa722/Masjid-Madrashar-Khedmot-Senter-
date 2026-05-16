@@ -186,7 +186,7 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 .back-title { color: var(--text-muted); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ════ HOME PAGE ════ */
-.home-page { max-width: 580px; margin: 0 auto; padding: 52px 20px 90px; }
+.home-page { max-width: 580px; margin: 0 auto; padding: 52px 20px 32px; }
 
 /* ════ HEADER ════ */
 .header { text-align: center; margin-bottom: 48px; animation: fadeDown 1s var(--ease-out) both; }
@@ -374,6 +374,7 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 .photo-card:hover { transform: scale(1.02) translateY(-3px); border-color: var(--border-mid); box-shadow: var(--shadow-hover); }
 .photo-card img { width: 100%; height: auto; display: block; }
 .photo-caption-text { padding: 12px 16px; font-size: 13px; color: var(--text-muted); }
+.photo-caption-text:empty { display: none; padding: 0; }
 .del-photo-btn {
   position: absolute; top: 10px; right: 10px;
   background: rgba(239,68,68,0.88); border: none; color: #fff;
@@ -384,7 +385,7 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 .photo-card:hover .del-photo-btn { display: flex; }
 
 /* ════ NEWS PAGE ════ */
-.news-content { max-width: 720px; margin: 0 auto; padding: 36px 20px 90px; }
+.news-content { max-width: 720px; margin: 0 auto; padding: 36px 20px 32px; }
 .news-hero {
   text-align: center; padding: 44px 32px 36px; margin-bottom: 26px;
   background: linear-gradient(145deg, rgba(15,140,78,0.16), rgba(201,168,76,0.06));
@@ -476,7 +477,7 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 .news-footer-text { text-align: center; color: var(--text-muted); font-size: 14px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border); line-height: 2; }
 
 /* ════ CENTER PAGE ════ */
-.center-wrap { max-width: 620px; margin: 0 auto; padding: 36px 20px 90px; }
+.center-wrap { max-width: 620px; margin: 0 auto; padding: 36px 20px 32px; }
 
 .bismillah-banner {
   text-align: center; padding: 28px; margin-bottom: 26px;
@@ -1039,12 +1040,12 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
     <div class="news-card"><h3>&#11088; আমাদের ওয়েবসাইটে আপনি যেসব সুবিধা পাবেন</h3><ul class="news-list"><li>প্রতিদিন নতুন নতুন খেদমতের পোস্ট</li><li>বিভিন্ন জেলার খেদমতের তথ্য</li><li>ভালো মানের বেতনের খেদমত খুঁজে নেওয়ার সুযোগ</li><li>কাছের ঠিকানায় খেদমত নেওয়ার সুযোগ</li><li>উন্নত সুযোগ-সুবিধাসম্পন্ন খেদমত বেছে নেওয়ার সুযোগ</li><li>সময় ও কষ্ট বাঁচানোর সুযোগ</li><li>এক জায়গায় শতশত খেদমতের পোস্ট দেখার সুবিধা</li><li>নিয়মিত মসজিদ মাদ্রাসার খেদমতের আপডেট</li></ul></div>
     <div class="news-card"><h3>&#128161; একটি ভালো খেদমত আপনার জীবন বদলে দিতে পারে</h3><div class="highlight-box">ভালো বেতনের খেদমত একজন মানুষের পরিবারকে স্বচ্ছল করতে পারে।</div><div class="highlight-box">কাছের ঠিকানার খেদমত একজন মানুষের কষ্ট কমিয়ে দিতে পারে।</div><div class="highlight-box">সুন্দর পরিবেশে খেদমত করলে মন শান্ত থাকে এবং কাজের মধ্যেও প্রশান্তি আসে।</div><p style="margin-top:14px">এজন্য খেদমত নেওয়ার আগে শতশত খেদমত যাচাই-বাছাই করা অত্যন্ত গুরুত্বপূর্ণ।</p></div>
 
-    <div class="news-card"><h3>&#128204; বিশেষভাবে লক্ষ্য করুন</h3><p>মসজিদের খেদমতের তুলনায় মাদ্রাসার খেদমতের খবর অনেক বেশি আসে। কারণ মসজিদের তুলনায় মাদ্রাসার সংখ্যা অনেক অনেক বেশি।</p></div>
+
     <div class="news-card"><h3>&#128274; পাসওয়ার্ড সিস্টেম কেন রাখা হয়েছে?</h3><p>আমাদের ওয়েবসাইটে শুধুমাত্র আগ্রহী ও সিরিয়াস ব্যক্তিরাই যুক্ত হতে পারেন। পাসওয়ার্ড ছাড়া ওয়েবসাইটে প্রবেশ করা সম্ভব নয়।</p>
     <div class="highlight-box" style="text-align:center;font-size:16px;font-weight:700">হোয়াটসঅ্যাপ: 01408764722</div><p style="margin-top:14px">এর বিনিময়ে আমরা আপনাদের কাছ থেকে ২০০ টাকা পরিশ্রমিক বিনিময় নিয়ে থাকি।</p></div>
     <div class="news-card"><h3>&#128176; কেন ২০০ টাকা পরিশ্রমিক বিনিময় নেওয়া হয়?</h3><p>প্রতিদিন শতশত খেদমতের পোস্ট নিয়ে কাজ করা সহজ নয়। প্রতিদিন ২৪ ঘন্টা অনলাইনে কানেক্ট থেকে কাজ করতে হয়। আমরা কয়েকজন টিম মিলে একসাথে কাজ করি। এই পরিশ্রমের বিনিময়ে মাত্র ২০০ টাকা হাদিয়া গ্রহণ করি।</p></div>
     <div class="news-card"><h3>&#127873; ২০০ টাকার বিনিময়ে আপনি কী পাচ্ছেন?</h3><p>মাত্র ২০০ টাকার বিনিময়ে শতশত খেদমতের পোস্ট দেখার সুযোগ পাচ্ছেন।</p><div class="highlight-box">অর্থাৎ অল্প টাকার বিনিময়ে বড় উপকার লাভ করতে পারবেন ইনশাআল্লাহ।</div></div>
-    <div class="news-card"><h3>&#128197; কতদিন পর্যন্ত ভিজিট করতে পারবেন?</h3><p>আপনাকে যে পাসওয়ার্ড দেওয়া হবে সেটা দিয়ে আমাদের ওয়েবসাইট ২০ দিন ভিজিট করতে পারবেন। ওয়েবসাইটে প্রবেশের পর যদি আপনার কাছে ভালো মনে হয় তাহলে, আমাদের ফেসবুক পেইজে একটি রিভিউ দিলে আপনাদেরকে আরও ১০ দিন ফ্রীতে ভিজিট করার সময় দেওয়া হবে। মোট ২০+১০=৩০ দিন।</p></div>
+    <div class="news-card"><h3>&#128197; কতদিন পর্যন্ত ভিজিট করতে পারবেন?</h3><p>আপনাকে যে পাসওয়ার্ড দেওয়া হবে সেটা দিয়ে আমাদের ওয়েবসাইট <strong>২০ দিন</strong> ভিজিট করতে পারবেন। কারণ খেদমত হতে এত সময় লাগে না। এরপরও ২০ দিনের সময় দেওয়া হয় যাতে করে আপনারা সময় নিয়ে খেদমত গুলো যাচাই-বাছাই করে ভালো মানের বেতনে এবং কাছের ঠিকানায় নিতে পারেন।</p><p>সবচেয়ে বড় কারণ হচ্ছে আপনি যখন আমাদের ওয়েবসাইটে যুক্ত থাকবেন তখন প্রতিনিয়ত ভালো ভালো খেদমতের খবর পাবেন। যার ফলে এক জায়গায় খেদমতে জয়েন হওয়ার পরও আবার অন্য জায়গায় চলে যেতে মন চাইবে। এতে করে অন্য প্রতিষ্ঠানের ক্ষতি হবে।</p></div>
     <div class="news-card"><h3>&#127974; পাসওয়ার্ড যেভাবে সংগ্রহ করবেন</h3><p>বিকাশ অথবা নগদে ২০০ টাকা পাঠাবেন। পাঠানোর নাম্বারের শেষ ৪ সংখ্যা হোয়াটসঅ্যাপে পাঠাবেন। সাথে সাথে পাসওয়ার্ড পাবেন।</p><div class="highlight-box" style="text-align:center;font-size:16px;font-weight:700">বিকাশ, নগদ ও হোয়াটসঅ্যাপ<br><span style="font-size:22px;color:var(--green)">01408764722</span></div></div>
     <div class="news-card"><h3>&#127919; আমাদের উদ্দেশ্য</h3><p>যারা মসজিদ ও মাদ্রাসার খেদমত খুঁজছেন তাদের জন্য একটি নির্ভরযোগ্য মাধ্যম তৈরি করা, যাতে তারা সহজে ভালো মানের খেদমত খুঁজে পান।</p></div>
     <div class="contact-card"><p>যোগাযোগ করতে এখনই WhatsApp করুন</p><span class="phone">01408764722</span><br><a class="whatsapp-btn" href="https://wa.me/8801408764722" target="_blank">&#128172; WhatsApp করুন</a></div>
@@ -1610,7 +1611,7 @@ function loadHomePhotos(){
       var d=doc.data();
       var card=document.createElement('div');card.className='photo-card';
       var dBtn=isAdmin?'<button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">&#10005;</button>':'';
-      card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy"><div class="photo-caption-text">'+(d.caption||'')+'</div>'+dBtn;
+      card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy">'+(d.caption?'<div class="photo-caption-text">'+d.caption+'</div>':'')+dBtn;
       g.appendChild(card);
     });
   });
