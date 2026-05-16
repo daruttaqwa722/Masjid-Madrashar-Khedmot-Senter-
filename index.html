@@ -993,19 +993,19 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 
     <div class="video-showcase anim-item" style="animation-delay:.85s">
       <div class="video-showcase-header">
-        <h2>আমাদের ওয়েবসাইটে খেদমতের পোস্টগুলো দেখতে কেমন ? কোথায় কি আছে ? ইত্যাদি সমস্ত কিছু জানতে ভিডিওটি অবশ্যই দেখতে হবে।</h2>
+        <h2>আমাদের ওয়েবসাইট কিভাবে ব্যবহার করবেন এবং পাসওয়ার্ড দিয়ে ব্যবহার করলে কেমন দেখাবে বিস্তারিত জেনে নিন।</h2>
         <p>সাউন্ড চালু করতে ভিডিওর উপর টাচ করুন তারপর সাউন্ড অপশন চালু করুন</p>
       </div>
       <div class="video-iframe-wrap">
     <iframe
   width="100%"
   height="500"
-  src="https://www.youtube.com/embed/CPsaHQReF-k?autoplay=1&mute=1&playsinline=1"
-  title="YouTube video player"
+  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fv%2F1EaPNWzWZG%2F&show_text=false&autoplay=true&mute=true"
+  title="Facebook video player"
   frameborder="0"
-  allow="autoplay; encrypted-media"
+  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
   allowfullscreen>
-   </iframe>
+    </iframe>
       </div>
     </div>
   </div>
@@ -1179,17 +1179,26 @@ var ADM_12H=12*3600*1000; /* 12 ঘন্টা */
 
 /* ══ কপি প্রটেকশন (সাধারণ ইউজার) ══ */
 function blockCopy(e){e.preventDefault();}
+function blockKeys(e){
+  if((e.ctrlKey||e.metaKey)&&['c','x','a','v'].indexOf(e.key.toLowerCase())!==-1){e.preventDefault();}
+}
 function applyCopyGuard(){
   if(!isAdmin){
     document.body.classList.add('no-copy');
     document.addEventListener('contextmenu',blockCopy);
     document.addEventListener('copy',blockCopy);
+    document.addEventListener('cut',blockCopy);
+    document.addEventListener('paste',blockCopy);
     document.addEventListener('selectstart',blockCopy);
+    document.addEventListener('keydown',blockKeys);
   }else{
     document.body.classList.remove('no-copy');
     document.removeEventListener('contextmenu',blockCopy);
     document.removeEventListener('copy',blockCopy);
+    document.removeEventListener('cut',blockCopy);
+    document.removeEventListener('paste',blockCopy);
     document.removeEventListener('selectstart',blockCopy);
+    document.removeEventListener('keydown',blockKeys);
   }
 }
 
@@ -1203,17 +1212,15 @@ function toast(msg,type){var t=document.getElementById('toast');t.textContent=ms
 
 /* ── Page Load ── */
 window.addEventListener('load',function(){
-  /* সব জায়গায় কপি বন্ধ */
-  document.body.classList.add('no-copy');
-  document.addEventListener('contextmenu',blockCopy);
-  document.addEventListener('copy',blockCopy);
-  document.addEventListener('selectstart',blockCopy);
+  /* লগইন না থাকলে ডিফল্টভাবে কপি বন্ধ (শুধু Admin পারবে) */
+  applyCopyGuard();
   trackVisitor();
   loadHomePhotos();
   /* Admin ১২ঘন্টা সেশন রিস্টোর */
   var at=parseInt(localStorage.getItem('kh_adm_time')||'0');
 if(localStorage.getItem('kh_adm')==='1'&&at&&(Date.now()-at)<ADM_12H){
     curUser='Administrator';isAdmin=true;
+    applyCopyGuard();
     document.getElementById('home-stats').classList.add('show');
     loadStats();
     enterComm();
@@ -1299,10 +1306,7 @@ function signOut(){
   if(sessInterval){clearInterval(sessInterval);sessInterval=null;}
   document.getElementById('home-stats').classList.remove('show');
   if(unsub){unsub();unsub=null;}
-  document.body.classList.remove('no-copy');
-  document.removeEventListener('contextmenu',blockCopy);
-  document.removeEventListener('copy',blockCopy);
-  document.removeEventListener('selectstart',blockCopy);
+  applyCopyGuard(); /* লগআউটে isAdmin=false, তাই কপি আবার বন্ধ হবে */
   document.getElementById('login-panel').style.display='block';
   var cv=document.getElementById('community-view');
   cv.classList.remove('show');cv.style.display='none';
