@@ -801,8 +801,217 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-pill); }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-mid); }
 
+/* ════ LIKE & SHARE BUTTONS ════ */
+.post-actions {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.like-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+  color: #ef4444; padding: 7px 14px; border-radius: var(--radius-pill);
+  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13px;
+  cursor: pointer; transition: all 0.25s; font-weight: 600;
+  user-select: none;
+}
+.like-btn:hover { background: rgba(239,68,68,0.18); border-color: rgba(239,68,68,0.45); transform: scale(1.05); }
+.like-btn.liked { background: rgba(239,68,68,0.22); border-color: rgba(239,68,68,0.55); color: #ff5555; }
+.like-btn .like-icon { font-size: 15px; transition: transform 0.3s var(--ease-spring); }
+.like-btn.liked .like-icon { transform: scale(1.3); }
+.like-count { font-weight: 700; }
+
+.share-fb-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: var(--radius-pill);
+  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13px;
+  cursor: pointer; transition: all 0.25s; font-weight: 600; border: 1px solid;
+  text-decoration: none;
+}
+.share-fb-btn {
+  background: rgba(24,119,242,0.1); border-color: rgba(24,119,242,0.3); color: #4a90d9;
+}
+.share-fb-btn:hover { background: rgba(24,119,242,0.22); border-color: rgba(24,119,242,0.55); transform: scale(1.05); }
+
+
+.post-expire-badge {
+  margin-left: auto; font-size: 11px; color: var(--text-faint);
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  padding: 3px 10px; border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.post-expire-badge.expiring-soon { color: #f59e0b; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.07); }
+body.light-mode .like-btn { color: #dc2626; }
+body.light-mode .share-fb-btn { color: #1877f2; }
+
 /* ════ SELECTION ════ */
 ::selection { background: rgba(201,168,76,0.22); color: var(--gold-pale); }
+
+/* ══════════════════════════════════════════════════
+   ☀️  LIGHT MODE
+   ══════════════════════════════════════════════════ */
+body.light-mode {
+  --bg-void: #f5f0e8;
+  --bg-deep: #ede8dc;
+  --bg-mid: #e8e0d0;
+  --bg-surface: #f0ebe0;
+  --bg-raised: #faf6ee;
+  --glass-1: rgba(255,255,255,0.55);
+  --glass-2: rgba(255,255,255,0.75);
+  --glass-3: rgba(255,255,255,0.88);
+  --glass-gold: rgba(201,168,76,0.1);
+  --glass-green: rgba(15,140,78,0.07);
+  --border: rgba(180,140,60,0.22);
+  --border-mid: rgba(180,140,60,0.4);
+  --border-bright: rgba(180,140,60,0.65);
+  --border-green: rgba(15,140,78,0.22);
+  --border-green-bright: rgba(15,140,78,0.45);
+  --text-white: #1a2e20;
+  --text-cream: #2a3d28;
+  --text-body: #3a5040;
+  --text-muted: #5a7a65;
+  --text-faint: #8aaa95;
+  --shadow-card: 0 4px 28px rgba(0,0,0,0.10), 0 1px 0 rgba(201,168,76,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  --shadow-hover: 0 16px 48px rgba(0,0,0,0.18), 0 0 0 1px rgba(201,168,76,0.28), 0 0 32px rgba(201,168,76,0.14);
+  --shadow-green-btn: 0 4px 22px rgba(15,140,78,0.25), 0 1px 0 rgba(255,255,255,0.3);
+  --shadow-gold-glow: 0 0 40px rgba(201,168,76,0.18), 0 0 80px rgba(201,168,76,0.08);
+  color: #1a2e20;
+}
+body.light-mode .bg-layer {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -8%, rgba(201,168,76,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 3% 55%, rgba(15,140,78,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 97% 75%, rgba(201,168,76,0.1) 0%, transparent 55%),
+    linear-gradient(180deg, #f5f0e8 0%, #ede8dc 40%, #e8e0d0 100%);
+}
+body.light-mode .bg-layer::before {
+  background-image:
+    linear-gradient(rgba(180,140,60,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180,140,60,0.06) 1px, transparent 1px);
+}
+body.light-mode .back-bar {
+  background: rgba(245,240,232,0.94);
+  border-bottom-color: rgba(180,140,60,0.22);
+}
+body.light-mode .toast {
+  background: rgba(245,240,232,0.97);
+  color: #1a2e20;
+}
+body.light-mode .toast.green { background: rgba(235,248,240,0.98); }
+body.light-mode .toast.red { background: rgba(255,240,240,0.98); }
+body.light-mode .btn { background: rgba(255,255,255,0.62); color: #1a2e20; }
+body.light-mode .btn:hover { background: rgba(255,255,255,0.85); color: #0d1f10; }
+body.light-mode .btn-green { background: linear-gradient(145deg, rgba(15,140,78,0.12), rgba(15,140,78,0.04)); }
+body.light-mode .btn-green:hover { background: linear-gradient(145deg, rgba(15,140,78,0.22), rgba(15,140,78,0.1)); }
+body.light-mode .stat-box { background: rgba(255,255,255,0.5); }
+body.light-mode .stat-num { color: #0a7a3e; text-shadow: 0 0 24px rgba(15,140,78,0.25); }
+body.light-mode ::-webkit-scrollbar-track { background: #f0ebe0; }
+body.light-mode ::selection { background: rgba(201,168,76,0.28); color: #3a2800; }
+body.light-mode .preview-post-card { background: rgba(255,255,255,0.55); }
+body.light-mode .preview-banner { background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(15,140,78,0.07)); }
+body.light-mode .news-hero { background: linear-gradient(145deg, rgba(15,140,78,0.10), rgba(201,168,76,0.06)); }
+body.light-mode .news-card { background: rgba(255,255,255,0.58); color: #1a2e20; }
+body.light-mode .video-showcase { background: #e8f0ec; }
+
+/* ════ LIGHT MODE TOGGLE BTN ════ */
+.theme-toggle-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(201,168,76,0.22), rgba(201,168,76,0.08));
+  border: 1.5px solid rgba(201,168,76,0.4);
+  color: var(--gold-bright);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 16px rgba(201,168,76,0.12);
+  transition: all 0.35s var(--ease-spring);
+  backdrop-filter: blur(16px);
+}
+.theme-toggle-btn:hover {
+  transform: scale(1.15) rotate(15deg);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.35), 0 0 28px rgba(201,168,76,0.28);
+  border-color: rgba(201,168,76,0.7);
+  background: linear-gradient(145deg, rgba(201,168,76,0.35), rgba(201,168,76,0.15));
+}
+body.light-mode .theme-toggle-btn {
+  background: linear-gradient(145deg, rgba(15,140,78,0.18), rgba(15,140,78,0.06));
+  border-color: rgba(15,140,78,0.38);
+  color: #0a7a3e;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 16px rgba(15,140,78,0.12);
+}
+
+/* ════ ISLAMIC GEOMETRIC OVERLAY ════ */
+.islamic-geo {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  overflow: hidden; opacity: 0.55;
+}
+.islamic-geo svg {
+  position: absolute; width: 100%; height: 100%;
+}
+body.light-mode .islamic-geo { opacity: 0.7; }
+
+/* ════ FLOATING LANTERNS ════ */
+.lantern-container {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.lantern {
+  position: absolute;
+  bottom: -80px;
+  animation: lanternFloat linear infinite;
+  filter: drop-shadow(0 0 8px rgba(201,168,76,0.6));
+}
+@keyframes lanternFloat {
+  0%   { transform: translateY(0) translateX(0) rotate(-3deg) scale(0.85); opacity: 0; }
+  5%   { opacity: 0.85; }
+  48%  { transform: translateY(-48vh) translateX(18px) rotate(4deg) scale(1); }
+  52%  { transform: translateY(-52vh) translateX(12px) rotate(-2deg) scale(1); }
+  95%  { opacity: 0.5; }
+  100% { transform: translateY(-105vh) translateX(-10px) rotate(5deg) scale(0.9); opacity: 0; }
+}
+body.light-mode .lantern { filter: drop-shadow(0 0 10px rgba(201,168,76,0.55)); }
+
+/* ════ GOLD GLOW HOVER (enhanced) ════ */
+.btn {
+  --glow-color: rgba(201,168,76,0.22);
+}
+.btn:hover {
+  box-shadow: var(--shadow-hover), 0 0 20px var(--glow-color), 0 0 40px rgba(201,168,76,0.08);
+}
+.btn-green:hover {
+  --glow-color: rgba(15,140,78,0.28);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 24px var(--glow-color), 0 0 0 1px rgba(15,140,78,0.22);
+}
+body.light-mode .btn:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.12), 0 0 22px rgba(201,168,76,0.22), 0 0 0 1px rgba(201,168,76,0.3); }
+
+/* ════ SMOOTH PAGE TRANSITION (enhanced) ════ */
+.screen.active {
+  animation: screenRevealSmooth 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes screenRevealSmooth {
+  from { opacity: 0; transform: translateY(18px) scale(0.985); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+/* ════ MODERN ICON BADGES ════ */
+.btn-icon svg {
+  width: 22px; height: 22px;
+  fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+  color: var(--gold-light);
+  transition: transform 0.38s var(--ease-spring), color 0.3s;
+}
+.btn:hover .btn-icon svg {
+  color: var(--gold-bright);
+  transform: scale(1.18) rotate(-8deg);
+}
 
 /* ════ PREVIEW SCREEN ════ */
 .preview-wrap { max-width: 680px; margin: 0 auto; padding: 28px 18px 80px; }
@@ -924,6 +1133,38 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 </head>
 <body>
 <div class="bg-layer"></div>
+
+<!-- Islamic Geometric Pattern Overlay -->
+<div class="islamic-geo" id="islamic-geo">
+  <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="geo8" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <polygon points="50,8 62,30 86,30 68,46 75,70 50,56 25,70 32,46 14,30 38,30"
+          fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
+        <polygon points="50,18 59,34 77,34 63,44 68,62 50,52 32,62 37,44 23,34 41,34"
+          fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+        <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(201,168,76,0.07)" stroke-width="0.5"/>
+        <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(201,168,76,0.07)" stroke-width="0.5"/>
+        <line x1="0" y1="0" x2="100" y2="100" stroke="rgba(201,168,76,0.05)" stroke-width="0.4"/>
+        <line x1="100" y1="0" x2="0" y2="100" stroke="rgba(201,168,76,0.05)" stroke-width="0.4"/>
+        <circle cx="50" cy="50" r="5" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="0.7"/>
+        <circle cx="50" cy="50" r="12" fill="none" stroke="rgba(201,168,76,0.08)" stroke-width="0.5"/>
+        <polygon points="0,50 8,42 16,50 8,58" fill="rgba(201,168,76,0.07)" stroke="none"/>
+        <polygon points="100,50 92,42 84,50 92,58" fill="rgba(201,168,76,0.07)" stroke="none"/>
+        <polygon points="50,0 58,8 50,16 42,8" fill="rgba(201,168,76,0.07)" stroke="none"/>
+        <polygon points="50,100 58,92 50,84 42,92" fill="rgba(201,168,76,0.07)" stroke="none"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#geo8)"/>
+  </svg>
+</div>
+
+<!-- Floating Lanterns -->
+<div class="lantern-container" id="lantern-container"></div>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle-btn" id="theme-toggle" title="Light / Dark Mode" onclick="toggleTheme()">☀️</button>
+
 <div id="toast" class="toast"></div>
 
 <!-- HOME -->
@@ -949,46 +1190,46 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.1s"><span>&#127760; ওয়েবসাইট</span><div class="section-label-line"></div></div>
     <button class="btn btn-green anim-item" onclick="showScreen('news')" style="animation-delay:.2s">
-      <div class="btn-icon">&#128203;</div><div class="btn-text">সুবিধা সম্পর্কে জানুন<br>পাসওয়ার্ড সংগ্রহ করুন</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><div class="btn-text">সুবিধা সম্পর্কে জানুন<br>পাসওয়ার্ড সংগ্রহ করুন</div><div class="btn-arrow">&#8250;</div>
     </button>
     <button class="btn btn-green anim-item" onclick="showScreen('center')" style="animation-delay:.3s">
-      <div class="btn-icon">&#128274;</div><div class="btn-text">পাসওয়ার্ড সহ পোস্ট দেখুন<br>নাম্বার সম্পূর্ণ দেখাবে</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="btn-text">পাসওয়ার্ড সহ পোস্ট দেখুন<br>নাম্বার সম্পূর্ণ দেখাবে</div><div class="btn-arrow">&#8250;</div>
     </button>
     <button class="btn anim-item" onclick="showScreen('preview');loadPreviewPosts();" style="animation-delay:.38s">
-      <div class="btn-icon">&#128065;</div><div class="btn-text">পাসওয়ার্ড ছাড়া পোস্ট দেখুন<br>নাম্বার আংশিক দেখাবে</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="btn-text">পাসওয়ার্ড ছাড়া পোস্ট দেখুন<br>নাম্বার আংশিক দেখাবে</div><div class="btn-arrow">&#8250;</div>
     </button>
   </div>
 
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.35s"><span>&#128241; WhatsApp</span><div class="section-label-line"></div></div>
     <a class="btn anim-item" href="https://wa.me/message/3T5Z7CFFDAJBL1" target="_blank" style="animation-delay:.45s">
-      <div class="btn-icon">&#128172;</div><div class="btn-text">আমাদের হোয়াটসঅ্যাপ লিংক</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div><div class="btn-text">আমাদের হোয়াটসঅ্যাপ লিংক</div><div class="btn-arrow">&#8250;</div>
     </a>
     <a class="btn anim-item" href="https://whatsapp.com/channel/0029VbD4Jr90VycNzIs5nM0c" target="_blank" style="animation-delay:.52s">
-      <div class="btn-icon">&#128226;</div><div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></div><div class="btn-text">আমাদের হোয়াটসঅ্যাপ চ্যানেল</div><div class="btn-arrow">&#8250;</div>
     </a>
   </div>
 
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.58s"><span>&#128216; Facebook</span><div class="section-label-line"></div></div>
     <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.65s">
-      <div class="btn-icon">&#128196;</div><div class="btn-text">আমাদের ফেসবুক পেইজ লিংক</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div><div class="btn-text">আমাদের ফেসবুক পেইজ লিংক</div><div class="btn-arrow">&#8250;</div>
     </a>
     <a class="btn anim-item" href="https://www.facebook.com/share/g/1BCyorfCey/" target="_blank" style="animation-delay:.72s">
-      <div class="btn-icon">&#128101;</div><div class="btn-text">আমাদের ফেসবুক গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><div class="btn-text">আমাদের ফেসবুক গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
     </a>
     <a class="btn anim-item" href="https://www.messenger.com/channel/HafizQuriJihadulislam" target="_blank" style="animation-delay:.79s">
-      <div class="btn-icon">&#9889;</div><div class="btn-text">আমাদের মেসেঞ্জার গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="btn-text">আমাদের মেসেঞ্জার গ্রুপ লিংক</div><div class="btn-arrow">&#8250;</div>
     </a>
   </div>
 
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.58s"><span>&#128216; Telegrame</span><div class="section-label-line"></div></div>
     <a class="btn anim-item" href="https://t.me/khadmot1" target="_blank" style="animation-delay:.79s">
-      <div class="btn-icon">&#9889;</div><div class="btn-text">আমাদের টেলিগ্রাম গ্রুপ লিংক </div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M21.198 2.433a2.242 2.242 0 00-1.022.215l-16.5 6.742c-1.45.594-1.443 1.822-.264 2.21l4.16 1.298 1.75 5.432c.217.65.847.893 1.374.556l2.398-1.558 4.58 3.372c.896.494 1.518.13 1.747-.836l2.777-13.1c.272-1.3-.485-1.943-1-1.331zm-9.448 9.73l-.663 3.54-1.527-4.854 9.84-5.865-7.65 7.179z"/></svg></div><div class="btn-text">আমাদের টেলিগ্রাম গ্রুপ লিংক </div><div class="btn-arrow">&#8250;</div>
     </a>
     <a class="btn anim-item" href="https://t.me/MadrasharJob" target="_blank" style="animation-delay:.52s">
-      <div class="btn-icon">&#128226;</div><div class="btn-text">আমাদের টেলিগ্রাম চ্যানেল</div><div class="btn-arrow">&#8250;</div>
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z"/><path d="M8 10h8M8 14h5"/></svg></div><div class="btn-text">আমাদের টেলিগ্রাম চ্যানেল</div><div class="btn-arrow">&#8250;</div>
     </a>
 
     <div class="video-showcase anim-item" style="animation-delay:.85s">
@@ -1164,6 +1405,129 @@ body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: n
 </div>
 
 <script>
+/* ── Theme Toggle ── */
+function toggleTheme(){
+  var b=document.body;
+  var btn=document.getElementById('theme-toggle');
+  var isLight=b.classList.toggle('light-mode');
+  btn.textContent=isLight?'🌙':'☀️';
+  localStorage.setItem('kh_theme',isLight?'light':'dark');
+}
+(function(){
+  var t=localStorage.getItem('kh_theme');
+  if(t==='light'){
+    document.body.classList.add('light-mode');
+    var btn=document.getElementById('theme-toggle');
+    if(btn)btn.textContent='🌙';
+  }
+})();
+
+/* ── Islamic Floating Elements ── */
+(function(){
+  var c=document.getElementById('lantern-container');
+  if(!c)return;
+
+  /* ১. হেলাল ও তারকা (Crescent & Star) */
+  var crescentStar=function(op){
+    return '<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'
+      +'<circle cx="20" cy="24" r="14" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="1.5"/>'
+      +'<circle cx="26" cy="20" r="11" fill="rgba(1,8,5,0.01)" stroke="rgba(1,8,5,0)" stroke-width="0"/>'
+      /* চাঁদ: বড় বৃত্তের উপর ছোট বৃত্ত overlap করে চাঁদ আকৃতি */
+      +'<path d="M20,10 A14,14 0 1,1 8,28 A10,10 0 1,0 20,10 Z" fill="rgba(201,168,76,'+op+')" />'
+      /* তারকা */
+      +'<polygon points="36,10 37.8,15.5 43.5,15.5 39,19 40.8,24.5 36,21 31.2,24.5 33,19 28.5,15.5 34.2,15.5" fill="rgba(201,168,76,'+op+')" />'
+      +'</svg>';
+  };
+
+  /* ২. মসজিদের গম্বুজ ও মিনার (Mosque Dome) */
+  var mosqueDome=function(op){
+    return '<svg width="44" height="52" viewBox="0 0 44 52" xmlns="http://www.w3.org/2000/svg">'
+      /* মিনার বাম */
+      +'<rect x="2" y="22" width="6" height="28" rx="1" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="1"/>'
+      +'<path d="M2,22 Q5,14 8,22Z" fill="rgba(201,168,76,'+op+')" />'
+      +'<line x1="5" y1="8" x2="5" y2="14" stroke="rgba(201,168,76,'+op+')" stroke-width="1"/>'
+      +'<circle cx="5" cy="7" r="2" fill="rgba(201,168,76,'+op+')" />'
+      /* মিনার ডান */
+      +'<rect x="36" y="22" width="6" height="28" rx="1" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="1"/>'
+      +'<path d="M36,22 Q39,14 42,22Z" fill="rgba(201,168,76,'+op+')" />'
+      +'<line x1="39" y1="8" x2="39" y2="14" stroke="rgba(201,168,76,'+op+')" stroke-width="1"/>'
+      +'<circle cx="39" cy="7" r="2" fill="rgba(201,168,76,'+op+')" />'
+      /* মূল গম্বুজ */
+      +'<path d="M10,34 Q10,18 22,12 Q34,18 34,34Z" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="1.3"/>'
+      +'<rect x="10" y="34" width="24" height="16" rx="1" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="1"/>'
+      /* গম্বুজের উপর চাঁদ-তারা */
+      +'<line x1="22" y1="5" x2="22" y2="12" stroke="rgba(201,168,76,'+op+')" stroke-width="1"/>'
+      +'<path d="M19,3 A3,3 0 1,1 19.1,3 Q21,1 23,3 A2,2 0 1,0 19,3Z" fill="rgba(201,168,76,'+op+')" />'
+      /* দরজা */
+      +'<path d="M18,50 L18,40 Q22,36 26,40 L26,50Z" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="0.9"/>'
+      +'</svg>';
+  };
+
+  /* ৩. ৮-কোণা ইসলামিক তারকা (Geometric Star) */
+  var islamicStar=function(op){
+    var cx=24,cy=24,r1=18,r2=9,pts='';
+    for(var i=0;i<16;i++){
+      var angle=(Math.PI/8)*i - Math.PI/2;
+      var r=i%2===0?r1:r2;
+      var x=cx+r*Math.cos(angle);
+      var y=cy+r*Math.sin(angle);
+      pts+=(i===0?'M':'L')+x.toFixed(2)+','+y.toFixed(2)+' ';
+    }
+    return '<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'
+      +'<path d="'+pts+'Z" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="1.2"/>'
+      +'<circle cx="24" cy="24" r="5" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="0.8"/>'
+      +'<circle cx="24" cy="24" r="20" fill="none" stroke="rgba(201,168,76,'+(op*0.4)+')" stroke-width="0.5"/>'
+      +'</svg>';
+  };
+
+  /* ৪. তাসবিহ (Prayer Beads) */
+  var tasbeeh=function(op){
+    return '<svg width="36" height="56" viewBox="0 0 36 56" xmlns="http://www.w3.org/2000/svg">'
+      +'<line x1="18" y1="2" x2="18" y2="54" stroke="rgba(201,168,76,'+(op*0.5)+')" stroke-width="0.8"/>'
+      +'<circle cx="18" cy="4" r="3" fill="rgba(201,168,76,'+op+')" />'
+      +'<circle cx="18" cy="12" r="4" fill="rgba(201,168,76,'+op+')" />'
+      +'<circle cx="18" cy="21" r="4.5" fill="rgba(201,168,76,'+op+')" />'
+      +'<circle cx="18" cy="31" r="4" fill="rgba(201,168,76,'+op+')" />'
+      +'<circle cx="18" cy="40" r="3.5" fill="rgba(201,168,76,'+op+')" />'
+      +'<circle cx="18" cy="48" r="3" fill="rgba(201,168,76,'+op+')" />'
+      +'<ellipse cx="18" cy="54" rx="5" ry="2" fill="rgba(201,168,76,'+(op*0.6)+')" />'
+      +'</svg>';
+  };
+
+  /* ৫. আরবি ক্যালিগ্রাফি তারকা-ফুল */
+  var starFlower=function(op){
+    var paths='';
+    for(var i=0;i<6;i++){
+      var a=(Math.PI/3)*i;
+      var x1=24+20*Math.cos(a), y1=24+20*Math.sin(a);
+      paths+='<line x1="24" y1="24" x2="'+x1.toFixed(1)+'" y2="'+y1.toFixed(1)+'" stroke="rgba(201,168,76,'+op+')" stroke-width="0.9"/>';
+      paths+='<circle cx="'+x1.toFixed(1)+'" cy="'+y1.toFixed(1)+'" r="3" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="0.8"/>';
+    }
+    return '<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'
+      +paths
+      +'<circle cx="24" cy="24" r="6" fill="none" stroke="rgba(201,168,76,'+op+')" stroke-width="1.1"/>'
+      +'<circle cx="24" cy="24" r="2.5" fill="rgba(201,168,76,'+op+')" />'
+      +'</svg>';
+  };
+
+  var types=[crescentStar, mosqueDome, islamicStar, tasbeeh, starFlower];
+  var opacities=[0.55, 0.48, 0.6, 0.5, 0.52, 0.45, 0.58, 0.42, 0.5, 0.6];
+
+  for(var i=0;i<10;i++){
+    var el=document.createElement('div');
+    el.className='lantern';
+    var fn=types[i%types.length];
+    var op=opacities[i%opacities.length];
+    el.innerHTML=fn(op);
+    var dur=(Math.random()*20+18).toFixed(1);
+    var delay=-(Math.random()*25).toFixed(1);
+    var left=(Math.random()*88+2).toFixed(1);
+    var scale=(Math.random()*0.5+0.7).toFixed(2);
+    el.style.cssText='left:'+left+'%;animation-duration:'+dur+'s;animation-delay:'+delay+'s;transform:scale('+scale+');';
+    c.appendChild(el);
+  }
+})();
+
 /* ── Particles ── */
 for(var i=0;i<22;i++){var p=document.createElement('div');p.className='particle';var s=Math.random()*3.5+1;p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*20+14)+'s;animation-delay:'+Math.random()*14+'s;';document.body.appendChild(p);}
 
@@ -1401,7 +1765,7 @@ function publishPost(){
   var btn=document.getElementById('pub-btn');
   btn.disabled=true;btn.textContent='Publishing...';
   var now=new Date();
-  db.collection('posts').add({text:txt,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime()})
+  db.collection('posts').add({text:txt,author:curUser,timeStr:now.toLocaleString('bn-BD'),created:now.getTime(),likes:0})
   .then(function(){
     document.getElementById('post-textarea').value='';
     updateChar();
@@ -1411,9 +1775,64 @@ function publishPost(){
   })
   .catch(function(e){btn.disabled=false;btn.textContent='&#128221; পোস্ট করুন';toast('সমস্যা হয়েছে','red');alert(e.message);});
 }
+/* ── অটো-ডিলিট: ৬০ ঘন্টার বেশি পুরোনো পোস্ট মুছে ফেলে ── */
+function autoDeleteOldPosts(){
+  if(!db)return;
+  var limit=Date.now()-(60*3600*1000); /* ৬০ ঘন্টা */
+  db.collection('posts').where('created','<=',limit).get()
+    .then(function(snap){
+      snap.forEach(function(doc){
+        doc.ref.delete().catch(function(){});
+      });
+    }).catch(function(){});
+}
+
+/* ── কতক্ষণ বাকি আছে সেটা দেখায় ── */
+function timeLeft(created){
+  var exp=created+(60*3600*1000);
+  var diff=exp-Date.now();
+  if(diff<=0)return null;
+  var h=Math.floor(diff/3600000);
+  var m=Math.floor((diff%3600000)/60000);
+  if(h<=6)return{label:h+'ঘ '+m+'মি বাকি',soon:true};
+  return{label:h+' ঘন্টা বাকি',soon:false};
+}
+
+/* ── লাইক টগল ── */
+function toggleLike(postId,btn){
+  if(!db)return;
+  var likedKey='liked_'+postId;
+  var alreadyLiked=localStorage.getItem(likedKey);
+  var countEl=btn.querySelector('.like-count');
+  var cur=parseInt(countEl.textContent)||0;
+  var ref=db.collection('posts').doc(postId);
+  if(alreadyLiked){
+    localStorage.removeItem(likedKey);
+    btn.classList.remove('liked');
+    countEl.textContent=Math.max(0,cur-1);
+    ref.update({likes:Math.max(0,cur-1)}).catch(function(){});
+  } else {
+    localStorage.setItem(likedKey,'1');
+    btn.classList.add('liked');
+    countEl.textContent=cur+1;
+    ref.update({likes:cur+1}).catch(function(){});
+  }
+}
+
+/* ── শেয়ার ── */
+function sharePost(platform,text){
+  var url=encodeURIComponent(window.location.href);
+  var msg=encodeURIComponent('মসজিদ-মাদ্রাসার খেদমত সেন্টার:\n\n'+text.substring(0,200)+(text.length>200?'...':'')+'\n\n'+window.location.href);
+  if(platform==='fb'){
+    window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'_blank','width=600,height=400');
+  }
+}
+
 function loadPosts(){
   if(!db){document.getElementById('posts-container').innerHTML=noPostsHTML();return;}
   if(unsub)unsub();
+  /* পেজ লোড হলে পুরোনো পোস্ট মুছে দাও */
+  autoDeleteOldPosts();
   unsub=db.collection('posts').orderBy('created','desc').onSnapshot(function(snap){
     allTxt=[];
     var c=document.getElementById('posts-container');
@@ -1423,9 +1842,33 @@ function loadPosts(){
     snap.forEach(function(doc){
       var d=doc.data();
       if(d.text)allTxt.push(d.text);
+      var postId=doc.id;
+      var likedKey='liked_'+postId;
+      var isLiked=localStorage.getItem(likedKey)?true:false;
+      var likeCount=d.likes||0;
+      var tl=timeLeft(d.created||Date.now());
+      var expBadge='';
+      if(tl){
+        expBadge='<span class="post-expire-badge'+(tl.soon?' expiring-soon':'')+'">⏳ '+tl.label+'</span>';
+      }
+      var delBtn=isAdmin?'<button class="delete-post-btn" onclick="delPost(\''+postId+'\')">&#10005;</button>':'';
+      var rawText=d.text||'';
       var el=document.createElement('div');el.className='post-card';
-      var delBtn=isAdmin?'<button class="delete-post-btn" onclick="delPost(\''+doc.id+'\')">&#10005;</button>':'';
-      el.innerHTML='<div class="post-text">'+esc(d.text||'')+'</div><div class="post-time">'+(d.timeStr||'')+'</div>'+delBtn;
+      el.innerHTML=
+        '<div class="post-text">'+esc(rawText)+'</div>'+
+        '<div class="post-time">'+(d.timeStr||'')+'</div>'+
+        '<div class="post-actions">'+
+          '<button class="like-btn'+(isLiked?' liked':'')+'" onclick="toggleLike(\''+postId+'\',this)">'+
+            '<span class="like-icon">&#10084;&#65039;</span>'+
+            '<span class="like-count">'+likeCount+'</span>'+
+          '</button>'+
+          '<button class="share-fb-btn" onclick="sharePost(\'fb\',\''+rawText.replace(/'/g,"\\'").replace(/\n/g,' ')+'\')">'+
+            '&#128081; Facebook'+
+          '</button>'+
+
+          expBadge+
+        '</div>'+
+        delBtn;
       c.appendChild(el);
     });
   },function(e){document.getElementById('posts-container').innerHTML='<div class="no-posts"><span>&#9888;</span>লোড হয়নি: '+e.message+'</div>';});
@@ -1549,10 +1992,30 @@ function loadPreviewPosts(){
         .replace(/</g,'&lt;')
         .replace(/>/g,'&gt;');
       var maskedText=maskNumbers(escapedText);
+      var postId=doc.id;
+      var likedKey='liked_'+postId;
+      var isLiked=localStorage.getItem(likedKey)?true:false;
+      var likeCount=d.likes||0;
+      var tl=timeLeft(d.created||Date.now());
+      var expBadge='';
+      if(tl){expBadge='<span class="post-expire-badge'+(tl.soon?' expiring-soon':'')+'">⏳ '+tl.label+'</span>';}
+      var shareText=rawText.replace(/'/g,"\\'").replace(/\n/g,' ');
       var card=document.createElement('div');
       card.className='preview-post-card';
-      card.innerHTML='<div class="preview-post-text">'+maskedText+'</div>'
-                    +'<div class="preview-post-time">'+(d.timeStr||'')+'</div>';
+      card.innerHTML=
+        '<div class="preview-post-text">'+maskedText+'</div>'+
+        '<div class="preview-post-time">'+(d.timeStr||'')+'</div>'+
+        '<div class="post-actions">'+
+          '<button class="like-btn'+(isLiked?' liked':'')+'" onclick="toggleLike(\''+postId+'\',this)">'+
+            '<span class="like-icon">&#10084;&#65039;</span>'+
+            '<span class="like-count">'+likeCount+'</span>'+
+          '</button>'+
+          '<button class="share-fb-btn" onclick="sharePost(\'fb\',\''+shareText+'\')">'+
+            '&#128081; Facebook'+
+          '</button>'+
+
+          expBadge+
+        '</div>';
       c.appendChild(card);
     });
   },function(e){
