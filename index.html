@@ -2345,11 +2345,31 @@ function enterComm(){
   if(isAdmin){
     document.getElementById('admin-tab-btns').style.display='block';
     document.getElementById('admin-post-area').style.display='block';
-    document.getElementById('user-mgmt-area').style.display='none'; // default: post tab
+    document.getElementById('user-mgmt-area').style.display='none';
     document.getElementById('pending-posts-area').style.display='none';
     startSessTimer();
     loadUserList();
     loadPendingCount();
+  } else {
+    /* ── Regular Member: পোস্ট দেখাও, Admin ফর্ম লুকাও ── */
+    document.getElementById('admin-post-area').style.display='block';
+    document.getElementById('admin-tab-btns').style.display='none';
+    document.getElementById('user-mgmt-area').style.display='none';
+    document.getElementById('pending-posts-area').style.display='none';
+    var adminH3=document.querySelector('#admin-post-area>h3');
+    if(adminH3)adminH3.style.display='none';
+    var catWrap=document.querySelector('#admin-post-area .cat-select-wrap');
+    if(catWrap)catWrap.style.display='none';
+    var ta=document.getElementById('post-textarea');
+    if(ta)ta.style.display='none';
+    var cc=document.querySelector('#admin-post-area .char-count');
+    if(cc)cc.style.display='none';
+    var dw=document.getElementById('dup-warning');
+    if(dw)dw.style.display='none';
+    var ia=document.querySelector('.img-upload-area');
+    if(ia)ia.style.display='none';
+    var pr=document.querySelector('.publish-row');
+    if(pr)pr.style.display='none';
   }
   loadPosts();
 }
