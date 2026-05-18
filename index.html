@@ -2862,7 +2862,6 @@ function loadPendingPosts() {
   listEl.innerHTML = '<div class="pending-empty">⏳ লোড হচ্ছে...</div>';
 
   db.collection('pendingPosts').where('status', '==', 'pending')
-    .orderBy('created', 'desc')
     .get()
     .then(function(snap) {
       if (snap.empty) {
@@ -2870,8 +2869,11 @@ function loadPendingPosts() {
         return;
       }
       listEl.innerHTML = '';
-      snap.forEach(function(doc) {
-        var d = doc.data();
+      var docs = [];
+      snap.forEach(function(doc) { docs.push({id: doc.id, data: doc.data()}); });
+      docs.sort(function(a,b){ return (b.data.created||0) - (a.data.created||0); });
+      docs.forEach(function(item) {
+        var d = item.data;
         var card = document.createElement('div');
         card.className = 'pending-card';
         var timeAgo = d.timeStr || '';
@@ -2885,8 +2887,8 @@ function loadPendingPosts() {
             '<span class="pending-card-mobile">📱 ' + esc(d.mobile || '') + '</span>' +
           '</div>' +
           '<div class="pending-card-actions">' +
-            '<button class="pending-approve-btn" onclick="approvePending(\'' + doc.id + '\')">✅ Approve করুন</button>' +
-            '<button class="pending-reject-btn"  onclick="rejectPending(\''  + doc.id + '\')">❌ Reject করুন</button>' +
+            '<button class="pending-approve-btn" onclick="approvePending(\'' + item.id + '\')">✅ Approve করুন</button>' +
+            '<button class="pending-reject-btn"  onclick="rejectPending(\''  + item.id + '\')">❌ Reject করুন</button>' +
           '</div>';
         listEl.appendChild(card);
       });
