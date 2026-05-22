@@ -4393,8 +4393,10 @@ var db=null,unsub=null;
 try{
   firebase.initializeApp(fcfg);
   db=firebase.firestore();
-  db.settings({experimentalForceLongPolling:true, merge:true});
-}catch(e){}
+  db.settings({ experimentalForceLongPolling:true });
+console.error('Firebase Error:', e);
+alert('Firebase Error: ' + e.message);
+}
 
 /* ── State ── */
 var curUser=null,isAdmin=false,allTxt=[];
