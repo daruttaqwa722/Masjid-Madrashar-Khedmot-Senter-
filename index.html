@@ -238,8 +238,9 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- ══ FIREBASE: defer for faster page load ══ -->
-<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
 <!-- ══ CRITICAL INLINE CSS: Fast First Render ══ -->
 <style>html{font-family:'Noto Sans Bengali',sans-serif;background:#080f0b;color:#f0ebe0}body{margin:0;padding:0;overflow-x:hidden}</style>
@@ -3735,7 +3736,9 @@ body.light-mode .share-fb-btn { color: #1877f2; }
         <div class="or-divider">অথবা</div>
         <button class="admin-toggle" onclick="toggleAdm()">⚔ Admin Panel</button>
         <div class="admin-panel-inner" id="adm-panel">
-          <label class="field-label" style="margin-top:14px">Admin Password</label>
+          <label class="field-label" style="margin-top:14px">Admin Email</label>
+          <input id="admin-email" class="field-input" type="email" placeholder="admin@example.com">
+          <label class="field-label" style="margin-top:10px">Admin Password</label>
           <input id="admin-pwd" class="field-input" type="password" placeholder="Admin password">
           <button class="admin-login-btn" onclick="adminLogin()">Access Admin Panel ⚔</button>
         </div>
@@ -4389,13 +4392,15 @@ function toggleTheme(){
 
 /* ── Firebase (অরিজিনাল কনফিগ) ── */
 var fcfg={apiKey:"AIzaSyAcTJsg367e4AMSIII6HsRIIFbACoP7dqA",authDomain:"khedmot-senter.firebaseapp.com",projectId:"khedmot-senter",storageBucket:"khedmot-senter.firebasestorage.app",messagingSenderId:"762215417966",appId:"1:762215417966:web:e63b5c2cce97693e8ebe7f"};
-var db=null,unsub=null;
+var db=null,auth=null,unsub=null;
 try{
   firebase.initializeApp(fcfg);
   db=firebase.firestore();
   db.settings({ experimentalForceLongPolling:true });
-console.error('Firebase Error:', e);
-alert('Firebase Error: ' + e.message);
+  auth=firebase.auth();
+}catch(e){
+  console.error('Firebase Error:', e);
+  alert('Firebase Error: ' + e.message);
 }
 
 /* ── State ── */
@@ -4475,17 +4480,26 @@ window.addEventListener('load',function(){
   applyCopyGuard();
   trackVisitor();
   loadHomePhotos();
-  var at=parseInt(localStorage.getItem('kh_adm_time')||'0');
-  if(localStorage.getItem('kh_adm')==='1'&&at&&(Date.now()-at)<ADM_12H){
-    curUser='Administrator';isAdmin=true;
-    applyCopyGuard();
-    showNotices();
-    document.getElementById('home-stats').classList.add('show');
-    var db_btn=document.getElementById('dash-open-btn');
-    if(db_btn)db_btn.style.display='inline-flex';
-    loadStats();
-    enterComm();
+  /* Firebase Auth state পর্যবেক্ষণ — auto session restore */
+  function waitForAuth(retries){
+    if(retries<=0)return;
+    if(!auth){setTimeout(function(){waitForAuth(retries-1);},300);return;}
+    auth.onAuthStateChanged(function(user){
+      if(user){
+        curUser='Administrator';isAdmin=true;
+        localStorage.setItem('kh_adm','1');
+        localStorage.setItem('kh_adm_time',String(Date.now()));
+        applyCopyGuard();
+        showNotices();
+        document.getElementById('home-stats').classList.add('show');
+        var db_btn=document.getElementById('dash-open-btn');
+        if(db_btn)db_btn.style.display='inline-flex';
+        loadStats();
+        enterComm();
+      }
+    });
   }
+  waitForAuth(20);
 });
 
 /* ══ Admin Session Timer ══ */
@@ -4531,19 +4545,37 @@ function memberLogin(){
 
 /* ══ Admin Login ══ */
 function adminLogin(){
+  if(!auth){toast('Firebase Auth লোড হয়নি, একটু অপেক্ষা করুন','red');return;}
+  var email=document.getElementById('admin-email').value.trim();
   var p=document.getElementById('admin-pwd').value.trim();
+  if(!email){toast('Email দিন','red');return;}
   if(!p){toast('পাসওয়ার্ড দিন','red');return;}
-  if(p!=='@JiHaDuL@'){toast('Admin password সঠিক নয়','red');return;}
-  curUser='Administrator';isAdmin=true;
-  localStorage.setItem('kh_adm','1');
-  localStorage.setItem('kh_adm_time',String(Date.now()));
-  applyCopyGuard();
-  showNotices();
-  document.getElementById('home-stats').classList.add('show');
-  var db_btn=document.getElementById('dash-open-btn');
-  if(db_btn)db_btn.style.display='inline-flex';
-  loadStats();
-  enterComm();
+  var btn=document.querySelector('.admin-login-btn');
+  if(btn){btn.disabled=true;btn.textContent='⏳ লগইন হচ্ছে...';}
+  auth.signInWithEmailAndPassword(email,p)
+    .then(function(uc){
+      curUser='Administrator';isAdmin=true;
+      localStorage.setItem('kh_adm','1');
+      localStorage.setItem('kh_adm_time',String(Date.now()));
+      applyCopyGuard();
+      showNotices();
+      document.getElementById('home-stats').classList.add('show');
+      var db_btn=document.getElementById('dash-open-btn');
+      if(db_btn)db_btn.style.display='inline-flex';
+      loadStats();
+      enterComm();
+      if(btn){btn.disabled=false;btn.textContent='Access Admin Panel ⚔';}
+    })
+    .catch(function(e){
+      if(btn){btn.disabled=false;btn.textContent='Access Admin Panel ⚔';}
+      var msg='লগইন ব্যর্থ হয়েছে';
+      if(e.code==='auth/user-not-found'||e.code==='auth/wrong-password'||e.code==='auth/invalid-credential'){
+        msg='Email বা Password সঠিক নয়';
+      } else if(e.code==='auth/too-many-requests'){
+        msg='অনেকবার চেষ্টা করা হয়েছে, কিছুক্ষণ পর আবার চেষ্টা করুন';
+      }
+      toast(msg,'red');
+    });
 }
 
 /* ── enterComm ── */
@@ -4588,6 +4620,7 @@ function enterComm(){
 
 /* ── signOut ── */
 function signOut(){
+  if(auth){auth.signOut().catch(function(){});}
   curUser=null;isAdmin=false;
   localStorage.removeItem('kh_adm');
   localStorage.removeItem('kh_adm_time');
@@ -5585,13 +5618,7 @@ function patchPreviewCache(posts){
   previewPostsAll = posts || [];
 }
 
-/* Post card এ "শেয়ার ও বিস্তারিত দেখুন" বাটন যোগ করার override */
-function renderPreviewPosts(posts, context){
-  /* existing renderFn কে call করো */
-  if(typeof window._renderPostList === 'function'){
-    window._renderPostList(posts, context);
-  }
-}
+/* renderPreviewPosts override সরানো হয়েছে — main function (line ~4874) use হবে */
 
 
 
