@@ -7,7 +7,6 @@
      ════════════════════════════════════════════════════════ -->
 
 <!-- ══ CHARSET & VIEWPORT ══ -->
-<meta name="google-site-verification" content="nxqw_xlU6P0sj9PwA85BpiMC2nj45wOc5_V2DER2EhE" />
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -4391,7 +4390,11 @@ function toggleTheme(){
 /* ── Firebase (অরিজিনাল কনফিগ) ── */
 var fcfg={apiKey:"AIzaSyAcTJsg367e4AMSIII6HsRIIFbACoP7dqA",authDomain:"khedmot-senter.firebaseapp.com",projectId:"khedmot-senter",storageBucket:"khedmot-senter.firebasestorage.app",messagingSenderId:"762215417966",appId:"1:762215417966:web:e63b5c2cce97693e8ebe7f"};
 var db=null,unsub=null;
-try{firebase.initializeApp(fcfg);db=firebase.firestore();}catch(e){}
+try{
+  firebase.initializeApp(fcfg);
+  db=firebase.firestore();
+  db.settings({experimentalForceLongPolling:true, merge:true});
+}catch(e){}
 
 /* ── State ── */
 var curUser=null,isAdmin=false,allTxt=[];
