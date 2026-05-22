@@ -1,0 +1,94 @@
+# ════════════════════════════════════════════════════════
+# মসজিদ-মাদ্রাসার খেদমত সেন্টার — robots.txt
+# Website: https://khedmot-senter.web.app/
+# Language: Bengali (bn-BD) | Islamic Job Portal Bangladesh
+# ════════════════════════════════════════════════════════
+
+# ── Allow ALL Search Engines ──
+User-agent: *
+Allow: /
+
+# ── Google Specific ──
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+
+User-agent: Googlebot-News
+Allow: /
+
+# ── Bing / Microsoft ──
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# ── Facebook / WhatsApp (for OG previews) ──
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# ── Twitter / X ──
+User-agent: Twitterbot
+Allow: /
+
+# ── LinkedIn ──
+User-agent: LinkedInBot
+Allow: /
+
+# ── Telegram ──
+User-agent: TelegramBot
+Allow: /
+
+# ── DuckDuckGo ──
+User-agent: DuckDuckBot
+Allow: /
+
+# ── Yandex ──
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 3
+
+# ── Archive.org ──
+User-agent: ia_archiver
+Allow: /
+
+# ── Block bad bots & scrapers ──
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# ── Block admin paths from indexing ──
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /__/
+Disallow: /firebase-debug.log
+Disallow: /.well-known/
+
+# ── Sitemaps ──
+Sitemap: https://khedmot-senter.web.app/sitemap.xml
+
+# ── Host ──
+Host: khedmot-senter.web.app
