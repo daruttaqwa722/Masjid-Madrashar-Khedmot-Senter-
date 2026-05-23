@@ -1,0 +1,25 @@
+{
+  "name": "মসজিদ-মাদ্রাসার খেদমত সেন্টার",
+  "short_name": "খেদমত সেন্টার",
+  "description": "বাংলাদেশের মসজিদ ও মাদ্রাসায় ইমাম, মুয়াজ্জিন ও শিক্ষক নিয়োগের সর্বশেষ বিজ্ঞপ্তি",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080f0b",
+  "theme_color": "#0d7a45",
+  "lang": "bn",
+  "icons": [
+    { "src": "hajera.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "hajera.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["education", "religion"],
+  "shortcuts": [
+    {
+      "name": "নতুন পোস্ট দেখুন",
+      "short_name": "পোস্ট",
+      "url": "./?screen=preview",
+      "icons": [{ "src": "hajera.png", "sizes": "96x96" }]
+    }
+  ]
+}
