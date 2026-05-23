@@ -53,7 +53,7 @@
 <meta property="og:type" id="og-type" content="website">
 <meta property="og:site_name" content="মসজিদ-মাদ্রাসার খেদমত সেন্টার">
 <meta property="og:title" id="og-title" content="মসজিদ-মাদ্রাসার খেদমত সেন্টার | ইমাম, মুয়াজ্জিন ও শিক্ষক নিয়োগ বাংলাদেশ">
-<meta property="og:description" id="og-desc" content="বাংলাদেশের মসজিদ ও মাদ্রাসায় ইমাম, মুয়াজ্জিন ও শিক্ষক নিয়োগের সর্বশেষ বিজ্ঞপ্তি। প্রতিদিন নতুন পোস্ট আপডেট হয়।">
+<meta property="og:description" id="og-desc" content="বাংলাদেশের মসজিদ ও মাদ্রাসায় ইমাম, মুয়াজ্জিন ও শিক্ষক নিয়োগের বিজ্ঞপ্তি। প্রতিদিন নতুন পোস্ট আপডেট হয়।">
 <meta property="og:image" id="og-image" content="https://khedmot-senter.web.app/khedmot.png">
 <meta property="og:image:secure_url" content="https://khedmot-senter.web.app/khedmot.png">
 <meta property="og:image:width" content="1200">
@@ -245,6 +245,59 @@
 <!-- ══ CRITICAL INLINE CSS: Fast First Render ══ -->
 <style>html{font-family:'Noto Sans Bengali',sans-serif;background:#080f0b;color:#f0ebe0}body{margin:0;padding:0;overflow-x:hidden}</style>
 <style>
+/* ═══ TIME STAT CHIPS (ক্লিকযোগ্য ফিল্টার + স্ট্যাটস) ═══ */
+.tsc-chip {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 8px 6px 7px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.tsc-chip:hover { background: var(--bg-elevated); border-color: var(--green-border); }
+.tsc-chip.active {
+  background: rgba(13,122,69,0.16);
+  border-color: var(--green-light);
+  box-shadow: 0 0 10px rgba(26,181,102,0.15);
+}
+.tsc-label {
+  font-size: 10.5px; font-weight: 700; color: var(--text-muted);
+  letter-spacing: 0.03em; margin-bottom: 3px;
+  font-family: 'Noto Sans Bengali', sans-serif;
+}
+.tsc-chip.active .tsc-label { color: var(--green-light); }
+.tsc-num {
+  font-size: 20px; font-weight: 800;
+  color: var(--text-primary);
+  font-family: 'Noto Serif Bengali', serif;
+  line-height: 1.1;
+}
+.tsc-chip.active .tsc-num { color: var(--green-vivid); }
+.tsc-unit {
+  font-size: 10px; color: var(--text-faint);
+  font-family: 'Noto Sans Bengali', sans-serif;
+  margin-top: 1px;
+}
+
+/* ═══ TIME FILTER BUTTONS (legacy — hidden now) ═══ */
+.time-filter-btn { display: none; }
+
+/* ═══ ADMIN HIDDEN POSTS BADGE ═══ */
+.admin-hidden-note {
+  display: inline-block;
+  background: rgba(196,154,56,0.12);
+  border: 1px solid var(--gold-border);
+  color: var(--gold-light);
+  border-radius: var(--r-sm);
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; margin-left: 6px;
+  vertical-align: middle;
+}
+
 /* ═══ MULTI-CAT SELECT ═══ */
 .multi-cat-wrap {
   display: flex; flex-direction: column; gap: 8px;
@@ -2945,6 +2998,33 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 
 <div id="toast" class="toast"></div>
 
+<!-- USER EDIT MODAL -->
+<div class="edit-modal-overlay" id="user-edit-modal-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);align-items:center;justify-content:center">
+  <div class="edit-modal" style="max-width:400px;width:92%">
+    <h3>✏ ইউজার এডিট করুন</h3>
+    <input type="hidden" id="edit-user-id">
+    <label class="field-label" style="margin-top:10px">নাম</label>
+    <input id="edit-user-name" class="field-input" type="text" placeholder="ইউজারের নাম">
+    <label class="field-label" style="margin-top:10px">মোবাইল নম্বর</label>
+    <input id="edit-user-mob" class="field-input" type="tel" placeholder="মোবাইল নম্বর">
+    <label class="field-label" style="margin-top:10px">পাসওয়ার্ড</label>
+    <input id="edit-user-pwd" class="field-input" type="text" placeholder="পাসওয়ার্ড">
+    <label class="field-label" style="margin-top:10px">মেয়াদ বৃদ্ধি করুন</label>
+    <select id="edit-user-days" class="field-input" style="cursor:pointer">
+      <option value="0">মেয়াদ পরিবর্তন করবেন না</option>
+      <option value="7">+৭ দিন</option>
+      <option value="10">+১০ দিন</option>
+      <option value="15">+১৫ দিন</option>
+      <option value="20">+২০ দিন</option>
+      <option value="30">+৩০ দিন</option>
+    </select>
+    <div class="edit-modal-row" style="display:flex;gap:10px;margin-top:16px">
+      <button class="edit-save-btn" style="flex:1;padding:12px;background:linear-gradient(135deg,#0e9c5a,#0d7a45);border:none;border-radius:10px;color:#fff;font-family:'Noto Sans Bengali',sans-serif;font-size:14px;font-weight:700;cursor:pointer" onclick="saveEditUser()">✓ সেভ করুন</button>
+      <button class="edit-cancel-btn" style="padding:12px 18px;background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;color:var(--text-muted);font-family:'Noto Sans Bengali',sans-serif;font-size:14px;cursor:pointer" onclick="closeUserEditModal()">বাতিল</button>
+    </div>
+  </div>
+</div>
+
 <!-- EDIT MODAL -->
 <div class="edit-modal-overlay" id="edit-modal-overlay">
   <div class="edit-modal">
@@ -3802,6 +3882,15 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 
         <div class="posts-section" style="margin-top:20px">
           <h3>খেদমতের পোস্ট <span class="posts-count" id="posts-count">0</span></h3>
+          <!-- ══ এডমিন ঘণ্টাভিত্তিক পোস্ট স্ট্যাটিস্টিক্স ══ -->
+          <div id="admin-hourly-stats" style="margin-bottom:18px;background:var(--bg-card);border:1px solid var(--border-gold);border-radius:14px;padding:14px 16px">
+            <div style="font-size:13px;font-weight:700;color:var(--gold-light);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+              📊 ঘণ্টাভিত্তিক পোস্ট স্ট্যাটিস্টিক্স <span style="font-size:10px;color:var(--text-muted);font-weight:400">(শুধু Admin দেখতে পাবেন)</span>
+            </div>
+            <div id="admin-hourly-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px">
+              <!-- JS দিয়ে পূরণ হবে -->
+            </div>
+          </div>
           <!-- Category Filter -->
           <div class="cat-filter-wrap" id="cat-filter-center">
             <div class="cat-all-chip selected" id="cac-all" onclick="filterCat('center','all')">
@@ -3899,6 +3988,26 @@ body.light-mode .share-fb-btn { color: #1877f2; }
     </div>
     <div class="preview-count-bar">
       📋 মোট পোস্ট: <span class="preview-count-badge" id="preview-count">০</span>
+    </div>
+    <!-- ══ Compact Time Stats chips (২৪/৪৮/৬০ এক লাইনে, ক্লিকযোগ্য ফিল্টার) ══ -->
+    <div id="post-time-stats-bar" style="margin:10px 0 4px">
+      <div style="display:flex;gap:6px">
+        <div class="tsc-chip" id="tf-btn-24" onclick="setPreviewTimeFilter(24)">
+          <span class="tsc-label">২৪ ঘণ্টা</span>
+          <span class="tsc-num" id="posts-24h-count">—</span>
+          <span class="tsc-unit">পোস্ট</span>
+        </div>
+        <div class="tsc-chip" id="tf-btn-48" onclick="setPreviewTimeFilter(48)">
+          <span class="tsc-label">৪৮ ঘণ্টা</span>
+          <span class="tsc-num" id="posts-48h-count">—</span>
+          <span class="tsc-unit">পোস্ট</span>
+        </div>
+        <div class="tsc-chip active" id="tf-btn-60" onclick="setPreviewTimeFilter(60)">
+          <span class="tsc-label">৬০ ঘণ্টা</span>
+          <span class="tsc-num" id="posts-60h-count">—</span>
+          <span class="tsc-unit">পোস্ট</span>
+        </div>
+      </div>
     </div>
     <!-- Category Filter Preview -->
     <div class="cat-filter-wrap" id="cat-filter-preview">
@@ -4711,7 +4820,7 @@ function loadUserList(){
           +'<div class="ul-pwd">🔑 '+esc(d.password||'')+'</div>'
           +'<div class="ul-exp '+ec+'">⏰ '+et+'</div>'
           +'</div>'
-          +'<div class="ul-btns"><button class="ext-btn" onclick="extendUser(\''+doc.id+'\')">+১০ দিন</button><button class="del-user-btn" onclick="deleteUser(\''+doc.id+'\')">মুছুন</button></div>';
+          +'<div class="ul-btns"><button class="edit-user-btn" style="background:rgba(26,181,102,0.13);border:1px solid rgba(26,181,102,0.3);color:var(--green-light);padding:6px 12px;border-radius:8px;font-size:12.5px;cursor:pointer;font-family:inherit" onclick="openUserEditModal(\''+doc.id+'\')">✏ এডিট</button><button class="ext-btn" onclick="extendUser(\''+doc.id+'\')">+১০ দিন</button><button class="del-user-btn" onclick="deleteUser(\''+doc.id+'\')">মুছুন</button></div>';
         c.appendChild(row);
       });
     })
@@ -4730,6 +4839,103 @@ function deleteUser(id){
   db.collection('users').doc(id).delete()
     .then(function(){toast('ইউজার ডিলিট হয়েছে','green');loadUserList();})
     .catch(function(){toast('সমস্যা হয়েছে','red');});
+}
+
+/* ══ USER EDIT FUNCTIONS ══ */
+function openUserEditModal(id){
+  if(!db){toast('Firebase error','red');return;}
+  db.collection('users').doc(id).get().then(function(doc){
+    if(!doc.exists){toast('ইউজার পাওয়া যায়নি','red');return;}
+    var d = doc.data();
+    document.getElementById('edit-user-id').value = id;
+    document.getElementById('edit-user-name').value = d.name || '';
+    document.getElementById('edit-user-mob').value = d.mobile || '';
+    document.getElementById('edit-user-pwd').value = d.password || '';
+    document.getElementById('edit-user-days').value = '0';
+    var overlay = document.getElementById('user-edit-modal-overlay');
+    overlay.style.display = 'flex';
+  }).catch(function(e){toast('সমস্যা: '+e.message,'red');});
+}
+function closeUserEditModal(){
+  document.getElementById('user-edit-modal-overlay').style.display = 'none';
+}
+function saveEditUser(){
+  var id  = document.getElementById('edit-user-id').value;
+  var name = document.getElementById('edit-user-name').value.trim();
+  var mob  = document.getElementById('edit-user-mob').value.trim();
+  var pwd  = document.getElementById('edit-user-pwd').value.trim();
+  var days = parseInt(document.getElementById('edit-user-days').value) || 0;
+  if(!name){toast('নাম লিখুন','red');return;}
+  if(!mob) {toast('মোবাইল নম্বর লিখুন','red');return;}
+  if(!pwd) {toast('পাসওয়ার্ড লিখুন','red');return;}
+  if(!db)  {toast('Firebase error','red');return;}
+  var upd = {name:name, mobile:mob, password:pwd};
+  if(days > 0){
+    db.collection('users').doc(id).get().then(function(doc){
+      var cur = doc.exists ? (doc.data().expiresAt || Date.now()) : Date.now();
+      upd.expiresAt = Math.max(cur, Date.now()) + days * 24 * 3600000;
+      return db.collection('users').doc(id).update(upd);
+    }).then(function(){
+      toast('ইউজার আপডেট হয়েছে','green');
+      closeUserEditModal();
+      loadUserList();
+    }).catch(function(e){toast('সমস্যা: '+e.message,'red');});
+  } else {
+    db.collection('users').doc(id).update(upd)
+      .then(function(){toast('ইউজার আপডেট হয়েছে','green');closeUserEditModal();loadUserList();})
+      .catch(function(e){toast('সমস্যা: '+e.message,'red');});
+  }
+}
+/* Close user edit modal on overlay click */
+document.getElementById('user-edit-modal-overlay').addEventListener('click', function(e){
+  if(e.target === this) closeUserEditModal();
+});
+
+/* ══ POST TIME STATS (24h / 48h / 60h — সবার জন্য) ══ */
+function updatePostTimeStats(posts){
+  var now = Date.now();
+  var h24 = now - 24*3600000;
+  var h48 = now - 48*3600000;
+  var h60 = now - 60*3600000;
+  var bnNums = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function toBN(n){ return String(n).split('').map(function(c){return bnNums[+c]!==undefined?bnNums[+c]:c;}).join(''); }
+  var c24=0, c48=0, c60=0;
+  posts.forEach(function(p){ var t=p.created||0; if(t>=h24)c24++; if(t>=h48)c48++; if(t>=h60)c60++; });
+  var el24=document.getElementById('posts-24h-count');
+  var el48=document.getElementById('posts-48h-count');
+  var el60=document.getElementById('posts-60h-count');
+  if(el24) el24.textContent = toBN(c24);
+  if(el48) el48.textContent = toBN(c48);
+  if(el60) el60.textContent = toBN(c60);
+}
+
+/* ══ ADMIN HOURLY STATS (1h–24h — শুধু Admin) ══ */
+function renderAdminHourlyStats(posts){
+  var grid = document.getElementById('admin-hourly-grid');
+  if(!grid) return;
+  var now = Date.now();
+  var bnNums = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function toBN(n){ return String(n).split('').map(function(c){return bnNums[+c]!==undefined?bnNums[+c]:c;}).join(''); }
+  grid.innerHTML = '';
+  for(var h=1; h<=24; h++){
+    var since = now - h*3600000;
+    var count = posts.filter(function(p){ return (p.created||0)>=since; }).length;
+    var pct = count > 0 ? Math.min(100, count * 6) : 0;
+    var cell = document.createElement('div');
+    cell.style.cssText = 'background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;padding:8px 6px;text-align:center;position:relative;overflow:hidden';
+    var bar = document.createElement('div');
+    bar.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:'+(pct)+'%;background:rgba(26,181,102,0.18);transition:height .4s';
+    var label = document.createElement('div');
+    label.style.cssText = 'position:relative;z-index:1;font-size:11px;color:var(--text-muted);margin-bottom:2px';
+    label.textContent = toBN(h)+'ঘণ্টা';
+    var num = document.createElement('div');
+    num.style.cssText = 'position:relative;z-index:1;font-size:18px;font-weight:800;color:'+(count>0?'#1ab566':'var(--text-faint)')+';font-family:"Noto Serif Bengali",serif';
+    num.textContent = toBN(count);
+    cell.appendChild(bar);
+    cell.appendChild(label);
+    cell.appendChild(num);
+    grid.appendChild(cell);
+  }
 }
 
 /* ══ CATEGORY CONFIG ══ */
@@ -4857,6 +5063,7 @@ function renderCenterPosts() {
     var tl = timeLeft(d.created || Date.now());
     var expBadge = '';
     if (tl) { expBadge = '<span class="post-expire-badge' + (tl.soon ? ' expiring-soon' : '') + '">⏳ ' + tl.label + '</span>'; }
+    else { expBadge = '<span class="post-expire-badge" style="background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);color:#f87171;border-radius:999px;font-size:11px;padding:3px 10px">🔒 ভিজিটরদের কাছে লুকানো</span>'; }
     var delBtn = isAdmin ? '<button class="delete-post-btn" onclick="delPost(\'' + postId + '\')">✕</button>' : '';
     var editBtn = isAdmin ? '<button class="edit-post-btn" onclick="openEditModal(\'' + postId + '\')">✏</button>' : '';
     var rawText = d.text || '';
@@ -4895,6 +5102,8 @@ function loadPosts() {
     });
     updateCounts(allPostsData, 'cac');
     renderCenterPosts();
+    /* এডমিন ঘণ্টাভিত্তিক স্ট্যাটিস্টিক্স */
+    if(isAdmin) renderAdminHourlyStats(allPostsData);
   }, function(e) {
     document.getElementById('posts-container').innerHTML = '<div class="no-posts"><span>⚠</span>লোড হয়নি: ' + e.message + '</div>';
   });
@@ -4905,8 +5114,16 @@ function loadPosts() {
 ═══════════════════════════════════ */
 function renderPreviewPosts(overridePosts) {
   var c = document.getElementById('preview-posts-container');
+  /* base source */
   var src = overridePosts !== undefined ? overridePosts : applyFilter(allPreviewData, previewFilter);
-  var filtered = src;
+  /* visitor/user এর জন্য time filter apply করো; admin সব দেখবে */
+  var filtered;
+  if (isAdmin) {
+    filtered = src;
+  } else {
+    var cutoff = Date.now() - (previewTimeFilter * 3600000);
+    filtered = src.filter(function(d) { return (d.created || 0) >= cutoff; });
+  }
   if (filtered.length === 0) {
     c.innerHTML = '<div class="no-posts"><span>🔍</span>এই ক্যাটাগরিতে কোনো পোস্ট নেই</div>';
     return;
@@ -4950,24 +5167,44 @@ function renderPreviewPosts(overridePosts) {
 }
 
 var previewUnsub = null;
+/* ── ভিজিটর/ইউজারের জন্য টাইম ফিল্টার (ঘণ্টা): 24 | 48 | 60 (default) ── */
+var previewTimeFilter = 60;
+
+function setPreviewTimeFilter(hours) {
+  previewTimeFilter = hours;
+  /* সব chips থেকে active সরাও */
+  [24, 48, 60].forEach(function(h) {
+    var el = document.getElementById('tf-btn-' + h);
+    if (el) el.classList.remove('active');
+  });
+  var activeEl = document.getElementById('tf-btn-' + hours);
+  if (activeEl) activeEl.classList.add('active');
+  renderPreviewPosts();
+}
+
 function loadPreviewPosts() {
   if (!db) { document.getElementById('preview-posts-container').innerHTML = noPostsHTML(); return; }
   if (previewUnsub) { previewUnsub(); previewUnsub = null; }
   var c = document.getElementById('preview-posts-container');
   c.innerHTML = '<div class="posts-loading"><div class="spinner"></div>লোড হচ্ছে...</div>';
   previewUnsub = db.collection('posts').orderBy('created', 'desc').onSnapshot(function(snap) {
-    document.getElementById('preview-count').textContent = snap.size;
     allPreviewData = [];
     snap.forEach(function(doc) {
       var d = doc.data(); d._id = doc.id;
       allPreviewData.push(d);
     });
-    /* Search cache আপডেট */
-    previewPostsAll = allPreviewData.slice();
-    updateCounts(allPreviewData, 'cap');
+    /* Admin সব পোস্ট দেখবে; Visitor/User শুধু ৬০ ঘণ্টার ভেতরেরগুলো দেখবে */
+    var visibleData = isAdmin ? allPreviewData : allPreviewData.filter(function(d) {
+      return isPostVisible(d.created || 0);
+    });
+    document.getElementById('preview-count').textContent = visibleData.length;
+    /* Search cache আপডেট — শুধু দৃশ্যমান পোস্ট */
+    previewPostsAll = visibleData.slice();
+    updateCounts(visibleData, 'cap');
+    updatePostTimeStats(visibleData);
     /* যদি search active থাকে */
-    var searchVal = (document.getElementById('post-search-input')||{}).value || '';
-    if(searchVal.trim()){
+    var searchVal = (document.getElementById('post-search-input') || {}).value || '';
+    if (searchVal.trim()) {
       searchPosts(searchVal);
     } else {
       renderPreviewPosts();
@@ -5236,18 +5473,25 @@ function simScore(a,b){
 }
 function autoDeleteOldPosts(){
   if(!db)return;
-  var limit=Date.now()-(60*3600*1000);
-  db.collection('posts').where('created','<=',limit).get()
-    .then(function(snap){snap.forEach(function(doc){doc.ref.delete().catch(function(){});});}).catch(function(){});
+  /* ৩ মাস (90 দিন) পুরনো পোস্ট পার্মানেন্টলি ডিলিট করো */
+  var deleteLimit = Date.now() - (90 * 24 * 3600000);
+  db.collection('posts').where('created','<=',deleteLimit).get()
+    .then(function(snap){ snap.forEach(function(doc){ doc.ref.delete().catch(function(){}); }); })
+    .catch(function(){});
 }
+/* ৬০ ঘণ্টা = ভিজিবিলিটি উইন্ডো */
+var POST_VISIBLE_MS = 60 * 3600000;
 function timeLeft(created){
-  var exp=created+(60*3600*1000);
-  var diff=exp-Date.now();
-  if(diff<=0)return null;
-  var h=Math.floor(diff/3600000);
-  var m=Math.floor((diff%3600000)/60000);
-  if(h<=6)return{label:h+'ঘ '+m+'মি বাকি',soon:true};
-  return{label:h+' ঘন্টা বাকি',soon:false};
+  var exp = created + POST_VISIBLE_MS;
+  var diff = exp - Date.now();
+  if(diff <= 0) return null;
+  var h = Math.floor(diff / 3600000);
+  var m = Math.floor((diff % 3600000) / 60000);
+  if(h <= 6) return { label: h + 'ঘ ' + m + 'মি বাকি', soon: true };
+  return { label: h + ' ঘন্টা বাকি', soon: false };
+}
+function isPostVisible(created){
+  return (Date.now() - created) < POST_VISIBLE_MS;
 }
 function toggleLike(postId,btn){
   if(!db)return;
