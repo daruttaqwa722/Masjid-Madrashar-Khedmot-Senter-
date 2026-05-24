@@ -11,6 +11,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
+<!-- ══ CACHE CONTROL — নতুন আপলোডের পরও পুরনো version দেখাবে না ══ -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <!-- ══ PRIMARY SEO META TAGS ══ -->
 <title id="page-title">মসজিদ-মাদ্রাসার খেদমত সেন্টার | ইমাম, মুয়াজ্জিন ও শিক্ষক নিয়োগ বাংলাদেশ ২০২৫</title>
 <meta name="description" id="page-desc" content="বাংলাদেশের মসজিদ, মাদ্রাসা ও মহিলা মাদ্রাসায় ইমাম নিয়োগ, মুয়াজ্জিন নিয়োগ, হাফেজ নিয়োগ ও ইসলামী শিক্ষক নিয়োগের সর্বশেষ বিজ্ঞপ্তি। আজকের নতুন খেদমত পোস্ট দেখুন — প্রতিদিন আপডেট হয়।">
@@ -6597,6 +6602,28 @@ try{
   console.error('Firebase Error:', e);
   alert('Firebase Error: ' + e.message);
 }
+
+/* ══ SERVICE WORKER CACHE CLEAR — পুরনো cache মুছে নতুন version লোড করে ══ */
+(function clearOldCaches(){
+  if('serviceWorker' in navigator && 'caches' in window){
+    /* সমস্ত পুরনো cache মুছে ফেলো */
+    caches.keys().then(function(cacheNames){
+      cacheNames.forEach(function(cacheName){
+        caches.delete(cacheName).then(function(){
+          console.log('[Cache Cleared]', cacheName);
+        });
+      });
+    }).catch(function(){});
+    /* পুরনো service worker unregister করো */
+    navigator.serviceWorker.getRegistrations().then(function(registrations){
+      registrations.forEach(function(reg){
+        reg.unregister().then(function(){
+          console.log('[SW Unregistered]', reg.scope);
+        });
+      });
+    }).catch(function(){});
+  }
+})();
 
 /* ── State ── */
 var curUser=null,isAdmin=false,allTxt=[];
