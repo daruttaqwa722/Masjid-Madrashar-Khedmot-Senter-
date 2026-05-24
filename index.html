@@ -8624,9 +8624,21 @@ function doLogout(){
 
 var pwaInstallPrompt = null;
 function initPWA(){
-  /* Service Worker register */
+  /* Service Worker — পুরনো cache সব মুছে নতুন version লোড করে */
   if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('./sw.js').then(function(reg){
+    /* আগে সব পুরনো SW unregister করো */
+    navigator.serviceWorker.getRegistrations().then(function(registrations){
+      registrations.forEach(function(reg){ reg.unregister(); });
+    }).catch(function(){});
+    /* সব cache মুছে ফেলো */
+    if('caches' in window){
+      caches.keys().then(function(names){
+        names.forEach(function(name){ caches.delete(name); });
+      }).catch(function(){});
+    }
+    /* নতুন করে SW register করো */
+    navigator.serviceWorker.register('./sw.js?v=' + Date.now()).then(function(reg){
+      reg.update();
       console.log('SW registered:', reg.scope);
     }).catch(function(e){ console.log('SW error:', e); });
   }
