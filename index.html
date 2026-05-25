@@ -7325,7 +7325,7 @@ function renderCenterPosts() {
           '<span class="like-icon">❤️</span>' +
           '<span class="like-count">' + likeCount + '</span>' +
         '</button>' +
-        '<button class="share-fb-btn" onclick="sharePost(\'fb\',\'' + rawText.replace(/'/g, "\\'").replace(/\n/g, ' ') + '\')">' +
+        '<button class="share-fb-btn" onclick="sharePost(\'fb\',\'' + rawText.replace(/'/g, "\\'").replace(/\n/g, ' ').substring(0,200) + '\',\'' + postId + '\')">' +
           '👑 Facebook' +
         '</button>' +
         expBadge +
@@ -7400,7 +7400,7 @@ function renderPreviewPosts(overridePosts) {
       expBadge = '<span class="' + timerCls + '" data-exp="' + (postCreated + POST_VISIBLE_MS) + '">⏳ <span class="cdown-txt">' + tl.label + '</span> পরে মুছে যাবে</span>';
     }
     var shareText = rawText.replace(/'/g, "\\'").replace(/\n/g, ' ');
-    var postUrl = BASE_URL + '#post/' + postId;
+    var postUrl = BASE_URL + '?post=' + postId;
     var shareUrl = encodeURIComponent(postUrl);
     var card = document.createElement('div');
     card.className = 'preview-post-card';
@@ -7413,7 +7413,7 @@ function renderPreviewPosts(overridePosts) {
           '<span class="like-icon">❤️</span>' +
           '<span class="like-count">' + likeCount + '</span>' +
         '</button>' +
-        '<button class="share-fb-btn" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u='+shareUrl+'\',\'_blank\',\'width=600,height=400\')">' +
+        '<button class="share-fb-btn" onclick="sharePost(\'fb\',\'' + shareText.substring(0,200) + '\',\'' + postId + '\')">' +
           '📘 Facebook' +
         '</button>' +
         '<button class="share-fb-btn" style="background:rgba(26,181,102,0.12);border-color:rgba(26,181,102,0.3);color:var(--green-light)" onclick="openSinglePost(\''+postId+'\',true)">' +
@@ -8100,9 +8100,15 @@ function toggleLike(postId,btn){
     ref.update({likes:cur+1}).catch(function(){});
   }
 }
-function sharePost(platform,text){
-  var url=encodeURIComponent(window.location.href);
-  if(platform==='fb'){window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'_blank','width=600,height=400');}
+function sharePost(platform, text, postId){
+  var postUrl = postId ? (BASE_URL + '?post=' + postId) : window.location.href;
+  var url = encodeURIComponent(postUrl);
+  if(platform==='fb'){
+    var quote = text ? encodeURIComponent(text.substring(0, 200)) : '';
+    var fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+    if(quote) fbUrl += '&quote=' + quote;
+    window.open(fbUrl, '_blank', 'width=600,height=400');
+  }
 }
 function delPost(id){
   if(!confirm('এই পোস্টটি ডিলিট করবেন?'))return;
@@ -8130,8 +8136,13 @@ function maskNumbers(text){
 var BASE_URL = 'https://khedmot-senter.web.app/';
 var currentPostId = null;
 
-/* URL hash থেকে post ID বের করো */
+/* URL থেকে post ID বের করো — hash (#post/ID) অথবা query (?post=ID) */
 function getHashPostId(){
+  /* query param ?post=ID (Facebook/WhatsApp শেয়ারের জন্য) */
+  var params = new URLSearchParams(window.location.search);
+  var qp = params.get('post');
+  if(qp) return qp;
+  /* hash #post/ID (পুরনো পদ্ধতি) */
   var h = window.location.hash;
   if(h.startsWith('#post/')) return h.slice(6);
   return null;
@@ -8140,7 +8151,7 @@ function getHashPostId(){
 /* Post এর URL সেট করো */
 function setPostUrl(postId){
   currentPostId = postId;
-  var newUrl = window.location.pathname + '#post/' + postId;
+  var newUrl = window.location.pathname + '?post=' + postId;
   history.pushState({postId:postId, screen:'post'}, '', newUrl);
   /* Facebook / OG meta dynamically update */
   updateOGForPost(postId);
@@ -8228,7 +8239,7 @@ function renderSinglePost(container, postId, d){
   var cats = (d.cats || [d.mainCat] || []);
   var catHTML = cats.map(function(c){ return '<span class="post-cat-badge '+(c||'')+'">'+(catLabels[c]||c||'')+'</span>'; }).join('');
   var bodyText = isAdmin ? (d.text||'') : maskNumbers(d.text||'');
-  var postUrl = BASE_URL + '#post/' + postId;
+  var postUrl = BASE_URL + '?post=' + postId;
   var shareUrl = encodeURIComponent(postUrl);
   var shareText = encodeURIComponent((d.text||'').substring(0,100));
   var tl = timeLeft(d.created || 0);
@@ -8275,7 +8286,7 @@ function renderSinglePost(container, postId, d){
 }
 
 function copyPostUrl(postId){
-  var url = BASE_URL + '#post/' + postId;
+  var url = BASE_URL + '?post=' + postId;
   navigator.clipboard.writeText(url).then(function(){
     toast('পোস্টের লিংক কপি হয়েছে!', 'green');
   }).catch(function(){
@@ -8325,7 +8336,7 @@ function clearSearch(){
 function updateOGForPost(postId, postData){
   var title, desc, url, imgUrl;
   /* ── Dynamic URL: hash-based for SPA ── */
-  url = BASE_URL + '#post/' + postId;
+  url = BASE_URL + '?post=' + postId;
   if(postData){
     var cats = postData.cats || [postData.mainCat] || [];
     var catNames = {
