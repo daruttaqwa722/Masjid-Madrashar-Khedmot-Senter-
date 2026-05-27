@@ -251,6 +251,16 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-messaging-compat.js"></script>
 
+<!-- PASSWORD HASHING -->
+<script>
+async function hashPassword(pwd){
+  var msgBuffer = new TextEncoder().encode(pwd);
+  var hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+  var hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(function(b){ return b.toString(16).padStart(2,"0"); }).join("");
+}
+</script>
+
 <!-- ══ CRITICAL INLINE CSS: Fast First Render ══ -->
 <style>html{font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;background:#080f0b;color:#f0ebe0}body{margin:0;padding:0;overflow-x:hidden}</style>
 <style>
@@ -7376,28 +7386,30 @@ function memberLogin(){
   if(!mob){toast('মোবাইল নম্বর দিন','red');return;}
   if(!pwd){toast('পাসওয়ার্ড দিন','red');return;}
   if(!db){toast('Firebase সংযোগ নেই','red');return;}
-  db.collection('users').where('mobile','==',mob).get()
-    .then(function(snap){
-      if(snap.empty){toast('এই মোবাইল নম্বরে কোনো অ্যাকাউন্ট নেই','red');return;}
-      var doc=snap.docs[0],d=doc.data();
-      if(d.password!==pwd){toast('পাসওয়ার্ড সঠিক নয়','red');return;}
-      if(d.expiresAt&&Date.now()>d.expiresAt){
-        /* Expired — login হবে কিন্তু expired screen দেখাবে */
+  hashPassword(pwd).then(function(hashedPwd){
+    db.collection('users').where('mobile','==',mob).get()
+      .then(function(snap){
+        if(snap.empty){toast('এই মোবাইল নম্বরে কোনো অ্যাকাউন্ট নেই','red');return;}
+        var doc=snap.docs[0],d=doc.data();
+        /* hashed এবং plain text দুটোই চেক করে — পুরনো account এর জন্য */
+        if(d.password!==hashedPwd && d.password!==pwd){toast('পাসওয়ার্ড সঠিক নয়','red');return;}
+        if(d.expiresAt&&Date.now()>d.expiresAt){
+          curUser=d.name||mob; isAdmin=false;
+          curUserExpired=true;
+          curUserData={name:d.name||mob,mobile:mob,expiresAt:d.expiresAt||0,uid:doc.id};
+          applyCopyGuard(); showNotices(); showExpiredScreen(); return;
+        }
         curUser=d.name||mob; isAdmin=false;
-        curUserExpired=true;
+        curUserExpired=false;
         curUserData={name:d.name||mob,mobile:mob,expiresAt:d.expiresAt||0,uid:doc.id};
-        applyCopyGuard(); showNotices(); showExpiredScreen(); return;
-      }
-      curUser=d.name||mob; isAdmin=false;
-      curUserExpired=false;
-      curUserData={name:d.name||mob,mobile:mob,expiresAt:d.expiresAt||0,uid:doc.id};
-      applyCopyGuard();
-      showNotices();
-      enterComm();
-      showTestimonialAddBtn();
-      setTimeout(showUserProfileCard, 300);
-    })
-    .catch(function(){toast('সংযোগ সমস্যা, আবার চেষ্টা করুন','red');});
+        applyCopyGuard();
+        showNotices();
+        enterComm();
+        showTestimonialAddBtn();
+        setTimeout(showUserProfileCard, 300);
+      })
+      .catch(function(){toast('সংযোগ সমস্যা, আবার চেষ্টা করুন','red');});
+  });
 }
 
 /* ══ Admin Login ══ */
@@ -7554,7 +7566,9 @@ function createUser(){
         return Promise.reject('dup');
       }
       var now=Date.now();
-      return db.collection('users').add({name:name,mobile:mob,password:pwd,createdAt:now,expiresAt:now+20*24*3600000});
+      return hashPassword(pwd).then(function(hashedPwd){
+        return db.collection('users').add({name:name,mobile:mob,password:hashedPwd,createdAt:now,expiresAt:now+20*24*3600000});
+      });
     })
     .then(function(ref){
       if(!ref)return;
@@ -7710,22 +7724,24 @@ function saveEditUser(){
   if(!mob) {toast('মোবাইল নম্বর লিখুন','red');return;}
   if(!pwd) {toast('পাসওয়ার্ড লিখুন','red');return;}
   if(!db)  {toast('Firebase error','red');return;}
-  var upd = {name:name, mobile:mob, password:pwd};
-  if(days > 0){
-    db.collection('users').doc(id).get().then(function(doc){
-      var cur = doc.exists ? (doc.data().expiresAt || Date.now()) : Date.now();
-      upd.expiresAt = Math.max(cur, Date.now()) + days * 24 * 3600000;
-      return db.collection('users').doc(id).update(upd);
-    }).then(function(){
-      toast('ইউজার আপডেট হয়েছে','green');
-      closeUserEditModal();
-      loadUserList();
-    }).catch(function(e){toast('সমস্যা: '+e.message,'red');});
-  } else {
-    db.collection('users').doc(id).update(upd)
-      .then(function(){toast('ইউজার আপডেট হয়েছে','green');closeUserEditModal();loadUserList();})
-      .catch(function(e){toast('সমস্যা: '+e.message,'red');});
-  }
+  hashPassword(pwd).then(function(hashedPwd){
+    var upd = {name:name, mobile:mob, password:hashedPwd};
+    if(days > 0){
+      db.collection('users').doc(id).get().then(function(doc){
+        var cur = doc.exists ? (doc.data().expiresAt || Date.now()) : Date.now();
+        upd.expiresAt = Math.max(cur, Date.now()) + days * 24 * 3600000;
+        return db.collection('users').doc(id).update(upd);
+      }).then(function(){
+        toast('ইউজার আপডেট হয়েছে','green');
+        closeUserEditModal();
+        loadUserList();
+      }).catch(function(e){toast('সমস্যা: '+e.message,'red');});
+    } else {
+      db.collection('users').doc(id).update(upd)
+        .then(function(){toast('ইউজার আপডেট হয়েছে','green');closeUserEditModal();loadUserList();})
+        .catch(function(e){toast('সমস্যা: '+e.message,'red');});
+    }
+  });
 }
 /* Close user edit modal on overlay click */
 document.getElementById('user-edit-modal-overlay').addEventListener('click', function(e){
@@ -9950,128 +9966,23 @@ function loadStats(){
   </div>
 </div>
 
-<!-- ══ SCREENSHOT PROTECTION SYSTEM ══ -->
-<div id="ss-warning-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(5,14,9,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);align-items:center;justify-content:center;flex-direction:column;padding:24px;text-align:center;">
-  <div style="max-width:340px;width:100%;">
-    <div style="font-size:60px;margin-bottom:16px;animation:ssWarnPulse 1.2s ease-in-out infinite;">🚫</div>
-    <div style="font-size:20px;font-weight:800;color:#f87171;font-family:'Noto Serif Bengali',serif;margin-bottom:10px;text-shadow:0 0 20px rgba(248,113,113,0.5);">স্ক্রিনশট সীমা শেষ!</div>
-    <div style="font-size:14px;color:#a0b8a8;font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;margin-bottom:20px;">
-      আপনি ২৪ ঘন্টায় সর্বোচ্চ <span style="color:#f0d478;font-weight:700;">২ বার</span> স্ক্রিনশট নিতে পারবেন।<br>
-      আপনার সীমা শেষ হয়ে গেছে।<br>
-      <span id="ss-time-remaining" style="color:#22c874;font-weight:700;"></span>
-    </div>
-    <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#fca5a5;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;">
-      ⚠️ বারবার চেষ্টা করলে আপনার অ্যাকাউন্ট <strong>সাময়িকভাবে বন্ধ</strong> হয়ে যেতে পারে।
-    </div>
-    <button onclick="ssCloseWarning()" style="width:100%;padding:14px;background:linear-gradient(135deg,rgba(13,122,69,0.35),rgba(13,122,69,0.18));border:1.5px solid rgba(26,181,102,0.6);border-radius:12px;color:#22c874;font-size:15px;font-weight:700;font-family:'Noto Sans Bengali',sans-serif;cursor:pointer;letter-spacing:0.02em;">
-      ঠিক আছে, বুঝেছি
-    </button>
-    <div style="margin-top:12px;font-size:12px;color:#4a6058;font-family:'Noto Sans Bengali',sans-serif;">কন্টেন্ট পুনরায় দেখতে পেতে অপেক্ষা করুন</div>
-  </div>
-</div>
-<style>
-@keyframes ssWarnPulse {
-  0%,100%{transform:scale(1);opacity:1;}
-  50%{transform:scale(1.12);opacity:0.85;}
-}
-.ss-blurred { filter: blur(18px) !important; pointer-events: none !important; user-select: none !important; }
-</style>
+<!-- ══ SCREENSHOT PROTECTION SYSTEM (ঠিক করা) ══ -->
 <script>
 (function(){
-  var SS_KEY       = 'kh_ss_data';
-  var SS_MAX       = 2;
-  var SS_WINDOW_MS = 24 * 3600000;
-  var ssBlocked    = false;
-  var ssWarningOpen= false;
-  var bnD = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-  function toBN(n){ return String(Math.round(n)).split('').map(function(c){ return bnD[+c]!==undefined?bnD[+c]:c; }).join(''); }
-  function getSsData(){ try{ return JSON.parse(localStorage.getItem(SS_KEY)||'{"count":0,"firstAt":0}'); }catch(e){ return {count:0,firstAt:0}; } }
-  function saveSsData(d){ try{ localStorage.setItem(SS_KEY, JSON.stringify(d)); }catch(e){} }
-  function getCleanData(){
-    var d = getSsData();
-    if(d.firstAt && (Date.now() - d.firstAt) >= SS_WINDOW_MS){ d = {count:0, firstAt:0}; saveSsData(d); }
-    return d;
-  }
-  function timeRemainingText(firstAt){
-    var rem = SS_WINDOW_MS - (Date.now() - firstAt);
-    if(rem <= 0) return '';
-    var h = Math.floor(rem / 3600000);
-    var m = Math.floor((rem % 3600000) / 60000);
-    return toBN(h) + ' ঘন্টা ' + toBN(m) + ' মিনিট পরে আবার পারবেন';
-  }
-  function logSsToFirebase(count){
-    try{
-      if(typeof db!=='undefined'&&db&&typeof curUserData!=='undefined'&&curUserData&&curUserData.mobile){
-        db.collection('ss_logs').add({ mobile:curUserData.mobile, name:curUserData.name||'', count:count, at:Date.now(), ua:navigator.userAgent.substring(0,120) }).catch(function(){});
-      }
-    }catch(e){}
-  }
-  function blurContent(){
-    ['posts-container','preview-posts-container','home-today-post-count'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.add('ss-blurred'); });
-    document.querySelectorAll('.post-card,.post-text,.masked-num,.copyable-num').forEach(function(el){ el.classList.add('ss-blurred'); });
-  }
-  function unblurContent(){ document.querySelectorAll('.ss-blurred').forEach(function(el){ el.classList.remove('ss-blurred'); }); }
-  function showSsWarning(firstAt){
-    if(ssWarningOpen) return;
-    ssWarningOpen = true;
-    blurContent();
-    var overlay = document.getElementById('ss-warning-overlay');
-    if(overlay){
-      overlay.style.display = 'flex';
-      var remEl = document.getElementById('ss-time-remaining');
-      if(remEl) remEl.textContent = timeRemainingText(firstAt);
-      var ssTimer = setInterval(function(){ if(!ssWarningOpen){clearInterval(ssTimer);return;} if(remEl){var txt=timeRemainingText(firstAt); if(!txt)clearInterval(ssTimer); else remEl.textContent=txt;} }, 30000);
-    }
-  }
-  window.ssCloseWarning = function(){
-    ssWarningOpen = false;
-    var overlay = document.getElementById('ss-warning-overlay');
-    if(overlay) overlay.style.display = 'none';
-    var d = getCleanData();
-    if(d.count < SS_MAX){ unblurContent(); }
-  };
-  function handleSsAttempt(){
-    var d = getCleanData();
-    if(d.count === 0){ d.firstAt = Date.now(); }
-    d.count++;
-    saveSsData(d);
-    logSsToFirebase(d.count);
-    if(d.count > SS_MAX){
-      ssBlocked = true;
-      showSsWarning(d.firstAt);
-    } else {
-      var remaining = SS_MAX - d.count;
-      var msg = remaining > 0 ? 'স্ক্রিনশট নেওয়া হয়েছে। আরও ' + toBN(remaining) + ' বার নিতে পারবেন।' : 'এটাই শেষ সুযোগ ছিল। আর স্ক্রিনশট নেওয়া যাবে না।';
-      if(typeof toast === 'function') toast(msg, remaining > 0 ? 'green' : 'red');
-    }
-  }
-  function checkOnLoad(){
-    var d = getCleanData();
-    if(d.count >= SS_MAX && d.firstAt){
-      var rem = SS_WINDOW_MS - (Date.now() - d.firstAt);
-      if(rem > 0){ ssBlocked = true; setTimeout(function(){ showSsWarning(d.firstAt); }, 1500); }
-      else { saveSsData({count:0, firstAt:0}); }
-    }
-  }
+  /* পুরনো blocked data clear করো — আগের ভুল detection এর কারণে জমা হয়েছিল */
+  try{ localStorage.removeItem('kh_ss_data'); }catch(e){}
+  /* শুধু PrintScreen key ধরবে — app switch বা screen off এ false trigger হবে না */
   document.addEventListener('keyup', function(e){
     if(e.key === 'PrintScreen' || e.keyCode === 44){
-      e.preventDefault(); handleSsAttempt();
+      e.preventDefault();
       try{ navigator.clipboard.writeText(' ').catch(function(){}); }catch(ex){}
+      if(typeof toast === 'function') toast('স্ক্রিনশট নেওয়া সীমাবদ্ধ', 'red');
       return false;
     }
   }, true);
   document.addEventListener('keydown', function(e){
-    var k = e.key ? e.key.toLowerCase() : '';
-    if(e.ctrlKey && e.shiftKey && k === 's'){ e.preventDefault(); handleSsAttempt(); return false; }
-    if(e.ctrlKey && k === 'p'){ e.preventDefault(); handleSsAttempt(); return false; }
     if(e.key === 'PrintScreen' || e.keyCode === 44){ e.preventDefault(); return false; }
   }, true);
-  var lastHidden = 0;
-  /* visibilitychange দিয়ে স্ক্রিনশট ধরা বন্ধ — app switch করলে false trigger হতো */
-  if(window.matchMedia){ window.matchMedia('print').addListener(function(mq){ if(mq.matches){ handleSsAttempt(); } }); }
-  window.addEventListener('beforeprint', function(){ handleSsAttempt(); });
-  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', checkOnLoad); }
-  else { setTimeout(checkOnLoad, 800); }
 })();
 </script>
 </body>
