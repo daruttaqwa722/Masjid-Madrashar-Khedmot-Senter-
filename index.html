@@ -237,10 +237,10 @@
 <link rel="shortcut icon" href="hajera.png">
 <meta name="msapplication-TileImage" content="hajera.png">
 
-<!-- ══ FONT: Optimized Bengali Font Loading ══ -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Scheherazade+New:wght@400;700&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<!-- ══ FONT: Premium Bengali Font Loading ══ -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- ══ PWA MANIFEST ══ -->
 <link rel="manifest" href="manifest.json">
@@ -252,7 +252,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-messaging-compat.js"></script>
 
 <!-- ══ CRITICAL INLINE CSS: Fast First Render ══ -->
-<style>html{font-family:'Noto Sans Bengali',sans-serif;background:#080f0b;color:#f0ebe0}body{margin:0;padding:0;overflow-x:hidden}</style>
+<style>html{font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;background:#080f0b;color:#f0ebe0}body{margin:0;padding:0;overflow-x:hidden}</style>
 <style>
 /* ═══════════════════════════════════════════════
    হোমপেজ — প্রিমিয়াম ভিজ্যুয়াল আপগ্রেড
@@ -277,7 +277,10 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-size: clamp(19px, 5vw, 25px) !important;
-  letter-spacing: 0.01em;
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.4 !important;
 }
 
 /* ── Header subtitle ── */
@@ -358,20 +361,20 @@
   color: #fae070 !important;
 }
 
-/* ── SUBMIT POST button ── */
+/* ── SUBMIT POST button — neutralized, inline style controls ── */
 .btn-submit-post {
-  background: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(59,130,246,0.06) 100%) !important;
-  border-color: rgba(59,130,246,0.32) !important;
+  background: unset !important;
+  border-color: unset !important;
 }
 .btn-submit-post .btn-icon-submit {
-  background: rgba(59,130,246,0.15) !important;
-  border-color: rgba(59,130,246,0.35) !important;
+  background: unset !important;
+  border-color: unset !important;
 }
-.btn-submit-post .btn-icon-submit svg { stroke: #93c5fd !important; }
-.btn-submit-post .btn-text { color: #bfdbfe !important; }
+.btn-submit-post .btn-icon-submit svg { stroke: #c084fc !important; }
+.btn-submit-post .btn-text { color: #c084fc !important; }
 .btn-submit-post:hover {
-  background: linear-gradient(135deg, rgba(59,130,246,0.20) 0%, rgba(59,130,246,0.10) 100%) !important;
-  border-color: rgba(59,130,246,0.55) !important;
+  background: linear-gradient(145deg,#180924 0%,#200c30 100%) !important;
+  border-color: rgba(192,132,252,0.80) !important;
 }
 
 /* ── General btn arrows ── */
@@ -382,8 +385,8 @@
 .home-footer {
   border-top: 1px solid var(--border);
   padding-top: 20px !important;
-  font-family: 'Noto Serif Bengali', serif;
-  font-size: 12.5px;
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-size: 13px;
   color: var(--text-faint) !important;
   letter-spacing: 0.04em;
 }
@@ -496,7 +499,7 @@
 .tsc-label {
   font-size: 10.5px; font-weight: 700; color: var(--text-muted);
   letter-spacing: 0.03em; margin-bottom: 3px;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .tsc-chip.active .tsc-label { color: var(--green-light); }
 .tsc-num {
@@ -508,7 +511,7 @@
 .tsc-chip.active .tsc-num { color: var(--green-vivid); }
 .tsc-unit {
   font-size: 10px; color: var(--text-faint);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   margin-top: 1px;
 }
 
@@ -537,7 +540,7 @@
   display: flex; align-items: center; gap: 10px;
   padding: 8px 10px; border-radius: var(--r-sm);
   cursor: pointer; transition: background 0.18s;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px; color: var(--text-body);
   border: 1px solid transparent;
 }
@@ -555,7 +558,7 @@
   flex: 1; padding: 12px 10px;
   background: var(--bg-raised); border: 1px solid var(--border);
   border-radius: var(--r-md); color: var(--text-muted);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px; font-weight: 600; cursor: pointer;
   transition: background 0.22s, border-color 0.22s, color 0.22s;
 }
@@ -645,13 +648,113 @@
 html { scroll-behavior: auto; }
 html, body { height: 100%; overflow-x: hidden; }
 body {
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   background: var(--bg);
   color: var(--text-primary);
-  line-height: 1.7;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 15.5px;
+  letter-spacing: 0.01em;
 }
 body.no-copy { -webkit-user-select: none; -moz-user-select: none; user-select: none; }
+
+/* ═══════════════════════════════════════════════
+   প্রিমিয়াম টাইপোগ্রাফি আপগ্রেড
+   ═══════════════════════════════════════════════ */
+
+/* হেডিং — Noto Serif Bengali (মনোরম ও ক্লাসিক) */
+h1, h2, h3, h4, h5, h6,
+.header h1,
+.page-title,
+.section-title,
+.card-title,
+.post-title,
+.preview-post-title {
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.5 !important;
+}
+
+/* বডি টেক্সট — Hind Siliguri (পরিষ্কার ও পড়তে আরামদায়ক) */
+p, span, div, label, input, textarea, select, button,
+.post-body, .preview-post-text, .center-post-text,
+.card-body, .notice-body, .info-text, .desc-text {
+  font-family: 'Hind Siliguri', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+}
+
+/* বাটন টেক্সট */
+.btn-text, .btn, button {
+  font-family: 'Hind Siliguri', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+}
+
+/* নেভিগেশন ও লেবেল */
+.nav-label, .tab-label, .section-label span,
+.admin-tab-btn, .tsc-label, .tsc-unit {
+  font-family: 'Hind Siliguri', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
+  letter-spacing: 0.03em;
+}
+
+/* পোস্ট কার্ড টেক্সট */
+.post-card p, .preview-post-card p,
+.post-text, .post-body {
+  font-family: 'Hind Siliguri', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.85 !important;
+  font-weight: 400;
+}
+
+/* বড় সংখ্যা */
+.stat-num, .tsc-num, .offer-days-num {
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-weight: 800 !important;
+}
+
+/* আরবি টেক্সট */
+.header-arabic, [lang="ar"] {
+  font-family: 'Scheherazade New', serif !important;
+  letter-spacing: 0.04em;
+}
+
+/* নোটিশ ও পপআপ */
+.notice-title, .offer-notice-title {
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: -0.01em;
+}
+
+/* কার্ড হেডার */
+.card-header, .section-header,
+.info-box-title, .panel-title {
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-weight: 700 !important;
+}
+
+/* ইনপুট ফিল্ড */
+input, textarea, select {
+  font-family: 'Hind Siliguri', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
+  font-size: 14.5px !important;
+}
+
+/* ফুটার */
+.home-footer {
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-size: 13px !important;
+  letter-spacing: 0.05em;
+}
+
+/* ছোট ব্যাজ ও চিপ */
+.badge, .chip, .tag, .admin-hidden-note {
+  font-family: 'Hind Siliguri', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em;
+}
 
 /* ══ COPY PROTECTION: শুধু নম্বর কপি করা যাবে ══ */
 .preview-post-text,
@@ -703,7 +806,7 @@ body::after {
   text-decoration: none;
   padding: 10px 20px;
   border-radius: var(--r-pill);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -736,7 +839,7 @@ body::after {
 .screen { display: none; position: relative; z-index: 1; min-height: 100vh; }
 .screen.active { display: block; }
 @media (prefers-reduced-motion: no-preference) {
-  .screen.active { animation: screenIn 0.22s ease both; }
+  .screen.active:not(#screen-home) { animation: screenIn 0.22s ease both; }
 }
 @keyframes screenIn {
   from { opacity: 0; transform: translateY(6px); }
@@ -761,7 +864,7 @@ body::after {
   border: 1px solid var(--green-border);
   color: var(--green-light);
   padding: 9px 18px; border-radius: var(--r-md);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px; font-weight: 600; cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
 }
@@ -850,7 +953,7 @@ body::after {
   color: var(--text-primary);
   padding: 16px 18px; margin: 9px 0;
   text-decoration: none; border-radius: var(--r-lg);
-  font-size: 15px; font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 15px; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-weight: 500; line-height: 1.55;
   border: 1px solid var(--border);
   transition: background 0.18s, border-color 0.18s, transform 0.18s, box-shadow 0.18s;
@@ -1054,7 +1157,7 @@ body::after {
 }
 .notif-clear-btn {
   background: none; border: none; color: var(--text-faint);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 12px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 12px;
   cursor: pointer; transition: color 0.2s; padding: 4px 6px; border-radius: 6px;
 }
 .notif-clear-btn:hover { color: var(--green-light); background: var(--green-bg); }
@@ -1079,7 +1182,7 @@ body::after {
 .notif-item-body { flex: 1; min-width: 0; }
 .notif-item-text {
   font-size: 13px; color: var(--text-body); line-height: 1.55;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .notif-item.unread .notif-item-text { color: var(--text-primary); font-weight: 600; }
@@ -1097,7 +1200,7 @@ body::after {
 }
 .notif-empty {
   padding: 32px 16px; text-align: center;
-  color: var(--text-muted); font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--text-muted); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px;
 }
 .notif-empty span { display: block; font-size: 30px; margin-bottom: 10px; opacity: 0.4; }
@@ -1109,7 +1212,7 @@ body::after {
 .notif-see-all-btn {
   background: var(--green-bg); border: 1px solid var(--green-border);
   border-radius: var(--r-md); padding: 8px 20px;
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13px; font-weight: 700;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13px; font-weight: 700;
   color: var(--green-light); cursor: pointer; transition: background 0.2s; width: 100%;
 }
 .notif-see-all-btn:hover { background: rgba(15,140,78,0.2); }
@@ -1147,12 +1250,12 @@ body::after {
 
 .news-card h3 {
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 16px; font-weight: 700; color: var(--gold-light);
+  font-size: 17.5px; font-weight: 800; color: var(--gold-light);
   margin-bottom: 14px; padding-bottom: 10px;
   border-bottom: 1px solid var(--border);
   line-height: 1.5;
 }
-.news-card p { color: var(--text-body); font-size: 14.5px; line-height: 1.9; margin-bottom: 10px; }
+.news-card p { color: var(--text-body); font-size: 15.5px; line-height: 2.1; margin-bottom: 10px; }
 .news-card p:last-child { margin-bottom: 0; }
 
 .news-list { list-style: none; padding: 0; }
@@ -1189,7 +1292,7 @@ body::after {
   background: linear-gradient(135deg, #1ebe68, #0d8a3a);
   color: #fff; text-decoration: none; padding: 14px 32px;
   border-radius: var(--r-pill);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 15px; font-weight: 700;
   margin-top: 14px;
   box-shadow: 0 4px 20px rgba(26,181,102,0.38), 0 1px 0 rgba(255,255,255,0.12) inset;
@@ -1223,7 +1326,7 @@ body::after {
 .video-showcase-header h2 {
   color: var(--text-primary); font-size: 16px; line-height: 1.65;
   margin-bottom: 8px; font-weight: 600;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .video-showcase-header p { color: var(--gold-light); font-size: 13.5px; }
 .video-iframe-wrap iframe { width: 100%; height: 480px; display: block; border: 0; }
@@ -1263,7 +1366,7 @@ body::after {
   width: 100%; padding: 13px 16px;
   background: #0a1a0e;
   border: 1.5px solid rgba(255,255,255,0.14); border-radius: var(--r-md);
-  color: #f0ebe0; font-family: 'Noto Sans Bengali', sans-serif;
+  color: #f0ebe0; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14.5px; margin-bottom: 16px;
   transition: border-color 0.22s, box-shadow 0.22s;
   outline: none;
@@ -1276,7 +1379,7 @@ body::after {
   background: linear-gradient(135deg, #0d7a45, #1ab566);
   border: 1px solid rgba(26,181,102,0.50);
   border-radius: var(--r-md);
-  color: #fff; font-family: 'Noto Sans Bengali', sans-serif;
+  color: #fff; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 15px; font-weight: 700; cursor: pointer;
   transition: opacity 0.22s, transform 0.25s var(--ease-spring), box-shadow 0.22s;
   box-shadow: 0 3px 18px rgba(13,122,69,0.38), 0 1px 0 rgba(255,255,255,0.1) inset;
@@ -1295,7 +1398,7 @@ body::after {
 
 .admin-toggle {
   background: transparent; border: 1px solid var(--border);
-  color: var(--text-muted); font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--text-muted); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px; padding: 10px; border-radius: var(--r-md);
   width: 100%; cursor: pointer; transition: border-color 0.22s, color 0.22s;
 }
@@ -1306,7 +1409,7 @@ body::after {
   width: 100%; padding: 13px;
   background: var(--gold-bg);
   border: 1px solid var(--gold-border); border-radius: var(--r-md);
-  color: var(--gold-light); font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--gold-light); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.22s;
 }
 .admin-login-btn:hover { background: rgba(201,168,76,0.22); }
@@ -1342,7 +1445,7 @@ body::after {
 .signout-btn {
   background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25);
   color: #ef4444; padding: 8px 14px; border-radius: var(--r-sm);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13.5px; cursor: pointer;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13.5px; cursor: pointer;
   transition: background 0.22s;
 }
 .signout-btn:hover { background: rgba(239,68,68,0.2); }
@@ -1358,7 +1461,7 @@ body::after {
   width: 100%; height: 260px; padding: 13px 16px;
   background: var(--bg-input); border: 1px solid var(--border);
   border-radius: var(--r-md); color: var(--text-primary);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
   resize: vertical; outline: none; transition: border-color 0.22s;
 }
 #post-textarea:focus { border-color: rgba(15,140,78,0.5); }
@@ -1376,7 +1479,7 @@ body::after {
   display: flex; align-items: center; gap: 8px;
   background: var(--gold-bg); border: 1px dashed var(--border);
   border-radius: var(--r-md); padding: 12px 16px;
-  color: var(--text-muted); font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--text-muted); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 13.5px; cursor: pointer; transition: border-color 0.22s, color 0.22s; width: 100%;
 }
 .img-upload-btn:hover { border-color: var(--border-gold); color: var(--gold-light); }
@@ -1386,17 +1489,37 @@ body::after {
   width: 100%; padding: 10px 14px;
   background: var(--bg-input); border: 1px solid var(--border);
   border-radius: var(--r-md); color: var(--text-primary);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13.5px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13.5px;
   margin-top: 8px; outline: none; display: none;
 }
 .img-cap-input:focus { border-color: rgba(15,140,78,0.5); }
+
+/* ── Post has-number checkbox ── */
+.has-num-wrap { display:flex; align-items:center; gap:8px; margin-top:10px; }
+.has-num-wrap input[type=checkbox] { width:16px; height:16px; accent-color:var(--gold); cursor:pointer; }
+.has-num-wrap label { font-size:13px; color:var(--text-muted); cursor:pointer; user-select:none; }
+
+/* ── Post photo in card ── */
+.post-photo-wrap { position:relative; margin:10px 0 6px; border-radius:var(--r-md); overflow:hidden; }
+.post-photo-wrap img { width:100%; height:auto; display:block; border-radius:var(--r-md); }
+.post-photo-blur { filter:blur(10px); pointer-events:none; user-select:none; }
+.post-photo-lock {
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  background:rgba(10,20,15,0.45); border-radius:var(--r-md);
+  gap:6px;
+}
+.post-photo-lock span { font-size:28px; }
+.post-photo-lock p { color:#fff; font-size:12.5px; font-family:'Noto Sans Bengali',sans-serif;
+  text-align:center; margin:0; line-height:1.5;
+  text-shadow:0 1px 4px rgba(0,0,0,0.7); }
 
 .publish-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 .publish-btn {
   padding: 13px;
   background: var(--green-dim);
   border: 1px solid rgba(15,140,78,0.5); border-radius: var(--r-md);
-  color: #fff; font-family: 'Noto Sans Bengali', sans-serif;
+  color: #fff; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.22s, transform 0.22s;
   box-shadow: 0 2px 10px rgba(15,140,78,0.25);
 }
@@ -1406,7 +1529,7 @@ body::after {
   padding: 13px;
   background: var(--gold-bg);
   border: 1px solid var(--gold-border); border-radius: var(--r-md);
-  color: var(--gold-light); font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--gold-light); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.22s; display: none;
 }
 .publish-img-btn:hover { background: rgba(201,168,76,0.22); }
@@ -1419,19 +1542,40 @@ body::after {
   border-radius: var(--r-pill); padding: 2px 10px; font-size: 12.5px; color: var(--gold);
 }
 .post-card {
-  background: var(--bg-card); border: 1px solid var(--border-green);
-  border-radius: var(--r-lg); padding: 22px; margin-bottom: 14px;
+  background: linear-gradient(160deg, #0e1f14 0%, #111d16 55%, #0d1a10 100%);
+  border: 1px solid rgba(196,154,56,0.22);
+  border-radius: var(--r-xl); padding: 26px 22px 20px; margin-bottom: 16px;
   position: relative;
-  transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s;
+  transition: border-color 0.32s, box-shadow 0.32s, transform 0.32s var(--ease);
   animation: screenIn 0.4s var(--ease) both;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(196,154,56,0.06) inset, 0 -1px 0 rgba(0,0,0,0.3) inset;
+  overflow: hidden;
+}
+.post-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(196,154,56,0.55) 30%, rgba(26,181,102,0.45) 70%, transparent 100%);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+}
+.post-card::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(196,154,56,0.04) 0%, transparent 70%);
+  border-radius: var(--r-xl);
 }
 .post-card:hover {
-  border-color: rgba(23,181,101,0.4);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  border-color: rgba(196,154,56,0.42);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(196,154,56,0.12), 0 0 30px rgba(196,154,56,0.07);
+  transform: translateY(-2px);
 }
-.post-text { color: var(--text-body); font-size: 15px; line-height: 2; white-space: pre-wrap; }
+.post-text {
+  color: var(--text-body);
+  font-size: 15px;
+  line-height: 2.05;
+  white-space: pre-wrap;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  position: relative; z-index: 1;
+}
 .post-time { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
 .delete-post-btn {
   position: absolute; top: 13px; right: 13px;
@@ -1474,7 +1618,7 @@ body::after {
   width: 100%; padding: 12px;
   background: var(--gold-bg);
   border: 1px solid var(--gold-border); border-radius: var(--r-md);
-  color: var(--gold-light); font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--gold-light); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.22s; margin-top: 4px;
 }
 .create-user-btn:hover { background: rgba(201,168,76,0.22); }
@@ -1494,19 +1638,19 @@ body::after {
 .ext-btn {
   background: rgba(15,140,78,0.12); border: 1px solid rgba(15,140,78,0.3);
   color: var(--green-light); padding: 6px 11px; border-radius: 6px;
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13px;
   cursor: pointer; transition: background 0.22s; font-weight: 600;
 }
 .ext-btn:hover { background: rgba(15,140,78,0.24); }
 .del-user-btn {
   background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.28);
   color: #ef4444; padding: 6px 11px; border-radius: 6px;
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13px; cursor: pointer; transition: background 0.22s;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13px; cursor: pointer; transition: background 0.22s;
 }
 .del-user-btn:hover { background: rgba(239,68,68,0.22); }
 
 /* ═══ PREVIEW SCREEN ═══ */
-.preview-wrap { max-width: 660px; margin: 0 auto; padding: 24px 16px 72px; }
+.preview-wrap { max-width: 600px; margin: 0 auto; padding: 32px 16px 40px; }
 
 .preview-banner {
   background: var(--bg-card);
@@ -1529,7 +1673,7 @@ body::after {
   border: 1px solid rgba(15,140,78,0.5);
   border-radius: var(--r-pill);
   color: #fff;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 13.5px; font-weight: 700; cursor: pointer;
   text-decoration: none;
   transition: background 0.22s, transform 0.22s;
@@ -1581,25 +1725,41 @@ body::after {
 }
 
 .preview-post-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-green);
-  border-radius: var(--r-lg);
-  padding: 22px;
-  margin-bottom: 14px;
-  box-shadow: var(--shadow-sm);
-  transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s;
+  background: linear-gradient(160deg, #0e1f14 0%, #111d16 55%, #0d1a10 100%);
+  border: 1px solid rgba(196,154,56,0.22);
+  border-radius: var(--r-xl);
+  padding: 26px 22px 20px;
+  margin-bottom: 16px;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(196,154,56,0.06) inset, 0 -1px 0 rgba(0,0,0,0.3) inset;
+  transition: border-color 0.32s, box-shadow 0.32s, transform 0.32s var(--ease);
   animation: screenIn 0.4s var(--ease) both;
+  overflow: hidden;
+}
+.preview-post-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(196,154,56,0.55) 30%, rgba(26,181,102,0.45) 70%, transparent 100%);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+}
+.preview-post-card::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(196,154,56,0.04) 0%, transparent 70%);
+  border-radius: var(--r-xl);
 }
 .preview-post-card:hover {
-  border-color: rgba(23,181,101,0.4);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  border-color: rgba(196,154,56,0.42);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(196,154,56,0.12), 0 0 30px rgba(196,154,56,0.07);
+  transform: translateY(-2px);
 }
 .preview-post-text {
   color: var(--text-body);
   font-size: 15px;
-  line-height: 2;
+  line-height: 2.05;
   white-space: pre-wrap;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  position: relative; z-index: 1;
 }
 .preview-post-time { font-size: 12px; color: var(--text-muted); margin-top: 14px; }
 
@@ -1640,15 +1800,16 @@ body::after {
 /* ═══ POST ACTIONS ═══ */
 .post-actions {
   display: flex; align-items: center; gap: 9px;
-  margin-top: 13px; padding-top: 11px;
-  border-top: 1px solid var(--border);
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid rgba(196,154,56,0.14);
   flex-wrap: wrap;
+  position: relative; z-index: 1;
 }
 .like-btn {
   display: flex; align-items: center; gap: 5px;
   background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
   color: #ef4444; padding: 6px 12px; border-radius: var(--r-pill);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13px;
   cursor: pointer; transition: background 0.22s, border-color 0.22s; font-weight: 600;
   user-select: none;
 }
@@ -1661,7 +1822,7 @@ body::after {
 .share-fb-btn {
   display: flex; align-items: center; gap: 5px;
   padding: 6px 12px; border-radius: var(--r-pill);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13px;
   cursor: pointer; transition: background 0.22s, border-color 0.22s; font-weight: 600; border: 1px solid;
   text-decoration: none;
   background: rgba(24,119,242,0.1); border-color: rgba(24,119,242,0.28); color: #4a90d9;
@@ -1672,7 +1833,7 @@ body::after {
   margin-left: auto; font-size: 11.5px; color: var(--text-faint);
   background: var(--bg-raised); border: 1px solid var(--border);
   padding: 3px 10px; border-radius: var(--r-pill); white-space: nowrap;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .live-countdown {
   font-size: 11.5px; font-weight: 700;
@@ -1752,32 +1913,54 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .cat-filter-wrap {
   margin-bottom: 20px;
 }
-.cat-section-header {
-  display: flex; align-items: center; gap: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-gold);
-  border-radius: var(--r-lg);
-  padding: 14px 18px; margin-bottom: 8px;
-  cursor: pointer;
-  transition: background 0.22s, border-color 0.22s;
-  user-select: none;
+
+/* ── গ্রিড লেআউট: ৪টি বাটন ২x২ এ ── */
+.cat-filter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 4px;
 }
-.cat-section-header:hover { background: var(--bg-raised); border-color: var(--gold); }
-.cat-section-header.active { background: rgba(201,168,76,0.1); border-color: var(--gold); }
-.cat-section-icon { font-size: 20px; flex-shrink: 0; }
+
+.cat-section-header {
+  display: flex; flex-direction: row; align-items: center;
+  gap: 12px; text-align: left;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-gold);
+  border-radius: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.22s, border-color 0.22s, transform 0.15s, box-shadow 0.22s;
+  user-select: none;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.30);
+}
+.cat-section-header:hover {
+  background: var(--bg-raised); border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(196,154,56,0.22);
+}
+.cat-section-header.active,
+.cat-section-header.selected {
+  background: rgba(201,168,76,0.14);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.25), 0 4px 16px rgba(196,154,56,0.18);
+}
+.cat-section-icon { font-size: 24px; flex-shrink: 0; line-height: 1; }
 .cat-section-title {
-  flex: 1; font-family: 'Noto Serif Bengali', serif;
-  font-size: 15px; font-weight: 700; color: var(--text-primary);
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 15px; font-weight: 800; color: var(--text-primary);
+  line-height: 1.4;
+  flex: 1;
 }
 .cat-section-count {
   background: var(--gold-bg); border: 1px solid var(--gold-border);
-  border-radius: var(--r-pill); padding: 2px 10px;
-  font-size: 12px; color: var(--gold); font-weight: 700; flex-shrink: 0;
+  border-radius: var(--r-pill); padding: 4px 16px;
+  font-size: 15px; color: var(--gold); font-weight: 900; flex-shrink: 0;
+  min-width: 38px; text-align: center;
+  font-family: 'Noto Serif Bengali', serif;
 }
-.cat-section-arrow {
-  font-size: 13px; color: var(--text-muted);
-  transition: transform 0.3s var(--ease); flex-shrink: 0;
-}
+.cat-section-arrow { display: none; }
 .cat-section-header.open .cat-section-arrow { transform: rotate(90deg); }
 
 .cat-sub-list {
@@ -1799,7 +1982,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   font-size: 13px; color: var(--text-body); cursor: pointer;
   margin: 3px 4px 3px 0;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
-  font-family: 'Noto Sans Bengali', sans-serif; font-weight: 500;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-weight: 500;
 }
 .cat-chip:hover { background: var(--bg-card); border-color: var(--border-green); color: var(--green-light); }
 .cat-chip.selected {
@@ -1812,25 +1995,33 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 }
 .cat-chip.selected .cat-chip-count { background: rgba(15,140,78,0.25); }
 
-/* All posts chip (special) */
+/* All posts chip (special) — পুরো প্রস্থ জুড়ে */
 .cat-all-chip {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  background: var(--bg-card); border: 1px solid var(--border-green);
-  border-radius: var(--r-lg); padding: 13px 18px; margin-bottom: 10px;
+  background: linear-gradient(135deg,rgba(13,26,16,0.9),rgba(8,20,12,0.9)); border: 1.5px solid rgba(34,200,116,0.30);
+  border-radius: 16px; padding: 14px 18px; margin-bottom: 10px;
   cursor: pointer;
-  transition: background 0.22s, border-color 0.22s;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  transition: background 0.22s, border-color 0.22s, transform 0.15s;
+  font-family: 'Noto Serif Bengali', serif;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.30);
 }
-.cat-all-chip:hover { background: var(--bg-raised); border-color: var(--green-light); }
-.cat-all-chip.selected { background: var(--green-bg); border-color: var(--green); }
+.cat-all-chip:hover {
+  background: linear-gradient(135deg,rgba(15,35,20,0.95),rgba(10,25,14,0.95)); border-color: rgba(34,200,116,0.55);
+  transform: translateY(-1px);
+}
+.cat-all-chip.selected {
+  background: linear-gradient(135deg,rgba(13,80,40,0.35),rgba(8,55,28,0.30)); border-color: rgba(34,200,116,0.55);
+  box-shadow: 0 0 0 2px rgba(34,200,116,0.15), 0 4px 18px rgba(34,200,116,0.15);
+}
 .cat-all-chip-label {
-  font-size: 15px; font-weight: 700; color: var(--text-primary);
+  font-size: 16px; font-weight: 800; color: var(--text-primary);
 }
-.cat-all-chip.selected .cat-all-chip-label { color: var(--green-light); }
+.cat-all-chip.selected .cat-all-chip-label { color: #4ade80; }
 .cat-all-count {
-  background: var(--gold-bg); border: 1px solid var(--gold-border);
-  border-radius: var(--r-pill); padding: 2px 12px;
-  font-size: 13px; color: var(--gold); font-weight: 700;
+  background: rgba(34,200,116,0.14); border: 1px solid rgba(34,200,116,0.35);
+  border-radius: var(--r-pill); padding: 4px 16px;
+  font-size: 16px; color: #22c874; font-weight: 900;
+  font-family: 'Noto Serif Bengali', serif;
 }
 
 /* Category badge on post */
@@ -1851,7 +2042,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   width: 100%; padding: 11px 14px;
   background: var(--bg-input); border: 1px solid var(--border);
   border-radius: var(--r-md); color: var(--text-primary);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 14px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 14px;
   outline: none; cursor: pointer; margin-bottom: 8px;
   transition: border-color 0.22s;
   -webkit-appearance: none; appearance: none;
@@ -1885,7 +2076,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   width: 100%; height: 140px; padding: 12px 14px;
   background: var(--bg-input); border: 1px solid var(--border);
   border-radius: var(--r-md); color: var(--text-primary);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
   resize: vertical; outline: none; margin-bottom: 10px;
   transition: border-color 0.22s;
 }
@@ -1894,14 +2085,14 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .edit-save-btn {
   padding: 12px; background: var(--green-dim);
   border: 1px solid rgba(15,140,78,0.5); border-radius: var(--r-md);
-  color: #fff; font-family: 'Noto Sans Bengali', sans-serif;
+  color: #fff; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.22s;
 }
 .edit-save-btn:hover { background: var(--green); }
 .edit-cancel-btn {
   padding: 12px; background: var(--bg-raised);
   border: 1px solid var(--border); border-radius: var(--r-md);
-  color: var(--text-muted); font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--text-muted); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px; cursor: pointer; transition: background 0.22s;
 }
 .edit-cancel-btn:hover { background: rgba(255,255,255,0.05); }
@@ -1992,7 +2183,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   flex-shrink: 0;
 }
 .notice-body {
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px;
   color: var(--text-body);
   line-height: 2;
@@ -2010,35 +2201,161 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   font-family: 'Noto Serif Bengali', serif;
 }
 
+/* ═══ NOTICE POPUP OVERLAY ═══ */
+.notice-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: noticeIn 0.25s ease;
+}
+@keyframes noticeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+.notice-overlay.hide {
+  animation: noticeOut 0.2s ease forwards;
+}
+@keyframes noticeOut {
+  from { opacity: 1; } to { opacity: 0; }
+}
+.notice-popup {
+  background: linear-gradient(135deg, #0d2a1a 0%, #1a1a0d 100%);
+  border: 1px solid rgba(184,150,64,0.4);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r-lg);
+  padding: 24px 20px 20px;
+  max-width: 420px; width: 100%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(184,150,64,0.1);
+  position: relative;
+  animation: popupIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popupIn {
+  from { transform: scale(0.88) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+.notice-popup-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 30px; height: 30px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  color: rgba(255,255,255,0.6);
+  font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.notice-popup-close:hover { background: rgba(240,80,80,0.2); color: #f87171; }
+
+/* ══ সফলতার গল্প অফার নোটিশ — বিশেষ ডিজাইন ══ */
+.notice-popup.offer-popup {
+  border-color: rgba(240,180,40,0.55) !important;
+  background: linear-gradient(160deg, #0d1f14 0%, #111a0e 60%, #1a1200 100%) !important;
+  box-shadow: 0 8px 48px rgba(240,180,40,0.22), 0 2px 20px rgba(0,0,0,0.6) !important;
+}
+.offer-notice-top {
+  text-align: center;
+  padding: 6px 0 10px;
+  border-bottom: 1px solid rgba(240,180,40,0.2);
+  margin-bottom: 14px;
+}
+.offer-notice-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #f0b428, #fae070, #f0b428);
+  color: #1a0f00;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 5px 18px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  animation: badgePulse 1.5s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(240,180,40,0.5); }
+  50% { box-shadow: 0 0 0 7px rgba(240,180,40,0); }
+}
+.offer-notice-title {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 17px; font-weight: 800;
+  background: linear-gradient(135deg, #fae070, #f0c840, #ffe090);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 4px;
+}
+.offer-days-box {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: rgba(240,180,40,0.10);
+  border: 1px solid rgba(240,180,40,0.28);
+  border-radius: 12px; padding: 10px 14px; margin: 12px 0;
+}
+.offer-days-num {
+  font-size: 28px; font-weight: 900; color: #fae070;
+  font-family: 'Noto Serif Bengali', serif;
+  text-shadow: 0 0 16px rgba(250,224,112,0.5);
+}
+.offer-days-label {
+  font-size: 13px; color: #d4c890; font-weight: 600;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; line-height: 1.4;
+}
+.offer-body-text {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  font-size: 13.5px; color: #cfe0d7; line-height: 1.75;
+  margin-bottom: 10px;
+}
+.offer-highlight { color: #fae070; font-weight: 700; }
+.offer-highlight-green { color: #4ade80; font-weight: 700; }
+.offer-tip {
+  background: rgba(74,222,128,0.08);
+  border: 1px solid rgba(74,222,128,0.22);
+  border-radius: 10px; padding: 9px 13px;
+  font-size: 12.5px; color: #86efac;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  margin: 10px 0 14px;
+}
+.offer-cta-btn {
+  display: block; width: 100%; box-sizing: border-box;
+  background: linear-gradient(135deg, #0d8a4e, #1ab566);
+  color: #fff; border: none; border-radius: 12px;
+  padding: 14px 10px; font-size: 15px; font-weight: 800;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  cursor: pointer; text-align: center;
+  box-shadow: 0 4px 20px rgba(26,181,102,0.35);
+  transition: transform 0.15s, box-shadow 0.2s;
+  margin-bottom: 8px;
+}
+.offer-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(26,181,102,0.50);
+}
+.offer-skip-btn {
+  display: block; width: 100%; background: none; border: none;
+  color: var(--text-muted); font-size: 12px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  cursor: pointer; text-align: center; padding: 4px 0;
+}
+
 /* ═══════════════════════════════════════════════
    SUBMIT POST BUTTON — same as all buttons
 ═══════════════════════════════════════════════ */
 .btn-submit-post {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  /* inline style controls this button's colors */
 }
 .btn-submit-post:hover {
-  background: var(--bg-raised);
-  border-color: var(--border-gold);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 .btn-icon-submit {
-  background: var(--gold-bg) !important;
-  border-color: var(--gold-border) !important;
+  /* inline style controls */
 }
 .btn-submit-post .btn-text {
-  color: #f0ece2;
   font-family: 'Noto Serif Bengali', serif;
-  font-weight: 600;
-  font-size: 15.5px;
+  font-weight: 700;
+  font-size: 16px;
   letter-spacing: 0.01em;
 }
-.btn-submit-post .btn-arrow { color: var(--gold); opacity: 0.55; font-size: 22px; }
+.btn-submit-post .btn-arrow { opacity: 0.55; font-size: 22px; }
 .btn-submit-post:hover .btn-arrow { opacity: 1; }
 .btn-submit-post:active {
-  box-shadow: 0 0 0 3px rgba(201,168,76,0.18), var(--shadow-sm);
-  border-color: rgba(201,168,76,0.55);
+  box-shadow: 0 0 0 3px rgba(168,85,247,0.22), var(--shadow-sm);
 }
 
 /* ═══════════════════════════════════════════════
@@ -2107,7 +2424,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .submit-card-header-text { flex: 1; }
 .submit-card-title {
   font-size: 14.5px; font-weight: 700; color: var(--text-primary);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .submit-card-subtitle { font-size: 12px; color: var(--green-light); margin-top: 2px; }
 
@@ -2133,7 +2450,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   border: 1.5px solid rgba(255,255,255,0.13);
   border-radius: var(--r-md);
   color: #f0ebe0;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14.5px; line-height: 1.85;
   resize: vertical; outline: none;
   transition: border-color 0.25s, box-shadow 0.25s;
@@ -2155,7 +2472,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   border: 1.5px solid rgba(255,255,255,0.13);
   border-radius: var(--r-md);
   color: #f0ebe0;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 15px; outline: none;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
@@ -2214,7 +2531,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .submit-cat-name {
   flex: 1; font-size: 14px; font-weight: 600;
   color: var(--text-body);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .submit-cat-item:has(input:checked) .submit-cat-name { color: var(--green-light); }
 
@@ -2239,7 +2556,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   border: none;
   border-radius: var(--r-md);
   color: #fff;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 15.5px; font-weight: 700; cursor: pointer;
   transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
   box-shadow: 0 4px 18px rgba(15,140,78,0.35);
@@ -2265,7 +2582,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   width: 100%; height: 260px; padding: 13px 16px;
   background: var(--bg-input); border: 1px solid var(--border);
   border-radius: var(--r-md); color: var(--text-primary);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
   resize: vertical; outline: none; transition: border-color 0.22s;
   margin-top: 12px;
 }
@@ -2275,7 +2592,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   width: 100%; padding: 13px 16px;
   background: var(--bg-input); border: 1px solid var(--border);
   border-radius: var(--r-md); color: var(--text-primary);
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 14.5px;
   outline: none; transition: border-color 0.22s; margin-top: 6px;
 }
 .user-post-input:focus { border-color: rgba(15,140,78,0.5); }
@@ -2372,7 +2689,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   border: 1px solid rgba(23,181,101,0.4);
   border-radius: var(--r-md);
   color: var(--green-light);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 13.5px; font-weight: 700; cursor: pointer;
   transition: background 0.22s, transform 0.2s;
 }
@@ -2386,7 +2703,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   border: 1px solid rgba(239,68,68,0.25);
   border-radius: var(--r-md);
   color: #f87171;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 13.5px; font-weight: 700; cursor: pointer;
   transition: background 0.22s, transform 0.2s;
 }
@@ -2574,7 +2891,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 
 /* Title */
 #khedmot-loader .ldr-title {
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: clamp(18px, 4.5vw, 22px); font-weight: 700;
   color: #f0ebe0; text-align: center; line-height: 1.4;
   text-shadow: 0 0 30px rgba(26,181,102,0.22);
@@ -2592,7 +2909,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 }
 #khedmot-loader .ldr-sub {
   font-size: clamp(11px, 3vw, 13px); color: #648572;
-  text-align: center; margin-top: 5px; font-family: 'Noto Sans Bengali', sans-serif;
+  text-align: center; margin-top: 5px; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   animation: ldrFadeUp 1.4s 1.0s cubic-bezier(0.25,0.8,0.25,1) both;
 }
 
@@ -2625,7 +2942,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   display:flex; justify-content:space-between; margin-top:7px;
 }
 #khedmot-loader .ldr-prog-lbl {
-  font-size: 10px; color: #648572; font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 10px; color: #648572; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 
 /* Dots */
@@ -2717,7 +3034,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   padding: 10px 20px; margin: 1px 8px;
   border-radius: var(--r-md); cursor: pointer;
   color: var(--text-muted); font-size: 13.5px;
-  font-family: 'Noto Sans Bengali', sans-serif; font-weight: 500;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-weight: 500;
   transition: background 0.2s, color 0.2s; position: relative;
   border: 1px solid transparent;
   user-select: none;
@@ -2799,7 +3116,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   color: var(--text-body); font-size: 16px; flex-shrink: 0;
 }
 @media(max-width:768px){ .dash-hamburger{ display:flex; } }
-.dash-breadcrumb { font-size: 13px; color: var(--text-muted); font-family: 'Noto Sans Bengali', sans-serif; }
+.dash-breadcrumb { font-size: 13px; color: var(--text-muted); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
 .dash-breadcrumb strong { color: var(--text-primary); font-weight: 700; }
 .dash-topbar-right { display: flex; align-items: center; gap: 10px; }
 .dash-notif-btn {
@@ -2821,7 +3138,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   display: flex; align-items: center; gap: 6px;
   background: var(--green-bg); border: 1px solid var(--green-border);
   border-radius: var(--r-sm); padding: 7px 14px;
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 12.5px; font-weight: 700;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 12.5px; font-weight: 700;
   color: var(--green-light); cursor: pointer; transition: background 0.2s;
 }
 .dash-back-home:hover { background: rgba(15,140,78,0.2); }
@@ -2885,7 +3202,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .dash-kpi-card.gold .dash-kpi-num  { color: var(--gold-warm); }
 .dash-kpi-card.blue .dash-kpi-num  { color: #93c5fd; }
 .dash-kpi-card.red .dash-kpi-num   { color: #fca5a5; }
-.dash-kpi-label { font-size: 12px; color: var(--text-muted); font-family: 'Noto Sans Bengali', sans-serif; }
+.dash-kpi-label { font-size: 12px; color: var(--text-muted); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
 .dash-kpi-trend {
   position: absolute; top: 16px; right: 16px;
   font-size: 11px; font-weight: 700; border-radius: var(--r-pill);
@@ -2970,7 +3287,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   padding: 6px 0;
   border-bottom: 1px solid var(--border);
   font-size: 12px; color: var(--text-muted);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .dash-ring-legend-item:last-child { border-bottom: none; }
 .dash-ring-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
@@ -2995,7 +3312,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   display: flex; align-items: center; justify-content: center; font-size: 13px;
 }
 .dash-feed-body { flex: 1; min-width: 0; }
-.dash-feed-text { font-size: 12.5px; color: var(--text-body); line-height: 1.55; font-family: 'Noto Sans Bengali', sans-serif; }
+.dash-feed-text { font-size: 12.5px; color: var(--text-body); line-height: 1.55; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
 .dash-feed-time { font-size: 10.5px; color: var(--text-faint); margin-top: 3px; }
 .dash-feed-badge {
   font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; flex-shrink: 0;
@@ -3020,7 +3337,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   box-shadow: 0 0 6px rgba(26,181,102,0.6);
   animation: dash-pulse 2s ease-in-out infinite;
 }
-.dash-online-name { flex: 1; font-size: 12.5px; color: var(--text-body); font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; }
+.dash-online-name { flex: 1; font-size: 12.5px; color: var(--text-body); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-weight: 600; }
 .dash-online-time { font-size: 10px; color: var(--text-faint); }
 
 /* Notification panel */
@@ -3042,7 +3359,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .dash-notif-item.warn  .dash-notif-icon-wrap { background: rgba(248,113,113,0.12); }
 .dash-notif-item.visit .dash-notif-icon-wrap { background: rgba(96,165,250,0.1); }
 .dash-notif-body { flex: 1; min-width: 0; }
-.dash-notif-text { font-size: 13px; color: var(--text-body); line-height: 1.55; font-family: 'Noto Sans Bengali', sans-serif; }
+.dash-notif-text { font-size: 13px; color: var(--text-body); line-height: 1.55; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
 .dash-notif-time { font-size: 11px; color: var(--text-faint); margin-top: 3px; }
 .dash-notif-unread-dot {
   width: 7px; height: 7px; border-radius: 50%;
@@ -3075,7 +3392,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .dash-quick-stat-icon { font-size: 18px; flex-shrink: 0; }
 .dash-quick-stat-info { flex: 1; min-width: 0; }
 .dash-quick-stat-num { font-size: 17px; font-weight: 700; color: var(--text-primary); font-family: 'Noto Serif Bengali', serif; }
-.dash-quick-stat-lbl { font-size: 10.5px; color: var(--text-muted); font-family: 'Noto Sans Bengali', sans-serif; }
+.dash-quick-stat-lbl { font-size: 10.5px; color: var(--text-muted); font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
 
 /* Live pulse indicator */
 .dash-live-badge {
@@ -3123,7 +3440,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   border: none; border-radius: var(--r-pill);
   padding: 7px 14px; font-size: 12px; font-weight: 700;
   cursor: pointer; white-space: nowrap;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .pwa-dismiss-btn {
   background: transparent; border: none;
@@ -3147,20 +3464,20 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   background: #fff; color: #0d7a45;
   border: none; border-radius: var(--r-pill);
   padding: 6px 14px; font-size: 12px; font-weight: 700;
-  cursor: pointer; font-family: 'Noto Sans Bengali', sans-serif;
+  cursor: pointer; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .push-deny-btn {
   background: transparent; border: 1px solid rgba(255,255,255,0.4);
   color: rgba(255,255,255,0.8); border-radius: var(--r-pill);
   padding: 6px 12px; font-size: 12px; cursor: pointer;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 
 /* ═══ POST VIEW COUNT BADGE ═══ */
 .post-view-count {
   display: inline-flex; align-items: center; gap: 4px;
   font-size: 11px; color: var(--text-faint);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .post-view-count::before { content: '👁'; font-size: 11px; }
 
@@ -3168,7 +3485,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 .top-post-row {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 16px; border-bottom: 1px solid var(--border);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .top-post-row:last-child { border-bottom: none; }
 .top-post-rank { font-size: 18px; font-weight: 800; color: var(--green-light); min-width: 28px; }
@@ -3265,12 +3582,12 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   border: 1.5px solid rgba(196,154,56,0.30);
 }
 .t-name {
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 13.5px; font-weight: 700; color: var(--text-primary);
 }
 .t-meta {
   font-size: 11.5px; color: var(--text-muted);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   margin-top: 1px;
 }
 .t-stars { color: #f0d478; font-size: 12px; letter-spacing: 1px; }
@@ -3283,7 +3600,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   color: #f87171; border-radius: 8px;
   padding: 5px 10px; font-size: 12px; cursor: pointer;
   transition: background 0.2s;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 }
 .t-delete-btn:hover { background: rgba(248,113,113,0.22); }
 
@@ -3304,7 +3621,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   width: 100%; background: var(--bg-input);
   border: 1.5px solid var(--border); border-radius: 10px;
   color: var(--text-primary); padding: 10px 14px;
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 13.5px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 13.5px;
   outline: none; margin-bottom: 10px; box-sizing: border-box;
   transition: border-color 0.2s;
 }
@@ -3318,7 +3635,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   background: var(--bg-card); border: 1.5px solid var(--border);
   border-radius: 10px; padding: 8px 10px;
   display: flex; align-items: center; gap: 6px; cursor: pointer;
-  font-family: 'Noto Sans Bengali', sans-serif; font-size: 12.5px;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; font-size: 12.5px;
   color: var(--text-muted); transition: all 0.18s;
 }
 .t-cat-radio:has(input:checked) {
@@ -3330,7 +3647,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   width: 100%; padding: 12px;
   background: linear-gradient(135deg, #0d7a45, #1ab566);
   border: none; border-radius: 12px; color: #fff;
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 14px; font-weight: 700; cursor: pointer;
   box-shadow: 0 4px 14px rgba(13,122,69,0.35);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -3344,7 +3661,7 @@ body.light-mode .share-fb-btn { color: #1877f2; }
   background: transparent;
   border: 1.5px dashed rgba(26,181,102,0.35);
   border-radius: 14px; color: var(--green-light);
-  font-family: 'Noto Sans Bengali', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   font-size: 13.5px; font-weight: 700; cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
   display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -3414,18 +3731,22 @@ body::before {
 body::after { opacity: 0.5 !important; }
 
 /* ════ UNIFIED BUTTON SYSTEM — ছবির মতো সব btn একই dark green ════ */
+/* ════ PREMIUM BTN — Post Card Design ════ */
 .btn {
   display: flex !important;
   align-items: center !important;
   gap: 14px !important;
-  background: #122018 !important;
+  background: linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%) !important;
   color: var(--text-primary) !important;
   padding: 16px 18px !important;
   margin: 9px 0 !important;
-  border-radius: 16px !important;
-  border: 1px solid rgba(255,255,255,0.07) !important;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.45) !important;
-  transition: background 0.18s, border-color 0.18s, transform 0.15s !important;
+  border-radius: 18px !important;
+  border-top: 2px solid rgba(196,154,56,0.55) !important;
+  border-left: 1px solid rgba(196,154,56,0.28) !important;
+  border-right: 1px solid rgba(196,154,56,0.28) !important;
+  border-bottom: 1px solid rgba(196,154,56,0.28) !important;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.55) !important;
+  transition: border-color 0.28s, box-shadow 0.28s, transform 0.22s !important;
   cursor: pointer !important;
   width: 100% !important;
   text-decoration: none !important;
@@ -3434,76 +3755,30 @@ body::after { opacity: 0.5 !important; }
 }
 .btn::before { display: none !important; }
 .btn:hover {
-  background: #18281c !important;
-  border-color: rgba(185,144,46,0.32) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 3px 16px rgba(0,0,0,0.55) !important;
+  border-top-color: rgba(196,154,56,0.85) !important;
+  border-left-color: rgba(196,154,56,0.50) !important;
+  border-right-color: rgba(196,154,56,0.50) !important;
+  border-bottom-color: rgba(196,154,56,0.50) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.65), 0 0 28px rgba(196,154,56,0.09) !important;
+  transform: translateY(-2px) !important;
 }
 .btn:active {
   transform: translateY(0) !important;
   transition-duration: 0.08s !important;
 }
 
-/* PRIMARY button — পাসওয়ার্ড সহ — same dark green, green border */
-#btn-get-password {
-  background: #122018 !important;
-  border: 1px solid rgba(20,145,74,0.38) !important;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.45) !important;
-  padding: 16px 18px !important;
-}
-#btn-get-password:hover {
-  background: #18281c !important;
-  border-color: rgba(20,145,74,0.55) !important;
-}
-#btn-get-password .btn-icon {
-  background: rgba(185,144,46,0.18) !important;
-  border: 1px solid rgba(185,144,46,0.35) !important;
+/* All btn-icon — gold style */
+.btn-icon, .btn-icon-submit {
+  background: rgba(196,154,56,0.14) !important;
+  border: 1px solid rgba(196,154,56,0.35) !important;
   width: 44px !important; height: 44px !important;
 }
-#btn-get-password .btn-icon svg { stroke: var(--gold-warm) !important; }
+.btn-icon svg, .btn-icon-submit svg { stroke: var(--gold-warm) !important; }
 
-/* GOLD button — পাসওয়ার্ড নিন — same dark green bg, gold border */
-#btn-get-password-2 {
-  background: #122018 !important;
-  border: 1px solid rgba(185,144,46,0.30) !important;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.45) !important;
-  padding: 16px 18px !important;
-}
-#btn-get-password-2:hover {
-  background: #18281c !important;
-  border-color: rgba(185,144,46,0.50) !important;
-}
-#btn-get-password-2 .btn-icon {
-  background: rgba(185,144,46,0.18) !important;
-  border: 1px solid rgba(185,144,46,0.35) !important;
-  width: 44px !important; height: 44px !important;
-}
-#btn-get-password-2 .btn-text { color: var(--gold-warm) !important; }
-
-/* SUBMIT button — পোস্ট করুন — same dark green bg */
-.btn-submit-post {
-  background: #122018 !important;
-  border: 1px solid rgba(255,255,255,0.07) !important;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.45) !important;
-}
-.btn-submit-post:hover {
-  background: #18281c !important;
-  border-color: rgba(185,144,46,0.30) !important;
-}
-.btn-submit-post .btn-icon,
-.btn-submit-post .btn-icon-submit {
-  background: rgba(185,144,46,0.18) !important;
-  border: 1px solid rgba(185,144,46,0.35) !important;
-  width: 44px !important; height: 44px !important;
-}
-.btn-submit-post .btn-icon svg,
-.btn-submit-post .btn-icon-submit svg { stroke: var(--gold-warm) !important; }
-.btn-submit-post .btn-text { color: var(--text-primary) !important; }
-
-/* পাসওয়ার্ড ছাড়া বাটন */
+/* পাসওয়ার্ড ছাড়া বাটন — btn-icon */
 .btn:not(#btn-get-password):not(#btn-get-password-2):not(.btn-submit-post) .btn-icon {
-  background: rgba(185,144,46,0.18) !important;
-  border: 1px solid rgba(185,144,46,0.35) !important;
+  background: rgba(196,154,56,0.14) !important;
+  border: 1px solid rgba(196,154,56,0.35) !important;
 }
 .btn:not(#btn-get-password):not(#btn-get-password-2):not(.btn-submit-post) .btn-icon svg {
   stroke: var(--gold-warm) !important;
@@ -3592,10 +3867,13 @@ body::after { opacity: 0.5 !important; }
 
 /* ════ TODAY POST BANNER ════ */
 #today-post-banner {
-  background: #122018 !important;
-  border: 1px solid rgba(20,145,74,0.28) !important;
+  background: linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%) !important;
+  border-top: 2px solid rgba(196,154,56,0.55) !important;
+  border-left: 1px solid rgba(196,154,56,0.28) !important;
+  border-right: 1px solid rgba(196,154,56,0.28) !important;
+  border-bottom: 1px solid rgba(196,154,56,0.28) !important;
   border-radius: 18px !important;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.45) !important;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.55) !important;
 }
 #today-post-banner > div:first-child {
   background: rgba(26,173,94,0.09) !important;
@@ -3620,9 +3898,6 @@ body::after { opacity: 0.5 !important; }
 #home-cat-mahila-count  { text-shadow: none !important; }
 
 /* ════ UNIFIED CARD SYSTEM ════ */
-.post-card,
-.preview-post-card,
-.news-card,
 .t-card,
 .stats-card,
 .notice-box,
@@ -3634,22 +3909,50 @@ body::after { opacity: 0.5 !important; }
   box-shadow: 0 1px 6px rgba(0,0,0,0.45) !important;
   transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s !important;
 }
-.post-card:hover,
-.preview-post-card:hover,
-.news-card:hover,
 .t-card:hover {
   border-color: rgba(185,144,46,0.30) !important;
   box-shadow: 0 3px 18px rgba(0,0,0,0.55) !important;
   transform: translateY(-1px) !important;
 }
 
+/* ════ PREMIUM POST CARD — Dark Green + Gold Islamic ════ */
+.post-card,
+.preview-post-card {
+  background: linear-gradient(160deg, #0c1c11 0%, #101b14 55%, #0b1810 100%) !important;
+  border: 1px solid rgba(196,154,56,0.28) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 4px 28px rgba(0,0,0,0.55),
+    0 1px 0 rgba(196,154,56,0.08) inset !important;
+  transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.post-card::before,
+.preview-post-card::before {
+  content: '' !important;
+  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(196,154,56,0.6) 35%, rgba(26,181,102,0.5) 65%, transparent 100%) !important;
+  border-radius: 18px 18px 0 0 !important;
+  display: block !important;
+}
+.post-card:hover,
+.preview-post-card:hover {
+  border-color: rgba(196,154,56,0.50) !important;
+  box-shadow:
+    0 8px 42px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(196,154,56,0.14),
+    0 0 32px rgba(196,154,56,0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
 /* ════ POST TEXT ════ */
 .post-text, .preview-post-text {
-  color: #a0b8a8 !important;
-  font-size: 14.5px !important;
-  line-height: 1.95 !important;
+  color: #c8ddd2 !important;
+  font-size: 15px !important;
+  line-height: 2.05 !important;
 }
-.post-time, .preview-post-time { font-size: 11.5px !important; color: #4e7060 !important; }
+.post-time, .preview-post-time { font-size: 11.5px !important; color: rgba(196,154,56,0.45) !important; }
 
 /* ════ STATS CARD ════ */
 .stats-card { border-color: rgba(185,144,46,0.22) !important; padding: 18px !important; }
@@ -3715,14 +4018,14 @@ body::after { opacity: 0.5 !important; }
 
 /* ════ CATEGORY SYSTEM ════ */
 .cat-section-header {
-  background: #122018 !important;
-  border: 1px solid rgba(255,255,255,0.06) !important;
-  border-radius: 14px !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg,#0f1f14,#0c1810) !important;
+  border: 1.5px solid rgba(196,154,56,0.28) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.35) !important;
 }
-.cat-section-header:hover { background: #18281c !important; border-color: rgba(185,144,46,0.28) !important; }
+.cat-section-header:hover { background: linear-gradient(135deg,#152a1c,#101f15) !important; border-color: rgba(196,154,56,0.50) !important; }
 .cat-section-header.active,
-.cat-section-header.selected { background: rgba(185,144,46,0.08) !important; border-color: rgba(185,144,46,0.35) !important; }
+.cat-section-header.selected { background: rgba(185,144,46,0.12) !important; border-color: rgba(196,154,56,0.55) !important; box-shadow: 0 0 0 2px rgba(196,154,56,0.20), 0 4px 18px rgba(196,154,56,0.15) !important; }
 
 .cat-chip {
   background: #18281c !important;
@@ -3740,7 +4043,7 @@ body::after { opacity: 0.5 !important; }
 }
 
 /* ════ POST ACTIONS ════ */
-.post-actions { border-top: 1px solid rgba(255,255,255,0.06) !important; }
+.post-actions { border-top: 1px solid rgba(196,154,56,0.14) !important; }
 .like-btn {
   background: rgba(239,68,68,0.07) !important;
   border: 1px solid rgba(239,68,68,0.18) !important;
@@ -3748,8 +4051,9 @@ body::after { opacity: 0.5 !important; }
   font-size: 12.5px !important; padding: 5px 11px !important;
 }
 .share-fb-btn {
-  background: rgba(24,119,242,0.07) !important;
-  border: 1px solid rgba(24,119,242,0.20) !important;
+  background: rgba(26,181,102,0.10) !important;
+  border: 1px solid rgba(26,181,102,0.28) !important;
+  color: var(--green-light) !important;
   border-radius: 999px !important;
   font-size: 12.5px !important; padding: 5px 11px !important;
 }
@@ -3867,8 +4171,25 @@ body::after { opacity: 0.5 !important; }
   border-radius: 16px !important;
   box-shadow: 0 1px 8px rgba(0,0,0,0.45) !important;
 }
-.news-card { background: #122018 !important; border: 1px solid rgba(255,255,255,0.06) !important; border-radius: 14px !important; padding: 18px !important; }
-.news-card:hover { border-color: rgba(185,144,46,0.28) !important; }
+.news-card {
+  background: linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%) !important;
+  border-top: 2px solid rgba(196,154,56,0.55) !important;
+  border-left: 1px solid rgba(196,154,56,0.28) !important;
+  border-right: 1px solid rgba(196,154,56,0.28) !important;
+  border-bottom: 1px solid rgba(196,154,56,0.28) !important;
+  border-radius: 18px !important;
+  padding: 22px 20px 18px !important;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.55) !important;
+  position: relative !important;
+}
+.news-card:hover {
+  border-top-color: rgba(196,154,56,0.80) !important;
+  border-left-color: rgba(196,154,56,0.50) !important;
+  border-right-color: rgba(196,154,56,0.50) !important;
+  border-bottom-color: rgba(196,154,56,0.50) !important;
+  box-shadow: 0 8px 42px rgba(0,0,0,0.65), 0 0 32px rgba(196,154,56,0.08) !important;
+  transform: translateY(-2px) !important;
+}
 
 /* ════ MASKED NUMBER ════ */
 .masked-num, .copyable-num {
@@ -4060,7 +4381,14 @@ h4, h5, h6 {
 .login-subtitle { color: rgba(255,255,255,0.52) !important; }
 
 /* Post body single view */
-.post-body { color: #cfe0d7 !important; }
+.post-body { color: #d4e8dc !important; font-size: 15.5px !important; line-height: 2.1 !important; }
+
+/* Post card header */
+.post-card-header {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  margin-bottom: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(196,154,56,0.14);
+}
 
 /* Inputs */
 .field-input, #edit-textarea, .cat-main-select, .cat-sub-select,
@@ -4087,7 +4415,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   border: 1px solid rgba(255,255,255,0.09) !important;
   border-radius: var(--r-sm) !important;
   color: #ffffff !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-size: 14px !important;
   outline: none !important;
   margin-bottom: 10px !important;
@@ -4117,7 +4445,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   color: #1a1000 !important;
   border: none !important;
   border-radius: var(--r-sm) !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   cursor: pointer !important;
@@ -4148,7 +4476,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   border-radius: 6px !important;
   font-size: 12px !important;
   cursor: pointer !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-weight: 600 !important;
   transition: opacity 0.18s !important;
 }
@@ -4161,7 +4489,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   border: 1px solid rgba(20,145,74,0.28) !important;
   color: var(--green-vivid) !important;
   border-radius: var(--r-sm) !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-size: 12px !important;
   cursor: pointer !important;
   width: auto !important;
@@ -4171,7 +4499,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
 .t-card button {
   padding: 7px 10px !important;
   border-radius: 7px !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-size: 12px !important;
   font-weight: 700 !important;
   cursor: pointer !important;
@@ -4217,7 +4545,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   border-radius: 8px !important;
   color: #ffffff !important;
   padding: 9px 12px !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-size: 13.5px !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -4237,7 +4565,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   border: 1px solid rgba(20,145,74,0.35) !important;
   color: var(--green-vivid) !important;
   border-radius: 8px !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   cursor: pointer !important;
@@ -4273,12 +4601,12 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   font-size: 12px !important;
   font-weight: 700 !important;
   cursor: pointer !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
 }
 
 /* Admin tab button — story tab */
 #tab-story-btn {
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
 }
 
 /* t-add-btn (user story add button) */
@@ -4289,7 +4617,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   border: 1.5px dashed rgba(20,145,74,0.35) !important;
   border-radius: 14px !important;
   color: var(--green-vivid) !important;
-  font-family: 'Noto Sans Bengali', sans-serif !important;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
   font-size: 13.5px !important;
   font-weight: 700 !important;
   cursor: pointer !important;
@@ -4317,16 +4645,26 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   background-clip: text !important;
   font-weight: 800 !important;
 }
-.news-hero .admin-name { color: #f0d478 !important; font-weight: 700 !important; }
-.news-hero .admin-role { color: rgba(255,255,255,0.55) !important; }
+.news-hero .admin-name { color: #f0d478 !important; font-weight: 800 !important; font-family: 'Noto Serif Bengali', serif !important; font-size: 16.5px !important; letter-spacing: -0.01em !important; }
+.news-hero .admin-role { color: rgba(255,255,255,0.55) !important; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important; font-size: 13.5px !important; }
 
 /* ── News cards ── */
+.news-card { transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s !important; }
 .news-card h3 {
   color: #dbb84e !important;
-  font-weight: 700 !important;
-  font-size: 15.5px !important;
+  font-family: 'Noto Serif Bengali', serif !important;
+  font-weight: 800 !important;
+  font-size: 14.5px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid rgba(196,154,56,0.14) !important;
+  margin-bottom: 12px !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.5 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
-.news-card p { color: #cfe0d7 !important; line-height: 1.9 !important; }
+.news-card p { color: #cfe0d7 !important; line-height: 2.1 !important; font-size: 15.5px !important; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important; }
 .news-card li { color: #cfe0d7 !important; }
 .news-card strong { color: #f0d478 !important; font-weight: 700 !important; }
 .highlight-box { color: #f0d478 !important; font-weight: 600 !important; }
@@ -4370,10 +4708,10 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
 .posts-count { color: #dbb84e !important; }
 
 /* ── Post cards ── */
-.post-text, .preview-post-text { color: #d4e8db !important; line-height: 2 !important; }
+.post-text, .preview-post-text { color: #c8ddd2 !important; line-height: 2.1 !important; font-size: 15.5px !important; font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important; }
 .post-text strong, .preview-post-text strong,
 .post-text b, .preview-post-text b { color: #f0d478 !important; font-weight: 700 !important; }
-.post-time, .preview-post-time { color: rgba(255,255,255,0.40) !important; }
+.post-time, .preview-post-time { color: rgba(196,154,56,0.50) !important; }
 .post-cat-badge { color: #22c874 !important; font-weight: 600 !important; }
 .post-main-cat { color: #f0d478 !important; font-weight: 700 !important; }
 
@@ -4469,6 +4807,67 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
 
 /* ── Masked number ── */
 .masked-num, .copyable-num { color: #f0d478 !important; font-weight: 700 !important; }
+
+/* ══════════════════════════════════════════════════════
+   ✦ FINAL GLOBAL TYPOGRAPHY OVERRIDE — সর্বোচ্চ অগ্রাধিকার
+   ══════════════════════════════════════════════════════ */
+
+/* হেডিং সব জায়গায় — Noto Serif Bengali */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Serif Bengali', serif !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.5 !important;
+}
+
+/* বডি সব জায়গায় — Hind Siliguri */
+body, p, span, div, a, li, td, th, label, input, textarea, select, button {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+}
+
+/* হেডিং টেক্সট — Noto Serif Bengali (বিশেষ ক্লাস) */
+.news-hero h1,
+.header h1,
+.page-title,
+.admin-name,
+.news-card h3,
+.login-title,
+.notice-title,
+.offer-notice-title,
+.testimonial-title,
+.ldr-title,
+.dash-card-title {
+  font-family: 'Noto Serif Bengali', serif !important;
+}
+
+/* news-card h3 এক লাইনে রাখা */
+.news-card h3 {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 14.5px !important;
+}
+
+/* বডি টেক্সট — Hind Siliguri (বিশেষ ক্লাস) */
+.news-card p,
+.post-text,
+.preview-post-text,
+.center-post-text,
+.notice-body p,
+.offer-body-text,
+.back-btn,
+.btn-text,
+.section-label span,
+.admin-role,
+.admin-tab-btn,
+.tsc-label {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;
+}
+
+/* আরবি — Scheherazade New */
+.header-arabic,
+.bismillah-ar {
+  font-family: 'Scheherazade New', serif !important;
+}
 
 </style>
 
@@ -5336,30 +5735,75 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
 
   <!-- ══ ১. আজকের পোস্ট কাউন্টার ══ -->
-  <div id="today-post-banner" style="margin-bottom:24px;background:linear-gradient(135deg,rgba(13,122,69,0.22),rgba(13,122,69,0.08));border:1.5px solid rgba(26,181,102,0.38);border-radius:20px;padding:22px 20px 18px;text-align:center;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(26,181,102,0.13),transparent 70%);"></div>
-    <div style="position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(34,200,116,0.08),transparent 70%);pointer-events:none"></div>
-    <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;color:#22c874;margin-bottom:8px;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;background:rgba(34,200,116,0.10);border:1px solid rgba(34,200,116,0.25);padding:4px 14px;border-radius:999px">
-      <span style="width:7px;height:7px;border-radius:50%;background:#22c874;box-shadow:0 0 8px rgba(34,200,116,0.7);animation:notif-pulse 1.5s ease-in-out infinite;display:inline-block"></span>
-      আজকের আপডেট
+  <div id="today-post-banner" style="margin-bottom:24px;background:linear-gradient(160deg,#081510 0%,#0d1f14 50%,#091610 100%);border:1px solid rgba(196,154,56,0.35);border-top:2px solid rgba(196,154,56,0.65);border-radius:20px;padding:16px 14px 14px;text-align:center;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.65),0 0 0 1px rgba(34,200,116,0.06);">
+    <!-- bg glows -->
+    <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 90% 50% at 50% -5%,rgba(34,200,116,0.11),transparent 68%);"></div>
+    <div style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);width:180px;height:80px;background:radial-gradient(ellipse,rgba(34,200,116,0.07),transparent 70%);pointer-events:none"></div>
+    <!-- gold corner accents -->
+    <div style="position:absolute;top:0;left:0;width:40px;height:40px;border-top:2px solid rgba(196,154,56,0.5);border-left:2px solid rgba(196,154,56,0.5);border-radius:20px 0 0 0;pointer-events:none"></div>
+    <div style="position:absolute;top:0;right:0;width:40px;height:40px;border-top:2px solid rgba(196,154,56,0.5);border-right:2px solid rgba(196,154,56,0.5);border-radius:0 20px 0 0;pointer-events:none"></div>
+
+    <!-- badge -->
+    <div style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(34,200,116,0.14),rgba(34,200,116,0.07));border:1px solid rgba(34,200,116,0.35);padding:5px 16px 5px 12px;border-radius:999px;margin-bottom:14px;">
+      <span style="width:8px;height:8px;border-radius:50%;background:#22c874;box-shadow:0 0 10px rgba(34,200,116,0.85),0 0 20px rgba(34,200,116,0.4);animation:notif-pulse 1.5s ease-in-out infinite;display:inline-block;flex-shrink:0;"></span>
+      <span style="font-size:12px;font-weight:700;letter-spacing:0.10em;color:#22c874;font-family:'Noto Sans Bengali',sans-serif;">আজকের আপডেট</span>
     </div>
-    <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin:8px 0 4px">
-      <span id="home-today-post-count" style="font-size:clamp(48px,12vw,68px);font-weight:900;font-family:'Noto Serif Bengali',serif;color:#22c874;line-height:1;text-shadow:0 0 30px rgba(34,200,116,0.50),0 0 10px rgba(34,200,116,0.25);letter-spacing:-2px;">—</span>
-      <span style="font-size:17px;font-weight:700;color:#b4cabf;padding-bottom:6px">টি</span>
+
+    <!-- count -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:4px;margin:0 0 6px;">
+      <span id="home-today-post-count" style="font-size:clamp(52px,13vw,72px);font-weight:900;font-family:'Noto Serif Bengali',serif;color:#22c874;line-height:1;text-shadow:0 0 40px rgba(34,200,116,0.55),0 0 12px rgba(34,200,116,0.30);letter-spacing:-3px;">—</span>
+      <span style="font-size:18px;font-weight:700;color:#7dbf9a;padding-bottom:8px;font-family:'Noto Serif Bengali',serif;">টি</span>
     </div>
-    <div style="font-size:13px;font-weight:600;color:var(--text-muted);font-family:'Noto Sans Bengali',sans-serif;margin-bottom:14px">গত ৪৮ ঘণ্টায় নতুন খেদমত পোস্ট এসেছে</div>
-    <div id="home-cat-breakdown" style="margin-top:2px;background:rgba(0,0,0,0.22);border:1px solid rgba(26,181,102,0.20);border-radius:14px;overflow:hidden;text-align:left;">
-      <div id="home-cat-masjid" style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,0.05);border-left:3px solid #22c874;">
-        <span style="font-size:13.5px;font-family:'Noto Sans Bengali',sans-serif;color:#d4e8de;font-weight:700">🕌 মসজিদের খেদমত নিউজ</span>
-        <span id="home-cat-masjid-count" style="font-size:20px;font-weight:900;font-family:'Noto Serif Bengali',serif;color:#22c874;min-width:36px;text-align:right;text-shadow:0 0 12px rgba(34,200,116,0.45)">—</span>
+
+    <!-- subtitle -->
+    <div style="font-size:14.5px;font-weight:700;color:#a8c4b4;font-family:'Noto Serif Bengali',serif;margin-bottom:18px;letter-spacing:0.02em;line-height:1.5;">
+      নতুন খেদমতের পোস্ট এসেছে
+    </div>
+
+    <!-- separator -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:0 4px;">
+      <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(196,154,56,0.35),transparent);"></div>
+      <span style="color:rgba(196,154,56,0.6);font-size:10px;">◆</span>
+      <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(196,154,56,0.35),transparent);"></div>
+    </div>
+
+    <!-- category breakdown -->
+    <div id="home-cat-breakdown" style="background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden;text-align:left;">
+      <!-- মসজিদ -->
+      <div id="home-cat-masjid" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden;">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#22c874,#15a85a);border-radius:0 2px 2px 0;"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding-left:4px;">
+          <span style="font-size:20px;line-height:1;">🕌</span>
+          <span style="font-size:14px;font-family:'Noto Serif Bengali',serif;color:#d4e8de;font-weight:700;letter-spacing:0.01em;">মসজিদের খেদমত নিউজ</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          <span id="home-cat-masjid-count" style="font-size:22px;font-weight:900;font-family:'Noto Serif Bengali',serif;color:#22c874;min-width:32px;text-align:right;text-shadow:0 0 14px rgba(34,200,116,0.50);">—</span>
+          <span style="font-size:11px;color:#22c874;opacity:0.6;font-family:'Noto Sans Bengali',sans-serif;">টি</span>
+        </div>
       </div>
-      <div id="home-cat-madrasa" style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,0.05);border-left:3px solid #f0d478;">
-        <span style="font-size:13.5px;font-family:'Noto Sans Bengali',sans-serif;color:#d4e8de;font-weight:700">🏫 পুরুষ মাদ্রাসার খেদমত নিউজ</span>
-        <span id="home-cat-madrasa-count" style="font-size:20px;font-weight:900;font-family:'Noto Serif Bengali',serif;color:#f0d478;min-width:36px;text-align:right;text-shadow:0 0 12px rgba(240,212,120,0.45)">—</span>
+      <!-- পুরুষ মাদ্রাসা -->
+      <div id="home-cat-madrasa" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden;">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#f0d478,#c8a830);border-radius:0 2px 2px 0;"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding-left:4px;">
+          <span style="font-size:20px;line-height:1;">🏫</span>
+          <span style="font-size:14px;font-family:'Noto Serif Bengali',serif;color:#d4e8de;font-weight:700;letter-spacing:0.01em;">পুরুষ মাদ্রাসার খেদমত নিউজ</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          <span id="home-cat-madrasa-count" style="font-size:22px;font-weight:900;font-family:'Noto Serif Bengali',serif;color:#f0d478;min-width:32px;text-align:right;text-shadow:0 0 14px rgba(240,212,120,0.50);">—</span>
+          <span style="font-size:11px;color:#f0d478;opacity:0.6;font-family:'Noto Sans Bengali',sans-serif;">টি</span>
+        </div>
       </div>
-      <div id="home-cat-mahila" style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-left:3px solid #a78bfa;">
-        <span style="font-size:13.5px;font-family:'Noto Sans Bengali',sans-serif;color:#d4e8de;font-weight:700">🏫 মহিলা মাদ্রাসার খেদমত নিউজ</span>
-        <span id="home-cat-mahila-count" style="font-size:20px;font-weight:900;font-family:'Noto Serif Bengali',serif;color:#a78bfa;min-width:36px;text-align:right;text-shadow:0 0 12px rgba(167,139,250,0.45)">—</span>
+      <!-- মহিলা মাদ্রাসা -->
+      <div id="home-cat-mahila" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;position:relative;overflow:hidden;">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#c084fc,#8b5cf6);border-radius:0 2px 2px 0;"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding-left:4px;">
+          <span style="font-size:20px;line-height:1;">🏫</span>
+          <span style="font-size:14px;font-family:'Noto Serif Bengali',serif;color:#d4e8de;font-weight:700;letter-spacing:0.01em;">মহিলা মাদ্রাসার খেদমত নিউজ</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          <span id="home-cat-mahila-count" style="font-size:22px;font-weight:900;font-family:'Noto Serif Bengali',serif;color:#c084fc;min-width:32px;text-align:right;text-shadow:0 0 14px rgba(192,132,252,0.50);">—</span>
+          <span style="font-size:11px;color:#c084fc;opacity:0.6;font-family:'Noto Sans Bengali',sans-serif;">টি</span>
+        </div>
       </div>
     </div>
   </div>
@@ -5368,52 +5812,52 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.06s"><span>🌐 খেদমত দেখুন</span><div class="section-label-line"></div></div>
 
-    <!-- পাসওয়ার্ড সহ — প্রাইমারি বাটন -->
-    <button id="btn-get-password" class="btn btn-green anim-item" onclick="showScreen('center')" style="animation-delay:.10s;background:linear-gradient(135deg,rgba(13,122,69,0.30),rgba(26,181,102,0.15));border:2px solid rgba(26,181,102,0.55);box-shadow:0 4px 24px rgba(26,181,102,0.20),0 2px 10px rgba(0,0,0,0.35);padding:18px 18px;">
-      <div class="btn-icon" style="background:rgba(26,181,102,0.20);border-color:rgba(26,181,102,0.5);width:48px;height:48px;">
-        <svg viewBox="0 0 24 24" style="width:24px;height:24px" stroke="#22c874"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    <!-- পাসওয়ার্ড সহ — সবুজ -->
+    <button id="btn-get-password" class="btn btn-green anim-item" onclick="saveHomeScroll();showScreen('center')" style="animation-delay:.10s;min-height:82px;background:linear-gradient(145deg,#071a0e 0%,#0c2415 60%,#071a0e 100%) !important;border:2px solid rgba(26,181,102,0.60) !important;border-top:2px solid rgba(26,181,102,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(26,181,102,0.22),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
+      <div class="btn-icon" style="background:rgba(26,181,102,0.22) !important;border:1.5px solid rgba(26,181,102,0.55) !important;width:46px;height:46px;min-width:46px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" stroke="#22c874" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
       </div>
-      <div class="btn-text" style="text-align:right">
-        <span style="font-size:16px;font-weight:800;color:#22c874;display:block">পাসওয়ার্ড সহ পোস্ট দেখুন</span>
-        <span style="font-size:12px;color:#6bab82">সম্পূর্ণ নাম্বার দেখাবে</span>
+      <div style="text-align:right;flex:1;min-width:0;">
+        <span style="font-size:15px;font-weight:800;color:#22c874;display:block;line-height:1.4;font-family:'Noto Serif Bengali',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">পাসওয়ার্ড সহ পোস্ট দেখুন</span>
+        <span style="font-size:12px;font-weight:500;color:#6bab82;font-family:'Noto Sans Bengali',sans-serif;white-space:nowrap;">সম্পূর্ণ নাম্বার দেখাবে</span>
       </div>
-      <div class="btn-arrow" style="color:#22c874;opacity:0.7">›</div>
+      <span style="color:#22c874;opacity:0.8;font-size:20px;flex-shrink:0;">›</span>
     </button>
 
-    <!-- পাসওয়ার্ড ছাড়া -->
-    <button class="btn anim-item" onclick="showScreen('preview');loadPreviewPosts();" style="animation-delay:.16s;background:linear-gradient(135deg,rgba(21,32,25,0.9),rgba(27,42,32,0.9));border:1px solid rgba(255,255,255,0.10);">
-      <div class="btn-icon" style="background:rgba(180,202,191,0.10);border-color:rgba(180,202,191,0.22);">
-        <svg viewBox="0 0 24 24" stroke="#b4cabf"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    <!-- পাসওয়ার্ড ছাড়া — নীল -->
+    <button class="btn anim-item" onclick="saveHomeScroll();showScreen('preview');loadPreviewPosts();" style="animation-delay:.16s;min-height:82px;background:linear-gradient(145deg,#060c1c 0%,#0a1228 60%,#060c1c 100%) !important;border:2px solid rgba(96,165,250,0.55) !important;border-top:2px solid rgba(96,165,250,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(96,165,250,0.18),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
+      <div style="background:rgba(96,165,250,0.20);border:1.5px solid rgba(96,165,250,0.50);width:46px;height:46px;min-width:46px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" stroke="#60a5fa" fill="none" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       </div>
-      <div class="btn-text" style="text-align:right">
-        <span style="display:block;font-size:15px;font-weight:700;color:#cce0d8">পাসওয়ার্ড ছাড়া পোস্ট দেখুন</span>
-        <span style="font-size:12px;color:var(--text-muted)">নাম্বার আংশিক দেখাবে</span>
+      <div style="text-align:right;flex:1;min-width:0;">
+        <span style="font-size:15px;font-weight:800;color:#60a5fa;display:block;line-height:1.4;font-family:'Noto Serif Bengali',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">পাসওয়ার্ড ছাড়া পোস্ট দেখুন</span>
+        <span style="font-size:12px;font-weight:500;color:#4a7abf;font-family:'Noto Sans Bengali',sans-serif;white-space:nowrap;">নাম্বার আংশিক দেখাবে</span>
       </div>
-      <div class="btn-arrow">›</div>
+      <span style="color:#60a5fa;opacity:0.8;font-size:20px;flex-shrink:0;">›</span>
     </button>
 
-    <!-- পাসওয়ার্ড সংগ্রহ -->
-    <button id="btn-get-password-2" class="btn anim-item" onclick="showScreen('news')" style="animation-delay:.22s;background:linear-gradient(135deg,rgba(196,154,56,0.18),rgba(196,154,56,0.08));border:2px solid rgba(196,154,56,0.40);box-shadow:0 4px 20px rgba(196,154,56,0.14),0 2px 10px rgba(0,0,0,0.3);">
-      <div class="btn-icon" style="background:rgba(196,154,56,0.18);border-color:rgba(196,154,56,0.42);width:46px;height:46px;">
-        <svg viewBox="0 0 24 24" stroke="#dbb84e" style="width:22px;height:22px"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    <!-- সুবিধা জানুন — গোল্ড -->
+    <button id="btn-get-password-2" class="btn anim-item" onclick="saveHomeScroll();showScreen('news')" style="animation-delay:.22s;min-height:82px;background:linear-gradient(145deg,#160e00 0%,#221500 60%,#160e00 100%) !important;border:2px solid rgba(196,154,56,0.60) !important;border-top:2px solid rgba(240,210,80,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(196,154,56,0.22),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
+      <div class="btn-icon" style="background:rgba(196,154,56,0.22) !important;border:1.5px solid rgba(196,154,56,0.55) !important;width:46px;height:46px;min-width:46px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" stroke="#f0d060" fill="none" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
       </div>
-      <div class="btn-text" style="text-align:right">
-        <span style="font-size:15.5px;font-weight:700;color:#f0d478;display:block">সুবিধা জানুন ও পাসওয়ার্ড নিন</span>
-        <span style="font-size:12px;color:#917a3a">বিস্তারিত তথ্য দেখুন</span>
+      <div style="text-align:right;flex:1;min-width:0;">
+        <span style="font-size:15px;font-weight:800;color:#f0d060;display:block;line-height:1.4;font-family:'Noto Serif Bengali',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">সুবিধা জানুন ও পাসওয়ার্ড নিন</span>
+        <span style="font-size:12px;font-weight:500;color:#917a3a;font-family:'Noto Sans Bengali',sans-serif;white-space:nowrap;">বিস্তারিত তথ্য দেখুন</span>
       </div>
-      <div class="btn-arrow" style="color:var(--gold-light)">›</div>
+      <span style="color:#f0d060;opacity:0.8;font-size:20px;flex-shrink:0;">›</span>
     </button>
 
-    <!-- শিক্ষক পোস্ট করুন -->
-    <button class="btn btn-submit-post anim-item" onclick="showScreen('submit')" style="animation-delay:.28s;background:linear-gradient(135deg,rgba(59,130,246,0.14),rgba(59,130,246,0.06));border:1px solid rgba(59,130,246,0.32);">
-      <div class="btn-icon btn-icon-submit" style="background:rgba(59,130,246,0.16);border:1px solid rgba(59,130,246,0.38);width:46px;height:46px;">
-        <svg viewBox="0 0 24 24" stroke="#93c5fd" style="width:22px;height:22px"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    <!-- শিক্ষক পোস্ট করুন — বেগুনি -->
+    <button class="btn btn-submit-post anim-item" onclick="saveHomeScroll();showScreen('submit')" style="animation-delay:.28s;min-height:82px;background:linear-gradient(145deg,#0f0618 0%,#180924 60%,#0f0618 100%) !important;border:2px solid rgba(192,132,252,0.55) !important;border-top:2px solid rgba(216,180,254,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(168,85,247,0.20),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
+      <div style="background:rgba(168,85,247,0.22);border:1.5px solid rgba(192,132,252,0.55);width:46px;height:46px;min-width:46px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" stroke="#c084fc" fill="none" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
       </div>
-      <div class="btn-text" style="text-align:right">
-        <span style="font-size:13px;color:#93c5fd;display:block">যাদের শিক্ষক / ইমাম প্রয়োজন</span>
-        <span style="font-size:15px;font-weight:800;color:#bfdbfe">এখানে পোস্ট করুন</span>
+      <div style="text-align:right;flex:1;min-width:0;">
+        <span style="font-size:15px;font-weight:800;color:#c084fc;display:block;line-height:1.4;font-family:'Noto Serif Bengali',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">যাদের শিক্ষক / ইমাম প্রয়োজন</span>
+        <span style="font-size:12px;font-weight:500;color:#9333ea;font-family:'Noto Sans Bengali',sans-serif;white-space:nowrap;">এখানে পোস্ট করুন</span>
       </div>
-      <div class="btn-arrow" style="color:#93c5fd">›</div>
+      <span style="color:#c084fc;opacity:0.8;font-size:20px;flex-shrink:0;">›</span>
     </button>
   </div>
 
@@ -5439,7 +5883,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
 
     <!-- WhatsApp গ্রুপ -->
     <div class="social-group-label">💬 WhatsApp</div>
-    <a class="btn anim-item" href="https://wa.me/message/3T5Z7CFFDAJBL1" target="_blank" style="animation-delay:.36s;background:linear-gradient(135deg,rgba(37,211,102,0.14),rgba(37,211,102,0.06));border-color:rgba(37,211,102,0.30);">
+    <a class="btn anim-item" href="https://wa.me/message/3T5Z7CFFDAJBL1" target="_blank" style="animation-delay:.36s;background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);">
       <div class="btn-icon" style="background:rgba(37,211,102,0.16);border-color:rgba(37,211,102,0.38);">
         <svg viewBox="0 0 24 24" stroke="#25d366"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
       </div>
@@ -5449,7 +5893,7 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
       </div>
       <div class="btn-arrow" style="color:#25d366">›</div>
     </a>
-    <a class="btn anim-item" href="https://whatsapp.com/channel/0029VbD4Jr90VycNzIs5nM0c" target="_blank" style="animation-delay:.40s;background:linear-gradient(135deg,rgba(37,211,102,0.10),rgba(37,211,102,0.04));border-color:rgba(37,211,102,0.22);">
+    <a class="btn anim-item" href="https://whatsapp.com/channel/0029VbD4Jr90VycNzIs5nM0c" target="_blank" style="animation-delay:.40s;background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);">
       <div class="btn-icon" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.28);">
         <svg viewBox="0 0 24 24" stroke="#25d366"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
       </div>
@@ -5459,21 +5903,21 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
 
     <!-- Facebook গ্রুপ -->
     <div class="social-group-label">📘 Facebook</div>
-    <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.44s;background:linear-gradient(135deg,rgba(24,119,242,0.14),rgba(24,119,242,0.06));border-color:rgba(24,119,242,0.28);">
+    <a class="btn anim-item" href="https://www.facebook.com/share/1agzS8Eavc/" target="_blank" style="animation-delay:.44s;background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);">
       <div class="btn-icon" style="background:rgba(24,119,242,0.15);border-color:rgba(24,119,242,0.35);">
         <svg viewBox="0 0 24 24" stroke="#1877f2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
       </div>
       <div class="btn-text" style="text-align:right;color:#60a5fa">Facebook পেইজ লাইক করুন</div>
       <div class="btn-arrow" style="color:#1877f2">›</div>
     </a>
-    <a class="btn anim-item" href="https://www.facebook.com/share/g/1BCyorfCey/" target="_blank" style="animation-delay:.48s;background:linear-gradient(135deg,rgba(24,119,242,0.10),rgba(24,119,242,0.04));border-color:rgba(24,119,242,0.22);">
+    <a class="btn anim-item" href="https://www.facebook.com/share/g/1BCyorfCey/" target="_blank" style="animation-delay:.48s;background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);">
       <div class="btn-icon" style="background:rgba(24,119,242,0.12);border-color:rgba(24,119,242,0.28);">
         <svg viewBox="0 0 24 24" stroke="#1877f2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
       <div class="btn-text" style="text-align:right;color:#60a5fa">Facebook গ্রুপে যোগ দিন</div>
       <div class="btn-arrow" style="color:#1877f2">›</div>
     </a>
-    <a class="btn anim-item" href="https://www.messenger.com/channel/HafizQuriJihadulislam" target="_blank" style="animation-delay:.52s;background:linear-gradient(135deg,rgba(0,153,255,0.12),rgba(0,153,255,0.05));border-color:rgba(0,153,255,0.25);">
+    <a class="btn anim-item" href="https://www.messenger.com/channel/HafizQuriJihadulislam" target="_blank" style="animation-delay:.52s;background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);">
       <div class="btn-icon" style="background:rgba(0,153,255,0.15);border-color:rgba(0,153,255,0.32);">
         <svg viewBox="0 0 24 24" stroke="#0099ff"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
       </div>
@@ -5483,14 +5927,14 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
 
     <!-- Telegram গ্রুপ -->
     <div class="social-group-label">✈️ Telegram</div>
-    <a class="btn anim-item" href="https://t.me/khadmot1" target="_blank" style="animation-delay:.56s;background:linear-gradient(135deg,rgba(0,136,204,0.14),rgba(0,136,204,0.06));border-color:rgba(0,136,204,0.28);">
+    <a class="btn anim-item" href="https://t.me/khadmot1" target="_blank" style="animation-delay:.56s;background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);">
       <div class="btn-icon" style="background:rgba(0,136,204,0.16);border-color:rgba(0,136,204,0.35);">
         <svg viewBox="0 0 24 24" stroke="#0088cc"><path d="M21.198 2.433a2.242 2.242 0 00-1.022.215l-16.5 6.742c-1.45.594-1.443 1.822-.264 2.21l4.16 1.298 1.75 5.432c.217.65.847.893 1.374.556l2.398-1.558 4.58 3.372c.896.494 1.518.13 1.747-.836l2.777-13.1c.272-1.3-.485-1.943-1-1.331zm-9.448 9.73l-.663 3.54-1.527-4.854 9.84-5.865-7.65 7.179z"/></svg>
       </div>
       <div class="btn-text" style="text-align:right;color:#38bdf8">Telegram গ্রুপে যোগ দিন</div>
       <div class="btn-arrow" style="color:#0088cc">›</div>
     </a>
-    <a class="btn anim-item" href="https://t.me/MadrasharJob" target="_blank" style="animation-delay:.60s;background:linear-gradient(135deg,rgba(0,136,204,0.10),rgba(0,136,204,0.04));border-color:rgba(0,136,204,0.22);">
+    <a class="btn anim-item" href="https://t.me/MadrasharJob" target="_blank" style="animation-delay:.60s;background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);">
       <div class="btn-icon" style="background:rgba(0,136,204,0.12);border-color:rgba(0,136,204,0.28);">
         <svg viewBox="0 0 24 24" stroke="#0088cc"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z"/><path d="M8 10h8M8 14h5"/></svg>
       </div>
@@ -5502,18 +5946,53 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
   <!-- ══ ৫. ভিডিও টিউটোরিয়াল ══ -->
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.62s"><span>🎬 কিভাবে ব্যবহার করবেন</span><div class="section-label-line"></div></div>
-    <div class="video-showcase anim-item" style="animation-delay:.66s">
-      <div class="video-showcase-header">
-        <h2>ওয়েবসাইট ব্যবহারের সম্পূর্ণ গাইড — পাসওয়ার্ড দিয়ে কেমন দেখাবে বিস্তারিত দেখুন</h2>
-        <p>সাউন্ড চালু করতে ভিডিওর উপর টাচ করুন তারপর সাউন্ড অপশন চালু করুন</p>
+
+    <div class="anim-item" style="animation-delay:.66s;background:linear-gradient(160deg,#081510 0%,#0d1f14 55%,#091610 100%);border:1px solid rgba(196,154,56,0.30);border-top:2px solid rgba(196,154,56,0.60);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.65),0 0 0 1px rgba(34,200,116,0.05);position:relative;">
+
+      <!-- corner accents -->
+      <div style="position:absolute;top:0;left:0;width:36px;height:36px;border-top:2px solid rgba(196,154,56,0.45);border-left:2px solid rgba(196,154,56,0.45);border-radius:20px 0 0 0;pointer-events:none;z-index:2"></div>
+      <div style="position:absolute;top:0;right:0;width:36px;height:36px;border-top:2px solid rgba(196,154,56,0.45);border-right:2px solid rgba(196,154,56,0.45);border-radius:0 20px 0 0;pointer-events:none;z-index:2"></div>
+      <!-- bg glow -->
+      <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:200px;height:80px;background:radial-gradient(ellipse,rgba(34,200,116,0.08),transparent 70%);pointer-events:none"></div>
+
+      <!-- header -->
+      <div style="padding:18px 18px 14px;text-align:center;position:relative;">
+
+        <!-- badge -->
+        <div style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(34,200,116,0.12),rgba(34,200,116,0.06));border:1px solid rgba(34,200,116,0.30);padding:4px 14px 4px 10px;border-radius:999px;margin-bottom:12px;">
+          <span style="font-size:14px;">🎬</span>
+          <span style="font-size:11.5px;font-weight:700;letter-spacing:0.08em;color:#22c874;font-family:'Noto Sans Bengali',sans-serif;">ভিডিও গাইড</span>
+        </div>
+
+        <!-- title -->
+        <h2 style="font-size:15.5px;font-weight:800;line-height:1.65;margin:0 0 10px;color:#f0ebe0;font-family:'Noto Serif Bengali',serif;letter-spacing:0.01em;">
+          ওয়েবসাইট ব্যবহারের সম্পূর্ণ গাইড
+          <span style="display:block;font-size:13.5px;font-weight:600;color:#a8c4b4;margin-top:4px;">পাসওয়ার্ড দিয়ে কেমন দেখাবে — বিস্তারিত দেখুন</span>
+        </h2>
+
+        <!-- divider -->
+        <div style="display:flex;align-items:center;gap:8px;margin:0 4px 12px;">
+          <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(196,154,56,0.30),transparent);"></div>
+          <span style="color:rgba(196,154,56,0.55);font-size:9px;">◆</span>
+          <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(196,154,56,0.30),transparent);"></div>
+        </div>
+
+        <!-- sound tip -->
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.30);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;border-radius:10px;">
+          <span style="font-size:14px;">🔊</span>
+          <span style="font-size:12px;color:#8aab9c;font-family:'Noto Sans Bengali',sans-serif;line-height:1.5;">ভিডিওর উপর টাচ করে সাউন্ড অপশন চালু করুন</span>
+        </div>
       </div>
-      <div class="video-iframe-wrap">
+
+      <!-- video frame -->
+      <div style="margin:0 14px 14px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.50);">
         <iframe width="100%" height="480"
           src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fweb.facebook.com%2Freel%2F1502017694655754%2F&show_text=false&width=267&t=0"
           title="Facebook video player" frameborder="0"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+          allowfullscreen style="display:block;border:0;"></iframe>
       </div>
+
     </div>
   </div>
 
@@ -5724,38 +6203,80 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
     <span class="back-title">মসজিদ মাদ্রাসার চাকরি</span>
   </div>
   <div class="center-wrap">
-    <div class="notice-box" id="center-notice-box" style="margin-bottom:20px;display:none">
-      <div class="notice-title">গুরুত্বপূর্ণ নোটিশ</div>
-      <div class="notice-body">
-        <p>আমাদের ওয়েবসাইটে নতুন নতুন আপডেট খেদমতের পোস্টগুলো দেখতে পারবেন। <span class="notice-hl-red">পুরাতন পোস্টগুলো দেখতে পারবেন না।</span> এটা করেছি আপনাদের ভালোর জন্য যাতে করে সহজেই খেদমত পেতে পারেন।</p>
-        <p>আমাদের ওয়েবসাইটে যে পোস্টগুলো <span class="notice-hl">৬০ ঘন্টা</span> হয়ে যায় এগুলো <span class="notice-hl-red">অটোমেটিক মুছে যাবে।</span> অর্থাৎ <span class="notice-hl">৬০ ঘন্টার আগের পোস্টগুলো দেখতে পারবেন না।</span></p>
-      </div>
-    </div>
+
     <div class="bismillah-banner" style="display:none">
       <span class="bismillah-ar">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616; &#1575;&#1604;&#1604;&#1617;&#1607;&#1616; &#1575;&#1604;&#1585;&#1617;&#1581;&#1618;&#1605;&#1614;&#1606;&#1616; &#1575;&#1604;&#1585;&#1617;&#1581;&#1616;&#1610;&#1605;&#1616;</span>
       <span class="bismillah-en">In the name of Allah, the Most Gracious, the Most Merciful</span>
     </div>
     <div id="login-panel">
-      <div class="pwd-note" style="margin-bottom:18px;font-size:15px;padding:22px 18px;border:1px solid var(--green-border);background:rgba(13,128,71,0.08);border-radius:var(--r-lg);text-align:center;">
-        <div style="font-size:15px;color:var(--text-body);line-height:1.9;margin-bottom:18px;">
-          আমাদের ওয়েবসাইটে প্রবেশের পাসওয়ার্ড সংগ্রহ করতে নিচের WhatsApp বাটনে ক্লিক করে মেসেজ করুন।
+
+      <!-- ══ Compact Notice ══ -->
+      <div style="display:flex;align-items:flex-start;gap:10px;background:linear-gradient(135deg,#0c1a0f,#0a1810);border:1px solid rgba(196,154,56,0.35);border-left:3px solid rgba(34,200,116,0.65);border-radius:12px;padding:10px 14px;margin-bottom:16px;">
+        <span style="font-size:15px;flex-shrink:0;margin-top:1px;">💬</span>
+        <div style="flex:1;min-width:0;">
+          <div style="font-family:'Noto Serif Bengali',serif;font-size:12.5px;font-weight:700;color:#a8c4b4;margin-bottom:5px;">পাসওয়ার্ড না থাকলে নিচের বাটনে যান</div>
+          <button onclick="showScreen('news')" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:linear-gradient(135deg,rgba(196,154,56,0.18),rgba(196,154,56,0.08));border:1px solid rgba(196,154,56,0.40);border-radius:999px;color:#f0d478;font-family:'Noto Serif Bengali',serif;font-size:11.5px;font-weight:700;cursor:pointer;">
+            <svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:none;stroke:#f0d478;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            বিস্তারিত জানুন ও পাসওয়ার্ড নিন
+          </button>
         </div>
-        <a href="https://wa.me/8801408764722" target="_blank" class="premium-wa-btn">
-          <svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:#fff;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          <span>WhatsApp এ মেসেজ করুন</span>
-          <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:rgba(255,255,255,0.7);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
       </div>
-      <div class="login-card">
-        <div class="login-title">মসজিদ মাদ্রাসার চাকরি</div>
-        <div class="login-subtitle">পরিচালনায় — হাফেজ ক্বারী জিহাদুল ইসলাম</div>
-        <label class="field-label">মোবাইল নম্বর</label>
-        <input id="member-mobile" class="field-input" type="tel" placeholder="মোবাইল নম্বর লিখুন">
-        <label class="field-label">পাসওয়ার্ড</label>
-        <input id="member-pwd" class="field-input" type="password" placeholder="এডমিনের দেওয়া পাসওয়ার্ডটি লিখুন">
-        <button class="login-btn-main" onclick="memberLogin()">লগইন করুন</button>
-        <div class="or-divider">অথবা</div>
-        <button class="admin-toggle" onclick="toggleAdm()">⚔ Admin Panel</button>
+
+      <!-- ══ Redesigned Login Card ══ -->
+      <div style="position:relative;overflow:hidden;background:linear-gradient(160deg,#0c1c11 0%,#0f1f14 55%,#0b1a10 100%);border:1px solid rgba(196,154,56,0.30);border-top:2px solid rgba(196,154,56,0.55);border-radius:20px;padding:26px 20px 22px;margin-bottom:20px;box-shadow:0 8px 40px rgba(0,0,0,0.60);">
+        <!-- bg glow -->
+        <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(34,200,116,0.08),transparent 70%);"></div>
+        <!-- corner accents -->
+        <div style="position:absolute;top:0;left:0;width:32px;height:32px;border-top:2px solid rgba(196,154,56,0.40);border-left:2px solid rgba(196,154,56,0.40);border-radius:20px 0 0 0;pointer-events:none"></div>
+        <div style="position:absolute;top:0;right:0;width:32px;height:32px;border-top:2px solid rgba(196,154,56,0.40);border-right:2px solid rgba(196,154,56,0.40);border-radius:0 20px 0 0;pointer-events:none"></div>
+
+        <!-- header -->
+        <div style="text-align:center;margin-bottom:22px;position:relative;">
+          <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(34,200,116,0.20),rgba(34,200,116,0.08));border:1.5px solid rgba(34,200,116,0.40);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#22c874;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div style="font-family:'Noto Serif Bengali',serif;font-size:20px;font-weight:800;color:#f0d478;line-height:1.3;">মসজিদ মাদ্রাসার চাকরি</div>
+          <div style="font-family:'Noto Sans Bengali',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px;">পরিচালনায় — হাফেজ ক্বারী জিহাদুল ইসলাম</div>
+          <!-- divider -->
+          <div style="display:flex;align-items:center;gap:8px;margin-top:16px;">
+            <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(196,154,56,0.30),transparent);"></div>
+            <span style="color:rgba(196,154,56,0.45);font-size:9px;">◆</span>
+            <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(196,154,56,0.30),transparent);"></div>
+          </div>
+        </div>
+
+        <!-- mobile field -->
+        <div style="margin-bottom:14px;position:relative;">
+          <label style="font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:700;color:#86b89a;display:flex;align-items:center;gap:6px;margin-bottom:7px;">
+            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:#86b89a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            মোবাইল নম্বর
+          </label>
+          <input id="member-mobile" class="field-input" type="tel" placeholder="মোবাইল নম্বর লিখুন" style="margin-bottom:0;background:rgba(0,0,0,0.30);border:1.5px solid rgba(255,255,255,0.10);border-radius:12px;padding:13px 16px;font-family:'Noto Sans Bengali',sans-serif;font-size:14.5px;color:#f0ebe0;width:100%;outline:none;box-sizing:border-box;transition:border-color 0.22s,box-shadow 0.22s;"
+            onfocus="this.style.borderColor='rgba(34,200,116,0.55)';this.style.boxShadow='0 0 0 3px rgba(34,200,116,0.10)'"
+            onblur="this.style.borderColor='rgba(255,255,255,0.10)';this.style.boxShadow='none'">
+        </div>
+
+        <!-- password field -->
+        <div style="margin-bottom:20px;position:relative;">
+          <label style="font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:700;color:#86b89a;display:flex;align-items:center;gap:6px;margin-bottom:7px;">
+            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:#86b89a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            পাসওয়ার্ড
+          </label>
+          <input id="member-pwd" class="field-input" type="password" placeholder="এডমিনের দেওয়া পাসওয়ার্ডটি লিখুন" style="margin-bottom:0;background:rgba(0,0,0,0.30);border:1.5px solid rgba(255,255,255,0.10);border-radius:12px;padding:13px 16px;font-family:'Noto Sans Bengali',sans-serif;font-size:14.5px;color:#f0ebe0;width:100%;outline:none;box-sizing:border-box;transition:border-color 0.22s,box-shadow 0.22s;"
+            onfocus="this.style.borderColor='rgba(34,200,116,0.55)';this.style.boxShadow='0 0 0 3px rgba(34,200,116,0.10)'"
+            onblur="this.style.borderColor='rgba(255,255,255,0.10)';this.style.boxShadow='none'">
+        </div>
+
+        <!-- login button -->
+        <button class="login-btn-main" onclick="memberLogin()" style="width:100%;padding:14px;background:linear-gradient(135deg,#0d7a45,#1ab566);border:1px solid rgba(26,181,102,0.50);border-radius:14px;color:#fff;font-family:'Noto Serif Bengali',serif;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(13,122,69,0.40),0 1px 0 rgba(255,255,255,0.10) inset;transition:transform 0.2s,box-shadow 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;"
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 7px 26px rgba(13,122,69,0.55)'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(13,122,69,0.40),0 1px 0 rgba(255,255,255,0.10) inset'">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          লগইন করুন
+        </button>
+
+        <div class="or-divider" style="margin:18px 0 14px;">অথবা</div>
+        <button class="admin-toggle" onclick="toggleAdm()" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,0.10);color:rgba(255,255,255,0.35);font-family:'Noto Sans Bengali',sans-serif;font-size:13px;padding:9px;border-radius:10px;cursor:pointer;">⚔ Admin Panel</button>
         <div class="admin-panel-inner" id="adm-panel">
           <label class="field-label" style="margin-top:14px">Admin Email</label>
           <input id="admin-email" class="field-input" type="email" placeholder="admin@example.com">
@@ -5763,8 +6284,8 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
           <input id="admin-pwd" class="field-input" type="password" placeholder="Admin password">
           <button class="admin-login-btn" onclick="adminLogin()">Access Admin Panel ⚔</button>
         </div>
-      </div>
-    </div>
+      </div><!-- /login-card redesigned -->
+    </div><!-- /login-panel -->
     <div id="community-view">
       <div class="community-header">
         <div class="user-badge">
@@ -5882,25 +6403,41 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
         <textarea id="post-textarea" placeholder="নতুন খেদমতের পোস্ট লিখুন..." maxlength="2000" oninput="updateChar();checkDup()"></textarea>
         <div class="char-count"><span id="char-count">0</span> / 2000</div>
         <div class="dup-warning" id="dup-warning">⚠ সতর্কতা! এরকম একটি পোস্ট ইতিমধ্যে আছে। একই পোস্ট দুইবার দিলে মানুষ বিরক্ত হবে। তারপরও পোস্ট করতে চাইলে করুন।</div>
-        <div class="img-upload-area">
+
+        <!-- ══ পোস্টে ফটো যোগ করুন (post collection-এ যাবে) ══ -->
+        <div class="img-upload-area" id="post-img-upload-area">
           <span class="img-upload-label">📷 পোস্টে ছবি যোগ করুন (ঐচ্ছিক)</span>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
-            <button class="img-upload-btn" onclick="document.getElementById('img-file').click()">🖼 ছবি সিলেক্ট করুন</button>
+            <button class="img-upload-btn" onclick="document.getElementById('post-img-file').click()">🖼 ছবি সিলেক্ট করুন</button>
             <span style="font-size:12px;color:var(--text-muted)">সর্বোচ্চ ১০MB</span>
           </div>
-          <input type="file" id="img-file" accept="image/*" style="display:none" onchange="previewImg(this)">
-          <div class="img-preview-wrap" id="img-pw" style="display:none"><img id="img-pe" src="" alt="" style="max-width:100%;border-radius:8px;margin-bottom:6px"></div>
-          <input type="text" id="img-cap" class="img-cap-input" placeholder="ছবির ক্যাপশন লিখুন (ঐচ্ছিক)" style="display:none">
+          <input type="file" id="post-img-file" accept="image/*" style="display:none" onchange="previewPostImg(this)">
+          <div class="img-preview-wrap" id="post-img-pw" style="display:none">
+            <img id="post-img-pe" src="" alt="" style="max-width:100%;border-radius:8px;margin-bottom:6px">
+            <button onclick="clearPostImg()" style="font-size:12px;color:#f87171;background:none;border:none;cursor:pointer;padding:0">✕ ছবি সরান</button>
+          </div>
+          <!-- নম্বর আছে চেকবক্স -->
+          <div class="has-num-wrap" id="post-has-num-wrap" style="display:none">
+            <input type="checkbox" id="post-has-num" onchange="togglePostHasNum()">
+            <label for="post-has-num">⚠️ এই ছবিতে মোবাইল নম্বর আছে (লগইন ছাড়া blur থাকবে)</label>
+          </div>
         </div>
         <div class="publish-row">
           <button class="publish-btn" id="pub-btn" onclick="publishPost()">✅ পোস্ট করুন</button>
-          <button class="publish-img-btn" id="pub-img-btn" onclick="publishImg()" style="display:none">📷 ছবি পোস্ট করুন</button>
+          <button class="publish-img-btn" id="pub-img-btn" onclick="publishImg()" style="display:none">📷 হোম ফটো পোস্ট করুন</button>
         </div>
 
-        <div class="posts-section" style="margin-top:20px">
-          <h3>খেদমতের পোস্ট <span class="posts-count" id="posts-count">0</span></h3>
-          <!-- ══ Compact Time Stats chips (২৪/৪৮/৬০ ঘণ্টা — লগইন ইউজারদের জন্য) ══ -->
-          <div id="center-time-stats-bar" style="margin:10px 0 14px">
+        <div class="posts-section" style="margin-top:16px">
+          <!-- গত ৬০ ঘণ্টার মোট পোস্ট — preview-র মতো -->
+          <div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(13,26,16,0.9),rgba(8,20,12,0.9));border:1px solid rgba(34,200,116,0.20);border-radius:14px;padding:12px 16px;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:18px;">📋</span>
+              <span style="font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;color:#a8c4b4;">গত ৬০ ঘণ্টার মোট পোস্ট</span>
+            </div>
+            <span id="posts-count" style="font-family:'Noto Serif Bengali',serif;font-size:20px;font-weight:900;color:#22c874;background:rgba(34,200,116,0.12);border:1px solid rgba(34,200,116,0.30);border-radius:999px;padding:2px 14px;min-width:40px;text-align:center;text-shadow:0 0 14px rgba(34,200,116,0.4);">0</span>
+          </div>
+          <!-- ══ Compact Time Stats chips (২৪/৪৮/৬০ ঘণ্টা) ══ -->
+          <div id="center-time-stats-bar" style="margin:0 0 12px">
             <div style="display:flex;gap:6px">
               <div class="tsc-chip" id="ctf-btn-24" onclick="setCenterTimeFilter(24)">
                 <span class="tsc-label">২৪ ঘণ্টা</span>
@@ -5934,20 +6471,22 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
               <span class="cat-all-chip-label">📋 সকল পোস্ট</span>
               <span class="cat-all-count" id="cac-all-count">0</span>
             </div>
-            <div class="cat-section-header" id="cac-masjid-hdr" onclick="filterCat('center','masjid')">
-              <span class="cat-section-icon">🕌</span>
-              <span class="cat-section-title">মসজিদের খেদমত নিউজ</span>
-              <span class="cat-section-count" id="cac-masjid-total">0</span>
-            </div>
-            <div class="cat-section-header" id="cac-madrasa-hdr" onclick="filterCat('center','madrasa')">
-              <span class="cat-section-icon">🏫</span>
-              <span class="cat-section-title">পুরুষ মাদ্রাসার খেদমত নিউজ</span>
-              <span class="cat-section-count" id="cac-madrasa-total">0</span>
-            </div>
-            <div class="cat-section-header" id="cac-mahila-hdr" onclick="filterCat('center','mahila')">
-              <span class="cat-section-icon">🏫</span>
-              <span class="cat-section-title">মহিলা মাদ্রাসার খেদমত নিউজ</span>
-              <span class="cat-section-count" id="cac-mahila-total">0</span>
+            <div class="cat-filter-grid">
+              <div class="cat-section-header" id="cac-masjid-hdr" onclick="filterCat('center','masjid')">
+                <span class="cat-section-icon">🕌</span>
+                <span class="cat-section-title">মসজিদের খেদমত নিউজ</span>
+                <span class="cat-section-count" id="cac-masjid-total">0</span>
+              </div>
+              <div class="cat-section-header" id="cac-madrasa-hdr" onclick="filterCat('center','madrasa')">
+                <span class="cat-section-icon">🏫</span>
+                <span class="cat-section-title">পুরুষ মাদ্রাসার খেদমত নিউজ</span>
+                <span class="cat-section-count" id="cac-madrasa-total">0</span>
+              </div>
+              <div class="cat-section-header" id="cac-mahila-hdr" onclick="filterCat('center','mahila')">
+                <span class="cat-section-icon">🏫</span>
+                <span class="cat-section-title">মহিলা মাদ্রাসার খেদমত নিউজ</span>
+                <span class="cat-section-count" id="cac-mahila-total">0</span>
+              </div>
             </div>
           </div>
           <div id="posts-container"><div class="posts-loading"><div class="spinner"></div>Loading posts...</div></div>
@@ -6046,41 +6585,32 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
     <span class="back-title">খেদমতের পোস্ট — পূর্বরূপ</span>
   </div>
   <div class="preview-wrap">
-    <!-- ══ SEARCH BOX ══ -->
-    <div id="post-search-wrap" style="margin-bottom:14px">
-      <div style="position:relative">
-        <input type="search" id="post-search-input"
-          style="width:100%;padding:12px 42px 12px 16px;background:#0a1a0e;border:1.5px solid rgba(255,255,255,0.14);border-radius:var(--r-md);color:#f0ebe0;font-family:'Noto Sans Bengali',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s"
-          placeholder="🔍 পোস্ট খুঁজুন... (শিরোনাম, ঠিকানা, বিষয়)"
-          oninput="searchPosts(this.value)"
-          onfocus="this.style.borderColor='rgba(26,181,102,0.65)'"
-          onblur="this.style.borderColor='rgba(255,255,255,0.14)'">
-        <span id="search-clear-btn" onclick="clearSearch()" style="display:none;position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text-muted);font-size:16px">✕</span>
-      </div>
-      <div id="search-results-info" style="display:none;margin-top:6px;font-size:12.5px;color:var(--text-muted);padding:0 4px"></div>
-    </div>
-    <div class="scroll-down-banner" onclick="document.getElementById('preview-posts-container').scrollIntoView({behavior:'smooth'})">
-      <span class="scroll-down-banner-text">খেদমতের পোস্ট গুলো দেখতে নিচে যান</span>
-      <span class="scroll-down-banner-arrow">↓</span>
-    </div>
-    <div class="notice-box" style="margin-bottom:18px">
-      <div class="notice-title">গুরুত্বপূর্ণ নোটিশ</div>
-      <div class="notice-body">
-        <p>আমাদের ওয়েবসাইটে নতুন নতুন আপডেট খেদমতের পোস্টগুলো দেখতে পারবেন। <span class="notice-hl-red">পুরাতন পোস্টগুলো দেখতে পারবেন না।</span> এটা করেছি আপনাদের ভালোর জন্য যাতে করে সহজেই খেদমত পেতে পারেন।</p>
-        <p>আমাদের ওয়েবসাইটে যে পোস্টগুলো <span class="notice-hl">৬০ ঘন্টা</span> হয়ে যায় এগুলো <span class="notice-hl-red">অটোমেটিক মুছে যাবে।</span> অর্থাৎ <span class="notice-hl">৬০ ঘন্টার আগের পোস্টগুলো দেখতে পারবেন না।</span></p>
+
+
+
+    <!-- ══ Compact Notice Banner ══ -->
+    <div style="background:linear-gradient(135deg,#0c1a0f,#0a1810);border:1px solid rgba(196,154,56,0.40);border-left:3px solid rgba(248,113,113,0.70);border-radius:12px;padding:11px 14px;margin-bottom:12px;display:flex;align-items:flex-start;gap:10px;">
+      <span style="font-size:16px;flex-shrink:0;margin-top:1px;">🔒</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:800;color:#fca5a5;margin-bottom:4px;">নাম্বার আংশিকভাবে দেখানো হচ্ছে</div>
+        <div style="font-family:'Noto Sans Bengali',sans-serif;font-size:12px;color:#9ab8a8;line-height:1.65;">পোস্টের শেষ <span style="color:#fbbf24;font-weight:700;">৩টি সংখ্যা লুকানো</span> আছে। সম্পূর্ণ নম্বর দেখতে পাসওয়ার্ড নিন।</div>
+        <button onclick="showScreen('news')" style="margin-top:8px;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:linear-gradient(135deg,rgba(196,154,56,0.18),rgba(196,154,56,0.08));border:1px solid rgba(196,154,56,0.45);border-radius:999px;color:#f0d478;font-family:'Noto Serif Bengali',serif;font-size:12px;font-weight:700;cursor:pointer;">
+          <svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:#f0d478;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          বিস্তারিত জানুন ও পাসওয়ার্ড নিন
+        </button>
       </div>
     </div>
-    <div class="preview-banner">
-      <h2>🔒 নাম্বার আংশিকভাবে দেখানো হচ্ছে</h2>
-      <p>এখানে পোস্টের ভেতরের যোগাযোগের নাম্বারগুলোর শেষের ৩টি সংখ্যা লুকানো আছে।<br>
-      সম্পূর্ণ নাম্বার সহ সব পোস্ট দেখতে পাসওয়ার্ড সংগ্রহ করুন।</p>
-      <a class="get-pwd-btn" href="https://wa.me/8801408764722" target="_blank">💬 পাসওয়ার্ড সংগ্রহ করুন (WhatsApp)</a>
-    </div>
-    <div class="preview-count-bar">
-      📋 মোট পোস্ট: <span class="preview-count-badge" id="preview-count">০</span>
+
+    <!-- ══ 60h post count header ══ -->
+    <div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(13,26,16,0.9),rgba(8,20,12,0.9));border:1px solid rgba(34,200,116,0.20);border-radius:14px;padding:12px 16px;margin-bottom:14px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:18px;">📋</span>
+        <span style="font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;color:#a8c4b4;">গত ৬০ ঘণ্টার মোট পোস্ট</span>
+      </div>
+      <span id="preview-count" style="font-family:'Noto Serif Bengali',serif;font-size:20px;font-weight:900;color:#22c874;background:rgba(34,200,116,0.12);border:1px solid rgba(34,200,116,0.30);border-radius:999px;padding:2px 14px;min-width:40px;text-align:center;text-shadow:0 0 14px rgba(34,200,116,0.4);">০</span>
     </div>
     <!-- ══ Compact Time Stats chips (২৪/৪৮/৬০ এক লাইনে, ক্লিকযোগ্য ফিল্টার) ══ -->
-    <div id="post-time-stats-bar" style="margin:10px 0 4px">
+    <div id="post-time-stats-bar" style="margin:10px 0 12px">
       <div style="display:flex;gap:6px">
         <div class="tsc-chip" id="tf-btn-24" onclick="setPreviewTimeFilter(24)">
           <span class="tsc-label">২৪ ঘণ্টা</span>
@@ -6105,20 +6635,22 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !impor
         <span class="cat-all-chip-label">📋 সকল পোস্ট</span>
         <span class="cat-all-count" id="cap-all-count">0</span>
       </div>
-      <div class="cat-section-header" id="cap-masjid-hdr" onclick="filterCat('preview','masjid')">
-        <span class="cat-section-icon">🕌</span>
-        <span class="cat-section-title">মসজিদের খেদমত নিউজ</span>
-        <span class="cat-section-count" id="cap-masjid-total">0</span>
-      </div>
-      <div class="cat-section-header" id="cap-madrasa-hdr" onclick="filterCat('preview','madrasa')">
-        <span class="cat-section-icon">🏫</span>
-        <span class="cat-section-title">পুরুষ মাদ্রাসার খেদমত নিউজ</span>
-        <span class="cat-section-count" id="cap-madrasa-total">0</span>
-      </div>
-      <div class="cat-section-header" id="cap-mahila-hdr" onclick="filterCat('preview','mahila')">
-        <span class="cat-section-icon">🏫</span>
-        <span class="cat-section-title">মহিলা মাদ্রাসার খেদমত নিউজ</span>
-        <span class="cat-section-count" id="cap-mahila-total">0</span>
+      <div class="cat-filter-grid">
+        <div class="cat-section-header" id="cap-masjid-hdr" onclick="filterCat('preview','masjid')">
+          <span class="cat-section-icon">🕌</span>
+          <span class="cat-section-title">মসজিদের খেদমত নিউজ</span>
+          <span class="cat-section-count" id="cap-masjid-total">0</span>
+        </div>
+        <div class="cat-section-header" id="cap-madrasa-hdr" onclick="filterCat('preview','madrasa')">
+          <span class="cat-section-icon">🏫</span>
+          <span class="cat-section-title">পুরুষ মাদ্রাসার খেদমত নিউজ</span>
+          <span class="cat-section-count" id="cap-madrasa-total">0</span>
+        </div>
+        <div class="cat-section-header" id="cap-mahila-hdr" onclick="filterCat('preview','mahila')">
+          <span class="cat-section-icon">🏫</span>
+          <span class="cat-section-title">মহিলা মাদ্রাসার খেদমত নিউজ</span>
+          <span class="cat-section-count" id="cap-mahila-total">0</span>
+        </div>
       </div>
     </div>
     <div id="preview-posts-container">
@@ -6598,6 +7130,8 @@ try{
   db=firebase.firestore();
   db.settings({ experimentalForceLongPolling:true });
   auth=firebase.auth();
+  /* db ready হওয়ার সাথে সাথে আজকের count লোড করো */
+  setTimeout(loadHomeTodayPostCount, 100);
 }catch(e){
   console.error('Firebase Error:', e);
   alert('Firebase Error: ' + e.message);
@@ -6668,39 +7202,111 @@ function scrollTop(){
   document.documentElement.scrollTop=0;
   document.body.scrollTop=0;
 }
-function showNotices(){
-  var cn=document.getElementById('center-notice-box');
-  if(cn)cn.style.display='block';
+function showNotices(){ /* popup দিয়ে replace হয়েছে */ }
+
+function goToStoryForm(){
+  /* ভিজিটর (লগইন ছাড়া) হলে শুধু মেসেজ দেখাও */
+  if(!curUser){
+    closeNotice('visitor-offer-overlay');
+    setTimeout(function(){
+      var msgOverlay = document.getElementById('visitor-only-msg-overlay');
+      if(msgOverlay){ msgOverlay.style.display='flex'; msgOverlay.classList.remove('hide'); }
+    }, 250);
+    return;
+  }
+  /* profile-story-form দেখাও এবং স্ক্রল করো */
+  var form = document.getElementById('profile-story-form');
+  if(form){
+    form.style.display = 'block';
+    setTimeout(function(){ form.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 200);
+  } else {
+    /* ফর্ম না পেলে submit screen-এ যাও */
+    showScreen('submit');
+  }
 }
-function hideNotices(){
-  var cn=document.getElementById('center-notice-box');
-  if(cn)cn.style.display='none';
-}
+function hideNotices(){ /* popup দিয়ে replace হয়েছে */ }
 function scrollBottom(){
   var h=document.body.scrollHeight;
   try{window.scrollTo({top:h,left:0,behavior:'instant'});}catch(e){window.scrollTo(0,h);}
   document.documentElement.scrollTop=h;
   document.body.scrollTop=h;
 }
+/* ═══ NOTICE POPUP ═══ */
+function closeNotice(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('hide');
+  setTimeout(function(){ el.style.display = 'none'; }, 220);
+  /* এই session-এ আর দেখাবে না */
+  sessionStorage.setItem('notice_seen_' + id, '1');
+}
+
+function showNoticeIfNeeded(overlayId) {
+  var el = document.getElementById(overlayId);
+  if (!el) return;
+  /* এই session-এ আগে দেখানো হয়েছে কিনা চেক করো */
+  if (sessionStorage.getItem('notice_seen_' + overlayId)) return;
+  el.style.display = 'flex';
+  el.classList.remove('hide');
+}
+
+/* ── Scroll position সংরক্ষণ ── */
+var _homeScrollPos = -1;   /* -1 = প্রথমবার এখনো যায়নি */
+var _homeVisited = false;  /* প্রথমবার নিচে নেওয়া হয়েছে কিনা */
+
+function saveHomeScroll(){
+  var s = document.querySelector('.screen.active');
+  if(s && s.id === 'screen-home'){
+    var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    _homeScrollPos = y;  /* যেকোনো মান সেভ করো, 0 হলেও */
+  }
+}
+
+/* home screen এ scroll হলে automatically সেভ করো */
+window.addEventListener('scroll', function(){
+  var s = document.querySelector('.screen.active');
+  if(s && s.id === 'screen-home'){
+    _homeScrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+  }
+}, {passive: true});
+
 function showScreen(n){
-  /* ── Dashboard guard: সরাসরি যেকোনো উপায়ে ঢুকলেও block করবে ── */
+  /* ── Dashboard guard ── */
   if(n === 'dashboard'){
     if(typeof isAdmin === 'undefined' || !isAdmin){
       toast('⛔ শুধুমাত্র Admin প্রবেশ করতে পারবেন', 'red');
       n = 'home';
     }
   }
-  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+
+  /* ── Screen switch ── */
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
   document.getElementById('screen-'+n).classList.add('active');
-  if(n==='home'){
-    setTimeout(scrollBottom,10);
-    setTimeout(scrollBottom,100);
-    setTimeout(scrollBottom,300);
+
+  if(n === 'home'){
+    if(!_homeVisited){
+      /* একদম প্রথমবার — নিচে নিয়ে যাও */
+      _homeVisited = true;
+      setTimeout(scrollBottom, 10);
+      setTimeout(scrollBottom, 150);
+      setTimeout(scrollBottom, 400);
+    } else {
+      /* পরবর্তীবার — সেভ করা জায়গায় ফিরিয়ে আনো */
+      var _p = _homeScrollPos;
+      setTimeout(function(){ window.scrollTo(0,_p); document.documentElement.scrollTop=_p; document.body.scrollTop=_p; }, 10);
+      setTimeout(function(){ window.scrollTo(0,_p); document.documentElement.scrollTop=_p; document.body.scrollTop=_p; }, 100);
+      setTimeout(function(){ window.scrollTo(0,_p); document.documentElement.scrollTop=_p; document.body.scrollTop=_p; }, 300);
+    }
   } else {
-    scrollTop();
-    setTimeout(scrollTop,50);
-    setTimeout(scrollTop,200);
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
+    setTimeout(function(){ window.scrollTo(0,0); },50);
+    setTimeout(function(){ window.scrollTo(0,0); },200);
   }
+
+  /* নোটিশ popup — শুধু preview screen-এ */
+  if(n === 'preview'){ setTimeout(function(){ showNoticeIfNeeded('preview-notice-overlay'); }, 300); }
 }
 function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
 
@@ -6731,6 +7337,14 @@ window.addEventListener('load',function(){
     });
   }
   waitForAuth(20);
+
+  /* ══ ভিজিটর অফার: হোমপেজে ১ মিনিট পর দেখাবে, শুধু লগইন না করা ভিজিটরদের জন্য ══ */
+  setTimeout(function(){
+    /* যদি কেউ লগইন না করে থাকে (curUser খালি) তাহলে অফার দেখাও */
+    if(!curUser){
+      showNoticeIfNeeded('visitor-offer-overlay');
+    }
+  }, 60000);
 });
 
 /* ══ Admin Session Timer ══ */
@@ -6750,7 +7364,9 @@ function updateSessLbl(){
   var rem=ADM_12H-(Date.now()-at);
   if(rem<=0){el.textContent='সেশন শেষ';return;}
   var h=Math.floor(rem/3600000),m=Math.floor((rem%3600000)/60000);
-  el.textContent='⏱ '+h+'ঘ '+m+'মি বাকি';
+  var bnD=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function toB(n){return String(n).split('').map(function(c){return bnD[+c]!==undefined?bnD[+c]:c;}).join('');}
+  el.textContent='⏱ '+toB(h)+'ঘ '+toB(m)+'মি বাকি';
 }
 
 /* ══ Member Login ══ */
@@ -6825,6 +7441,10 @@ function enterComm(){
   document.getElementById('login-panel').style.display='none';
   var cv=document.getElementById('community-view');
   cv.classList.add('show');cv.style.display='block';
+  /* লগইনের পর নোটিশ দেখাও (admin-এর জন্য না) */
+  if(!isAdmin){ setTimeout(function(){ showNoticeIfNeeded('center-notice-overlay'); }, 400); }
+  /* প্রথম নোটিশের ১ মিনিট পর সফলতার গল্প অফার নোটিশ দেখাবে (শুধু non-admin) */
+  if(!isAdmin){ setTimeout(function(){ showNoticeIfNeeded('offer-notice-overlay'); }, 60400); }
   document.getElementById('uname').textContent=curUser;
   document.getElementById('urole').textContent=isAdmin?'Administrator':'Community Member';
   document.getElementById('uavatar').textContent=isAdmin?'⚔':'👤';
@@ -7146,7 +7766,7 @@ function renderAdminHourlyStats(posts){
   var bnNums = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
   function toBN(n){ return String(n).split('').map(function(c){return bnNums[+c]!==undefined?bnNums[+c]:c;}).join(''); }
   grid.innerHTML = '';
-  for(var h=1; h<=24; h++){
+  for(var h=1; h<=60; h++){
     var since = now - h*3600000;
     var count = posts.filter(function(p){ return (p.created||0)>=since; }).length;
     var pct = count > 0 ? Math.min(100, count * 6) : 0;
@@ -7315,18 +7935,27 @@ function renderCenterPosts() {
     var delBtn = isAdmin ? '<button class="delete-post-btn" onclick="delPost(\'' + postId + '\')">✕</button>' : '';
     var editBtn = isAdmin ? '<button class="edit-post-btn" onclick="openEditModal(\'' + postId + '\')">✏</button>' : '';
     var rawText = d.text || '';
-    var el = document.createElement('div'); el.className = 'post-card';
+    var el = document.createElement('div'); el.className = 'post-card'; el.style.cssText = 'background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);position:relative;padding:22px 20px 18px;margin-bottom:16px;transition:border-color 0.28s,box-shadow 0.28s,transform 0.28s;';
+    var photoHTML = '';
+    if (d.imgUrl) {
+      if (d.hasNumber) {
+        /* admin সবসময় পরিষ্কার দেখবে */
+        var blurClass = isAdmin ? '' : ' post-photo-blur';
+        var lockHTML = isAdmin ? '' : '<div class="post-photo-lock"><span>🔒</span><p>নম্বর দেখতে লগইন করুন</p></div>';
+        photoHTML = '<div class="post-photo-wrap"><img src="'+d.imgUrl+'" alt="" loading="lazy" class="'+blurClass.trim()+'">'+lockHTML+'</div>';
+      } else {
+        photoHTML = '<div class="post-photo-wrap"><img src="'+d.imgUrl+'" alt="" loading="lazy"></div>';
+      }
+    }
     el.innerHTML =
       catBadgeHTML(d.mainCat, d.subCat, d.cats) +
       '<div class="post-text">' + esc(rawText) + '</div>' +
+      photoHTML +
       '<div class="post-time">' + (d.timeStr || '') + '</div>' +
       '<div class="post-actions">' +
         '<button class="like-btn' + (isLiked ? ' liked' : '') + '" onclick="toggleLike(\'' + postId + '\',this)">' +
           '<span class="like-icon">❤️</span>' +
           '<span class="like-count">' + likeCount + '</span>' +
-        '</button>' +
-        '<button class="share-fb-btn" onclick="sharePost(\'fb\',\'' + rawText.replace(/'/g, "\\'").replace(/\n/g, ' ').substring(0,200) + '\',\'' + postId + '\')">' +
-          '👑 Facebook' +
         '</button>' +
         expBadge +
       '</div>' +
@@ -7404,23 +8033,21 @@ function renderPreviewPosts(overridePosts) {
     var shareUrl = encodeURIComponent(postUrl);
     var card = document.createElement('div');
     card.className = 'preview-post-card';
+    card.style.cssText = 'background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(196,154,56,0.55);border-left:1px solid rgba(196,154,56,0.28);border-right:1px solid rgba(196,154,56,0.28);border-bottom:1px solid rgba(196,154,56,0.28);border-radius:18px;box-shadow:0 4px 28px rgba(0,0,0,0.55);position:relative;padding:22px 20px 18px;margin-bottom:16px;transition:border-color 0.28s,box-shadow 0.28s,transform 0.28s;';
+    var previewPhotoHTML = '';
+    if (d.imgUrl) {
+      if (d.hasNumber && !curUser && !isAdmin) {
+        previewPhotoHTML = '<div class="post-photo-wrap"><img src="'+d.imgUrl+'" alt="" loading="lazy" class="post-photo-blur"><div class="post-photo-lock"><span>🔒</span><p>নম্বর দেখতে লগইন করুন</p></div></div>';
+      } else {
+        previewPhotoHTML = '<div class="post-photo-wrap"><img src="'+d.imgUrl+'" alt="" loading="lazy"></div>';
+      }
+    }
     card.innerHTML =
       catBadgeHTML(d.mainCat, d.subCat, d.cats) +
       '<div class="preview-post-text">' + maskedText + '</div>' +
+      previewPhotoHTML +
       '<div class="preview-post-time">' + (d.timeStr || '') + '</div>' +
-      '<div class="post-actions">' +
-        '<button class="like-btn' + (isLiked ? ' liked' : '') + '" onclick="toggleLike(\'' + postId + '\',this)">' +
-          '<span class="like-icon">❤️</span>' +
-          '<span class="like-count">' + likeCount + '</span>' +
-        '</button>' +
-        '<button class="share-fb-btn" onclick="sharePost(\'fb\',\'' + shareText.substring(0,200) + '\',\'' + postId + '\')">' +
-          '📘 Facebook' +
-        '</button>' +
-        '<button class="share-fb-btn" style="background:rgba(26,181,102,0.12);border-color:rgba(26,181,102,0.3);color:var(--green-light)" onclick="openSinglePost(\''+postId+'\',true)">' +
-          '🔗 বিস্তারিত / শেয়ার' +
-        '</button>' +
-        expBadge +
-      '</div>';
+      (expBadge ? '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(196,154,56,0.14)">' + expBadge + '</div>' : '');
     c.appendChild(card);
   });
 }
@@ -7452,8 +8079,8 @@ function loadPreviewPosts() {
       var d = doc.data(); d._id = doc.id;
       allPreviewData.push(d);
     });
-    /* Admin সব পোস্ট দেখবে; Visitor/User শুধু ৬০ ঘণ্টার ভেতরেরগুলো দেখবে */
-    var visibleData = isAdmin ? allPreviewData : allPreviewData.filter(function(d) {
+    /* Preview screen সবসময় শুধু ৬০ ঘণ্টার পোস্ট দেখাবে */
+    var visibleData = allPreviewData.filter(function(d) {
       return isPostVisible(d.created || 0);
     });
     document.getElementById('preview-count').textContent = visibleData.length;
@@ -7755,14 +8382,14 @@ function editTestimonial(id, currentText){
 /* ── page load এ শুরু করো ── */
 window.addEventListener('load', function(){ setTimeout(loadTestimonials, 2000); });
 
-/* ══ HOME PAGE — গত ৪৮ ঘণ্টার পোস্ট সংখ্যা ও ক্যাটাগরি breakdown ══ */
+/* ══ HOME PAGE — গত ৬০ ঘণ্টার পোস্ট সংখ্যা ও ক্যাটাগরি breakdown ══ */
 function loadHomeTodayPostCount(){
   var bnD=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
   function toBN(n){return String(n).split('').map(function(c){return bnD[+c]!==undefined?bnD[+c]:c;}).join('');}
 
   function applyBreakdown(posts){
-    var since48h = Date.now() - 48*3600000;
-    var recent = posts.filter(function(d){ return (d.created||0) >= since48h; });
+    var since60h = Date.now() - 60*3600000;
+    var recent = posts.filter(function(d){ return (d.created||0) >= since60h; });
     var total=0, masjid=0, madrasa=0, mahila=0;
     recent.forEach(function(d){
       total++;
@@ -7778,9 +8405,9 @@ function loadHomeTodayPostCount(){
     var elMadrasa = document.getElementById('home-cat-madrasa-count');
     var elMahila  = document.getElementById('home-cat-mahila-count');
     if(elTotal)   elTotal.textContent   = toBN(total);
-    if(elMasjid)  elMasjid.textContent  = toBN(masjid)  + 'টি';
-    if(elMadrasa) elMadrasa.textContent = toBN(madrasa) + 'টি';
-    if(elMahila)  elMahila.textContent  = toBN(mahila)  + 'টি';
+    if(elMasjid)  elMasjid.textContent  = toBN(masjid);
+    if(elMadrasa) elMadrasa.textContent = toBN(madrasa);
+    if(elMahila)  elMahila.textContent  = toBN(mahila);
   }
 
   /* allPreviewData তে ইতিমধ্যে data থাকলে সেখান থেকে নাও */
@@ -7790,15 +8417,15 @@ function loadHomeTodayPostCount(){
   }
   /* না থাকলে Firebase থেকে আনো */
   if(!db) return;
-  var since48h = Date.now() - 48*3600000;
-  db.collection('posts').where('created','>=',since48h).get().then(function(snap){
+  var since60h = Date.now() - 60*3600000;
+  db.collection('posts').where('created','>=',since60h).get().then(function(snap){
     var posts = [];
     snap.forEach(function(doc){ var d=doc.data(); d._id=doc.id; posts.push(d); });
     applyBreakdown(posts);
   }).catch(function(){});
 }
 /* page load হলে count লোড করো */
-window.addEventListener('load', function(){ setTimeout(loadHomeTodayPostCount, 3500); });
+window.addEventListener('load', function(){ setTimeout(loadHomeTodayPostCount, 0); });
 
 /* ═══════════════════════════════════
    PUBLISH POST (with category)
@@ -7806,32 +8433,57 @@ window.addEventListener('load', function(){ setTimeout(loadHomeTodayPostCount, 3
 function publishPost() {
   if (!db) { toast('Firebase error', 'red'); return; }
   var txt = document.getElementById('post-textarea').value.trim();
-  if (!txt) { toast('পোস্ট লিখুন', 'red'); return; }
+  if (!txt && !selectedPostFile) { toast('লেখা বা ফটো — অন্তত একটি দিন', 'red'); return; }
   var checked = document.querySelectorAll('#multi-cat-wrap input[type=checkbox]:checked');
   var cats = Array.from(checked).map(function(cb) { return cb.value; });
   if (cats.length === 0) { toast('অন্তত একটি ক্যাটাগরি নির্বাচন করুন', 'red'); return; }
   var btn = document.getElementById('pub-btn');
   btn.disabled = true; btn.textContent = 'Publishing...';
   var now = new Date();
-  db.collection('posts').add({
-    text: txt, author: curUser,
-    timeStr: now.toLocaleString('bn-BD'),
-    created: now.getTime(), likes: 0,
-    cats: cats,
-    mainCat: cats[0], subCat: ''
-  })
-  .then(function(docRef) {
-    var firstLine = txt.split('\n')[0].substring(0,50);
-    sendPushToAll(firstLine, docRef.id);
-    document.getElementById('post-textarea').value = '';
-    updateChar();
-    document.getElementById('dup-warning').classList.remove('show');
-    document.querySelectorAll('#multi-cat-wrap input[type=checkbox]').forEach(function(cb) { cb.checked = false; });
-    updateMultiCatDisplay();
-    btn.disabled = false; btn.textContent = '📝 পোস্ট করুন';
-    toast('পোস্ট প্রকাশিত হয়েছে', 'green');
-  })
-  .catch(function(e) { btn.disabled = false; btn.textContent = '📝 পোস্ট করুন'; toast('সমস্যা হয়েছে', 'red'); alert(e.message); });
+  var hasNum = document.getElementById('post-has-num') ? document.getElementById('post-has-num').checked : false;
+
+  function doSave(imgUrl) {
+    var postData = {
+      text: txt, author: curUser,
+      timeStr: now.toLocaleString('bn-BD'),
+      created: now.getTime(), likes: 0,
+      cats: cats,
+      mainCat: cats[0], subCat: ''
+    };
+    if (imgUrl) { postData.imgUrl = imgUrl; postData.hasNumber = hasNum; }
+    db.collection('posts').add(postData)
+    .then(function(docRef) {
+      var firstLine = txt.split('\n')[0].substring(0,50);
+      sendPushToAll(firstLine, docRef.id);
+      document.getElementById('post-textarea').value = '';
+      updateChar();
+      document.getElementById('dup-warning').classList.remove('show');
+      document.querySelectorAll('#multi-cat-wrap input[type=checkbox]').forEach(function(cb) { cb.checked = false; });
+      updateMultiCatDisplay();
+      clearPostImg();
+      btn.disabled = false; btn.textContent = '📝 পোস্ট করুন';
+      toast('পোস্ট প্রকাশিত হয়েছে', 'green');
+    })
+    .catch(function(e) { btn.disabled = false; btn.textContent = '📝 পোস্ট করুন'; toast('সমস্যা হয়েছে', 'red'); alert(e.message); });
+  }
+
+  /* ফটো থাকলে আগে Cloudinary-তে আপলোড করো */
+  if (selectedPostFile) {
+    btn.textContent = 'ছবি আপলোড হচ্ছে...';
+    var fd = new FormData();
+    fd.append('file', selectedPostFile);
+    fd.append('upload_preset', 'masjid_upload');
+    fd.append('cloud_name', 'dlwk33bws');
+    fetch('https://api.cloudinary.com/v1_1/dlwk33bws/image/upload', {method:'POST', body:fd})
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (!data.secure_url) { throw new Error('ছবি আপলোড ব্যর্থ হয়েছে'); }
+      doSave(data.secure_url);
+    })
+    .catch(function(e){ btn.disabled=false; btn.textContent='📝 পোস্ট করুন'; toast('ছবি আপলোড সমস্যা: '+e.message,'red'); });
+  } else {
+    doSave(null);
+  }
 }
 
 /* ═══════════════════════════════════
@@ -8075,8 +8727,10 @@ function timeLeft(created){
   if(diff <= 0) return null;
   var h = Math.floor(diff / 3600000);
   var m = Math.floor((diff % 3600000) / 60000);
-  if(h <= 6) return { label: h + 'ঘ ' + m + 'মি বাকি', soon: true };
-  return { label: h + ' ঘন্টা বাকি', soon: false };
+  var bnD=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function toB(n){return String(n).split('').map(function(c){return bnD[+c]!==undefined?bnD[+c]:c;}).join('');}
+  if(h <= 6) return { label: toB(h) + 'ঘ ' + toB(m) + 'মি বাকি', soon: true };
+  return { label: toB(h) + ' ঘন্টা বাকি', soon: false };
 }
 function isPostVisible(created){
   return (Date.now() - created) < POST_VISIBLE_MS;
@@ -8119,7 +8773,7 @@ function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g
 
 /* ══ নাম্বার মাস্কিং ══ */
 function maskNumbers(text){
-  var hint='<span class="pwd-hint-inline" onclick="showScreen(\'home\');showScreen(\'news\')" title="পাসওয়ার্ড দিয়ে সম্পূর্ণ নাম্বার দেখুন">🔒 <strong>পাসওয়ার্ড দিলে এই নম্বর দেখবেন</strong></span>';
+  var hint='<span class="pwd-hint-inline" onclick="showScreen(\'home\');showScreen(\'news\')" title="পাসওয়ার্ড দিয়ে সম্পূর্ণ নাম্বার দেখুন">🔒 <strong>পাসওয়ার্ড দিলে সম্পূর্ণ নাম্বার দেখবেন</strong></span>';
   function maskLast3(str){var count=0,arr=str.split('');for(var i=arr.length-1;i>=0;i--){if(/[\d\u09E6-\u09EF]/.test(arr[i])){arr[i]='X';count++;if(count===3)break;}}return arr.join('');}
   function digitsOnly(str){return str.replace(/[\s\-\(\)\.]/g,'');}
   text=text.replace(/(?:\+?8{2}0?[\s\-]?)?0[\s\-]?1[\s\-]?[3-9](?:[\s\-]?\d){8}/g,function(match){var d=digitsOnly(match);if(/^01[3-9]\d{8}$/.test(d)){return'<span class="masked-num">'+maskLast3(match)+'</span>'+hint;}if(/^(?:880|0880|00880)1[3-9]\d{8}$/.test(d)){return'<span class="masked-num">'+maskLast3(match)+'</span>'+hint;}return match;});
@@ -8248,23 +8902,18 @@ function renderSinglePost(container, postId, d){
   document.getElementById('post-view-title').textContent = cats.map(function(c){ return catLabels[c]||c; }).join(', ');
 
   container.innerHTML =
-    '<div class="post-card" style="margin-bottom:18px">' +
+    '<div class="post-card" style="margin-bottom:18px;padding:28px 22px 22px">' +
       '<div class="post-card-header">' +
         catHTML + tlHTML +
         '<span class="post-time">'+(d.timeStr||'')+'</span>' +
         '<span class="post-view-count" id="single-post-views">...</span>' +
       '</div>' +
-      '<div class="post-body" style="white-space:pre-wrap;line-height:2;font-size:15px">' + bodyText + '</div>' +
+      '<div class="post-body" style="white-space:pre-wrap;line-height:2.1;font-size:15.5px;color:var(--text-body);font-family:\'Noto Sans Bengali\',sans-serif;position:relative;z-index:1">' + bodyText + '</div>' +
+      (d.imgUrl ? (d.hasNumber && !curUser && !isAdmin ?
+        '<div class="post-photo-wrap" style="margin:12px 0"><img src="'+d.imgUrl+'" alt="" style="width:100%;border-radius:8px" class="post-photo-blur"><div class="post-photo-lock"><span>🔒</span><p>নম্বর দেখতে লগইন করুন</p></div></div>' :
+        '<div class="post-photo-wrap" style="margin:12px 0"><img src="'+d.imgUrl+'" alt="" style="width:100%;border-radius:8px"></div>'
+      ) : '') +
       '<div class="post-actions" style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">' +
-        '<a href="https://www.facebook.com/sharer/sharer.php?u='+shareUrl+'" target="_blank" '+
-          'style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#1877f2;color:#fff;border-radius:var(--r-pill);font-family:\'Noto Sans Bengali\',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none;border:none">'+
-          '📘 Facebook এ শেয়ার করুন</a>' +
-        '<a href="https://wa.me/?text='+shareText+'%0A'+shareUrl+'" target="_blank" '+
-          'style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#25d366;color:#fff;border-radius:var(--r-pill);font-family:\'Noto Sans Bengali\',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none">'+
-          '💬 WhatsApp এ শেয়ার</a>' +
-        '<button onclick="copyPostUrl(\''+postId+'\')" '+
-          'style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--bg-raised);border:1px solid var(--border);color:var(--text-body);border-radius:var(--r-pill);font-family:\'Noto Sans Bengali\',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer">'+
-          '🔗 লিংক কপি করুন</button>' +
       '</div>' +
     '</div>';
 
@@ -8482,6 +9131,39 @@ function patchPreviewCache(posts){
 
 
 var selectedFile=null;
+/* ═══════════════════════════════════════════════════
+   POST-এ ফটো আপলোড (home photos থেকে আলাদা)
+═══════════════════════════════════════════════════ */
+var selectedPostFile = null;
+
+function previewPostImg(inp) {
+  var f = inp.files[0]; if (!f) return;
+  if (f.size > 10485760) { toast('ফটো ১০MB এর বেশি হবে না', 'red'); return; }
+  selectedPostFile = f;
+  var r = new FileReader();
+  r.onload = function(e) {
+    document.getElementById('post-img-pe').src = e.target.result;
+    document.getElementById('post-img-pw').style.display = 'block';
+    document.getElementById('post-has-num-wrap').style.display = 'flex';
+  };
+  r.readAsDataURL(f);
+}
+
+function clearPostImg() {
+  selectedPostFile = null;
+  document.getElementById('post-img-file').value = '';
+  document.getElementById('post-img-pe').src = '';
+  document.getElementById('post-img-pw').style.display = 'none';
+  document.getElementById('post-has-num-wrap').style.display = 'none';
+  document.getElementById('post-has-num').checked = false;
+}
+
+function togglePostHasNum() {
+  /* শুধু UI feedback — save হবে publishPost()-এ */
+  var checked = document.getElementById('post-has-num').checked;
+  toast(checked ? '⚠️ ছবিতে নম্বর আছে — লগইন ছাড়া blur থাকবে' : 'ঠিক আছে, সবাই দেখতে পাবে', checked ? 'red' : 'green');
+}
+
 function previewImg(inp){
   var f=inp.files[0];if(!f)return;
   if(f.size>10485760){toast('ফটো ১০MB এর বেশি হবে না','red');return;}
@@ -8633,66 +9315,113 @@ function doLogout(){
   if(home) home.style.display='block';
 }
 
+/* ════════════════════════════════════════════════════
+   PWA INSTALL — Smart Logic
+   - যারা ইনস্টল করেনি → সবসময় দেখাবে
+   - যারা ইনস্টল করেছে → শুধু আপডেট আসলে দেখাবে
+   ════════════════════════════════════════════════════ */
 var pwaInstallPrompt = null;
+var APP_VERSION = '2.0'; /* আপডেট করলে এই নম্বর বাড়ান → banner আবার দেখাবে */
+
 function initPWA(){
-  /* Service Worker — পুরনো cache সব মুছে নতুন version লোড করে */
   if('serviceWorker' in navigator){
-    /* আগে সব পুরনো SW unregister করো */
     navigator.serviceWorker.getRegistrations().then(function(registrations){
       registrations.forEach(function(reg){ reg.unregister(); });
     }).catch(function(){});
-    /* সব cache মুছে ফেলো */
     if('caches' in window){
       caches.keys().then(function(names){
         names.forEach(function(name){ caches.delete(name); });
       }).catch(function(){});
     }
-    /* নতুন করে SW register করো */
     navigator.serviceWorker.register('./sw.js?v=' + Date.now()).then(function(reg){
       reg.update();
       console.log('SW registered:', reg.scope);
     }).catch(function(e){ console.log('SW error:', e); });
   }
-  /* Install prompt capture */
+
   window.addEventListener('beforeinstallprompt', function(e){
     e.preventDefault();
     pwaInstallPrompt = e;
-    /* ৩ সেকেন্ড পরে banner দেখাও */
-    if(!localStorage.getItem('pwa-dismissed')){
-      var lastShown = parseInt(localStorage.getItem('pwa-last-shown')||'0');
-      var oneDay = 24 * 3600000;
-      if(Date.now() - lastShown > oneDay){
-        setTimeout(function(){
-          document.getElementById('pwa-install-banner').classList.add('show');
-          localStorage.setItem('pwa-last-shown', Date.now());
-        }, 3000);
-      }
+
+    var isInstalled = localStorage.getItem('pwa-installed') === '1';
+    var installedVersion = localStorage.getItem('pwa-installed-version') || '';
+    var hasUpdate = isInstalled && (installedVersion !== APP_VERSION);
+
+    if(!isInstalled){
+      /* ইনস্টল করেনি → সবসময় দেখাও */
+      setTimeout(function(){
+        showPWABanner('install');
+      }, 3000);
+    } else if(hasUpdate){
+      /* ইনস্টল করেছে কিন্তু নতুন আপডেট আছে → দেখাও */
+      setTimeout(function(){
+        showPWABanner('update');
+      }, 3000);
     }
+    /* ইনস্টল করেছে এবং আপডেট নেই → দেখাবে না */
   });
+
   window.addEventListener('appinstalled', function(){
     document.getElementById('pwa-install-banner').classList.remove('show');
+    localStorage.setItem('pwa-installed', '1');
+    localStorage.setItem('pwa-installed-version', APP_VERSION);
     pwaInstallPrompt = null;
   });
+
+  /* Display Mode check — standalone মানে আগেই ইনস্টল করা */
+  if(window.matchMedia('(display-mode: standalone)').matches){
+    localStorage.setItem('pwa-installed', '1');
+    localStorage.setItem('pwa-installed-version', APP_VERSION);
+  }
 }
+
+function showPWABanner(type){
+  var banner = document.getElementById('pwa-install-banner');
+  var title = banner.querySelector('.pwa-banner-title');
+  var sub = banner.querySelector('.pwa-banner-sub');
+  var btn = banner.querySelector('.pwa-install-btn');
+  if(!banner) return;
+  if(type === 'update'){
+    if(title) title.textContent = '🔄 নতুন আপডেট এসেছে!';
+    if(sub) sub.textContent = 'অ্যাপটি আপডেট করুন — নতুন ফিচার পাবেন';
+    if(btn) btn.textContent = 'আপডেট করুন';
+  } else {
+    if(title) title.textContent = 'অ্যাপ হিসেবে ইনস্টল করুন';
+    if(sub) sub.textContent = 'Home Screen এ যোগ করুন — দ্রুত খুলবে';
+    if(btn) btn.textContent = 'ইনস্টল';
+  }
+  banner.classList.add('show');
+}
+
 function pwaDoPWAInstall(){
   if(!pwaInstallPrompt) return;
   pwaInstallPrompt.prompt();
   pwaInstallPrompt.userChoice.then(function(r){
-    if(r.outcome === 'accepted') document.getElementById('pwa-install-banner').classList.remove('show');
+    if(r.outcome === 'accepted'){
+      document.getElementById('pwa-install-banner').classList.remove('show');
+      localStorage.setItem('pwa-installed', '1');
+      localStorage.setItem('pwa-installed-version', APP_VERSION);
+    }
     pwaInstallPrompt = null;
   });
 }
+
 function pwaDismiss(){
+  /* "পরে" চাপলে banner লুকাবে — কিন্তু পরের বার আবার দেখাবে */
   document.getElementById('pwa-install-banner').classList.remove('show');
-  localStorage.setItem('pwa-dismissed','1');
+  /* installed না হলে dismissed সেট করবে না — পরের session এ আবার দেখাবে */
 }
 
 /* ════════════════════════════════════════════════════
    PUSH NOTIFICATION — Firebase Cloud Messaging
    ════════════════════════════════════════════════════ */
 var messaging = null;
-/* VAPID Key — Firebase Console > Project Settings > Cloud Messaging এ পাবেন */
-var VAPID_KEY = 'YOUR_VAPID_KEY_HERE';
+/* ══════════════════════════════════════════════════════════════
+   ⚠️  VAPID KEY — এটা বসালেই নোটিফিকেশন কাজ করবে
+   Firebase Console → Project Settings → Cloud Messaging →
+   "Web Push certificates" → Generate key pair → Key কপি করুন
+   ══════════════════════════════════════════════════════════════ */
+var VAPID_KEY = 'BLWKzpTRSnywE5TbgSDXNNFlzQpMHCXsP48YEYlzlcrk-9h5JWhB9Yfu9Ca_YG8eAUP0YMEItoyJcD1By_6dn4'; /* ← VAPID Key বসানো হয়েছে */
 
 function initPushNotification(){
   try {
@@ -8911,7 +9640,48 @@ var profileStoryGuideLines = [
   '২. আপনার নাম ও এলাকা সঠিকভাবে লিখুন।',
   '৩. আপনার অভিজ্ঞতা বিস্তারিত লিখুন।',
   '৪. পোস্ট করার আগে ভালো করে পড়ুন — একবার পোস্ট করলে আর পরিবর্তন করতে পারবেন না।',
-  '৫. মিথ্যা বা আপত্তিকর কিছু লিখবেন না — অ্যাডমিন ডিলিট করতে পারবেন।'
+  '৫. মিথ্যা বা আপত্তিকর কিছু লিখবেন না — অ্যাডমিন ডিলিট করতে পারবেন।',
+  '<div style="margin-top:14px;margin-bottom:8px;font-size:13px;font-weight:800;color:#f0d478;border-bottom:1px solid rgba(196,154,56,0.25);padding-bottom:6px;">✨ ডেমো উদাহরণ — এভাবে লিখুন</div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. রফিকুল ইসলাম — নরসিংদী</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">আলহামদুলিল্লাহ, আমি এই ওয়েবসাইট থেকে মাত্র ৩ দিনের মধ্যে আমার এলাকার কাছেই একটি মসজিদে ইমামের খেদমত পেয়েছি। বেতন আগের চেয়ে অনেক ভালো এবং থাকা-খাওয়ার সুবিধাও আছে। যারা এখনো খেদমত খুঁজছেন তাদের বলব — প্রতিদিন পোস্টগুলো মনোযোগ দিয়ে দেখুন, ইনশাআল্লাহ ভালো খেদমত পাবেন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. আবুল কালাম — কিশোরগঞ্জ</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">আমি প্রায় ২ মাস ধরে ভালো খেদমত খুঁজছিলাম কিন্তু পাচ্ছিলাম না। এই ওয়েবসাইটে এসে প্রতিদিন নতুন পোস্ট দেখতাম। একদিন আমার উপজেলার একটি মাদ্রাসায় শিক্ষক নিয়োগের পোস্ট দেখলাম, সাথে সাথে যোগাযোগ করলাম। আলহামদুলিল্লাহ এখন সেখানেই আছি। জাযাকাল্লাহ খাইর।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">হাফেজ মাহবুবুর রহমান — গাজীপুর</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">আলহামদুলিল্লাহ, হিফজ বিভাগে শিক্ষকের খেদমত পেয়েছি। আগে অনেক কম বেতনে দূরে একটি মাদ্রাসায় ছিলাম। এই সাইটে এসে দেখলাম কাছেই আরও ভালো সুযোগ আছে। এখন বাড়ির কাছে, বেতনও ভালো। সবাইকে অনুরোধ — ধৈর্য ধরে পোস্ট যাচাই করুন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. জহিরুল হক — ময়মনসিংহ</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">আমি মুয়াজ্জিনের পদে খেদমত পেয়েছি আলহামদুলিল্লাহ। মাত্র ৫ দিন এই সাইট ব্যবহার করে আমার পছন্দের এলাকায় একটি বড় মসজিদে খেদমতের সুযোগ হয়েছে। থাকার ব্যবস্থা আছে, বেতনও সন্তোষজনক। এই উদ্যোগের জন্য অনেক ধন্যবাদ।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. শফিকুল ইসলাম — সিলেট</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">সিলেটে আমার বাড়ির কাছে একটি মসজিদে ইমামের পদ পেয়েছি। এই ওয়েবসাইটে প্রতিদিন ১০০+ পোস্ট আসে, তাই অনেক অপশন থেকে বেছে নিতে পেরেছি। আগে যে বেতনে ছিলাম তার চেয়ে প্রায় দ্বিগুণ বেতন পাচ্ছি এখন। আল্লাহ এই সাইটের সবাইকে জাযায়ে খাইর দান করুন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. আমিনুল ইসলাম — রাজশাহী</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">রাজশাহীতে একটি কওমি মাদ্রাসায় কিতাব বিভাগে শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। অনেকদিন ধরে চেষ্টা করছিলাম, শেষ পর্যন্ত এই সাইটের মাধ্যমে সফল হয়েছি। শতশত পোস্ট দেখে নিজের যোগ্যতা অনুযায়ী সেরাটা বেছে নিয়েছি।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. নুরুল আমিন — চট্টগ্রাম</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">চট্টগ্রামে একটি জামে মসজিদে ইমামের খেদমত পেয়েছি। প্রথমে একটু সন্দিহান ছিলাম, কিন্তু এই সাইটে এসে অনেক বিশ্বাসযোগ্য পোস্ট দেখলাম। আমার পরিবার এখন আমার সাথে থাকতে পারছে কারণ মসজিদের পাশেই বাসস্থান আছে। আলহামদুলিল্লাহ।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">হাফেজ ইদ্রিস আলী — বরিশাল</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">বরিশাল শহরে একটি মহিলা মাদ্রাসায় শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। আগে গ্রামে কম বেতনে ছিলাম। এখন শহরে ভালো বেতনে আছি। এই ওয়েবসাইট না পেলে এই সুযোগ পেতাম না। সবাইকে বলব — ধৈর্য ধরুন, প্রতিদিন পোস্ট দেখুন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. তারেকুজ্জামান — কুমিল্লা</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">কুমিল্লায় একটি বড় মসজিদে খতিবের পদ পেয়েছি। মাত্র ১ সপ্তাহ এই সাইট ব্যবহার করে এই সুযোগ পেয়েছি। বেতন ১৫,০০০ টাকা এবং থাকা-খাওয়া ফ্রি। আগে যা পেতাম তার দ্বিগুণেরও বেশি। আল্লাহ এই সাইটের সবার মঙ্গল করুন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. খলিলুর রহমান — খুলনা</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">খুলনায় একটি নূরানী মাদ্রাসায় প্রধান শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। এই সাইটে প্রতিদিন নতুন পোস্ট আসে বলে অনেক অপশন পেয়েছি। নিজের যোগ্যতা ও চাহিদা অনুযায়ী সেরাটা বেছে নিতে পেরেছি। সবাইকে ধন্যবাদ।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. বেলাল হোসেন — ফরিদপুর</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">ফরিদপুরে একটি মসজিদে মুয়াজ্জিনের খেদমত পেয়েছি। দীর্ঘদিন বেকার ছিলাম। এই সাইটে এসে মাত্র ৪ দিনে একটি ভালো সুযোগ পেয়েছি। পরিবার নিয়ে থাকতে পারছি, বেতনও ভালো। আল্লাহ এই সাইটের উদ্যোক্তাদের উত্তম প্রতিদান দিন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">হাফেজ মো. সাইফুল ইসলাম — টাঙ্গাইল</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">টাঙ্গাইলে একটি হিফজ মাদ্রাসায় শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। এর আগে অনেক জায়গায় খুঁজেছি কিন্তু পাইনি। এই সাইটে এসে ৩ দিনেই পেয়ে গেছি। বেতন ১২,০০০ টাকা এবং থাকার ব্যবস্থা আছে। এই সাইট সত্যিই অনেক উপকারী।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. আব্দুর রাজ্জাক — পাবনা</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">পাবনায় একটি জামে মসজিদে ইমামের পদ পেয়েছি। আলহামদুলিল্লাহ। এই সাইটে এসে দেখলাম অনেক পোস্ট, সবগুলো যাচাই করে সবচেয়ে ভালোটা বেছে নিলাম। আগের জায়গায় বেতন কম ছিল, এখন প্রায় দেড়গুণ বেশি পাচ্ছি। ধন্যবাদ।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. হাসানুজ্জামান — জামালপুর</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">জামালপুরে একটি বড় মাদ্রাসায় নাহু-সরফ বিভাগে শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। এই সাইট ব্যবহার করে বুঝলাম যে সঠিক জায়গায় খুঁজলে ভালো খেদমত পাওয়া কঠিন না। শতশত পোস্ট দেখে নিজের পছন্দমতো বেছে নিতে পেরেছি।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. ইসমাইল হোসেন — নোয়াখালী</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">নোয়াখালীতে একটি মসজিদে ইমাম ও খতিবের পদ পেয়েছি। এই সাইটে প্রতিদিন নতুন পোস্ট আসে, তাই সুযোগ অনেক বেশি। মাত্র ৬ দিনে ভালো একটি পদ পেয়েছি। বেতন ও সুযোগ-সুবিধা দুটোই ভালো। সবাইকে এই সাইট ব্যবহার করতে বলব।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">হাফেজ আবু বকর — দিনাজপুর</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">দিনাজপুরে একটি হিফজ বিভাগে শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। আমার স্ত্রী অসুস্থ ছিল, তাই বাড়ির কাছে খেদমত দরকার ছিল। এই সাইটে এসে মাত্র ২ দিনে কাছের একটি ভালো মাদ্রাসায় পদ পেয়েছি। আল্লাহ এই উদ্যোগে বরকত দিন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. আলমগীর হোসেন — বগুড়া</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">বগুড়ায় একটি বড় মসজিদে ইমামের পদ পেয়েছি। মাসিক বেতন ১৮,০০০ টাকা এবং থাকা-খাওয়া ফ্রি। এই সাইট ব্যবহারের আগে এত ভালো পদ পাওয়া সম্ভব হতো না। সবাইকে অনুরোধ — শুধু একটা পোস্ট দেখে সিদ্ধান্ত নেবেন না, শতশত পোস্ট দেখে সেরাটা বেছে নিন।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. রুহুল আমিন — মাদারীপুর</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">মাদারীপুরে একটি মক্তবে ইমাম ও শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। ছোট শহরে এত ভালো পদ পাওয়া কঠিন ছিল। এই সাইটের কারণে সম্ভব হয়েছে। পদ পাওয়ার পর পরিবার নিয়ে অনেক খুশি আছি। এই সাইটের সবার জন্য দোয়া রইল।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">মো. আনোয়ার হোসেন — লক্ষ্মীপুর</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">লক্ষ্মীপুরে একটি মসজিদে ইমামের পদ পেয়েছি। আগে অনেক দূরে কম বেতনে কাজ করতাম। এই সাইটে এসে কাছের এবং অনেক ভালো একটি পদ পেয়েছি। এখন সকালে কাজ করে বিকেলে পরিবারের সাথে সময় দিতে পারছি। আলহামদুলিল্লাহ।</div></div>',
+
+  '<div style="background:rgba(13,122,69,0.12);border:1px solid rgba(26,181,102,0.25);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#f0d478;margin-bottom:4px">হাফেজ মো. জিয়াউর রহমান — মুন্সিগঞ্জ</div><div style="font-size:12.5px;color:#cfe0d7;line-height:1.8">মুন্সিগঞ্জে একটি হিফজ মাদ্রাসায় সিনিয়র শিক্ষকের পদ পেয়েছি আলহামদুলিল্লাহ। অনেক দিন ধরে ভালো পদ খুঁজছিলাম। এই সাইটে এসে ৫ দিনেই পেয়ে গেছি। বেতন ও সুযোগ-সুবিধা দুটোই আগের চেয়ে অনেক ভালো। এই সাইটের জন্য অশেষ কৃতজ্ঞ।</div></div>'
 ];
 
 function openProfileStoryForm(){
@@ -9087,5 +9857,225 @@ function loadStats(){
   });
 })();
 </script>
+
+<!-- ══ NOTICE POPUPS — body level, position:fixed কাজ করবে সঠিকভাবে ══ -->
+<div class="notice-overlay" id="center-notice-overlay" style="display:none">
+  <div class="notice-popup">
+    <button class="notice-popup-close" onclick="closeNotice('center-notice-overlay')" aria-label="বন্ধ করুন">✕</button>
+    <div class="notice-title">গুরুত্বপূর্ণ নোটিশ</div>
+    <div class="notice-body">
+      <p>আমাদের ওয়েবসাইটে নতুন নতুন আপডেট খেদমতের পোস্টগুলো দেখতে পারবেন। <span class="notice-hl-red">পুরাতন পোস্টগুলো দেখতে পারবেন না।</span> এটা করেছি আপনাদের ভালোর জন্য যাতে করে সহজেই খেদমত পেতে পারেন।</p>
+      <p>আমাদের ওয়েবসাইটে যে পোস্টগুলো <span class="notice-hl">৬০ ঘন্টা</span> হয়ে যায় এগুলো <span class="notice-hl-red">অটোমেটিক মুছে যাবে।</span> অর্থাৎ <span class="notice-hl">৬০ ঘন্টার আগের পোস্টগুলো দেখতে পারবেন না।</span></p>
+    </div>
+  </div>
+</div>
+<div class="notice-overlay" id="preview-notice-overlay" style="display:none">
+  <div class="notice-popup">
+    <button class="notice-popup-close" onclick="closeNotice('preview-notice-overlay')" aria-label="বন্ধ করুন">✕</button>
+    <div class="notice-title">গুরুত্বপূর্ণ নোটিশ</div>
+    <div class="notice-body">
+      <p>আমাদের ওয়েবসাইটে নতুন নতুন আপডেট খেদমতের পোস্টগুলো দেখতে পারবেন। <span class="notice-hl-red">পুরাতন পোস্টগুলো দেখতে পারবেন না।</span> এটা করেছি আপনাদের ভালোর জন্য যাতে করে সহজেই খেদমত পেতে পারেন।</p>
+      <p>আমাদের ওয়েবসাইটে যে পোস্টগুলো <span class="notice-hl">৬০ ঘন্টা</span> হয়ে যায় এগুলো <span class="notice-hl-red">অটোমেটিক মুছে যাবে।</span> অর্থাৎ <span class="notice-hl">৬০ ঘন্টার আগের পোস্টগুলো দেখতে পারবেন না।</span></p>
+    </div>
+  </div>
+</div>
+<div class="notice-overlay" id="offer-notice-overlay" style="display:none">
+  <div class="notice-popup offer-popup">
+    <button class="notice-popup-close" onclick="closeNotice('offer-notice-overlay')" aria-label="বন্ধ করুন">✕</button>
+    <div class="offer-notice-top">
+      <div class="offer-notice-badge">🎉 সুখবর &nbsp;•&nbsp; সুখবর &nbsp;•&nbsp; সুখবর 🎉</div>
+      <div class="offer-notice-title">ফ্রিতে সময় বাড়িয়ে নিন!</div>
+    </div>
+    <div class="offer-days-box">
+      <div class="offer-days-num">৫–১০</div>
+      <div class="offer-days-label">দিন সম্পূর্ণ <strong>ফ্রিতে</strong><br>অ্যাক্সেস বাড়িয়ে নিন</div>
+    </div>
+    <div class="offer-body-text">
+      যারা আমাদের ওয়েবসাইট থেকে <span class="offer-highlight">উপকৃত হয়েছেন</span> বা হচ্ছেন, তারা এখন <span class="offer-highlight-green">সফলতার গল্প পোস্ট করে</span> সর্বনিম্ন আরও <span class="offer-highlight">৫ থেকে ১০ দিন</span> সম্পূর্ণ ফ্রিতে খেদমতের পোস্ট দেখার সময় বাড়িয়ে নিতে পারবেন।
+    </div>
+    <div class="offer-tip">
+      ✨ <strong>বিশেষ টিপস:</strong> আপনার লেখা যত সুন্দর ও গুছানো হবে, আপনাকে ততদিন বেশি সময় বাড়িয়ে দেওয়া হবে। ইনশাআল্লাহ।
+    </div>
+    <div class="offer-body-text" style="text-align:center; font-size:13px; color:#a0b8a8;">
+      তাহলে দেরি না করে <span class="offer-highlight-green">এখনই সফলতার গল্প পোস্ট করুন</span> এবং ফ্রিতে সময় বাড়িয়ে নিন।
+    </div>
+    <button class="offer-cta-btn" onclick="closeNotice('offer-notice-overlay'); goToStoryForm();">
+      ✍️ এখনই সফলতার গল্প পোস্ট করুন
+    </button>
+    <button class="offer-skip-btn" onclick="closeNotice('offer-notice-overlay')">এখন না, পরে করব</button>
+  </div>
+</div>
+
+<!-- ══ VISITOR OFFER POPUP — হোমপেজে লগইন ছাড়া ভিজিটরদের জন্য ১ মিনিট পর দেখাবে ══ -->
+<div class="notice-overlay" id="visitor-offer-overlay" style="display:none">
+  <div class="notice-popup offer-popup">
+    <button class="notice-popup-close" onclick="closeNotice('visitor-offer-overlay')" aria-label="বন্ধ করুন">✕</button>
+    <div class="offer-notice-top">
+      <div class="offer-notice-badge">🎉 সুখবর &nbsp;•&nbsp; সুখবর &nbsp;•&nbsp; সুখবর 🎉</div>
+      <div class="offer-notice-title">ফ্রিতে সময় বাড়িয়ে নিন!</div>
+    </div>
+    <div class="offer-days-box">
+      <div class="offer-days-num">৫–১০</div>
+      <div class="offer-days-label">দিন সম্পূর্ণ <strong>ফ্রিতে</strong><br>অ্যাক্সেস বাড়িয়ে নিন</div>
+    </div>
+    <div class="offer-body-text">
+      যারা আমাদের ওয়েবসাইট থেকে <span class="offer-highlight">উপকৃত হয়েছেন</span> বা হচ্ছেন, তারা এখন <span class="offer-highlight-green">সফলতার গল্প পোস্ট করে</span> সর্বনিম্ন আরও <span class="offer-highlight">৫ থেকে ১০ দিন</span> সম্পূর্ণ ফ্রিতে খেদমতের পোস্ট দেখার সময় বাড়িয়ে নিতে পারবেন।
+    </div>
+    <div class="offer-tip">
+      ✨ <strong>বিশেষ টিপস:</strong> আপনার লেখা যত সুন্দর ও গুছানো হবে, আপনাকে ততদিন বেশি সময় বাড়িয়ে দেওয়া হবে। ইনশাআল্লাহ।
+    </div>
+    <div class="offer-body-text" style="text-align:center; font-size:13px; color:#a0b8a8;">
+      তাহলে দেরি না করে <span class="offer-highlight-green">এখনই সফলতার গল্প পোস্ট করুন</span> এবং ফ্রিতে সময় বাড়িয়ে নিন।
+    </div>
+    <button class="offer-cta-btn" onclick="closeNotice('visitor-offer-overlay'); goToStoryForm();">
+      ✍️ এখনই সফলতার গল্প পোস্ট করুন
+    </button>
+    <button class="offer-skip-btn" onclick="closeNotice('visitor-offer-overlay')">এখন না, পরে করব</button>
+  </div>
+</div>
+
+<!-- ══ VISITOR ONLY MESSAGE — ভিজিটর বাটন ক্লিক করলে এই মেসেজ দেখাবে ══ -->
+<div class="notice-overlay" id="visitor-only-msg-overlay" style="display:none" onclick="if(event.target===this){this.style.display='none';}">
+  <div class="notice-popup" style="text-align:center; padding: 32px 24px;">
+    <button class="notice-popup-close" onclick="document.getElementById('visitor-only-msg-overlay').style.display='none'" aria-label="বন্ধ করুন">✕</button>
+    <div style="font-size:48px; margin-bottom:12px;">🔒</div>
+    <div class="notice-title" style="font-size:18px; margin-bottom:12px;">শুধুমাত্র ইউজারদের জন্য</div>
+    <div style="color: var(--text-muted, #a0b8a8); font-size:14px; line-height:1.7; margin-bottom:20px;">
+      এই অফারটি শুধুমাত্র আমাদের রেজিস্টার্ড ইউজারদের জন্য।<br>
+      সফলতার গল্প পোস্ট করতে হলে প্রথমে <strong style="color: #0d7a45;">লগইন</strong> করুন।
+    </div>
+    <button class="offer-cta-btn" onclick="document.getElementById('visitor-only-msg-overlay').style.display='none';" style="max-width:200px; margin: 0 auto;">
+      ঠিক আছে
+    </button>
+  </div>
+</div>
+
+<!-- ══ SCREENSHOT PROTECTION SYSTEM ══ -->
+<div id="ss-warning-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(5,14,9,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);align-items:center;justify-content:center;flex-direction:column;padding:24px;text-align:center;">
+  <div style="max-width:340px;width:100%;">
+    <div style="font-size:60px;margin-bottom:16px;animation:ssWarnPulse 1.2s ease-in-out infinite;">🚫</div>
+    <div style="font-size:20px;font-weight:800;color:#f87171;font-family:'Noto Serif Bengali',serif;margin-bottom:10px;text-shadow:0 0 20px rgba(248,113,113,0.5);">স্ক্রিনশট সীমা শেষ!</div>
+    <div style="font-size:14px;color:#a0b8a8;font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;margin-bottom:20px;">
+      আপনি ২৪ ঘন্টায় সর্বোচ্চ <span style="color:#f0d478;font-weight:700;">২ বার</span> স্ক্রিনশট নিতে পারবেন।<br>
+      আপনার সীমা শেষ হয়ে গেছে।<br>
+      <span id="ss-time-remaining" style="color:#22c874;font-weight:700;"></span>
+    </div>
+    <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#fca5a5;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;">
+      ⚠️ বারবার চেষ্টা করলে আপনার অ্যাকাউন্ট <strong>সাময়িকভাবে বন্ধ</strong> হয়ে যেতে পারে।
+    </div>
+    <button onclick="ssCloseWarning()" style="width:100%;padding:14px;background:linear-gradient(135deg,rgba(13,122,69,0.35),rgba(13,122,69,0.18));border:1.5px solid rgba(26,181,102,0.6);border-radius:12px;color:#22c874;font-size:15px;font-weight:700;font-family:'Noto Sans Bengali',sans-serif;cursor:pointer;letter-spacing:0.02em;">
+      ঠিক আছে, বুঝেছি
+    </button>
+    <div style="margin-top:12px;font-size:12px;color:#4a6058;font-family:'Noto Sans Bengali',sans-serif;">কন্টেন্ট পুনরায় দেখতে পেতে অপেক্ষা করুন</div>
+  </div>
+</div>
+<style>
+@keyframes ssWarnPulse {
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.12);opacity:0.85;}
+}
+.ss-blurred { filter: blur(18px) !important; pointer-events: none !important; user-select: none !important; }
+</style>
+<script>
+(function(){
+  var SS_KEY       = 'kh_ss_data';
+  var SS_MAX       = 2;
+  var SS_WINDOW_MS = 24 * 3600000;
+  var ssBlocked    = false;
+  var ssWarningOpen= false;
+  var bnD = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function toBN(n){ return String(Math.round(n)).split('').map(function(c){ return bnD[+c]!==undefined?bnD[+c]:c; }).join(''); }
+  function getSsData(){ try{ return JSON.parse(localStorage.getItem(SS_KEY)||'{"count":0,"firstAt":0}'); }catch(e){ return {count:0,firstAt:0}; } }
+  function saveSsData(d){ try{ localStorage.setItem(SS_KEY, JSON.stringify(d)); }catch(e){} }
+  function getCleanData(){
+    var d = getSsData();
+    if(d.firstAt && (Date.now() - d.firstAt) >= SS_WINDOW_MS){ d = {count:0, firstAt:0}; saveSsData(d); }
+    return d;
+  }
+  function timeRemainingText(firstAt){
+    var rem = SS_WINDOW_MS - (Date.now() - firstAt);
+    if(rem <= 0) return '';
+    var h = Math.floor(rem / 3600000);
+    var m = Math.floor((rem % 3600000) / 60000);
+    return toBN(h) + ' ঘন্টা ' + toBN(m) + ' মিনিট পরে আবার পারবেন';
+  }
+  function logSsToFirebase(count){
+    try{
+      if(typeof db!=='undefined'&&db&&typeof curUserData!=='undefined'&&curUserData&&curUserData.mobile){
+        db.collection('ss_logs').add({ mobile:curUserData.mobile, name:curUserData.name||'', count:count, at:Date.now(), ua:navigator.userAgent.substring(0,120) }).catch(function(){});
+      }
+    }catch(e){}
+  }
+  function blurContent(){
+    ['posts-container','preview-posts-container','home-today-post-count'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.add('ss-blurred'); });
+    document.querySelectorAll('.post-card,.post-text,.masked-num,.copyable-num').forEach(function(el){ el.classList.add('ss-blurred'); });
+  }
+  function unblurContent(){ document.querySelectorAll('.ss-blurred').forEach(function(el){ el.classList.remove('ss-blurred'); }); }
+  function showSsWarning(firstAt){
+    if(ssWarningOpen) return;
+    ssWarningOpen = true;
+    blurContent();
+    var overlay = document.getElementById('ss-warning-overlay');
+    if(overlay){
+      overlay.style.display = 'flex';
+      var remEl = document.getElementById('ss-time-remaining');
+      if(remEl) remEl.textContent = timeRemainingText(firstAt);
+      var ssTimer = setInterval(function(){ if(!ssWarningOpen){clearInterval(ssTimer);return;} if(remEl){var txt=timeRemainingText(firstAt); if(!txt)clearInterval(ssTimer); else remEl.textContent=txt;} }, 30000);
+    }
+  }
+  window.ssCloseWarning = function(){
+    ssWarningOpen = false;
+    var overlay = document.getElementById('ss-warning-overlay');
+    if(overlay) overlay.style.display = 'none';
+    var d = getCleanData();
+    if(d.count < SS_MAX){ unblurContent(); }
+  };
+  function handleSsAttempt(){
+    var d = getCleanData();
+    if(d.count === 0){ d.firstAt = Date.now(); }
+    d.count++;
+    saveSsData(d);
+    logSsToFirebase(d.count);
+    if(d.count > SS_MAX){
+      ssBlocked = true;
+      showSsWarning(d.firstAt);
+    } else {
+      var remaining = SS_MAX - d.count;
+      var msg = remaining > 0 ? 'স্ক্রিনশট নেওয়া হয়েছে। আরও ' + toBN(remaining) + ' বার নিতে পারবেন।' : 'এটাই শেষ সুযোগ ছিল। আর স্ক্রিনশট নেওয়া যাবে না।';
+      if(typeof toast === 'function') toast(msg, remaining > 0 ? 'green' : 'red');
+    }
+  }
+  function checkOnLoad(){
+    var d = getCleanData();
+    if(d.count >= SS_MAX && d.firstAt){
+      var rem = SS_WINDOW_MS - (Date.now() - d.firstAt);
+      if(rem > 0){ ssBlocked = true; setTimeout(function(){ showSsWarning(d.firstAt); }, 1500); }
+      else { saveSsData({count:0, firstAt:0}); }
+    }
+  }
+  document.addEventListener('keyup', function(e){
+    if(e.key === 'PrintScreen' || e.keyCode === 44){
+      e.preventDefault(); handleSsAttempt();
+      try{ navigator.clipboard.writeText(' ').catch(function(){}); }catch(ex){}
+      return false;
+    }
+  }, true);
+  document.addEventListener('keydown', function(e){
+    var k = e.key ? e.key.toLowerCase() : '';
+    if(e.ctrlKey && e.shiftKey && k === 's'){ e.preventDefault(); handleSsAttempt(); return false; }
+    if(e.ctrlKey && k === 'p'){ e.preventDefault(); handleSsAttempt(); return false; }
+    if(e.key === 'PrintScreen' || e.keyCode === 44){ e.preventDefault(); return false; }
+  }, true);
+  var lastHidden = 0;
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ lastHidden = Date.now(); }
+    else { var gap = Date.now() - lastHidden; if(lastHidden > 0 && gap >= 300 && gap <= 3000){ handleSsAttempt(); } lastHidden = 0; }
+  });
+  if(window.matchMedia){ window.matchMedia('print').addListener(function(mq){ if(mq.matches){ handleSsAttempt(); } }); }
+  window.addEventListener('beforeprint', function(){ handleSsAttempt(); });
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', checkOnLoad); }
+  else { setTimeout(checkOnLoad, 800); }
+})();
+</script>
 </body>
-</html>
+</html><!-- appended -->
