@@ -10067,10 +10067,7 @@ function loadStats(){
     if(e.key === 'PrintScreen' || e.keyCode === 44){ e.preventDefault(); return false; }
   }, true);
   var lastHidden = 0;
-  document.addEventListener('visibilitychange', function(){
-    if(document.hidden){ lastHidden = Date.now(); }
-    else { var gap = Date.now() - lastHidden; if(lastHidden > 0 && gap >= 300 && gap <= 3000){ handleSsAttempt(); } lastHidden = 0; }
-  });
+  /* visibilitychange দিয়ে স্ক্রিনশট ধরা বন্ধ — app switch করলে false trigger হতো */
   if(window.matchMedia){ window.matchMedia('print').addListener(function(mq){ if(mq.matches){ handleSsAttempt(); } }); }
   window.addEventListener('beforeprint', function(){ handleSsAttempt(); });
   if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', checkOnLoad); }
