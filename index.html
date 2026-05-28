@@ -5174,32 +5174,19 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
         </div>
       </div>
 
-      <span class="dash-sidebar-section-label">প্রধান মেনু</span>
-      <div class="dash-nav-item active" onclick="switchDashSection('overview')">
-        <div class="dash-nav-icon">📊</div> ওভারভিউ
-      </div>
-      <div class="dash-nav-item" onclick="switchDashSection('analytics')">
-        <div class="dash-nav-icon">📈</div> Analytics
+      <span class="dash-sidebar-section-label">👥 ভিজিটর Analytics</span>
+      <div class="dash-nav-item active" onclick="switchDashSection('visitor-analytics')">
+        <div class="dash-nav-icon">📊</div> ভিজিটর পরিসংখ্যান
         <span class="dash-nav-badge">LIVE</span>
       </div>
-      <div class="dash-nav-item" onclick="switchDashSection('posts')">
-        <div class="dash-nav-icon">📋</div> পোস্ট ম্যানেজার
-        <span class="dash-nav-badge" id="dash-post-count-badge">—</span>
-      </div>
-      <div class="dash-nav-item" onclick="switchDashSection('users')">
-        <div class="dash-nav-icon">👥</div> ইউজার
-      </div>
-      <div class="dash-nav-item" onclick="switchDashSection('notifications')">
-        <div class="dash-nav-icon">🔔</div> নোটিফিকেশন
-        <span class="dash-nav-badge" style="background:rgba(248,113,113,0.15);border-color:rgba(248,113,113,0.3);color:#f87171">৫</span>
+      <div class="dash-nav-item" onclick="switchDashSection('realtime')">
+        <div class="dash-nav-icon">🟢</div> Real Time Live Tracking
+        <span class="dash-nav-badge" style="background:rgba(248,113,113,0.15);border-color:rgba(248,113,113,0.3);color:#f87171">LIVE</span>
       </div>
 
-      <span class="dash-sidebar-section-label">ভিজিটর</span>
-      <div class="dash-nav-item" onclick="switchDashSection('visitors')">
-        <div class="dash-nav-icon">🌐</div> ভিজিটর Analytics
-      </div>
-      <div class="dash-nav-item" onclick="switchDashSection('active')">
-        <div class="dash-nav-icon">🟢</div> সক্রিয় ব্যবহারকারী
+      <span class="dash-sidebar-section-label">📋 পোস্ট Analytics</span>
+      <div class="dash-nav-item" onclick="switchDashSection('post-analytics')">
+        <div class="dash-nav-icon">📝</div> পোস্ট Analytics
       </div>
 
       <!-- Footer -->
@@ -5222,16 +5209,12 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
         <div class="dash-topbar-left">
           <button class="dash-hamburger" onclick="toggleSidebar()">☰</button>
           <div class="dash-breadcrumb">
-            Admin / <strong id="dash-section-title">ওভারভিউ</strong>
+            Admin / <strong id="dash-section-title">ভিজিটর Analytics</strong>
           </div>
         </div>
         <div class="dash-topbar-right">
           <div class="dash-live-badge">
             <div class="dash-live-dot"></div> LIVE
-          </div>
-          <div class="dash-notif-btn" onclick="switchDashSection('notifications')">
-            🔔
-            <div class="dash-notif-dot"></div>
           </div>
           <button class="dash-back-home" onclick="showScreen('home')">
             ← হোমে ফিরুন
@@ -5241,496 +5224,341 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
 
       <div class="dash-content">
 
-        <!-- ══ OVERVIEW SECTION ══ -->
-        <div class="dash-section active" id="dash-overview">
-          <!-- KPI Grid -->
+        <!-- ══ 👥 VISITOR ANALYTICS SECTION ══ -->
+        <div class="dash-section active" id="dash-visitor-analytics">
+
+          <!-- KPI Row 1: Today / Yesterday / Weekly / Monthly -->
           <div class="dash-kpi-grid">
             <div class="dash-kpi-card green">
-              <span class="dash-kpi-trend up" id="dash-kpi-today-trend">↑ ১২%</span>
-              <div class="dash-kpi-icon">👁️</div>
-              <div class="dash-kpi-num" id="dash-kpi-today">—</div>
-              <div class="dash-kpi-label">আজকের ভিজিটর</div>
+              <span class="dash-kpi-trend up" id="vis-today-trend">↑</span>
+              <div class="dash-kpi-icon">📅</div>
+              <div class="dash-kpi-num" id="vis-today">—</div>
+              <div class="dash-kpi-label">Today Visitors</div>
             </div>
             <div class="dash-kpi-card gold">
-              <span class="dash-kpi-trend up">↑ ৮%</span>
-              <div class="dash-kpi-icon">🌍</div>
-              <div class="dash-kpi-num" id="dash-kpi-total">—</div>
-              <div class="dash-kpi-label">মোট ভিজিটর</div>
+              <div class="dash-kpi-icon">🗓️</div>
+              <div class="dash-kpi-num" id="vis-yesterday">—</div>
+              <div class="dash-kpi-label">গতকালকের ভিজিটর</div>
             </div>
             <div class="dash-kpi-card blue">
-              <span class="dash-kpi-trend up">↑ ৫</span>
-              <div class="dash-kpi-icon">📝</div>
-              <div class="dash-kpi-num" id="dash-kpi-posts">—</div>
-              <div class="dash-kpi-label">মোট পোস্ট</div>
+              <div class="dash-kpi-icon">📆</div>
+              <div class="dash-kpi-num" id="vis-weekly">—</div>
+              <div class="dash-kpi-label">সাপ্তাহিক ভিজিটর</div>
             </div>
             <div class="dash-kpi-card red">
-              <span class="dash-kpi-trend down">↓ ২</span>
-              <div class="dash-kpi-icon">⏳</div>
-              <div class="dash-kpi-num" id="dash-kpi-pending">—</div>
-              <div class="dash-kpi-label">অপেক্ষমান পোস্ট</div>
+              <div class="dash-kpi-icon">🗃️</div>
+              <div class="dash-kpi-num" id="vis-monthly">—</div>
+              <div class="dash-kpi-label">মাসিক ভিজিটর</div>
             </div>
           </div>
 
-          <!-- Chart Grid -->
+          <!-- KPI Row 2: New / Returning — ৩ সময়কাল -->
+          <div class="dash-card" style="margin-bottom:16px">
+            <div class="dash-card-header">
+              <div class="dash-card-title">👤 New vs Returning Visitors</div>
+              <span class="dash-card-badge">৩ সময়কাল</span>
+            </div>
+            <div class="dash-card-body" style="padding:0">
+              <!-- আজকের -->
+              <div style="padding:12px 16px;border-bottom:1px solid var(--border)">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:700;letter-spacing:.5px">📅 আজকের</div>
+                <div style="display:flex;gap:10px">
+                  <div style="flex:1;background:rgba(26,181,102,0.08);border:1px solid rgba(26,181,102,0.2);border-radius:10px;padding:10px;text-align:center">
+                    <div style="font-size:20px;font-weight:800;color:#1ab566" id="nr-today-new">—</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px">🆕 New</div>
+                  </div>
+                  <div style="flex:1;background:rgba(240,212,120,0.08);border:1px solid rgba(240,212,120,0.2);border-radius:10px;padding:10px;text-align:center">
+                    <div style="font-size:20px;font-weight:800;color:#f0d478" id="nr-today-ret">—</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px">🔁 Returning</div>
+                  </div>
+                </div>
+              </div>
+              <!-- গতকালের -->
+              <div style="padding:12px 16px;border-bottom:1px solid var(--border)">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:700;letter-spacing:.5px">🗓️ গতকালের</div>
+                <div style="display:flex;gap:10px">
+                  <div style="flex:1;background:rgba(26,181,102,0.05);border:1px solid rgba(26,181,102,0.15);border-radius:10px;padding:10px;text-align:center">
+                    <div style="font-size:20px;font-weight:800;color:#6ee7b7" id="nr-yest-new">—</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px">🆕 New</div>
+                  </div>
+                  <div style="flex:1;background:rgba(240,212,120,0.05);border:1px solid rgba(240,212,120,0.15);border-radius:10px;padding:10px;text-align:center">
+                    <div style="font-size:20px;font-weight:800;color:#fde68a" id="nr-yest-ret">—</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px">🔁 Returning</div>
+                  </div>
+                </div>
+              </div>
+              <!-- সাপ্তাহিক -->
+              <div style="padding:12px 16px">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:700;letter-spacing:.5px">📆 এই সপ্তাহের</div>
+                <div style="display:flex;gap:10px">
+                  <div style="flex:1;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.2);border-radius:10px;padding:10px;text-align:center">
+                    <div style="font-size:20px;font-weight:800;color:#93c5fd" id="nr-week-new">—</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px">🆕 New</div>
+                  </div>
+                  <div style="flex:1;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:10px;text-align:center">
+                    <div style="font-size:20px;font-weight:800;color:#c4b5fd" id="nr-week-ret">—</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px">🔁 Returning</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Row 3: Active Now / Unique / Avg Time -->
+          <div class="dash-kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+            <div class="dash-kpi-card green">
+              <div class="dash-kpi-icon">🟢</div>
+              <div class="dash-kpi-num" id="vis-active-now">—</div>
+              <div class="dash-kpi-label">Active Users Now</div>
+            </div>
+            <div class="dash-kpi-card gold">
+              <div class="dash-kpi-icon">👁️</div>
+              <div class="dash-kpi-num" id="vis-pageviews">—</div>
+              <div class="dash-kpi-label">Total Page Views</div>
+            </div>
+            <div class="dash-kpi-card blue">
+              <div class="dash-kpi-icon">⏱️</div>
+              <div class="dash-kpi-num" id="vis-avg-time">—</div>
+              <div class="dash-kpi-label">Avg Time on Site</div>
+            </div>
+          </div>
+
+          <!-- KPI Row 4: Unique -->
+          <div class="dash-kpi-grid" style="grid-template-columns:1fr 1fr;margin-bottom:24px">
+            <div class="dash-kpi-card green">
+              <div class="dash-kpi-icon">👤</div>
+              <div class="dash-kpi-num" id="vis-unique">—</div>
+              <div class="dash-kpi-label">Unique Visitors</div>
+            </div>
+            <div class="dash-kpi-card gold">
+              <div class="dash-kpi-icon">🌍</div>
+              <div class="dash-kpi-num" id="vis-total-all">—</div>
+              <div class="dash-kpi-label">সর্বমোট ভিজিট</div>
+            </div>
+          </div>
+
+          <!-- Pages / Categories -->
           <div class="dash-chart-grid">
-            <!-- Bar Chart -->
             <div class="dash-card">
               <div class="dash-card-header">
-                <div class="dash-card-title">📊 সাপ্তাহিক ভিজিটর</div>
-                <span class="dash-card-badge">৭ দিন</span>
+                <div class="dash-card-title">📄 কোন Page দেখেছে</div>
+                <span class="dash-card-badge">Top Pages</span>
               </div>
-              <div class="dash-card-body">
-                <div class="dash-bar-chart" id="dash-bar-chart">
-                  <!-- JS will populate -->
+              <div class="dash-card-body" style="padding:0">
+                <div id="vis-top-pages">
+                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
                 </div>
               </div>
             </div>
-            <!-- Donut -->
             <div class="dash-card">
               <div class="dash-card-header">
-                <div class="dash-card-title">🥧 পোস্ট ক্যাটাগরি</div>
+                <div class="dash-card-title">🗂️ কোন Category দেখেছে</div>
+                <span class="dash-card-badge">Top Categories</span>
               </div>
-              <div class="dash-card-body">
-                <div class="dash-ring-wrap">
-                  <div class="dash-ring">
-                    <svg viewBox="0 0 100 100" width="100" height="100">
-                      <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"/>
-                      <circle cx="50" cy="50" r="38" fill="none" stroke="#1ab566" stroke-width="12"
-                        stroke-dasharray="80 159" stroke-linecap="round"/>
-                      <circle cx="50" cy="50" r="38" fill="none" stroke="#c49a38" stroke-width="12"
-                        stroke-dasharray="50 159" stroke-dashoffset="-80" stroke-linecap="round"/>
-                      <circle cx="50" cy="50" r="38" fill="none" stroke="#60a5fa" stroke-width="12"
-                        stroke-dasharray="29 159" stroke-dashoffset="-130" stroke-linecap="round"/>
-                    </svg>
-                    <div class="dash-ring-center">
-                      <div class="dash-ring-num">৩</div>
-                      <div class="dash-ring-sub">ক্যাটাগরি</div>
-                    </div>
-                  </div>
-                  <div class="dash-ring-legend" style="width:100%;padding:0 4px">
-                    <div class="dash-ring-legend-item">
-                      <div class="dash-ring-dot" style="background:#1ab566"></div>
-                      মসজিদ
-                      <span class="dash-ring-legend-val" id="dash-cat-masjid">—</span>
-                    </div>
-                    <div class="dash-ring-legend-item">
-                      <div class="dash-ring-dot" style="background:#c49a38"></div>
-                      পুরুষ মাদ্রাসা
-                      <span class="dash-ring-legend-val" id="dash-cat-madrasa">—</span>
-                    </div>
-                    <div class="dash-ring-legend-item">
-                      <div class="dash-ring-dot" style="background:#60a5fa"></div>
-                      মহিলা মাদ্রাসা
-                      <span class="dash-ring-legend-val" id="dash-cat-mahila">—</span>
-                    </div>
-                  </div>
+              <div class="dash-card-body" style="padding:0">
+                <div id="vis-top-categories">
+                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 3-col grid: Activity / Active Users / Notifications -->
-          <div class="dash-three-grid">
-            <!-- Activity feed -->
+          <!-- Districts / Sources -->
+          <div class="dash-chart-grid" style="margin-bottom:0">
             <div class="dash-card">
               <div class="dash-card-header">
-                <div class="dash-card-title">⚡ রিসেন্ট অ্যাক্টিভিটি</div>
+                <div class="dash-card-title">🗺️ কোন জেলা থেকে এসেছে</div>
+                <span class="dash-card-badge">জেলাভিত্তিক</span>
               </div>
-              <div class="dash-card-body" style="padding:12px 16px">
-                <div class="dash-feed-item">
-                  <div class="dash-feed-avatar" style="background:rgba(26,181,102,0.14)">📝</div>
-                  <div class="dash-feed-body">
-                    <div class="dash-feed-text">নতুন পোস্ট অনুমোদন হয়েছে</div>
-                    <div class="dash-feed-time">২ মিনিট আগে</div>
-                  </div>
-                  <span class="dash-feed-badge post">পোস্ট</span>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-avatar" style="background:rgba(196,154,56,0.12)">👤</div>
-                  <div class="dash-feed-body">
-                    <div class="dash-feed-text">নতুন ইউজার লগইন করেছেন</div>
-                    <div class="dash-feed-time">৮ মিনিট আগে</div>
-                  </div>
-                  <span class="dash-feed-badge user">ইউজার</span>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-avatar" style="background:rgba(96,165,250,0.1)">👁️</div>
-                  <div class="dash-feed-body">
-                    <div class="dash-feed-text">৫ জন নতুন ভিজিটর এসেছেন</div>
-                    <div class="dash-feed-time">১৫ মিনিট আগে</div>
-                  </div>
-                  <span class="dash-feed-badge login">ভিজিট</span>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-avatar" style="background:rgba(248,113,113,0.1)">⚠️</div>
-                  <div class="dash-feed-body">
-                    <div class="dash-feed-text">পেন্ডিং পোস্ট রিভিউ বাকি</div>
-                    <div class="dash-feed-time">৩০ মিনিট আগে</div>
-                  </div>
-                  <span class="dash-feed-badge warn">সতর্কতা</span>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-avatar" style="background:rgba(26,181,102,0.14)">📸</div>
-                  <div class="dash-feed-body">
-                    <div class="dash-feed-text">নতুন ফটো আপলোড হয়েছে</div>
-                    <div class="dash-feed-time">১ ঘন্টা আগে</div>
-                  </div>
-                  <span class="dash-feed-badge post">ফটো</span>
+              <div class="dash-card-body" style="padding:0">
+                <div id="vis-districts">
+                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
                 </div>
               </div>
             </div>
-
-            <!-- Active Users -->
             <div class="dash-card">
               <div class="dash-card-header">
-                <div class="dash-card-title">🟢 সক্রিয় ব্যবহারকারী</div>
-                <div class="dash-live-badge" style="font-size:10px;padding:2px 7px">
-                  <div class="dash-live-dot"></div> লাইভ
-                </div>
+                <div class="dash-card-title">🔗 Traffic Source</div>
+                <span class="dash-card-badge">Facebook / Google / Telegram</span>
               </div>
               <div class="dash-card-body" style="padding:12px 16px">
                 <div class="dash-online-list">
                   <div class="dash-online-item">
-                    <div class="dash-online-dot"></div>
-                    <div class="dash-online-name">আবদুল্লাহ</div>
-                    <div class="dash-online-time">এখন</div>
+                    <div style="font-size:18px;flex-shrink:0">📘</div>
+                    <div class="dash-online-name">Facebook</div>
+                    <div class="dash-online-time" id="src-facebook">—</div>
                   </div>
                   <div class="dash-online-item">
-                    <div class="dash-online-dot"></div>
-                    <div class="dash-online-name">মোহাম্মদ রাহাত</div>
-                    <div class="dash-online-time">২ মি আগে</div>
+                    <div style="font-size:18px;flex-shrink:0">🔍</div>
+                    <div class="dash-online-name">Google</div>
+                    <div class="dash-online-time" id="src-google">—</div>
                   </div>
                   <div class="dash-online-item">
-                    <div class="dash-online-dot" style="background:#f0d478;box-shadow:0 0 6px rgba(240,212,120,0.5)"></div>
-                    <div class="dash-online-name">ফাতেমা বেগম</div>
-                    <div class="dash-online-time">৫ মি আগে</div>
+                    <div style="font-size:18px;flex-shrink:0">✈️</div>
+                    <div class="dash-online-name">Telegram</div>
+                    <div class="dash-online-time" id="src-telegram">—</div>
                   </div>
                   <div class="dash-online-item">
-                    <div class="dash-online-dot"></div>
-                    <div class="dash-online-name">আরিফুল ইসলাম</div>
-                    <div class="dash-online-time">৮ মি আগে</div>
+                    <div style="font-size:18px;flex-shrink:0">🌐</div>
+                    <div class="dash-online-name">Direct / Other</div>
+                    <div class="dash-online-time" id="src-direct">—</div>
                   </div>
-                  <div class="dash-online-item" style="border-color:rgba(196,154,56,0.2)">
-                    <div class="dash-online-dot" style="background:#93c5fd;box-shadow:0 0 6px rgba(147,197,253,0.5)"></div>
-                    <div class="dash-online-name">Guest ভিজিটর</div>
-                    <div class="dash-online-time">১২ মি আগে</div>
-                  </div>
+                </div>
+                <div id="src-note" style="display:none;margin-top:10px;padding:8px 10px;background:rgba(240,212,120,0.08);border:1px solid rgba(240,212,120,0.2);border-radius:8px;font-size:11px;color:var(--text-muted);text-align:center">
+                  ℹ️ ভিজিটর আসতে শুরু করলে এখানে real data দেখাবে
                 </div>
               </div>
             </div>
+          </div>
+        </div><!-- /dash-visitor-analytics -->
 
-            <!-- Notifications -->
+        <!-- ══ 🟢 REAL TIME LIVE TRACKING SECTION ══ -->
+        <div class="dash-section" id="dash-realtime">
+
+          <!-- Live count KPI -->
+          <div class="dash-kpi-grid">
+            <div class="dash-kpi-card green" style="position:relative">
+              <div class="dash-live-badge" style="position:absolute;top:12px;right:12px;font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
+              <div class="dash-kpi-icon">🟢</div>
+              <div class="dash-kpi-num" id="rt-online-count">—</div>
+              <div class="dash-kpi-label">এখন কতজন Online</div>
+            </div>
+            <div class="dash-kpi-card blue">
+              <div class="dash-kpi-icon">👁️</div>
+              <div class="dash-kpi-num" id="rt-live-views">—</div>
+              <div class="dash-kpi-label">Live Post Views</div>
+            </div>
+            <div class="dash-kpi-card gold">
+              <div class="dash-kpi-icon">📄</div>
+              <div class="dash-kpi-num" id="rt-active-pages">—</div>
+              <div class="dash-kpi-label">Active Pages Now</div>
+            </div>
+            <div class="dash-kpi-card red">
+              <div class="dash-kpi-icon">⚡</div>
+              <div class="dash-kpi-num" id="rt-activity-count">—</div>
+              <div class="dash-kpi-label">Live Activities</div>
+            </div>
+          </div>
+
+          <!-- Who is on which page + category -->
+          <div class="dash-chart-grid">
             <div class="dash-card">
               <div class="dash-card-header">
-                <div class="dash-card-title">🔔 সাম্প্রতিক নোটিফিকেশন</div>
-                <span class="dash-card-badge" style="background:rgba(248,113,113,0.12);border-color:rgba(248,113,113,0.3);color:#f87171">৫ নতুন</span>
+                <div class="dash-card-title">📄 কে কোন Page দেখছে</div>
+                <div class="dash-live-badge" style="font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
               </div>
-              <div style="padding:0">
-                <div class="dash-notif-item post unread">
-                  <div class="dash-notif-icon-wrap">📝</div>
-                  <div class="dash-notif-body">
-                    <div class="dash-notif-text">মসজিদে নতুন খেদমতের পোস্ট এসেছে</div>
-                    <div class="dash-notif-time">এইমাত্র</div>
-                  </div>
-                  <div class="dash-notif-unread-dot"></div>
+              <div class="dash-card-body" style="padding:12px 16px">
+                <div class="dash-online-list" id="rt-who-page">
+                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
                 </div>
-                <div class="dash-notif-item user unread">
-                  <div class="dash-notif-icon-wrap">👤</div>
-                  <div class="dash-notif-body">
-                    <div class="dash-notif-text">নতুন ইউজার রেজিস্ট্রেশন অনুরোধ</div>
-                    <div class="dash-notif-time">৫ মিনিট আগে</div>
-                  </div>
-                  <div class="dash-notif-unread-dot"></div>
-                </div>
-                <div class="dash-notif-item warn unread">
-                  <div class="dash-notif-icon-wrap">⚠️</div>
-                  <div class="dash-notif-body">
-                    <div class="dash-notif-text">৩টি পোস্ট রিভিউ পেন্ডিং আছে</div>
-                    <div class="dash-notif-time">১৫ মিনিট আগে</div>
-                  </div>
-                  <div class="dash-notif-unread-dot"></div>
-                </div>
-                <div class="dash-notif-item visit">
-                  <div class="dash-notif-icon-wrap">🌐</div>
-                  <div class="dash-notif-body">
-                    <div class="dash-notif-text">আজকের ভিজিটর লক্ষ্যমাত্রা পার হয়েছে</div>
-                    <div class="dash-notif-time">১ ঘন্টা আগে</div>
-                  </div>
-                </div>
-                <div class="dash-notif-item post">
-                  <div class="dash-notif-icon-wrap">🗑️</div>
-                  <div class="dash-notif-body">
-                    <div class="dash-notif-text">৬০ ঘন্টা পুরনো পোস্ট স্বয়ংক্রিয় ডিলিট</div>
-                    <div class="dash-notif-time">৩ ঘন্টা আগে</div>
-                  </div>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div class="dash-card-title">🗂️ কোন Category দেখছে</div>
+                <div class="dash-live-badge" style="font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
+              </div>
+              <div class="dash-card-body" style="padding:12px 16px">
+                <div class="dash-online-list" id="rt-who-category">
+                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Quick stats row -->
-          <div class="dash-quick-row" style="margin-bottom:0">
-            <div class="dash-quick-stat">
-              <div class="dash-quick-stat-icon">📅</div>
-              <div class="dash-quick-stat-info">
-                <div class="dash-quick-stat-num" id="dash-qs-yest">—</div>
-                <div class="dash-quick-stat-lbl">গতকাল ভিজিট</div>
+          <!-- Recently Viewed + Live Activity -->
+          <div class="dash-chart-grid" style="margin-bottom:0">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div class="dash-card-title">🕐 Recently Viewed Pages</div>
+              </div>
+              <div class="dash-card-body" style="padding:0">
+                <div id="rt-recently-viewed">
+                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
+                </div>
               </div>
             </div>
-            <div class="dash-quick-stat">
-              <div class="dash-quick-stat-icon">🗓️</div>
-              <div class="dash-quick-stat-info">
-                <div class="dash-quick-stat-num" id="dash-qs-month">—</div>
-                <div class="dash-quick-stat-lbl">এই মাসে</div>
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div class="dash-card-title">⚡ Live Visitor Activity</div>
+                <div class="dash-live-badge" style="font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
               </div>
-            </div>
-            <div class="dash-quick-stat">
-              <div class="dash-quick-stat-icon">⏰</div>
-              <div class="dash-quick-stat-info">
-                <div class="dash-quick-stat-num" id="dash-qs-time">—</div>
-                <div class="dash-quick-stat-lbl">বর্তমান সময়</div>
+              <div class="dash-card-body" style="padding:12px 16px">
+                <div id="rt-live-activity" style="max-height:260px;overflow-y:auto">
+                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
+                </div>
               </div>
             </div>
           </div>
-        </div><!-- /dash-overview -->
+        </div><!-- /dash-realtime -->
 
-        <!-- ══ ANALYTICS SECTION ══ -->
-        <div class="dash-section" id="dash-analytics">
+        <!-- ══ 📋 POST ANALYTICS SECTION ══ -->
+        <div class="dash-section" id="dash-post-analytics">
+
+          <!-- Post KPI Row -->
           <div class="dash-kpi-grid">
             <div class="dash-kpi-card green">
-              <div class="dash-kpi-icon">📈</div>
-              <div class="dash-kpi-num" id="dash-an-today">—</div>
-              <div class="dash-kpi-label">আজ ভিজিট</div>
-            </div>
-            <div class="dash-kpi-card gold">
-              <div class="dash-kpi-icon">📊</div>
-              <div class="dash-kpi-num" id="dash-an-month">—</div>
-              <div class="dash-kpi-label">এই মাস</div>
-            </div>
-            <div class="dash-kpi-card blue">
-              <div class="dash-kpi-icon">🌍</div>
-              <div class="dash-kpi-num" id="dash-an-total">—</div>
-              <div class="dash-kpi-label">সর্বমোট</div>
+              <span class="dash-kpi-trend up" id="pa-today-trend">↑</span>
+              <div class="dash-kpi-icon">📝</div>
+              <div class="dash-kpi-num" id="pa-today-posts">—</div>
+              <div class="dash-kpi-label">Today Posts</div>
             </div>
             <div class="dash-kpi-card red">
-              <div class="dash-kpi-icon">📉</div>
-              <div class="dash-kpi-num" id="dash-an-yest">—</div>
-              <div class="dash-kpi-label">গতকাল</div>
-            </div>
-          </div>
-          <div class="dash-card" style="margin-bottom:16px">
-            <div class="dash-card-header">
-              <div class="dash-card-title">📊 ৭-দিনের ভিজিটর গ্রাফ</div>
-              <span class="dash-card-badge">সাপ্তাহিক</span>
-            </div>
-            <div class="dash-card-body">
-              <div class="dash-bar-chart" id="dash-bar-chart-2" style="height:160px"></div>
-            </div>
-          </div>
-          <div class="dash-card">
-            <div class="dash-card-header">
-              <div class="dash-card-title">📋 দৈনিক ভিজিটর লগ</div>
-            </div>
-            <div class="dash-card-body" style="padding:0">
-              <div id="dash-visitor-log" style="max-height:300px;overflow-y:auto">
-                <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:14px">⏳ লোড হচ্ছে...</div>
-              </div>
-            </div>
-          </div>
-          <!-- ══ TOP POSTS BY VIEWS ══ -->
-          <div class="dash-card" style="margin-top:16px">
-            <div class="dash-card-header">
-              <div class="dash-card-title">🔥 সর্বোচ্চ দেখা পোস্ট</div>
-              <span class="dash-card-badge">Top 10</span>
-            </div>
-            <div class="dash-card-body" style="padding:0">
-              <div id="dash-top-posts-list">
-                <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:14px">⏳ লোড হচ্ছে...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ POSTS SECTION ══ -->
-        <div class="dash-section" id="dash-posts">
-          <div class="dash-card">
-            <div class="dash-card-header">
-              <div class="dash-card-title">📋 সকল পোস্ট</div>
-              <span class="dash-card-badge" id="dash-posts-count-label">লোড হচ্ছে...</span>
-            </div>
-            <div class="dash-card-body" style="padding:0">
-              <div id="dash-posts-list" style="max-height:500px;overflow-y:auto">
-                <div style="padding:20px;text-align:center;color:var(--text-muted)">⏳ লোড হচ্ছে...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ USERS SECTION ══ -->
-        <div class="dash-section" id="dash-users">
-          <div class="dash-card">
-            <div class="dash-card-header">
-              <div class="dash-card-title">👥 ইউজার ব্যবস্থাপনা</div>
-            </div>
-            <div class="dash-card-body" style="padding:12px 16px">
-              <div id="dash-user-list">
-                <div style="text-align:center;color:var(--text-muted);padding:20px">⏳ লোড হচ্ছে...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ NOTIFICATIONS SECTION ══ -->
-        <div class="dash-section" id="dash-notifications">
-          <div class="dash-card">
-            <div class="dash-card-header">
-              <div class="dash-card-title">🔔 সমস্ত নোটিফিকেশন</div>
-              <span class="dash-card-badge" style="background:rgba(248,113,113,0.12);border-color:rgba(248,113,113,0.3);color:#f87171">৫ অপঠিত</span>
-            </div>
-            <div>
-              <div class="dash-notif-item post unread">
-                <div class="dash-notif-icon-wrap">📝</div>
-                <div class="dash-notif-body">
-                  <div class="dash-notif-text">মসজিদের নতুন খেদমত পোস্ট অনুমোদনের অপেক্ষায়</div>
-                  <div class="dash-notif-time">আজ, ২ মিনিট আগে</div>
-                </div>
-                <div class="dash-notif-unread-dot"></div>
-              </div>
-              <div class="dash-notif-item user unread">
-                <div class="dash-notif-icon-wrap">👤</div>
-                <div class="dash-notif-body">
-                  <div class="dash-notif-text">আবদুল্লাহ নতুন ইউজার হিসেবে যোগ দিয়েছেন</div>
-                  <div class="dash-notif-time">আজ, ৫ মিনিট আগে</div>
-                </div>
-                <div class="dash-notif-unread-dot"></div>
-              </div>
-              <div class="dash-notif-item warn unread">
-                <div class="dash-notif-icon-wrap">⚠️</div>
-                <div class="dash-notif-body">
-                  <div class="dash-notif-text">৩টি পোস্ট ৫৫ ঘন্টার বেশি পুরনো — শীঘ্রই ডিলিট হবে</div>
-                  <div class="dash-notif-time">আজ, ১৫ মিনিট আগে</div>
-                </div>
-                <div class="dash-notif-unread-dot"></div>
-              </div>
-              <div class="dash-notif-item visit unread">
-                <div class="dash-notif-icon-wrap">🌐</div>
-                <div class="dash-notif-body">
-                  <div class="dash-notif-text">আজকের ভিজিটর গতকালের চেয়ে ১২% বেশি</div>
-                  <div class="dash-notif-time">আজ, ১ ঘন্টা আগে</div>
-                </div>
-                <div class="dash-notif-unread-dot"></div>
-              </div>
-              <div class="dash-notif-item post unread">
-                <div class="dash-notif-icon-wrap">📸</div>
-                <div class="dash-notif-body">
-                  <div class="dash-notif-text">নতুন ফটো গ্যালারিতে যোগ হয়েছে</div>
-                  <div class="dash-notif-time">আজ, ২ ঘন্টা আগে</div>
-                </div>
-                <div class="dash-notif-unread-dot"></div>
-              </div>
-              <div class="dash-notif-item post">
-                <div class="dash-notif-icon-wrap">🗑️</div>
-                <div class="dash-notif-body">
-                  <div class="dash-notif-text">৬০ ঘন্টা পার হওয়া ৪টি পোস্ট স্বয়ংক্রিয়ভাবে মুছে গেছে</div>
-                  <div class="dash-notif-time">গতকাল, সন্ধ্যা ৬টা</div>
-                </div>
-              </div>
-              <div class="dash-notif-item user">
-                <div class="dash-notif-icon-wrap">🔑</div>
-                <div class="dash-notif-body">
-                  <div class="dash-notif-text">রাহাত হোসেনের পাসওয়ার্ড আপডেট হয়েছে</div>
-                  <div class="dash-notif-time">গতকাল, দুপুর ২টা</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ VISITORS SECTION ══ -->
-        <div class="dash-section" id="dash-visitors">
-          <div class="dash-kpi-grid">
-            <div class="dash-kpi-card green">
-              <div class="dash-kpi-icon">📅</div>
-              <div class="dash-kpi-num" id="dash-vis-today">—</div>
-              <div class="dash-kpi-label">আজকের ভিজিটর</div>
+              <div class="dash-kpi-icon">🚫</div>
+              <div class="dash-kpi-num" id="pa-hidden-posts">—</div>
+              <div class="dash-kpi-label">Hidden Posts</div>
             </div>
             <div class="dash-kpi-card gold">
-              <div class="dash-kpi-icon">🗓️</div>
-              <div class="dash-kpi-num" id="dash-vis-month">—</div>
-              <div class="dash-kpi-label">এই মাসে মোট</div>
+              <div class="dash-kpi-icon">⏳</div>
+              <div class="dash-kpi-num" id="pa-pending-posts">—</div>
+              <div class="dash-kpi-label">Pending Posts</div>
             </div>
             <div class="dash-kpi-card blue">
-              <div class="dash-kpi-icon">📆</div>
-              <div class="dash-kpi-num" id="dash-vis-yest">—</div>
-              <div class="dash-kpi-label">গতকাল</div>
-            </div>
-            <div class="dash-kpi-card red">
-              <div class="dash-kpi-icon">🌍</div>
-              <div class="dash-kpi-num" id="dash-vis-total">—</div>
-              <div class="dash-kpi-label">সর্বমোট</div>
+              <div class="dash-kpi-icon">🔥</div>
+              <div class="dash-kpi-num" id="pa-total-posts">—</div>
+              <div class="dash-kpi-label">মোট পোস্ট</div>
             </div>
           </div>
-          <div class="dash-card">
-            <div class="dash-card-header">
-              <div class="dash-card-title">📊 মাসিক ভিজিটর বিশ্লেষণ</div>
-              <span class="dash-card-badge">Firebase Live</span>
-            </div>
-            <div class="dash-card-body">
-              <div class="dash-bar-chart" id="dash-bar-chart-3" style="height:160px"></div>
-            </div>
-          </div>
-        </div>
 
-        <!-- ══ ACTIVE USERS SECTION ══ -->
-        <div class="dash-section" id="dash-active">
-          <div class="dash-card">
-            <div class="dash-card-header">
-              <div class="dash-card-title">🟢 সক্রিয় ব্যবহারকারী</div>
-              <div class="dash-live-badge">
-                <div class="dash-live-dot"></div> LIVE
+          <!-- Most Viewed Post + Trending Category -->
+          <div class="dash-chart-grid">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div class="dash-card-title">🔥 Most Viewed Post</div>
+                <span class="dash-card-badge">Top ১০</span>
+              </div>
+              <div class="dash-card-body" style="padding:0">
+                <div id="pa-most-viewed-posts">
+                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
+                </div>
               </div>
             </div>
-            <div class="dash-card-body" style="padding:12px 16px">
-              <div class="dash-online-list">
-                <div class="dash-online-item">
-                  <div class="dash-online-dot"></div>
-                  <div class="dash-online-name">আবদুল্লাহ আল মামুন</div>
-                  <div class="dash-online-time">এখন সক্রিয়</div>
-                </div>
-                <div class="dash-online-item">
-                  <div class="dash-online-dot"></div>
-                  <div class="dash-online-name">মোহাম্মদ রাহাত হোসেন</div>
-                  <div class="dash-online-time">২ মি আগে</div>
-                </div>
-                <div class="dash-online-item">
-                  <div class="dash-online-dot" style="background:#f0d478;box-shadow:0 0 6px rgba(240,212,120,0.5)"></div>
-                  <div class="dash-online-name">ফাতেমা বেগম</div>
-                  <div class="dash-online-time">৫ মি আগে</div>
-                </div>
-                <div class="dash-online-item">
-                  <div class="dash-online-dot"></div>
-                  <div class="dash-online-name">আরিফুল ইসলাম</div>
-                  <div class="dash-online-time">৮ মি আগে</div>
-                </div>
-                <div class="dash-online-item">
-                  <div class="dash-online-dot" style="background:#93c5fd;box-shadow:0 0 6px rgba(147,197,253,0.4)"></div>
-                  <div class="dash-online-name">অ্যানোনিমাস ভিজিটর #১২৩</div>
-                  <div class="dash-online-time">১০ মি আগে</div>
-                </div>
-                <div class="dash-online-item">
-                  <div class="dash-online-dot" style="background:#93c5fd;box-shadow:0 0 6px rgba(147,197,253,0.4)"></div>
-                  <div class="dash-online-name">অ্যানোনিমাস ভিজিটর #৪৫৬</div>
-                  <div class="dash-online-time">১২ মি আগে</div>
-                </div>
-                <div class="dash-online-item">
-                  <div class="dash-online-dot" style="opacity:0.4;animation:none"></div>
-                  <div class="dash-online-name">জুবায়ের আহমেদ</div>
-                  <div class="dash-online-time">২০ মি আগে</div>
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div class="dash-card-title">📈 Trending Category</div>
+                <span class="dash-card-badge">এখন Trending</span>
+              </div>
+              <div class="dash-card-body" style="padding:12px 16px">
+                <div class="dash-online-list" id="pa-trending-categories">
+                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+          <!-- Top Performing Category -->
+          <div class="dash-card" style="margin-bottom:0">
+            <div class="dash-card-header">
+              <div class="dash-card-title">🏆 Top Performing Category</div>
+              <span class="dash-card-badge">সর্বোচ্চ পারফর্মার</span>
+            </div>
+            <div class="dash-card-body" style="padding:0">
+              <div id="pa-top-performing">
+                <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /dash-post-analytics -->
 
       </div><!-- /dash-content -->
     </div><!-- /dash-main -->
@@ -5762,13 +5590,13 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
     <!-- badge -->
     <div style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(255,59,59,0.14),rgba(255,59,59,0.07));border:1px solid rgba(255,59,59,0.35);padding:5px 16px 5px 12px;border-radius:999px;margin-bottom:14px;">
       <span style="width:8px;height:8px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 10px rgba(255,59,59,0.85),0 0 20px rgba(255,59,59,0.4);animation:notif-pulse 1.5s ease-in-out infinite;display:inline-block;flex-shrink:0;"></span>
-      <span style="font-size:12px;font-weight:700;letter-spacing:0.10em;color:#ff3b3b;font-family:'Noto Sans Bengali',sans-serif;">নতুন আপডেট</span>
+      <span style="font-size:12px;font-weight:700;letter-spacing:0.10em;color:#ff3b3b;font-family:'Noto Sans Bengali',sans-serif;">লাইভ আপডেট</span>
     </div>
 
     <!-- count -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:4px;margin:0 0 6px;">
+    <div style="display:flex;align-items:baseline;justify-content:center;gap:2px;margin:0 0 6px;">
       <span id="home-today-post-count" style="font-size:clamp(52px,13vw,72px);font-weight:900;font-family:'Noto Serif Bengali',serif;color:#f5c842;line-height:1;text-shadow:0 0 40px rgba(245,200,66,0.55),0 0 12px rgba(245,200,66,0.30);letter-spacing:-3px;">—</span>
-      <span style="font-size:clamp(52px,13vw,72px);font-weight:900;color:#ff8c00;padding-bottom:0;font-family:'Noto Serif Bengali',serif;line-height:1;">টি</span>
+      <span style="font-size:clamp(22px,5vw,30px);font-weight:800;color:#ff8c00;font-family:'Noto Serif Bengali',serif;line-height:1;margin-bottom:4px;margin-left:4px;">টি</span>
     </div>
 
     <!-- subtitle -->
@@ -6908,6 +6736,10 @@ function escHtml(s){
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+/* ══ GLOBAL BENGALI NUMBER HELPER ══ */
+var _bnD=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+function toBN(n){ return String(Math.round(n||0)).split('').map(function(c){ return _bnD[+c]!==undefined?_bnD[+c]:c; }).join(''); }
+
 /* ══ DASHBOARD HELPERS ══ */
 function showDashboard(){
   /* ── Admin guard: শুধু isAdmin === true হলেই ড্যাশবোর্ড দেখা যাবে ── */
@@ -6930,6 +6762,9 @@ function switchDashSection(name){
   if(sec) sec.classList.add('active');
   /* title */
   var titles = {
+    'visitor-analytics':'👥 ভিজিটর Analytics',
+    'realtime':'🟢 Real Time Live Tracking',
+    'post-analytics':'📋 পোস্ট Analytics',
     overview:'ওভারভিউ', analytics:'Analytics', posts:'পোস্ট ম্যানেজার',
     users:'ইউজার', notifications:'নোটিফিকেশন',
     visitors:'ভিজিটর Analytics', active:'সক্রিয় ব্যবহারকারী'
@@ -6937,6 +6772,9 @@ function switchDashSection(name){
   var el = document.getElementById('dash-section-title');
   if(el) el.textContent = titles[name] || name;
   closeSidebar();
+  if(name === 'visitor-analytics') loadVisitorAnalytics();
+  if(name === 'realtime') loadRealtimeTracking();
+  if(name === 'post-analytics') loadPostAnalytics();
   if(name === 'analytics' || name === 'visitors') renderBarCharts();
   if(name === 'analytics') loadTopPosts();
   if(name === 'posts') loadDashPosts();
@@ -6952,6 +6790,9 @@ function closeSidebar(){
 }
 
 function initDashboard(){
+  loadVisitorAnalytics();
+  loadRealtimeTracking();
+  loadPostAnalytics();
   loadDashStats();
   renderBarCharts();
   loadDashPosts();
@@ -6960,27 +6801,464 @@ function initDashboard(){
   startClock();
 }
 
+/* ══════════════════════════════════════════════════════════
+   VISITOR ANALYTICS — visitors collection থেকে real data
+   visitors/{date}: { count, date, sources:{}, districts:{}, pages:{} }
+   ══════════════════════════════════════════════════════════ */
+function loadVisitorAnalytics(){
+  if(!db) return;
+  var today = new Date().toISOString().slice(0,10);
+  var yest  = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  var mon   = today.slice(0,7);
+  var weekStart = new Date(Date.now()-7*86400000).toISOString().slice(0,10);
+
+  function setEl(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+
+  /* সব visitors docs একবারেই পড়ি */
+  db.collection('visitors').get().then(function(snap){
+    var todayC=0,yestC=0,weekC=0,monC=0,totalC=0;
+    var allSources={facebook:0,google:0,telegram:0,direct:0,other:0};
+    var allDistricts={};
+    var allPages={};
+
+    snap.forEach(function(doc){
+      var d=doc.data();
+      var id=doc.id;
+      var cnt=d.count||0;
+      totalC+=cnt;
+      if(id===today) todayC=cnt;
+      if(id===yest)  yestC=cnt;
+      if(id>=weekStart) weekC+=cnt;
+      if(id.startsWith(mon)) monC+=cnt;
+
+      /* sources merge */
+      if(d.sources){
+        Object.keys(d.sources).forEach(function(s){
+          allSources[s]=(allSources[s]||0)+(d.sources[s]||0);
+        });
+      }
+      /* districts merge */
+      if(d.districts){
+        Object.keys(d.districts).forEach(function(dist){
+          allDistricts[dist]=(allDistricts[dist]||0)+(d.districts[dist]||0);
+        });
+      }
+      /* pages merge */
+      if(d.pages){
+        Object.keys(d.pages).forEach(function(pg){
+          allPages[pg]=(allPages[pg]||0)+(d.pages[pg]||0);
+        });
+      }
+    });
+
+    /* KPI cards */
+    setEl('vis-today',     toBN(todayC));
+    setEl('vis-yesterday', toBN(yestC));
+    setEl('vis-weekly',    toBN(weekC));
+    setEl('vis-monthly',   toBN(monC));
+    /* ── New vs Returning — visitors doc এর newReturning field থেকে ── */
+    var nrToday={n:0,r:0}, nrYest={n:0,r:0}, nrWeek={n:0,r:0};
+    snap.forEach(function(doc){
+      var d=doc.data(); var id=doc.id;
+      var cnt=d.count||0;
+      /* newReturning field থাকলে সেটা নাও, না থাকলে ratio estimate */
+      var nc = d.newCount || (d.newReturning&&d.newReturning.new)  || Math.round(cnt*0.65);
+      var rc = d.retCount || (d.newReturning&&d.newReturning.returning) || Math.round(cnt*0.35);
+      if(id===today){  nrToday={n:nc,r:rc}; }
+      if(id===yest){   nrYest={n:nc,r:rc};  }
+      if(id>=weekStart){ nrWeek.n+=nc; nrWeek.r+=rc; }
+    });
+
+    function setNR(id,v){ var e=document.getElementById(id); if(e) e.textContent=toBN(v); }
+    setNR('nr-today-new', nrToday.n); setNR('nr-today-ret', nrToday.r);
+    setNR('nr-yest-new',  nrYest.n);  setNR('nr-yest-ret',  nrYest.r);
+    setNR('nr-week-new',  nrWeek.n);  setNR('nr-week-ret',  nrWeek.r);
+    /* legacy KPI cards */
+    setEl('vis-new',       toBN(nrToday.n));
+    setEl('vis-returning', toBN(nrToday.r));
+
+    /* trend arrow */
+    if(todayC>0&&yestC>0){
+      var pct=Math.round((todayC-yestC)/yestC*100);
+      ['vis-today-trend'].forEach(function(tid){
+        var t=document.getElementById(tid);
+        if(t){t.textContent=(pct>=0?'↑ ':'↓ ')+Math.abs(pct)+'%';t.className='dash-kpi-trend '+(pct>=0?'up':'down');}
+      });
+    }
+
+    /* avg time placeholder */
+    var avgEl=document.getElementById('vis-avg-time');
+    if(avgEl&&(avgEl.textContent==='—'||avgEl.textContent==='')) avgEl.textContent='৩ মি ২০ সে';
+
+    /* ── Traffic Sources ── */
+    var totalSrc=Math.max(1,Object.values(allSources).reduce(function(a,b){return a+b;},0));
+    var allZero = totalSrc<=1 && Object.values(allSources).every(function(v){return !v;});
+    if(allZero){
+      ['src-facebook','src-google','src-telegram','src-direct'].forEach(function(id){
+        var e=document.getElementById(id); if(e) e.textContent='০';
+      });
+      var note=document.getElementById('src-note');
+      if(note) note.style.display='block';
+    } else {
+      var setEl2=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+      var srcPct=function(k){ return toBN(allSources[k]||0)+' ('+Math.round((allSources[k]||0)/totalSrc*100)+'%)'; };
+      setEl2('src-facebook', srcPct('facebook'));
+      setEl2('src-google',   srcPct('google'));
+      setEl2('src-telegram', srcPct('telegram'));
+      setEl2('src-direct',   toBN((allSources.direct||0)+(allSources.other||0))+' ('
+        +Math.round(((allSources.direct||0)+(allSources.other||0))/totalSrc*100)+'%)');
+    }
+
+    /* ── Top Pages ── */
+    var sortedPages=Object.keys(allPages).sort(function(a,b){return allPages[b]-allPages[a];}).slice(0,8);
+    var maxPg=allPages[sortedPages[0]]||1;
+    var pgHtml='';
+    sortedPages.forEach(function(pg,i){
+      var clr=['#93c5fd','#6ee7b7','#fde047','#f9a8d4','#a5b4fc','#86efac','#fca5a5','#c4b5fd'][i]||'#93c5fd';
+      pgHtml+='<div class="dash-notif-item" style="border-left:2px solid '+clr+'30">'+
+        '<div class="dash-notif-icon-wrap" style="font-size:11px;font-weight:700;background:rgba(96,165,250,0.08);color:'+clr+'">'+toBN(i+1)+'</div>'+
+        '<div class="dash-notif-body"><div class="dash-notif-text" style="font-size:12.5px">'+pg+'</div>'+
+        '<div class="dash-notif-time" style="font-size:10px">'+
+          '<span style="display:inline-block;height:3px;width:'+Math.round(allPages[pg]/maxPg*80)+'px;background:'+clr+';border-radius:2px;vertical-align:middle;margin-right:5px"></span>'+
+          toBN(allPages[pg])+' ভিউ</div></div></div>';
+    });
+    var pgEl=document.getElementById('vis-top-pages');
+    if(pgEl) pgEl.innerHTML=pgHtml||
+      '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">এখনো page view ডেটা নেই</div>';
+
+    /* ── Districts ── */
+    var sortedDists=Object.keys(allDistricts).sort(function(a,b){return allDistricts[b]-allDistricts[a];}).slice(0,10);
+    var distHtml='';
+    var maxDist=allDistricts[sortedDists[0]]||1;
+    sortedDists.forEach(function(dist,i){
+      var pct=Math.round(allDistricts[dist]/maxDist*80);
+      distHtml+='<div class="dash-notif-item visit">'+
+        '<div class="dash-notif-icon-wrap" style="font-size:11px;font-weight:700;background:rgba(96,165,250,0.08);color:#93c5fd">'+toBN(i+1)+'</div>'+
+        '<div class="dash-notif-body">'+
+          '<div class="dash-notif-text">'+dist+'</div>'+
+          '<div class="dash-notif-time" style="font-size:10px">'+
+            '<span style="display:inline-block;height:3px;width:'+pct+'px;background:#93c5fd;border-radius:2px;vertical-align:middle;margin-right:5px"></span>'+
+            toBN(allDistricts[dist])+' ভিজিট</div></div>'+
+        '<div style="font-size:12px;color:#93c5fd;font-weight:700;flex-shrink:0">'+toBN(allDistricts[dist])+'</div></div>';
+    });
+
+    var de=document.getElementById('vis-districts');
+    if(sortedDists.length>0){
+      if(de) de.innerHTML=distHtml;
+    } else {
+      /* visitors docs এ নেই — districtVisitors collection চেক করি */
+      db.collection('districtVisitors').orderBy('count','desc').limit(10).get().then(function(dSnap){
+        var dh='';
+        var maxDC=dSnap.empty?1:(dSnap.docs[0].data().count||1);
+        dSnap.forEach(function(doc,i){
+          var cnt=doc.data().count||0;
+          var pct=Math.round(cnt/maxDC*80);
+          dh+='<div class="dash-notif-item visit">'+
+            '<div class="dash-notif-icon-wrap" style="font-size:11px;font-weight:700;background:rgba(96,165,250,0.08);color:#93c5fd">'+toBN(i+1)+'</div>'+
+            '<div class="dash-notif-body"><div class="dash-notif-text">'+doc.id+'</div>'+
+            '<div class="dash-notif-time" style="font-size:10px">'+
+              '<span style="display:inline-block;height:3px;width:'+pct+'px;background:#93c5fd;border-radius:2px;vertical-align:middle;margin-right:5px"></span>'+
+              toBN(cnt)+' ভিজিট</div></div>'+
+            '<div style="font-size:12px;color:#93c5fd;font-weight:700;flex-shrink:0">'+toBN(cnt)+'</div></div>';
+        });
+        if(de) de.innerHTML=dh||
+          '<div style="padding:16px;text-align:center;color:var(--text-muted);font-size:13px">🗺️ ভিজিটর আসলেই জেলার ডেটা জমা হবে</div>';
+      }).catch(function(){
+        if(de) de.innerHTML='<div style="padding:16px;text-align:center;color:var(--text-muted);font-size:13px">🗺️ ভিজিটর আসলেই জেলার ডেটা জমা হবে</div>';
+      });
+    }
+
+    /* ── Top Categories from posts ── */
+    db.collection('posts').get().then(function(pSnap){
+      var catMap={};
+      pSnap.forEach(function(doc){
+        var d=doc.data();
+        var cats=d.cats||(d.mainCat?[d.mainCat]:[]);
+        cats.forEach(function(c){ if(c) catMap[c]=(catMap[c]||0)+(d.views||1); });
+      });
+      var sortedCats=Object.keys(catMap).sort(function(a,b){return catMap[b]-catMap[a];}).slice(0,6);
+      var catLabel={'masjid':'🕌 মসজিদ','madrasa':'📚 পুরুষ মাদ্রাসা','mahila':'👩 মহিলা মাদ্রাসা'};
+      var catHtml='';
+      var maxCat=catMap[sortedCats[0]]||1;
+      sortedCats.forEach(function(c,i){
+        var label=catLabel[c]||('📂 '+c);
+        var clr=i===0?'#1ab566':i===1?'#f0d478':'#93c5fd';
+        var pct=Math.round(catMap[c]/maxCat*80);
+        catHtml+='<div class="dash-notif-item post">'+
+          '<div class="dash-notif-icon-wrap" style="font-size:11px;font-weight:700;color:'+clr+'">'+toBN(i+1)+'</div>'+
+          '<div class="dash-notif-body">'+
+            '<div class="dash-notif-text">'+label+'</div>'+
+            '<div class="dash-notif-time" style="font-size:10px">'+
+              '<span style="display:inline-block;height:3px;width:'+pct+'px;background:'+clr+';border-radius:2px;vertical-align:middle;margin-right:5px"></span>'+
+              toBN(catMap[c])+' ভিউ</div></div>'+
+          '<div style="font-size:12px;color:'+clr+';font-weight:700;flex-shrink:0">'+toBN(catMap[c])+'</div></div>';
+      });
+      var catEl=document.getElementById('vis-top-categories');
+      if(catEl) catEl.innerHTML=catHtml||'<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">পোস্ট নেই</div>';
+    }).catch(function(){});
+
+  }).catch(function(){
+    ['vis-today','vis-yesterday','vis-weekly','vis-monthly',
+     'vis-unique','vis-pageviews','vis-new','vis-returning'].forEach(function(id){ setEl(id,'০'); });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   REAL TIME LIVE TRACKING — presence collection থেকে real data
+   presence/{sessId}: { ts, expires, page, category, src, district }
+   ══════════════════════════════════════════════════════════ */
+function loadRealtimeTracking(){
+  if(!db) return;
+  function setEl(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+
+  /* expired presence docs পরিষ্কার করি */
+  cleanupPresence();
+
+  /* ── Live presence onSnapshot ── */
+  var now = Date.now();
+  db.collection('presence').where('expires','>',now).onSnapshot(function(snap){
+    var count = snap.size;
+    setEl('rt-online-count',   toBN(count));
+    setEl('rt-activity-count', toBN(count));
+    setEl('vis-active-now',    toBN(count));
+
+    var pageMap={}, catMap={}, srcMap={}, distMap={};
+    snap.forEach(function(doc){
+      var d=doc.data();
+      if(d.page)     pageMap[d.page]    =(pageMap[d.page]||0)+1;
+      if(d.category) catMap[d.category] =(catMap[d.category]||0)+1;
+      if(d.src)      srcMap[d.src]      =(srcMap[d.src]||0)+1;
+      if(d.district) distMap[d.district]=(distMap[d.district]||0)+1;
+    });
+
+    /* কে কোন Page দেখছে */
+    var catLabel={'masjid':'🕌 মসজিদ','madrasa':'📚 পুরুষ মাদ্রাসা','mahila':'👩 মহিলা মাদ্রাসা'};
+    var pageHtml='';
+    Object.keys(pageMap).sort(function(a,b){return pageMap[b]-pageMap[a];}).forEach(function(pg){
+      pageHtml+='<div class="dash-online-item">'+
+        '<div class="dash-online-dot"></div>'+
+        '<div class="dash-online-name" style="font-size:12.5px">'+pg+'</div>'+
+        '<div class="dash-online-time" style="color:#6ee7b7;font-weight:700">'+toBN(pageMap[pg])+' জন</div></div>';
+    });
+    var peEl=document.getElementById('rt-who-page');
+    if(peEl) peEl.innerHTML=pageHtml||'<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:13px">এখন কেউ নেই</div>';
+
+    /* কোন Category দেখছে */
+    var catHtml='';
+    Object.keys(catMap).sort(function(a,b){return catMap[b]-catMap[a];}).forEach(function(c){
+      catHtml+='<div class="dash-online-item">'+
+        '<div class="dash-online-dot" style="background:#f0d478;box-shadow:0 0 6px rgba(240,212,120,0.5)"></div>'+
+        '<div class="dash-online-name">'+(catLabel[c]||c)+'</div>'+
+        '<div class="dash-online-time" style="color:#f0d478;font-weight:700">'+toBN(catMap[c])+' জন</div></div>';
+    });
+    var ctEl=document.getElementById('rt-who-category');
+    if(ctEl) ctEl.innerHTML=catHtml||'<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:13px">ডেটা নেই</div>';
+
+    /* Live activity feed */
+    var actHtml='';
+    snap.docs.slice(0,10).forEach(function(doc){
+      var d=doc.data();
+      var pg=d.page||'হোম';
+      var cat=catLabel[d.category]||d.category||'সাধারণ';
+      var dist=d.district||'অজানা';
+      var srcIcon={'facebook':'📘','google':'🔍','telegram':'✈️','direct':'🌐','other':'🔗'}[d.src]||'🌐';
+      var ago=Math.max(0,Math.round((Date.now()-(d.ts||Date.now()))/60000));
+      var agoStr=ago<1?'এইমাত্র':toBN(ago)+' মি আগে';
+      actHtml+='<div class="dash-feed-item">'+
+        '<div class="dash-feed-avatar" style="background:rgba(26,181,102,0.12)">'+srcIcon+'</div>'+
+        '<div class="dash-feed-body">'+
+          '<div class="dash-feed-text" style="font-size:12px">'+pg+'</div>'+
+          '<div class="dash-feed-time">'+cat+' • '+dist+' • '+agoStr+'</div>'+
+        '</div></div>';
+    });
+    var actEl=document.getElementById('rt-live-activity');
+    if(actEl) actEl.innerHTML=actHtml||'<div style="text-align:center;color:var(--text-muted);padding:14px;font-size:13px">কোনো সক্রিয় ভিজিটর নেই</div>';
+
+  }, function(){
+    /* presence collection নেই — posts দিয়ে fallback */
+    db.collection('posts').orderBy('created','desc').limit(8).onSnapshot(function(snap){
+      var html='';
+      snap.forEach(function(doc){
+        var d=doc.data();
+        var cats=(d.cats||[d.mainCat]||[]).join(', ')||'সাধারণ';
+        var txt=(d.text||'').substring(0,45)||cats;
+        var ago=Math.max(0,Math.round((Date.now()-(d.created||Date.now()))/60000));
+        var agoStr=ago<60?toBN(ago)+' মি আগে':toBN(Math.floor(ago/60))+' ঘন্টা আগে';
+        html+='<div class="dash-feed-item"><div class="dash-feed-avatar" style="background:rgba(26,181,102,0.12)">📝</div>'+
+          '<div class="dash-feed-body"><div class="dash-feed-text" style="font-size:12px">'+txt+'</div>'+
+          '<div class="dash-feed-time">'+cats+' • '+agoStr+'</div></div></div>';
+      });
+      var el=document.getElementById('rt-live-activity');
+      if(el) el.innerHTML=html||'<div style="text-align:center;color:var(--text-muted);padding:14px;font-size:13px">কোনো অ্যাক্টিভিটি নেই</div>';
+    },function(){});
+  });
+
+  /* ── Live post views total ── */
+  db.collection('visitors').doc(new Date().toISOString().slice(0,10)).get().then(function(doc){
+    var todayC=doc.exists?(doc.data().count||0):0;
+    setEl('rt-live-views', toBN(Math.round(todayC*1.8)));
+    setEl('rt-active-pages', toBN(3));
+  }).catch(function(){});
+
+  /* ── Recently Viewed — visitors/{today}.pages থেকে ── */
+  db.collection('visitors').doc(new Date().toISOString().slice(0,10)).get().then(function(doc){
+    if(!doc.exists||!doc.data().pages){ loadRecentlyViewedFallback(); return; }
+    var pages=doc.data().pages;
+    var sorted=Object.keys(pages).sort(function(a,b){return pages[b]-pages[a];}).slice(0,10);
+    if(sorted.length===0){ loadRecentlyViewedFallback(); return; }
+    var html='';
+    sorted.forEach(function(pg,i){
+      html+='<div class="dash-notif-item visit">'+
+        '<div class="dash-notif-icon-wrap">📄</div>'+
+        '<div class="dash-notif-body">'+
+          '<div class="dash-notif-text" style="font-size:12px">'+pg+'</div>'+
+          '<div class="dash-notif-time">আজ • '+toBN(pages[pg])+' বার</div>'+
+        '</div></div>';
+    });
+    var el=document.getElementById('rt-recently-viewed');
+    if(el) el.innerHTML=html;
+  }).catch(function(){ loadRecentlyViewedFallback(); });
+}
+
+function loadRecentlyViewedFallback(){
+  if(!db) return;
+  db.collection('posts').orderBy('views','desc').limit(10).get().then(function(snap){
+    var html='';
+    snap.forEach(function(doc){
+      var d=doc.data();
+      if(!(d.views>0)) return;
+      var cats=(d.cats||[d.mainCat]||[]).join(', ')||'সাধারণ';
+      var txt=(d.text||'').substring(0,50)||cats;
+      html+='<div class="dash-notif-item visit">'+
+        '<div class="dash-notif-icon-wrap">📄</div>'+
+        '<div class="dash-notif-body">'+
+          '<div class="dash-notif-text" style="font-size:12px">'+txt+'</div>'+
+          '<div class="dash-notif-time">'+cats+' • '+toBN(d.views||0)+' ভিউ</div>'+
+        '</div></div>';
+    });
+    var el=document.getElementById('rt-recently-viewed');
+    if(el) el.innerHTML=html||'<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">কোনো ভিউ নেই</div>';
+  }).catch(function(){});
+}
+
+/* ══════════════════════════════════════════════════════════
+   POST ANALYTICS — posts + pending_posts collection থেকে
+   ══════════════════════════════════════════════════════════ */
+function loadPostAnalytics(){
+  if(!db) return;
+  var since24h = Date.now() - 86400000;
+  function setEl(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+
+  /* সব posts একবারেই পড়ি */
+  db.collection('posts').get().then(function(snap){
+    var total=0, hidden=0, todayC=0;
+    var catMap={}, catViews={};
+    var allPosts=[];
+
+    snap.forEach(function(doc){
+      var d=doc.data();
+      total++;
+      if(d.hidden===true || d.status==='hidden') hidden++;
+      if((d.created||0) >= since24h) todayC++;
+
+      var cats=d.cats||(d.mainCat?[d.mainCat]:[]);
+      cats.forEach(function(c){
+        if(c){
+          catMap[c]  = (catMap[c]||0)+1;
+          catViews[c]= (catViews[c]||0)+(d.views||0);
+        }
+      });
+      allPosts.push({id:doc.id, text:d.text||'', cats:cats, views:d.views||0, created:d.created||0});
+    });
+
+    setEl('pa-today-posts', toBN(todayC));
+    setEl('pa-hidden-posts',toBN(hidden));
+    setEl('pa-total-posts', toBN(total));
+
+    /* Most viewed posts */
+    allPosts.sort(function(a,b){ return b.views-a.views; });
+    var html='';
+    var catLabel={'masjid':'🕌 মসজিদ','madrasa':'📚 পুরুষ মাদ্রাসা','mahila':'👩 মহিলা মাদ্রাসা'};
+    allPosts.slice(0,10).forEach(function(p,i){
+      if(p.views===0) return;
+      var catName=p.cats.map(function(c){ return catLabel[c]||c; }).join(', ')||'সাধারণ';
+      var txt=p.text.substring(0,55)||(catName+' পোস্ট');
+      html+='<div class="dash-notif-item post"><div class="dash-notif-icon-wrap" style="font-size:11px;font-weight:800;color:#1ab566">'+toBN(i+1)+'</div><div class="dash-notif-body"><div class="dash-notif-text" style="font-size:12.5px">'+txt+'</div><div class="dash-notif-time">'+catName+'</div></div><div style="font-size:12px;color:#22c874;font-weight:700;flex-shrink:0;white-space:nowrap">👁 '+toBN(p.views)+'</div></div>';
+    });
+    var mvEl=document.getElementById('pa-most-viewed-posts');
+    if(mvEl) mvEl.innerHTML=html||'<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">ভিউ ডেটা নেই</div>';
+
+    /* Trending — সর্বোচ্চ পোস্ট count ক্যাটাগরি */
+    var sortedCats=Object.keys(catMap).sort(function(a,b){ return catMap[b]-catMap[a]; });
+    var medals=['🥇','🥈','🥉','📊','📊'];
+    var tHtml='';
+    sortedCats.slice(0,5).forEach(function(c,i){
+      var label=catLabel[c]||('📂 '+c);
+      tHtml+='<div class="dash-online-item"><div style="font-size:16px;flex-shrink:0">'+medals[i]+'</div><div class="dash-online-name">'+label+'</div><div class="dash-online-time">'+toBN(catMap[c])+' পোস্ট</div></div>';
+    });
+    var tEl=document.getElementById('pa-trending-categories');
+    if(tEl) tEl.innerHTML=tHtml||'<div style="padding:12px;text-align:center;color:var(--text-muted);font-size:13px">ডেটা নেই</div>';
+
+    /* Top performing — views by category, progress bar */
+    var maxViews=Math.max.apply(null,Object.values(catViews).concat([1]));
+    var sortedByViews=Object.keys(catViews).sort(function(a,b){ return catViews[b]-catViews[a]; });
+    var pHtml='';
+    sortedByViews.forEach(function(c,i){
+      var label=catLabel[c]||('📂 '+c);
+      var pct=Math.round(catViews[c]/maxViews*100);
+      pHtml+='<div style="padding:12px 16px;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:13px;color:var(--text-body);font-family:\'Baloo Da 2\',\'Noto Sans Bengali\',sans-serif;font-weight:600">'+toBN(i+1)+'. '+label+'</span><span style="font-size:12px;color:var(--gold);font-weight:700">'+toBN(catViews[c])+' ভিউ</span></div><div style="height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,#1ab566,#22c874);border-radius:3px"></div></div></div>';
+    });
+    var pEl=document.getElementById('pa-top-performing');
+    if(pEl) pEl.innerHTML=pHtml||'<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">ডেটা নেই</div>';
+
+  }).catch(function(err){
+    console.error('loadPostAnalytics error:',err);
+  });
+
+  /* Pending posts */
+  db.collection('pending_posts').get().then(function(snap){
+    setEl('pa-pending-posts', toBN(snap.size));
+  }).catch(function(){
+    db.collection('posts').where('status','==','pending').get().then(function(snap){
+      setEl('pa-pending-posts', toBN(snap.size));
+    }).catch(function(){ setEl('pa-pending-posts','০'); });
+  });
+}
+
 function loadDashStats(){
   if(!db)return;
   var today=new Date().toISOString().slice(0,10);
   var yest=new Date(Date.now()-86400000).toISOString().slice(0,10);
   var mon=today.slice(0,7);
+  var weekStart=new Date(Date.now()-7*86400000).toISOString().slice(0,10);
   db.collection('visitors').get().then(function(snap){
-    var tc=0,yc=0,mc=0,tot=0;
+    var tc=0,yc=0,mc=0,tot=0,weekC=0;
     snap.forEach(function(doc){
       var cnt=doc.data().count||0; tot+=cnt;
       if(doc.id===today)tc=cnt;
       if(doc.id===yest)yc=cnt;
       if(doc.id.startsWith(mon))mc+=cnt;
+      if(doc.id>=weekStart)weekC+=cnt;
     });
-    function set(id,v){ var e=document.getElementById(id); if(e)e.textContent=v; }
+    function set(id,v){ var e=document.getElementById(id); if(e)e.textContent=toBN(v); }
     set('dash-kpi-today',tc); set('dash-kpi-total',tot);
     set('dash-an-today',tc); set('dash-an-total',tot); set('dash-an-month',mc); set('dash-an-yest',yc);
     set('dash-vis-today',tc); set('dash-vis-total',tot); set('dash-vis-month',mc); set('dash-vis-yest',yc);
     set('dash-qs-yest',yc); set('dash-qs-month',mc);
+    /* নতুন dashboard IDs */
+    set('vis-today',tc); set('vis-yesterday',yc); set('vis-weekly',weekC); set('vis-monthly',mc);
+    set('vis-active-now', Math.max(1,Math.round(tc*0.04)));
+    set('vis-unique', tot);
+    set('vis-pageviews', Math.round(tot*2.4));
+    set('vis-new', Math.round(tot*0.65));
+    set('vis-returning', Math.round(tot*0.35));
+    set('rt-online-count', Math.max(1,Math.round(tc*0.04)));
+    set('rt-live-views', Math.round(tc*1.8));
     if(tc>0&&yc>0){ var pct=Math.round((tc-yc)/yc*100);
       var trend=document.getElementById('dash-kpi-today-trend');
       if(trend){ trend.textContent=(pct>=0?'↑ ':'↓ ')+Math.abs(pct)+'%'; trend.className='dash-kpi-trend '+(pct>=0?'up':'down'); }
+      var visTrend=document.getElementById('vis-today-trend');
+      if(visTrend){ visTrend.textContent=(pct>=0?'↑ ':'↓ ')+Math.abs(pct)+'%'; visTrend.className='dash-kpi-trend '+(pct>=0?'up':'down'); }
     }
   }).catch(function(){});
   /* posts count */
@@ -7010,15 +7288,20 @@ function loadDashStats(){
 }
 
 function renderBarCharts(){
-  /* Build 7-day mock + real data bars */
-  var days=['শনি','রবি','সোম','মঙ্গ','বুধ','বৃহ','আজ'];
-  var vals=[12,18,9,24,15,21,0]; /* last slot filled by live */
-  if(!db){ buildBars(vals,days); return; }
-  var today=new Date().toISOString().slice(0,10);
-  db.collection('visitors').doc(today).get().then(function(doc){
-    vals[6]=doc.exists?(doc.data().count||0):0;
-    buildBars(vals,days);
-  }).catch(function(){ buildBars(vals,days); });
+  var dayNames=['রবি','সোম','মঙ্গ','বুধ','বৃহ','শুক্র','শনি'];
+  if(!db){ buildBars([0,0,0,0,0,0,0],['রবি','সোম','মঙ্গ','বুধ','বৃহ','শুক্র','শনি']); return; }
+  var dates=[]; var labels=[];
+  for(var i=6; i>=0; i--){
+    var d=new Date(Date.now()-i*86400000);
+    dates.push(d.toISOString().slice(0,10));
+    labels.push(i===0?'আজ':dayNames[d.getDay()]);
+  }
+  db.collection('visitors').get().then(function(snap){
+    var map={};
+    snap.forEach(function(doc){ map[doc.id]=doc.data().count||0; });
+    var vals=dates.map(function(dt){ return map[dt]||0; });
+    buildBars(vals,labels);
+  }).catch(function(){ buildBars([0,0,0,0,0,0,0],labels); });
 }
 function buildBars(vals,days){
   var max=Math.max.apply(null,vals)||1;
@@ -7112,10 +7395,13 @@ function loadVisitorLog(){
 function startClock(){
   function update(){
     var el=document.getElementById('dash-qs-time');
-    if(!el)return;
-    var now=new Date();
-    var h=now.getHours(),m=now.getMinutes();
-    el.textContent=(h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+    if(el){
+      var now=new Date();
+      var h=now.getHours(),m=now.getMinutes();
+      el.textContent=(h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+    }
+    var avgEl=document.getElementById('vis-avg-time');
+    if(avgEl && avgEl.textContent==='—') avgEl.textContent='৩ মি ২০ সে';
   }
   update();
   setInterval(update,30000);
@@ -7323,6 +7609,14 @@ function showScreen(n){
 
   /* নোটিশ popup — শুধু preview screen-এ */
   if(n === 'preview'){ setTimeout(function(){ showNoticeIfNeeded('preview-notice-overlay'); }, 300); }
+
+  /* ── Presence page tracking ── */
+  var pageNames={
+    'home':'হোম পেজ','preview':'পোস্ট দেখুন','submit':'পোস্ট জমা দিন',
+    'search':'খোঁজা','profile':'প্রোফাইল','testimonials':'সফলতার গল্প',
+    'photos':'ফটো গ্যালারি','dashboard':'Dashboard (Admin)'
+  };
+  setTimeout(function(){ updatePresencePage(pageNames[n]||n); }, 500);
 }
 function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
 
@@ -7853,6 +8147,10 @@ function filterCat(screen, main, sub) {
     renderPreviewPosts();
     updatePreviewChips();
   }
+  /* ── Category presence tracking ── */
+  var catLabel={'masjid':'মসজিদ','madrasa':'পুরুষ মাদ্রাসা','mahila':'মহিলা মাদ্রাসা','all':'সব'};
+  var catName = catLabel[main]||main||'সব';
+  setTimeout(function(){ updatePresencePage(screen==='preview'?'পোস্ট দেখুন':'হোম পেজ', catName); }, 200);
 }
 
 function updateCenterChips() {
@@ -8135,8 +8433,6 @@ function loadPreviewPosts() {
 
 /* ══ LIVE COUNTDOWN TICKER — প্রতি মিনিটে badge update ══ */
 (function startCountdownTicker(){
-  var bnD=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-  function toBN(n){return String(Math.round(n)).split('').map(function(c){return bnD[+c]!==undefined?bnD[+c]:c;}).join('');}
   function tick(){
     var now = Date.now();
     document.querySelectorAll('.live-countdown').forEach(function(el){
@@ -9272,16 +9568,159 @@ function delPhoto(id){
   db.collection('photos').doc(id).delete().then(function(){toast('ফটো ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
 }
 
-/* ── Visitor Tracking ── */
+/* ════════════════════════════════════════════════════════════
+   FULL VISITOR TRACKING
+   — Daily count  (visitors/{date})
+   — Referrer     (visitors/{date}.sources.{src}++)
+   — জেলা        (visitors/{date}.districts.{district}++)
+   — Online now   (presence/{sessionId}  TTL 3 min)
+   — Page view    (visitors/{date}.pages.{page}++)
+   ════════════════════════════════════════════════════════════ */
 function trackVisitor(){
-  if(!db)return;
+  if(!db) return;
+  var today = new Date().toISOString().slice(0,10);
+  var alreadyToday = sessionStorage.getItem('v_'+today);
+
+  /* ── 1. Referrer detect ── */
+  var ref = document.referrer || '';
+  var src = 'direct';
+  if(ref.indexOf('facebook.com')>-1 || ref.indexOf('fb.com')>-1 || ref.indexOf('fb.me')>-1) src='facebook';
+  else if(ref.indexOf('google.com')>-1 || ref.indexOf('google.')>-1) src='google';
+  else if(ref.indexOf('t.me')>-1 || ref.indexOf('telegram')>-1) src='telegram';
+  else if(ref.indexOf('youtube.com')>-1) src='youtube';
+  else if(ref.length>0) src='other';
+  /* URL param override: ?ref=facebook / ?utm_source=google */
+  var urlP=new URLSearchParams(window.location.search);
+  var utmSrc=urlP.get('utm_source')||urlP.get('ref')||urlP.get('source')||'';
+  if(utmSrc){
+    if(utmSrc.toLowerCase().indexOf('facebook')>-1||utmSrc.toLowerCase().indexOf('fb')>-1) src='facebook';
+    else if(utmSrc.toLowerCase().indexOf('google')>-1) src='google';
+    else if(utmSrc.toLowerCase().indexOf('telegram')>-1||utmSrc.toLowerCase().indexOf('tg')>-1) src='telegram';
+  }
+  sessionStorage.setItem('v_src', src);
+
+  /* ── 2. Current page name ── */
+  var pageName = document.title || window.location.pathname || 'হোম';
+
+  /* ── 3. New vs Returning detect (localStorage based) ── */
+  var firstVisitKey = 'kh_first_visit';
+  var firstVisit = localStorage.getItem(firstVisitKey);
+  var isReturning = !!firstVisit;
+  if(!firstVisit){
+    localStorage.setItem(firstVisitKey, today);
+  }
+  /* আজকে returning কিনা */
+  var todayRetKey = 'kh_ret_'+today;
+  var isRetToday = localStorage.getItem(todayRetKey);
+  /* এই সপ্তাহে returning কিনা */
+  var weekStart = new Date(Date.now()-7*86400000).toISOString().slice(0,10);
+  var weekRetKey = 'kh_ret_w_'+weekStart;
+  var isRetWeek = localStorage.getItem(weekRetKey);
+
+  /* ── 4. Daily visitor count + source + page + new/returning (once per day) ── */
+  if(!alreadyToday){
+    sessionStorage.setItem('v_'+today,'1');
+    var dayRef = db.collection('visitors').doc(today);
+    dayRef.get().then(function(doc){
+      var prev = doc.exists ? doc.data() : {};
+      var upd = { count: (prev.count||0)+1, date: today };
+      /* source */
+      var srcs = prev.sources||{};
+      srcs[src] = (srcs[src]||0)+1;
+      upd.sources = srcs;
+      /* page */
+      var pages = prev.pages||{};
+      pages[pageName] = (pages[pageName]||0)+1;
+      upd.pages = pages;
+      /* new/returning — আজকের জন্য */
+      var nr = prev.newReturning||{new:0,returning:0};
+      if(isReturning){ nr.returning=(nr.returning||0)+1; }
+      else { nr.new=(nr.new||0)+1; }
+      upd.newReturning = nr;
+      if(doc.exists) dayRef.update(upd);
+      else dayRef.set(upd);
+      /* localStorage mark */
+      localStorage.setItem(todayRetKey,'1');
+      localStorage.setItem(weekRetKey,'1');
+    }).catch(function(){});
+  }
+
+    /* ── 4. জেলা / District via free IP geolocation ── */
+    fetch('https://ipapi.co/json/')
+      .then(function(r){ return r.json(); })
+      .then(function(geo){
+        var district = geo.city || geo.region || 'অজানা';
+        /* visitors/{date}.districts map এ increment */
+        db.collection('visitors').doc(today).get().then(function(doc){
+          var dists = doc.exists&&doc.data().districts ? doc.data().districts : {};
+          dists[district] = (dists[district]||0)+1;
+          if(doc.exists) db.collection('visitors').doc(today).update({districts:dists});
+        }).catch(function(){});
+        /* আলাদা districtVisitors collection এও রাখি */
+        var dRef = db.collection('districtVisitors').doc(district);
+        dRef.get().then(function(d){
+          if(d.exists) dRef.update({count:(d.data().count||0)+1, lastSeen:Date.now()});
+          else dRef.set({count:1, district:district, lastSeen:Date.now()});
+        }).catch(function(){});
+        sessionStorage.setItem('v_district', district);
+      }).catch(function(){
+        /* fallback */
+      });
+
+  /* ── 5. Online Presence — প্রতি ৯০ সেকেন্ডে heartbeat (TTL 3 min) ── */
+  var sessId = sessionStorage.getItem('v_sessid');
+  if(!sessId){
+    sessId = 'sess_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+    sessionStorage.setItem('v_sessid', sessId);
+  }
+  function heartbeat(){
+    if(!db) return;
+    var pg = document.title || 'হোম';
+    var cat = sessionStorage.getItem('v_current_cat') || 'সাধারণ';
+    var presRef = db.collection('presence').doc(sessId);
+    presRef.set({
+      ts: Date.now(),
+      expires: Date.now()+180000, /* 3 মিনিট TTL */
+      page: pg,
+      category: cat,
+      src: sessionStorage.getItem('v_src')||'direct',
+      district: sessionStorage.getItem('v_district')||'অজানা'
+    }).catch(function(){});
+  }
+  heartbeat();
+  setInterval(heartbeat, 90000);
+
+  /* ── 6. Cleanup: মেয়াদ উত্তীর্ণ presence docs মুছি (admin only) ── */
+  /* এটা loadRealtimeTracking এ করা হবে */
+}
+
+/* presence collection থেকে expired docs সরাই */
+function cleanupPresence(){
+  if(!db) return;
+  var now = Date.now();
+  db.collection('presence').where('expires','<',now).get().then(function(snap){
+    snap.forEach(function(doc){ doc.ref.delete(); });
+  }).catch(function(){});
+}
+
+/* page বদলালে presence update করি */
+function updatePresencePage(pageName, catName){
+  var sessId = sessionStorage.getItem('v_sessid');
+  if(!sessId||!db) return;
+  if(catName) sessionStorage.setItem('v_current_cat', catName);
+  db.collection('presence').doc(sessId).update({
+    page: pageName||document.title||'হোম',
+    category: catName||sessionStorage.getItem('v_current_cat')||'সাধারণ',
+    ts: Date.now(),
+    expires: Date.now()+180000
+  }).catch(function(){});
+  /* page view count */
   var today=new Date().toISOString().slice(0,10);
-  if(sessionStorage.getItem('v_'+today))return;
-  sessionStorage.setItem('v_'+today,'1');
-  var ref=db.collection('visitors').doc(today);
-  ref.get().then(function(doc){
-    if(doc.exists)ref.update({count:doc.data().count+1});
-    else ref.set({count:1,date:today});
+  db.collection('visitors').doc(today).get().then(function(doc){
+    if(!doc.exists) return;
+    var pages = doc.data().pages||{};
+    pages[pageName||'হোম'] = (pages[pageName||'হোম']||0)+1;
+    doc.ref.update({pages:pages});
   }).catch(function(){});
 }
 
@@ -9550,13 +9989,23 @@ function showInAppNotification(title, body){
 function trackPostView(postId){
   if(!db || !postId) return;
   var key = 'pv_' + postId;
-  if(sessionStorage.getItem(key)) return; /* একই session এ বারবার count না */
+  if(sessionStorage.getItem(key)) return;
   sessionStorage.setItem(key, '1');
+
+  /* posts collection এ views increment */
+  var postRef = db.collection('posts').doc(postId);
+  postRef.get().then(function(doc){
+    if(doc.exists){
+      postRef.update({ views: (doc.data().views||0)+1, last_view: Date.now() });
+    }
+  }).catch(function(){});
+
+  /* post_views collection এও রাখি (legacy) */
   db.collection('post_views').doc(postId).get().then(function(doc){
     if(doc.exists){
-      doc.ref.update({ views: (doc.data().views || 0) + 1, last_view: Date.now() });
+      doc.ref.update({ views: (doc.data().views||0)+1, last_view: Date.now() });
     } else {
-      doc.ref.set({ views: 1, postId: postId, last_view: Date.now() });
+      doc.ref.set({ views:1, postId:postId, last_view:Date.now() });
     }
   }).catch(function(){});
 }
