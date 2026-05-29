@@ -6,6 +6,15 @@
      Professional SEO & Google Indexing Optimized v2.0
      ════════════════════════════════════════════════════════ -->
 
+<!-- ══ GOOGLE ANALYTICS 4 ══ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q3VNT55980"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q3VNT55980');
+</script>
+
 <!-- ══ CHARSET & VIEWPORT ══ -->
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,7 +101,7 @@
   "url": "https://khedmot-senter.web.app/",
   "description": "বাংলাদেশের মসজিদ ও মাদ্রাসায় ইমাম, মুয়াজ্জিন ও শিক্ষক নিয়োগের সর্বশেষ বিজ্ঞপ্তি",
   "inLanguage": "bn",
-  "copyrightYear": "2025",
+  "copyrightYear": "2026",
   "keywords": "ইমাম নিয়োগ, মুয়াজ্জিন নিয়োগ, মাদ্রাসা শিক্ষক নিয়োগ",
   "potentialAction": {
     "@type": "SearchAction",
@@ -143,8 +152,8 @@
   "@type": "JobPosting",
   "title": "ইমাম / মুয়াজ্জিন / মাদ্রাসা শিক্ষক নিয়োগ",
   "description": "বাংলাদেশের মসজিদ, মাদ্রাসা ও মহিলা মাদ্রাসায় ইমাম, মুয়াজ্জিন, হাফেজ ও ইসলামী শিক্ষক নিয়োগ দেওয়া হচ্ছে। যোগ্য প্রার্থীরা আবেদন করুন।",
-  "datePosted": "2025-01-01",
-  "validThrough": "2025-12-31",
+  "datePosted": "2026-01-01",
+  "validThrough": "2026-12-31",
   "employmentType": "FULL_TIME",
   "hiringOrganization": {
     "@type": "Organization",
@@ -9579,7 +9588,12 @@ function delPhoto(id){
 function trackVisitor(){
   if(!db) return;
   var today = new Date().toISOString().slice(0,10);
-  var alreadyToday = sessionStorage.getItem('v_'+today);
+  /* sessionStorage এর বদলে localStorage — browser বন্ধ করে খুললেও count হবে */
+  var visitKey = 'kh_visited_'+today;
+  var lastVisitTime = localStorage.getItem(visitKey);
+  var now = Date.now();
+  /* একই দিনে ৩০ মিনিটের বেশি গ্যাপ হলে নতুন visit count হবে */
+  var alreadyToday = lastVisitTime && (now - parseInt(lastVisitTime)) < 30*60*1000;
 
   /* ── 1. Referrer detect ── */
   var ref = document.referrer || '';
@@ -9619,7 +9633,7 @@ function trackVisitor(){
 
   /* ── 4. Daily visitor count + source + page + new/returning (once per day) ── */
   if(!alreadyToday){
-    sessionStorage.setItem('v_'+today,'1');
+    localStorage.setItem(visitKey, now.toString());
     var dayRef = db.collection('visitors').doc(today);
     dayRef.get().then(function(doc){
       var prev = doc.exists ? doc.data() : {};
