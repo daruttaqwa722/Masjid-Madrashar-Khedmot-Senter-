@@ -9609,128 +9609,92 @@ function trackVisitor(){
   /* ── 2. Current page name ── */
   var pageName = document.title || window.location.pathname || 'হোম';
 
-  /* ── 3. IP দিয়ে আলাদা আলাদা মানুষ চেনা — Facebook browser সহ সবার জন্য ── */
-  /* Cloudflare trace — কোনো limit নেই, সম্পূর্ণ ফ্রি */
-  fetch('https://cloudflare.com/cdn-cgi/trace')
-    .then(function(r){ return r.text(); })
-    .then(function(txt){
-      var ip = '';
-      txt.split('\n').forEach(function(line){
-        if(line.startsWith('ip=')) ip = line.split('=')[1].trim();
-      });
-      return fetch('https://ipapi.co/'+ip+'/json/');
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(geo){
-      var ip = geo.ip || '';
-      var district = geo.city || geo.region || 'অজানা';
+  /* ── 3. Firebase Anonymous Auth দিয়ে প্রতিটা মানুষকে আলাদা চেনা ── */
+  /* Facebook browser, Chrome, যেকোনো browser এ কাজ করবে */
+  var authInstance = firebase.auth();
+  var doTrack = function(uid){
+    /* uid দিয়ে আজকে already visited কিনা চেক */
+    var uidDocId = today + '_' + uid;
+    var uidRef = db.collection('visitorUIDs').doc(uidDocId);
+    /* সব সময়ের record */
+    var allUidRef = db.collection('visitorUIDs_all').doc(uid);
 
-      /* IP দিয়ে আজকে already visited কিনা চেক — Firebase এ */
-      var ipKey = ip.replace(/\./g,'_');
-      var ipDocId = today+'_'+ipKey;
-      var ipRef = db.collection('visitorIPs').doc(ipDocId);
+    uidRef.get().then(function(uidDoc){
+      var alreadyToday = uidDoc.exists;
 
-      ipRef.get().then(function(ipDoc){
-        var alreadyToday = ipDoc.exists;
+      allUidRef.get().then(function(allDoc){
+        var isReturning = allDoc.exists && allDoc.data().firstDate !== today;
 
-        /* New vs Returning — IP এর আগের record চেক */
-        var allIpRef = db.collection('visitorIPs_all').doc(ipKey);
-        allIpRef.get().then(function(allDoc){
-          var isReturning = allDoc.exists && allDoc.data().firstDate !== today;
-
-          /* ── count করা ── */
-          var dayRef = db.collection('visitors').doc(today);
-          dayRef.get().then(function(doc){
-            var prev = doc.exists ? doc.data() : {};
-            var upd = { date: today };
-
-            if(!alreadyToday){
-              /* নতুন visitor — IP এ mark করো */
-              ipRef.set({ ip: ip, date: today, time: Date.now() });
-              /* মোট count বাড়াও */
-              upd.count = (prev.count||0)+1;
-              /* source */
-              var srcs = prev.sources||{};
-              srcs[src] = (srcs[src]||0)+1;
-              upd.sources = srcs;
-              /* page */
-              var pages = prev.pages||{};
-              pages[pageName] = (pages[pageName]||0)+1;
-              upd.pages = pages;
-              /* new/returning */
-              var nr = prev.newReturning||{new:0,returning:0};
-              if(isReturning){ nr.returning=(nr.returning||0)+1; }
-              else { nr.new=(nr.new||0)+1; }
-              upd.newReturning = nr;
-              /* district */
-              var dists = prev.districts||{};
-              dists[district] = (dists[district]||0)+1;
-              upd.districts = dists;
-            }
-
-            if(doc.exists) dayRef.update(upd);
-            else dayRef.set(upd);
-
-            /* IP এর সব সময়ের record */
-            if(!allDoc.exists){
-              allIpRef.set({ ip: ip, firstDate: today, lastSeen: Date.now() });
-            } else {
-              allIpRef.update({ lastSeen: Date.now() });
-            }
-
-            /* districtVisitors আলাদা collection */
-            if(!alreadyToday){
-              var dRef = db.collection('districtVisitors').doc(district);
-              dRef.get().then(function(d){
-                if(d.exists) dRef.update({count:(d.data().count||0)+1, lastSeen:Date.now()});
-                else dRef.set({count:1, district:district, lastSeen:Date.now()});
-              }).catch(function(){});
-            }
-
-          }).catch(function(){});
-        }).catch(function(){});
-      }).catch(function(){});
-
-      sessionStorage.setItem('v_district', district);
-    }).catch(function(){
-      /* IP পাওয়া না গেলে পুরনো পদ্ধতিতে count */
-      var visitKey = 'kh_visited_'+today;
-      var alreadyToday = false;
-      try { if(localStorage.getItem(visitKey)) alreadyToday = true; } catch(e) {}
-      if(!alreadyToday){
-        try { localStorage.setItem(visitKey,'1'); } catch(e) {}
-        try { sessionStorage.setItem(visitKey,'1'); } catch(e) {}
         var dayRef = db.collection('visitors').doc(today);
         dayRef.get().then(function(doc){
           var prev = doc.exists ? doc.data() : {};
-          var upd = { count: (prev.count||0)+1, date: today };
+          var upd = { date: today };
+
+          if(!alreadyToday){
+            /* নতুন visit — mark করো */
+            uidRef.set({ uid: uid, date: today, time: Date.now() });
+            upd.count = (prev.count||0)+1;
+            /* source */
+            var srcs = prev.sources||{};
+            srcs[src] = (srcs[src]||0)+1;
+            upd.sources = srcs;
+            /* page */
+            var pages = prev.pages||{};
+            pages[pageName] = (pages[pageName]||0)+1;
+            upd.pages = pages;
+            /* new/returning */
+            var nr = prev.newReturning||{new:0,returning:0};
+            if(isReturning){ nr.returning=(nr.returning||0)+1; }
+            else { nr.new=(nr.new||0)+1; }
+            upd.newReturning = nr;
+          }
+
           if(doc.exists) dayRef.update(upd);
           else dayRef.set(upd);
-        }).catch(function(){});
-      }
-    });
 
-    /* ── 4. জেলা / District via free IP geolocation ── */
+          /* সব সময়ের record আপডেট */
+          if(!allDoc.exists){
+            allUidRef.set({ uid: uid, firstDate: today, lastSeen: Date.now() });
+          } else {
+            allUidRef.update({ lastSeen: Date.now() });
+          }
+        }).catch(function(){});
+      }).catch(function(){});
+    }).catch(function(){});
+
+    /* ── জেলা detect ── */
     fetch('https://ipapi.co/json/')
       .then(function(r){ return r.json(); })
       .then(function(geo){
         var district = geo.city || geo.region || 'অজানা';
-        /* visitors/{date}.districts map এ increment */
+        sessionStorage.setItem('v_district', district);
         db.collection('visitors').doc(today).get().then(function(doc){
           var dists = doc.exists&&doc.data().districts ? doc.data().districts : {};
           dists[district] = (dists[district]||0)+1;
           if(doc.exists) db.collection('visitors').doc(today).update({districts:dists});
+          else db.collection('visitors').doc(today).set({districts:dists, date:today});
         }).catch(function(){});
-        /* আলাদা districtVisitors collection এও রাখি */
         var dRef = db.collection('districtVisitors').doc(district);
         dRef.get().then(function(d){
           if(d.exists) dRef.update({count:(d.data().count||0)+1, lastSeen:Date.now()});
           else dRef.set({count:1, district:district, lastSeen:Date.now()});
         }).catch(function(){});
-        sessionStorage.setItem('v_district', district);
-      }).catch(function(){
-        /* fallback */
-      });
+      }).catch(function(){});
+  };
+
+  /* Anonymous sign in — আগে থেকে sign in থাকলে সেটাই ব্যবহার করবে */
+  if(authInstance.currentUser){
+    doTrack(authInstance.currentUser.uid);
+  } else {
+    authInstance.signInAnonymously().then(function(result){
+      doTrack(result.user.uid);
+    }).catch(function(){
+      /* fallback — random ID */
+      var fbId = localStorage.getItem('kh_fbid');
+      if(!fbId){ fbId = 'fb_'+Date.now()+'_'+Math.random().toString(36).slice(2,8); localStorage.setItem('kh_fbid',fbId); }
+      doTrack(fbId);
+    });
+  }
 
   /* ── 5. Online Presence — প্রতি ৯০ সেকেন্ডে heartbeat (TTL 3 min) ── */
   var sessId = sessionStorage.getItem('v_sessid');
