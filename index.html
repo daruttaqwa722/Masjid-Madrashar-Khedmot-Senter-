@@ -5838,12 +5838,23 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
       </div>
 
       <!-- video frame -->
-      <div style="margin:0 14px 14px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.50);">
-        <iframe width="100%" height="480"
-          src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fweb.facebook.com%2Freel%2F1502017694655754%2F&show_text=false&width=267&t=0"
-          title="Facebook video player" frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowfullscreen style="display:block;border:0;"></iframe>
+      <div style="margin:0 14px 14px;border-radius:14px;overflow:hidden;border:1px solid rgba(196,154,56,0.25);box-shadow:0 4px 24px rgba(0,0,0,0.60),0 0 0 1px rgba(34,200,116,0.06);position:relative;background:#000;">
+        <!-- YouTube branding bar -->
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;background:linear-gradient(90deg,rgba(196,154,56,0.10),rgba(34,200,116,0.06));border-bottom:1px solid rgba(196,154,56,0.18);">
+          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="18" height="13" rx="3" fill="#FF0000"/><path d="M7.2 9.1V3.9L12.15 6.5L7.2 9.1Z" fill="white"/></svg>
+          <span style="font-size:11px;font-weight:700;color:#e0d5c0;font-family:'Noto Sans Bengali',sans-serif;letter-spacing:0.05em;">YouTube — ভিডিও গাইড</span>
+        </div>
+        <!-- responsive 9:16 wrapper (portrait / short video) -->
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;max-width:400px;margin:0 auto;">
+          <iframe
+            src="https://www.youtube.com/embed/EB_oGBXNXE4?rel=0&modestbranding=1&color=white"
+            title="ওয়েবসাইট ব্যবহারের সম্পূর্ণ গাইড"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;border:0;">
+          </iframe>
+        </div>
       </div>
 
     </div>
