@@ -5665,20 +5665,8 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
   <div class="section">
     <div class="section-label anim-item" style="animation-delay:.06s"><span>🌐 খেদমত দেখুন</span><div class="section-label-line"></div></div>
 
-    <!-- পাসওয়ার্ড সহ — সবুজ -->
-    <button id="btn-get-password" class="btn btn-green anim-item" onclick="saveHomeScroll();showScreen('center')" style="animation-delay:.10s;min-height:82px;background:linear-gradient(145deg,#071a0e 0%,#0c2415 60%,#071a0e 100%) !important;border:2px solid rgba(26,181,102,0.60) !important;border-top:2px solid rgba(26,181,102,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(26,181,102,0.22),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
-      <div class="btn-icon" style="background:rgba(26,181,102,0.22) !important;border:1.5px solid rgba(26,181,102,0.55) !important;width:46px;height:46px;min-width:46px;flex-shrink:0;">
-        <svg viewBox="0 0 24 24" style="width:22px;height:22px" stroke="#22c874" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      </div>
-      <div style="text-align:right;flex:1;min-width:0;">
-        <span style="font-size:15px;font-weight:800;color:#22c874;display:block;line-height:1.4;font-family:'Noto Serif Bengali',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">পাসওয়ার্ড সহ পোস্ট দেখুন</span>
-        <span style="font-size:12px;font-weight:500;color:#6bab82;font-family:'Noto Sans Bengali',sans-serif;white-space:nowrap;">সম্পূর্ণ নাম্বার দেখাবে</span>
-      </div>
-      <span style="color:#22c874;opacity:0.8;font-size:20px;flex-shrink:0;">›</span>
-    </button>
-
-    <!-- পাসওয়ার্ড ছাড়া — নীল -->
-    <button class="btn anim-item" onclick="saveHomeScroll();showScreen('preview');loadPreviewPosts();" style="animation-delay:.16s;min-height:82px;background:linear-gradient(145deg,#060c1c 0%,#0a1228 60%,#060c1c 100%) !important;border:2px solid rgba(96,165,250,0.55) !important;border-top:2px solid rgba(96,165,250,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(96,165,250,0.18),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
+    <!-- পাসওয়ার্ড ছাড়া — নীল (এখন ১ নম্বর) -->
+    <button class="btn anim-item" onclick="saveHomeScroll();showScreen('preview');loadPreviewPosts();" style="animation-delay:.10s;min-height:82px;background:linear-gradient(145deg,#060c1c 0%,#0a1228 60%,#060c1c 100%) !important;border:2px solid rgba(96,165,250,0.55) !important;border-top:2px solid rgba(96,165,250,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(96,165,250,0.18),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
       <div style="background:rgba(96,165,250,0.20);border:1.5px solid rgba(96,165,250,0.50);width:46px;height:46px;min-width:46px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;">
         <svg viewBox="0 0 24 24" style="width:22px;height:22px" stroke="#60a5fa" fill="none" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       </div>
@@ -5687,6 +5675,18 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
         <span style="font-size:12px;font-weight:500;color:#4a7abf;font-family:'Noto Sans Bengali',sans-serif;white-space:nowrap;">নাম্বার আংশিক দেখাবে</span>
       </div>
       <span style="color:#60a5fa;opacity:0.8;font-size:20px;flex-shrink:0;">›</span>
+    </button>
+
+    <!-- পাসওয়ার্ড সহ — সবুজ (এখন ২ নম্বর) -->
+    <button id="btn-get-password" class="btn btn-green anim-item" onclick="saveHomeScroll();showScreen('center')" style="animation-delay:.16s;min-height:82px;background:linear-gradient(145deg,#071a0e 0%,#0c2415 60%,#071a0e 100%) !important;border:2px solid rgba(26,181,102,0.60) !important;border-top:2px solid rgba(26,181,102,0.85) !important;border-radius:18px !important;box-shadow:0 4px 28px rgba(26,181,102,0.22),0 2px 12px rgba(0,0,0,0.5) !important;padding:16px 14px;">
+      <div class="btn-icon" style="background:rgba(26,181,102,0.22) !important;border:1.5px solid rgba(26,181,102,0.55) !important;width:46px;height:46px;min-width:46px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" stroke="#22c874" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div style="text-align:right;flex:1;min-width:0;">
+        <span style="font-size:15px;font-weight:800;color:#22c874;display:block;line-height:1.4;font-family:'Noto Serif Bengali',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">পাসওয়ার্ড সহ পোস্ট দেখুন</span>
+        <span style="font-size:12px;font-weight:500;color:#6bab82;font-family:'Noto Sans Bengali',sans-serif;white-space:nowrap;">সম্পূর্ণ নাম্বার দেখাবে</span>
+      </div>
+      <span style="color:#22c874;opacity:0.8;font-size:20px;flex-shrink:0;">›</span>
     </button>
 
     <!-- সুবিধা জানুন — গোল্ড -->
@@ -5714,7 +5714,9 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
     </button>
   </div>
 
-  <!-- ══ ৩. Admin Stats (শুধু Admin দেখবে) ══ -->
+
+
+  <!-- ══ ৪. Admin Stats (শুধু Admin দেখবে) ══ -->
   <div class="stats-card" id="home-stats">
     <h3>📊 ভিজিটর পরিসংখ্যান (শুধু Admin)</h3>
     <div class="stats-grid">
@@ -7641,21 +7643,46 @@ function showScreen(n){
 function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(function(){t.className='toast';},3500);}
 
 /* ── Page Load ── */
+/* ══ রাত ৩টায় auto-refresh — সাইট খোলা থাকলেও পোস্ট হাইড হবে ══ */
+function schedule3AMRefresh(){
+  var now = new Date();
+  var next3AM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 3, 0, 0, 0);
+  if(now >= next3AM) next3AM = new Date(next3AM.getTime() + 24*3600000);
+  var msUntil3AM = next3AM.getTime() - Date.now();
+  setTimeout(function(){
+    if(typeof renderPreviewPosts === 'function') renderPreviewPosts();
+    if(typeof renderCenterPosts === 'function') renderCenterPosts();
+    if(typeof loadHomePreviewPosts === 'function') loadHomePreviewPosts();
+    schedule3AMRefresh();
+  }, msUntil3AM);
+}
+
 window.addEventListener('load',function(){
   applyCopyGuard();
   trackVisitor();
   initPWA();
   setTimeout(initPushNotification, 2000);
   loadHomePhotos();
-  /* Firebase Auth state পর্যবেক্ষণ — auto session restore */
+  schedule3AMRefresh();
+  /* db ও সব function ready হওয়ার পর লোড করো */
+  setTimeout(loadHomePreviewPosts, 800);
+  /* Firebase Auth state পর্যবেক্ষণ — শুধু সত্যিকারের admin এর জন্য session restore */
   function waitForAuth(retries){
     if(retries<=0)return;
     if(!auth){setTimeout(function(){waitForAuth(retries-1);},300);return;}
     auth.onAuthStateChanged(function(user){
-      if(user){
+      /* ⚠️ Anonymous user কে কখনো admin করা যাবে না */
+      /* শুধু email/password দিয়ে লগইন করা admin এর session restore হবে */
+      if(user && !user.isAnonymous && localStorage.getItem('kh_adm')==='1'){
+        var savedTime=parseInt(localStorage.getItem('kh_adm_time')||'0');
+        /* ১২ ঘণ্টার বেশি পুরনো session বাতিল */
+        if(Date.now()-savedTime > ADM_12H){
+          auth.signOut().catch(function(){});
+          localStorage.removeItem('kh_adm');
+          localStorage.removeItem('kh_adm_time');
+          return;
+        }
         curUser='Administrator';isAdmin=true;
-        localStorage.setItem('kh_adm','1');
-        localStorage.setItem('kh_adm_time',String(Date.now()));
         applyCopyGuard();
         showNotices();
         document.getElementById('home-stats').classList.add('show');
@@ -7663,15 +7690,18 @@ window.addEventListener('load',function(){
         if(db_btn)db_btn.style.display='inline-flex';
         loadStats();
         enterComm();
+      } else if(user && user.isAnonymous){
+        /* Anonymous user — কিছু করার দরকার নেই, শুধু ট্র্যাকিং এর জন্য */
+        /* isAdmin কখনো true হবে না */
       }
     });
   }
   waitForAuth(20);
 
-  /* ══ ভিজিটর অফার: হোমপেজে ১ মিনিট পর দেখাবে, শুধু লগইন না করা ভিজিটরদের জন্য ══ */
+  /* ══ ভিজিটর অফার: হোমপেজে ১ মিনিট পর দেখাবে ══
+     শর্ত: লগইন নেই AND এই ডিভাইসে আগে কখনো লগইন হয়নি */
   setTimeout(function(){
-    /* যদি কেউ লগইন না করে থাকে (curUser খালি) তাহলে অফার দেখাও */
-    if(!curUser){
+    if(!curUser && !localStorage.getItem('kh_ever_logged')){
       showNoticeIfNeeded('visitor-offer-overlay');
     }
   }, 60000);
@@ -7722,6 +7752,7 @@ function memberLogin(){
         curUser=d.name||mob; isAdmin=false;
         curUserExpired=false;
         curUserData={name:d.name||mob,mobile:mob,expiresAt:d.expiresAt||0,uid:doc.id};
+        localStorage.setItem('kh_ever_logged','1'); /* এই ডিভাইসে আগে লগইন হয়েছে */
         applyCopyGuard();
         showNotices();
         enterComm();
@@ -8069,15 +8100,20 @@ document.getElementById('user-edit-modal-overlay').addEventListener('click', fun
 });
 
 /* ══ POST TIME STATS (24h / 48h / 60h — সবার জন্য) ══ */
-function updatePostTimeStats(posts){
+/* rawPosts = সব পোস্ট (ফিল্টার ছাড়া) পাঠাতে হবে */
+function updatePostTimeStats(rawPosts){
   var now = Date.now();
   var h24 = now - 24*3600000;
   var h48 = now - 48*3600000;
-  var h60 = now - 60*3600000;
   var bnNums = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
   function toBN(n){ return String(n).split('').map(function(c){return bnNums[+c]!==undefined?bnNums[+c]:c;}).join(''); }
   var c24=0, c48=0, c60=0;
-  posts.forEach(function(p){ var t=p.created||0; if(t>=h24)c24++; if(t>=h48)c48++; if(t>=h60)c60++; });
+  rawPosts.forEach(function(p){
+    var t=p.created||0;
+    if(t>=h24) c24++;
+    if(t>=h48) c48++;
+    if(isPostVisible(t)) c60++;
+  });
   /* preview screen chips */
   var el24=document.getElementById('posts-24h-count');
   var el48=document.getElementById('posts-48h-count');
@@ -8156,6 +8192,72 @@ var centerFilter = { main: 'all', sub: null };
 var previewFilter = { main: 'all', sub: null };
 var allPostsData = window.allPostsData || []; // cache for center
 var allPreviewData = []; // cache for preview
+
+/* ══════════════════════════════════════════════════════
+   হোমপেজ পোস্ট প্রিভিউ — আরো দেখুন সিস্টেম
+   ══════════════════════════════════════════════════════ */
+var HOME_PAGE_SIZE = 5; /* প্রথমে ৫টি পোস্ট দেখাবে */
+var homeShownCount = 0;
+var homePostsCache = [];
+
+function loadHomePreviewPosts(){
+  /* db বা isPostVisible না থাকলে retry করো */
+  if(!db || typeof isPostVisible !== 'function'){
+    setTimeout(loadHomePreviewPosts, 500);
+    return;
+  }
+  var container = document.getElementById('home-preview-posts-container');
+  if(!container) return;
+  container.innerHTML = '<div class="posts-loading"><div class="spinner"></div>লোড হচ্ছে...</div>';
+  db.collection('posts').orderBy('created','desc').limit(100).get().then(function(snap){
+    homePostsCache = [];
+    snap.forEach(function(doc){
+      var d = doc.data(); d._id = doc.id;
+      if(isPostVisible(d.created || 0)) homePostsCache.push(d);
+    });
+    homeShownCount = 0;
+    container.innerHTML = '';
+    renderHomeMorePosts();
+  }).catch(function(){
+    container.innerHTML = '<div class="no-posts"><span>⚠</span>লোড হয়নি</div>';
+  });
+}
+
+function renderHomeMorePosts(){
+  var container = document.getElementById('home-preview-posts-container');
+  var loadMoreWrap = document.getElementById('home-load-more-wrap');
+  var noMoreMsg = document.getElementById('home-no-more-msg');
+  if(!container) return;
+  var batch = homePostsCache.slice(homeShownCount, homeShownCount + HOME_PAGE_SIZE);
+  batch.forEach(function(d){
+    var rawText = d.text || '';
+    var escapedText = rawText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var maskedText = maskNumbers(escapedText);
+    var tl = timeLeft(d.created || Date.now());
+    var expBadge = '';
+    var catBadge = catBadgeHTML(d.mainCat, d.subCat, d.cats);
+    var card = document.createElement('div');
+    card.style.cssText = 'background:linear-gradient(160deg,#0c1c11 0%,#101b14 55%,#0b1810 100%);border-top:2px solid rgba(96,165,250,0.45);border-left:1px solid rgba(96,165,250,0.22);border-right:1px solid rgba(96,165,250,0.22);border-bottom:1px solid rgba(96,165,250,0.22);border-radius:16px;padding:18px 16px 14px;margin-bottom:12px;';
+    card.innerHTML = catBadge +
+      '<div style="font-family:\'Noto Sans Bengali\',sans-serif;font-size:14px;color:#d4e8da;line-height:1.75;white-space:pre-wrap;word-break:break-word;">' + maskedText + '</div>' +
+      '<div style="font-size:12px;color:var(--text-muted);margin-top:10px;">' + (d.timeStr||'') + '</div>' +
+      expBadge;
+    container.appendChild(card);
+  });
+  homeShownCount += batch.length;
+  /* আরো দেখুন / সব দেখানো হয়েছে */
+  if(homeShownCount < homePostsCache.length){
+    if(loadMoreWrap) loadMoreWrap.style.display = 'block';
+    if(noMoreMsg) noMoreMsg.style.display = 'none';
+  } else {
+    if(loadMoreWrap) loadMoreWrap.style.display = 'none';
+    if(noMoreMsg && homeShownCount > 0) noMoreMsg.style.display = 'block';
+  }
+}
+
+function homeLoadMore(){
+  renderHomeMorePosts();
+}
 
 function filterCat(screen, main, sub) {
   if (screen === 'center') {
@@ -8272,8 +8374,6 @@ function renderCenterPosts() {
     var likeCount = d.likes || 0;
     var tl = timeLeft(d.created || Date.now());
     var expBadge = '';
-    if (tl) { expBadge = '<span class="post-expire-badge' + (tl.soon ? ' expiring-soon' : '') + '">⏳ ' + tl.label + '</span>'; }
-    else { expBadge = '<span class="post-expire-badge" style="background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);color:#f87171;border-radius:999px;font-size:11px;padding:3px 10px">🔒 ভিজিটরদের কাছে লুকানো</span>'; }
     var delBtn = isAdmin ? '<button class="delete-post-btn" onclick="delPost(\'' + postId + '\')">✕</button>' : '';
     var editBtn = isAdmin ? '<button class="edit-post-btn" onclick="openEditModal(\'' + postId + '\')">✏</button>' : '';
     var rawText = d.text || '';
@@ -8321,8 +8421,7 @@ function loadPosts() {
     /* ৬০ ঘণ্টার ফিল্টার করা পোস্ট গণনা করো */
     var bnNs=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
     function toBNc(n){return String(n).split('').map(function(c){return bnNs[+c]!==undefined?bnNs[+c]:c;}).join('');}
-    var cutoff60 = Date.now() - 60*3600000;
-    var visible60 = isAdmin ? allPostsData : allPostsData.filter(function(d){ return (d.created||0) >= cutoff60; });
+    var visible60 = isAdmin ? allPostsData : allPostsData.filter(function(d){ return isPostVisible(d.created||0); });
     document.getElementById('posts-count').textContent = toBNc(visible60.length);
     updateCounts(visible60, 'cac');
     updatePostTimeStats(allPostsData);
@@ -8351,6 +8450,9 @@ function renderPreviewPosts(overridePosts) {
   var filtered;
   if (isAdmin) {
     filtered = src;
+  } else if (previewTimeFilter === 60) {
+    /* ৬০ ঘণ্টার ক্ষেত্রে রাত ৩টার cutoff সিস্টেম ব্যবহার করো */
+    filtered = src.filter(function(d) { return isPostVisible(d.created || 0); });
   } else {
     var cutoff = Date.now() - (previewTimeFilter * 3600000);
     filtered = src.filter(function(d) { return (d.created || 0) >= cutoff; });
@@ -8371,10 +8473,6 @@ function renderPreviewPosts(overridePosts) {
     var tl = timeLeft(d.created || Date.now());
     var expBadge = '';
     var postCreated = d.created || Date.now();
-    if (tl) {
-      var timerCls = 'post-expire-badge live-countdown' + (tl.soon ? ' expiring-soon' : '');
-      expBadge = '<span class="' + timerCls + '" data-exp="' + (postCreated + POST_VISIBLE_MS) + '">⏳ <span class="cdown-txt">' + tl.label + '</span> পরে মুছে যাবে</span>';
-    }
     var shareText = rawText.replace(/'/g, "\\'").replace(/\n/g, ' ');
     var postUrl = BASE_URL + '?post=' + postId;
     var shareUrl = encodeURIComponent(postUrl);
@@ -8420,13 +8518,19 @@ function loadPreviewPosts() {
   if (previewUnsub) { previewUnsub(); previewUnsub = null; }
   var c = document.getElementById('preview-posts-container');
   c.innerHTML = '<div class="posts-loading"><div class="spinner"></div>লোড হচ্ছে...</div>';
-  previewUnsub = db.collection('posts').orderBy('created', 'desc').onSnapshot(function(snap) {
+  /* onSnapshot এর বদলে get() ব্যবহার — Firestore read অনেক কমবে */
+  /* ৫ মিনিট পরপর auto-refresh */
+  var previewRefreshTimer = null;
+  function fetchPreviewPosts(){
+    /* রাত ৩টার cutoff থেকে ৬০ ঘণ্টা পিছনের সময় — এর আগের পোস্ট দরকার নেই */
+    var previewSince = get3AMCutoff() - POST_VISIBLE_MS;
+    db.collection('posts').orderBy('created', 'desc').where('created', '>=', previewSince).get().then(function(snap) {
     allPreviewData = [];
     snap.forEach(function(doc) {
       var d = doc.data(); d._id = doc.id;
       allPreviewData.push(d);
     });
-    /* Preview screen সবসময় শুধু ৬০ ঘণ্টার পোস্ট দেখাবে */
+    /* isPostVisible দিয়ে দৃশ্যমান পোস্ট ফিল্টার */
     var visibleData = allPreviewData.filter(function(d) {
       return isPostVisible(d.created || 0);
     });
@@ -8436,7 +8540,7 @@ function loadPreviewPosts() {
     /* Search cache আপডেট — শুধু দৃশ্যমান পোস্ট */
     previewPostsAll = visibleData.slice();
     updateCounts(visibleData, 'cap');
-    updatePostTimeStats(visibleData);
+    updatePostTimeStats(allPreviewData); /* raw সব পোস্ট — ফিল্টার ছাড়া */
     /* হোমপেজ ক্যাটাগরি breakdown আপডেট করো — visibleData (৬০ঘণ্টার) পাঠাও */
     loadHomeTodayPostCount(visibleData);
     /* যদি search active থাকে */
@@ -8446,9 +8550,14 @@ function loadPreviewPosts() {
     } else {
       renderPreviewPosts();
     }
-  }, function(e) {
+    /* ৫ মিনিট পরে আবার fetch */
+    if(previewRefreshTimer) clearTimeout(previewRefreshTimer);
+    previewRefreshTimer = setTimeout(fetchPreviewPosts, 5 * 60 * 1000);
+  }).catch(function(e) {
     c.innerHTML = '<div class="no-posts"><span>⚠</span>লোড হয়নি: ' + e.message + '</div>';
   });
+  }
+  fetchPreviewPosts();
 }
 
 /* ══ LIVE COUNTDOWN TICKER — প্রতি মিনিটে badge update ══ */
@@ -8735,8 +8844,8 @@ function loadHomeTodayPostCount(directPosts){
   function toBN(n){return String(n).split('').map(function(c){return bnD[+c]!==undefined?bnD[+c]:c;}).join('');}
 
   function applyBreakdown(posts){
-    var since60h = Date.now() - 60*3600000;
-    var recent = posts.filter(function(d){ return (d.created||0) >= since60h; });
+    /* রাত ৩টার cutoff সিস্টেম অনুযায়ী দৃশ্যমান পোস্ট */
+    var recent = posts.filter(function(d){ return isPostVisible(d.created||0); });
     var total=0, masjid=0, madrasa=0, mahila=0;
     recent.forEach(function(d){
       total++;
@@ -8775,8 +8884,8 @@ function loadHomeTodayPostCount(directPosts){
   }
   /* না থাকলে Firebase থেকে আনো */
   if(!db) return;
-  var since60h = Date.now() - 60*3600000;
-  db.collection('posts').where('created','>=',since60h).get().then(function(snap){
+  var hideBeforeTime = get3AMCutoff() - POST_VISIBLE_MS;
+  db.collection('posts').where('created','>=',hideBeforeTime).get().then(function(snap){
     var posts = [];
     snap.forEach(function(doc){ var d=doc.data(); d._id=doc.id; posts.push(d); });
     applyBreakdown(posts);
@@ -9080,11 +9189,45 @@ function autoDeleteOldPosts(){
     .then(function(snap){ snap.forEach(function(doc){ doc.ref.delete().catch(function(){}); }); })
     .catch(function(){});
 }
-/* ৬০ ঘণ্টা = ভিজিবিলিটি উইন্ডো */
+/* ══════════════════════════════════════════════════════
+   রাত ৩টার cutoff সিস্টেম
+   — প্রতিদিন রাত ৩টায় ৬০ ঘণ্টার পুরনো পোস্ট একসাথে হাইড হবে
+   ══════════════════════════════════════════════════════ */
 var POST_VISIBLE_MS = 60 * 3600000;
+
+/* আজকের বা গতকালের রাত ৩টার cutoff timestamp বের করো */
+function get3AMCutoff(){
+  var now = new Date();
+  /* আজকের রাত ৩টা */
+  var cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 3, 0, 0, 0);
+  /* যদি এখন রাত ৩টার আগে হয় (যেমন রাত ১টা বা ২টা),
+     তাহলে গতকালের রাত ৩টাকে cutoff ধরো */
+  if(now < cutoff){
+    cutoff = new Date(cutoff.getTime() - 24*3600000);
+  }
+  return cutoff.getTime();
+}
+
+/* একটি পোস্ট দৃশ্যমান কিনা চেক করো:
+   রাত ৩টার cutoff থেকে ৬০ ঘণ্টা আগের পোস্ট হাইড হবে */
+function isPostVisible(created){
+  var cutoff3AM = get3AMCutoff();
+  /* cutoff থেকে ৬০ ঘণ্টা পিছিয়ে যাও — এর আগের পোস্ট হাইড */
+  var hideBeforeTime = cutoff3AM - POST_VISIBLE_MS;
+  return created >= hideBeforeTime;
+}
+
+/* পোস্টের বাকি সময় দেখাও (রাত ৩টার হিসেবে) */
 function timeLeft(created){
-  var exp = created + POST_VISIBLE_MS;
-  var diff = exp - Date.now();
+  /* দৃশ্যমান না হলে null */
+  if(!isPostVisible(created)) return null;
+
+  /* সব পোস্ট একসাথে পরের রাত ৩টায় হাইড হবে —
+     countdown সবার জন্য একই: পরের রাত ৩টা পর্যন্ত বাকি সময় */
+  var cutoff3AM = get3AMCutoff();
+  var next3AM = cutoff3AM + 24 * 3600000;
+
+  var diff = next3AM - Date.now();
   if(diff <= 0) return null;
   var h = Math.floor(diff / 3600000);
   var m = Math.floor((diff % 3600000) / 60000);
@@ -9092,9 +9235,6 @@ function timeLeft(created){
   function toB(n){return String(n).split('').map(function(c){return bnD[+c]!==undefined?bnD[+c]:c;}).join('');}
   if(h <= 6) return { label: toB(h) + 'ঘ ' + toB(m) + 'মি বাকি', soon: true };
   return { label: toB(h) + ' ঘন্টা বাকি', soon: false };
-}
-function isPostVisible(created){
-  return (Date.now() - created) < POST_VISIBLE_MS;
 }
 function toggleLike(postId,btn){
   if(!db)return;
@@ -9620,92 +9760,70 @@ function trackVisitor(){
   /* ── 2. Current page name ── */
   var pageName = document.title || window.location.pathname || 'হোম';
 
-  /* ── 3. Firebase Anonymous Auth দিয়ে প্রতিটা মানুষকে আলাদা চেনা ── */
-  /* Facebook browser, Chrome, যেকোনো browser এ কাজ করবে */
-  var authInstance = firebase.auth();
-  var doTrack = function(uid){
-    /* uid দিয়ে আজকে already visited কিনা চেক */
-    var uidDocId = today + '_' + uid;
-    var uidRef = db.collection('visitorUIDs').doc(uidDocId);
-    /* সব সময়ের record */
-    var allUidRef = db.collection('visitorUIDs_all').doc(uid);
+  /* ── 3. LocalStorage দিয়ে আজকে already tracked কিনা চেক করো ── */
+  /* এতে Firestore read অনেক কমবে — প্রতিটি ভিজিটরের জন্য বারবার read হবে না */
+  var trackKey = 'kh_tracked_' + today;
+  var alreadyTrackedToday = localStorage.getItem(trackKey) === '1';
 
-    uidRef.get().then(function(uidDoc){
-      var alreadyToday = uidDoc.exists;
+  /* ── 4. LocalStorage থেকে unique visitor ID নাও (anonymous auth বাদ দেওয়া হয়েছে) ── */
+  /* Anonymous auth বন্ধ — এতে Firebase read/write অনেক কমবে */
+  var uid = localStorage.getItem('kh_fbid');
+  if(!uid){
+    uid = 'v_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+    localStorage.setItem('kh_fbid', uid);
+  }
 
-      allUidRef.get().then(function(allDoc){
-        var isReturning = allDoc.exists && allDoc.data().firstDate !== today;
+  var doTrack = function(){
+    if(alreadyTrackedToday){
+      /* আজকে আগেই track হয়েছে — Firestore read/write করার দরকার নেই */
+      return;
+    }
+    /* প্রথমবার আজকে visit — localStorage এ mark করো */
+    localStorage.setItem(trackKey, '1');
 
-        var dayRef = db.collection('visitors').doc(today);
-        dayRef.get().then(function(doc){
-          var prev = doc.exists ? doc.data() : {};
-          var upd = { date: today };
+    var isReturning = localStorage.getItem('kh_ever_visited') === '1';
+    localStorage.setItem('kh_ever_visited', '1');
 
-          if(!alreadyToday){
-            /* নতুন visit — mark করো */
-            uidRef.set({ uid: uid, date: today, time: Date.now() });
-            upd.count = (prev.count||0)+1;
-            /* source */
-            var srcs = prev.sources||{};
-            srcs[src] = (srcs[src]||0)+1;
-            upd.sources = srcs;
-            /* page */
-            var pages = prev.pages||{};
-            pages[pageName] = (pages[pageName]||0)+1;
-            upd.pages = pages;
-            /* new/returning */
-            var nr = prev.newReturning||{new:0,returning:0};
-            if(isReturning){ nr.returning=(nr.returning||0)+1; }
-            else { nr.new=(nr.new||0)+1; }
-            upd.newReturning = nr;
-          }
-
-          if(doc.exists) dayRef.update(upd);
-          else dayRef.set(upd);
-
-          /* সব সময়ের record আপডেট */
-          if(!allDoc.exists){
-            allUidRef.set({ uid: uid, firstDate: today, lastSeen: Date.now() });
-          } else {
-            allUidRef.update({ lastSeen: Date.now() });
-          }
-        }).catch(function(){});
-      }).catch(function(){});
+    /* শুধু একটি write — visitors collection এ */
+    var dayRef = db.collection('visitors').doc(today);
+    dayRef.get().then(function(doc){
+      var prev = doc.exists ? doc.data() : {};
+      var upd = { date: today };
+      upd.count = (prev.count||0)+1;
+      var srcs = prev.sources||{};
+      srcs[src] = (srcs[src]||0)+1;
+      upd.sources = srcs;
+      var pages = prev.pages||{};
+      pages[pageName] = (pages[pageName]||0)+1;
+      upd.pages = pages;
+      var nr = prev.newReturning||{new:0,returning:0};
+      if(isReturning){ nr.returning=(nr.returning||0)+1; }
+      else { nr.new=(nr.new||0)+1; }
+      upd.newReturning = nr;
+      if(doc.exists) dayRef.update(upd);
+      else dayRef.set(upd);
     }).catch(function(){});
 
-    /* ── জেলা detect ── */
-    fetch('https://ipapi.co/json/')
-      .then(function(r){ return r.json(); })
-      .then(function(geo){
-        var district = geo.city || geo.region || 'অজানা';
-        sessionStorage.setItem('v_district', district);
-        db.collection('visitors').doc(today).get().then(function(doc){
-          var dists = doc.exists&&doc.data().districts ? doc.data().districts : {};
-          dists[district] = (dists[district]||0)+1;
-          if(doc.exists) db.collection('visitors').doc(today).update({districts:dists});
-          else db.collection('visitors').doc(today).set({districts:dists, date:today});
+    /* ── জেলা detect (শুধু নতুন ভিজিটরের জন্য) ── */
+    if(!localStorage.getItem('kh_district')){
+      fetch('https://ipapi.co/json/')
+        .then(function(r){ return r.json(); })
+        .then(function(geo){
+          var district = geo.city || geo.region || 'অজানা';
+          sessionStorage.setItem('v_district', district);
+          localStorage.setItem('kh_district', district);
+          var dRef = db.collection('districtVisitors').doc(district);
+          dRef.get().then(function(d){
+            if(d.exists) dRef.update({count:(d.data().count||0)+1, lastSeen:Date.now()});
+            else dRef.set({count:1, district:district, lastSeen:Date.now()});
+          }).catch(function(){});
         }).catch(function(){});
-        var dRef = db.collection('districtVisitors').doc(district);
-        dRef.get().then(function(d){
-          if(d.exists) dRef.update({count:(d.data().count||0)+1, lastSeen:Date.now()});
-          else dRef.set({count:1, district:district, lastSeen:Date.now()});
-        }).catch(function(){});
-      }).catch(function(){});
+    } else {
+      sessionStorage.setItem('v_district', localStorage.getItem('kh_district'));
+    }
   };
 
-  /* Anonymous sign in — আগে থেকে sign in থাকলে সেটাই ব্যবহার করবে */
-  if(authInstance.currentUser){
-    doTrack(authInstance.currentUser.uid);
-  } else {
-    authInstance.signInAnonymously().then(function(result){
-      doTrack(result.user.uid);
-    }).catch(function(){
-      /* fallback — random ID */
-      var fbId = localStorage.getItem('kh_fbid');
-      if(!fbId){ fbId = 'fb_'+Date.now()+'_'+Math.random().toString(36).slice(2,8); localStorage.setItem('kh_fbid',fbId); }
-      doTrack(fbId);
-    });
-  }
+  doTrack();
 
   /* ── 5. Online Presence — প্রতি ৯০ সেকেন্ডে heartbeat (TTL 3 min) ── */
   var sessId = sessionStorage.getItem('v_sessid');
@@ -9720,7 +9838,7 @@ function trackVisitor(){
     var presRef = db.collection('presence').doc(sessId);
     presRef.set({
       ts: Date.now(),
-      expires: Date.now()+180000, /* 3 মিনিট TTL */
+      expires: Date.now()+360000, /* 6 মিনিট TTL — heartbeat 5 মিনিটে একবার */
       page: pg,
       category: cat,
       src: sessionStorage.getItem('v_src')||'direct',
@@ -9728,7 +9846,8 @@ function trackVisitor(){
     }).catch(function(){});
   }
   heartbeat();
-  setInterval(heartbeat, 90000);
+  /* ৫ মিনিটে একবার heartbeat — আগে ৯০ সেকেন্ড ছিল, এতে write অনেক কমবে */
+  setInterval(heartbeat, 300000);
 
   /* ── 6. Cleanup: মেয়াদ উত্তীর্ণ presence docs মুছি (admin only) ── */
   /* এটা loadRealtimeTracking এ করা হবে */
@@ -9752,7 +9871,7 @@ function updatePresencePage(pageName, catName){
     page: pageName||document.title||'হোম',
     category: catName||sessionStorage.getItem('v_current_cat')||'সাধারণ',
     ts: Date.now(),
-    expires: Date.now()+180000
+    expires: Date.now()+360000
   }).catch(function(){});
   /* page view count */
   var today=new Date().toISOString().slice(0,10);
