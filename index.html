@@ -1616,10 +1616,13 @@ body::after {
   color: #ef4444; width: 28px; height: 28px; border-radius: 6px;
   cursor: pointer; font-size: 13px;
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.22s; opacity: 0;
+  transition: background 0.22s; opacity: 1;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  z-index: 10;
 }
 .post-card:hover .delete-post-btn { opacity: 1; }
-.delete-post-btn:hover { background: rgba(239,68,68,0.22); }
+.delete-post-btn:hover, .delete-post-btn:active { background: rgba(239,68,68,0.35); }
 
 .no-posts {
   text-align: center; padding: 48px 20px;
@@ -2160,15 +2163,18 @@ body.light-mode .share-fb-btn { color: #1877f2; }
 
 /* Edit button on post card */
 .edit-post-btn {
-  position: absolute; top: 13px; right: 46px;
+  position: absolute; top: 13px; right: 48px;
   background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
   color: var(--gold-light); width: 28px; height: 28px; border-radius: 6px;
   cursor: pointer; font-size: 12px;
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.22s; opacity: 0;
+  transition: background 0.22s; opacity: 1;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  z-index: 10;
 }
 .post-card:hover .edit-post-btn { opacity: 1; }
-.edit-post-btn:hover { background: rgba(201,168,76,0.24); }
+.edit-post-btn:hover, .edit-post-btn:active { background: rgba(201,168,76,0.35); }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 480px) {
@@ -5688,9 +5694,8 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
         </div>
 
         <!-- ── Count display — hero number ── -->
-        <div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin:0 0 4px;">
-          <span id="home-today-post-count" style="font-size:clamp(60px,15vw,80px);font-weight:900;font-family:'Noto Serif Bengali',serif;color:#f5c842;line-height:0.95;background:linear-gradient(160deg,#ffe066,#f5c842,#e0a020);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(245,200,66,0.65));letter-spacing:-4px;">—</span>
-          <span style="font-size:clamp(26px,6vw,34px);font-weight:900;color:#ff9500;font-family:'Noto Serif Bengali',serif;line-height:1;margin-bottom:8px;text-shadow:0 0 16px rgba(255,149,0,0.65);">টি</span>
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin:0 0 4px;line-height:1;flex-wrap:nowrap;">
+          <span id="home-today-post-count" style="font-size:clamp(48px,12vw,70px);font-weight:900;font-family:'Noto Serif Bengali',serif;color:#f5c842;line-height:1;background:linear-gradient(160deg,#ffe066,#f5c842,#e0a020);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(245,200,66,0.65));letter-spacing:0;display:inline-block;flex-shrink:0;">—</span><span style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#ff9500;font-family:'Noto Serif Bengali',serif;line-height:1;text-shadow:0 0 16px rgba(255,149,0,0.65);display:inline-block;flex-shrink:0;">টি</span>
         </div>
 
         <!-- ── Subtitle ── -->
@@ -6642,6 +6647,7 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
           <button class="admin-tab-btn" id="tab-pending-btn" onclick="switchAdminTab('pending')">⏳ Pending <span id="pending-tab-count" style="background:rgba(234,179,8,0.2);border-radius:999px;padding:0 7px;font-size:12px;color:#fde047;margin-left:3px">0</span></button>
           <button class="admin-tab-btn" id="tab-story-btn" onclick="switchAdminTab('story')">🌟 সফলতার গল্প</button>
           <button class="admin-tab-btn" id="tab-user-btn" onclick="switchAdminTab('user')">👥 ইউজার</button>
+          <button class="admin-tab-btn" id="tab-photo-btn" onclick="switchAdminTab('photo')">🖼️ ফটো গ্যালারি</button>
         </div>
       </div>
 
@@ -6820,6 +6826,44 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
         </div>
         <div id="user-search-info" style="display:none;font-size:12px;color:var(--text-muted);margin-bottom:8px;padding:0 2px"></div>
         <div id="ul-wrap"><div style="color:var(--text-muted);text-align:center;padding:14px;font-size:14px">⏳ লোড হচ্ছে...</div></div>
+      </div>
+
+      <!-- ══ ফটো গ্যালারি অ্যাডমিন প্যানেল ══ -->
+      <div id="admin-photo-area" style="display:none">
+        <!-- আপলোড সেকশন -->
+        <div style="background:rgba(13,122,69,0.08);border:1px solid rgba(13,122,69,0.25);border-radius:12px;padding:16px;margin-bottom:16px">
+          <div style="font-size:15px;font-weight:700;color:var(--gold-light);margin-bottom:14px">🖼️ নতুন ফটো আপলোড করুন</div>
+          <!-- label for= দিয়ে সরাসরি input trigger — Android-এ সবচেয়ে নির্ভরযোগ্য -->
+          <label for="photo-file-input" style="display:block;width:100%;box-sizing:border-box;cursor:pointer;margin-bottom:12px;">
+            <div id="photo-select-box" style="width:100%;padding:18px 14px;background:#0a1a0e;border:2px dashed rgba(13,122,69,0.7);border-radius:12px;text-align:center;box-sizing:border-box;">
+              <div style="font-size:28px;margin-bottom:6px;">📷</div>
+              <div id="photo-file-label-text" style="font-size:14px;font-weight:700;color:#4ade80;font-family:'Noto Sans Bengali',sans-serif;">ফটো নির্বাচন করতে এখানে ট্যাপ করুন</div>
+              <div style="font-size:11px;color:#6b8f7a;margin-top:4px;font-family:'Noto Sans Bengali',sans-serif;">একাধিক ফটো একসাথে সিলেক্ট করা যাবে</div>
+            </div>
+          </label>
+          <input type="file" id="photo-file-input" accept="image/*" multiple
+            style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;"
+            onchange="previewPhotoUpload(this)">
+          <div id="photo-preview-wrap" style="display:none;margin-bottom:12px">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">প্রিভিউ:</div>
+            <div id="photo-preview-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"></div>
+          </div>
+          <button onclick="uploadGalleryPhotos()"
+            style="width:100%;padding:12px;background:linear-gradient(135deg,#0d7a45,#13a860);color:#fff;border:none;border-radius:10px;font-family:'Noto Sans Bengali',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+            <span id="photo-upload-btn-text">📤 ফটো আপলোড করুন</span>
+          </button>
+          <div id="photo-upload-progress" style="display:none;margin-top:10px">
+            <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden">
+              <div id="photo-progress-bar" style="height:100%;background:linear-gradient(90deg,#0d7a45,#13a860);width:0%;transition:width 0.3s"></div>
+            </div>
+            <div id="photo-progress-text" style="font-size:12px;color:var(--text-muted);margin-top:4px;text-align:center">আপলোড হচ্ছে...</div>
+          </div>
+        </div>
+        <!-- গ্যালারি গ্রিড (অ্যাডমিন ভিউ — ডিলিট সহ) -->
+        <div style="font-size:14px;font-weight:700;color:var(--gold-light);margin-bottom:10px">📋 সকল ফটো</div>
+        <div id="admin-gallery-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+          <div style="color:var(--text-muted);text-align:center;padding:20px;grid-column:1/-1;font-size:14px">⏳ লোড হচ্ছে...</div>
+        </div>
       </div>
 
     </div><!-- /community-view -->
@@ -8282,12 +8326,14 @@ function switchAdminTab(tab) {
   var userArea    = document.getElementById('user-mgmt-area');
   var pendingArea = document.getElementById('pending-posts-area');
   var storyArea   = document.getElementById('admin-story-area');
+  var photoArea   = document.getElementById('admin-photo-area');
   var postBtn     = document.getElementById('tab-post-btn');
   var userBtn     = document.getElementById('tab-user-btn');
   var pendingBtn  = document.getElementById('tab-pending-btn');
   var storyBtn    = document.getElementById('tab-story-btn');
-  [postArea, userArea, pendingArea, storyArea].forEach(function(a) { if(a) a.style.display = 'none'; });
-  [postBtn, userBtn, pendingBtn, storyBtn].forEach(function(b) { if(b) b.classList.remove('active'); });
+  var photoBtn    = document.getElementById('tab-photo-btn');
+  [postArea, userArea, pendingArea, storyArea, photoArea].forEach(function(a) { if(a) a.style.display = 'none'; });
+  [postBtn, userBtn, pendingBtn, storyBtn, photoBtn].forEach(function(b) { if(b) b.classList.remove('active'); });
   if (tab === 'post') {
     postArea.style.display = 'block';
     postBtn.classList.add('active');
@@ -8302,6 +8348,10 @@ function switchAdminTab(tab) {
     storyArea.style.display = 'block';
     if(storyBtn) storyBtn.classList.add('active');
     loadAdminStories();
+  } else if (tab === 'photo') {
+    if(photoArea) photoArea.style.display = 'block';
+    if(photoBtn) photoBtn.classList.add('active');
+    loadAdminGallery();
   }
 }
 
@@ -8807,6 +8857,25 @@ function renderCenterPosts() {
         expBadge +
       '</div>' +
       editBtn + delBtn;
+    /* মোবাইল টাচ ফিক্স: touchend event সরাসরি বাটনে যোগ করো */
+    if (isAdmin) {
+      var _delBtnEl = el.querySelector('.delete-post-btn');
+      var _editBtnEl = el.querySelector('.edit-post-btn');
+      if (_delBtnEl) {
+        (function(pid) {
+          _delBtnEl.addEventListener('touchend', function(e) {
+            e.preventDefault(); e.stopPropagation(); delPost(pid);
+          }, {passive: false});
+        })(postId);
+      }
+      if (_editBtnEl) {
+        (function(pid) {
+          _editBtnEl.addEventListener('touchend', function(e) {
+            e.preventDefault(); e.stopPropagation(); openEditModal(pid);
+          }, {passive: false});
+        })(postId);
+      }
+    }
     c.appendChild(el);
   });
 }
@@ -9395,15 +9464,26 @@ function saveEditPost() {
     return cb && cb.checked;
   });
   if (cats.length === 0) { toast('অন্তত একটি ক্যাটাগরি নির্বাচন করুন', 'red'); return; }
-  db.collection('posts').doc(editingPostId).update({
-    text: txt, cats: cats, mainCat: cats[0], subCat: '',
-    editedAt: Date.now()
-  })
+  var _editId = editingPostId;
+  var _upd = { text: txt, cats: cats, mainCat: cats[0], subCat: '', editedAt: Date.now() };
+  db.collection('posts').doc(_editId).update(_upd)
   .then(function() {
     toast('পোস্ট আপডেট হয়েছে', 'green');
+    /* allPostsData ও allPreviewData লোকালি আপডেট করো */
+    allPostsData = allPostsData.map(function(p){
+      return p._id === _editId ? Object.assign({}, p, _upd) : p;
+    });
+    if(typeof allPreviewData !== 'undefined'){
+      allPreviewData = allPreviewData.map(function(p){
+        return p._id === _editId ? Object.assign({}, p, _upd) : p;
+      });
+    }
     closeEditModal();
+    /* UI রিফ্রেশ করো */
+    renderCenterPosts();
+    if(typeof renderPreviewPosts === 'function') renderPreviewPosts();
   })
-  .catch(function(e) { toast('সমস্যা হয়েছে: ' + e.message, 'red'); });
+  .catch(function(e) { toast('আপডেট ব্যর্থ: ' + e.message, 'red'); });
 }
 
 /* Close modal on overlay click */
@@ -9671,7 +9751,14 @@ function sharePost(platform, text, postId){
 }
 function delPost(id){
   if(!confirm('এই পোস্টটি ডিলিট করবেন?'))return;
-  db.collection('posts').doc(id).delete().then(function(){toast('ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
+  db.collection('posts').doc(id).delete().then(function(){
+    toast('ডিলিট হয়েছে','green');
+    /* allPostsData থেকে ডিলিট করা পোস্ট সরাও এবং UI রিফ্রেশ করো */
+    allPostsData = allPostsData.filter(function(p){ return p._id !== id; });
+    allPreviewData = allPreviewData.filter(function(p){ return p._id !== id; });
+    renderCenterPosts();
+    if(typeof renderPreviewPosts === 'function') renderPreviewPosts();
+  }).catch(function(e){toast('ডিলিট ব্যর্থ: ' + e.message,'red');});
 }
 function noPostsHTML(){return'<div class="no-posts"><span>🕐</span>কোনো পোস্ট নেই<br><small style="margin-top:8px;display:block">এখনো কোনো পোস্ট করা হয়নি।</small></div>';}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -10130,6 +10217,120 @@ function loadHomePhotos(){
 function delPhoto(id){
   if(!confirm('এই ফটো ডিলিট করবেন?'))return;
   db.collection('photos').doc(id).delete().then(function(){toast('ফটো ডিলিট হয়েছে','green');}).catch(function(e){toast(e.message,'red');});
+}
+
+/* ══ ফটো গ্যালারি — অ্যাডমিন প্যানেল ফাংশন ══ */
+function previewPhotoUpload(input){
+  var wrap=document.getElementById('photo-preview-wrap');
+  var grid=document.getElementById('photo-preview-grid');
+  var label=document.getElementById('photo-file-label-text');
+  if(!input.files||!input.files.length){wrap.style.display='none';if(label)label.textContent='কোনও ফাইল চয়ন করা হয়নি';return;}
+  if(label){
+    var n=input.files.length;
+    label.textContent = n===1 ? input.files[0].name : n+' টি ফটো নির্বাচন হয়েছে';
+    label.style.color='#4ade80';
+  }
+  wrap.style.display='block'; grid.innerHTML='';
+  Array.from(input.files).forEach(function(f){
+    var r=new FileReader();
+    r.onload=function(e){
+      var img=document.createElement('img');
+      img.src=e.target.result;
+      img.style.cssText='width:100%;height:80px;object-fit:cover;border-radius:8px;';
+      grid.appendChild(img);
+    };
+    r.readAsDataURL(f);
+  });
+}
+
+function uploadGalleryPhotos(){
+  var fileInput=document.getElementById('photo-file-input');
+  var capEl=document.getElementById('photo-caption-input');
+  var cap=capEl?capEl.value.trim():'';
+  var files=fileInput.files;
+  if(!files||!files.length){toast('ফটো সিলেক্ট করুন','red');return;}
+  if(!db){toast('Firebase error','red');return;}
+  var btnText=document.getElementById('photo-upload-btn-text');
+  var prog=document.getElementById('photo-upload-progress');
+  var bar=document.getElementById('photo-progress-bar');
+  var progText=document.getElementById('photo-progress-text');
+  btnText.textContent='আপলোড হচ্ছে...';
+  prog.style.display='block';
+  var total=files.length, done=0, failed=0;
+  function uploadOne(file, idx){
+    var fd=new FormData();
+    fd.append('file',file);
+    fd.append('upload_preset','masjid_upload');
+    fd.append('cloud_name','dlwk33bws');
+    fetch('https://api.cloudinary.com/v1_1/dlwk33bws/image/upload',{method:'POST',body:fd})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(!data.secure_url){throw new Error('আপলোড ব্যর্থ');}
+      var now=new Date();
+      return db.collection('photos').add({imgUrl:data.secure_url,caption:cap,author:'Admin',timeStr:now.toLocaleString('bn-BD'),created:now.getTime()});
+    })
+    .then(function(){
+      done++;
+      var pct=Math.round((done+failed)/total*100);
+      bar.style.width=pct+'%';
+      progText.textContent=done+'/'+total+' ফটো আপলোড হয়েছে';
+      if(done+failed===total){ finishUpload(done, failed); }
+    })
+    .catch(function(){
+      failed++;
+      var pct=Math.round((done+failed)/total*100);
+      bar.style.width=pct+'%';
+      if(done+failed===total){ finishUpload(done, failed); }
+    });
+  }
+  Array.from(files).forEach(function(f,i){ uploadOne(f,i); });
+}
+
+function finishUpload(done, failed){
+  document.getElementById('photo-upload-btn-text').textContent='📤 ফটো আপলোড করুন';
+  document.getElementById('photo-file-input').value='';
+  var capEl=document.getElementById('photo-caption-input'); if(capEl) capEl.value='';
+  document.getElementById('photo-preview-wrap').style.display='none';
+  document.getElementById('photo-preview-grid').innerHTML='';
+  var lbl=document.getElementById('photo-file-label-text');
+  if(lbl){lbl.textContent='ফটো নির্বাচন করতে এখানে ট্যাপ করুন';lbl.style.color='#4ade80';}
+  setTimeout(function(){ document.getElementById('photo-upload-progress').style.display='none'; document.getElementById('photo-progress-bar').style.width='0%'; }, 2000);
+  if(failed>0){ toast(done+' ফটো যোগ হয়েছে, '+failed+' টি ব্যর্থ হয়েছে','red'); }
+  else { toast(done+' টি ফটো হোমপেজে যোগ হয়েছে ✅','green'); }
+  loadAdminGallery();
+}
+
+function loadAdminGallery(){
+  if(!db)return;
+  var g=document.getElementById('admin-gallery-grid');
+  if(!g)return;
+  g.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:20px;grid-column:1/-1;font-size:14px">⏳ লোড হচ্ছে...</div>';
+  db.collection('photos').orderBy('created','desc').get().then(function(snap){
+    if(snap.empty){
+      g.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:30px;grid-column:1/-1;font-size:14px">কোনো ফটো নেই</div>';
+      return;
+    }
+    g.innerHTML='';
+    snap.forEach(function(doc){
+      var d=doc.data();
+      var card=document.createElement('div');
+      card.style.cssText='background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;position:relative;';
+      card.innerHTML='<img src="'+(d.imgUrl||'')+'" alt="'+(d.caption||'')+'" loading="lazy" style="width:100%;height:120px;object-fit:cover;display:block;">'
+        +'<div style="padding:6px 8px;">'
+        +(d.caption?'<div style="font-size:11px;color:var(--text-muted);line-height:1.4;margin-bottom:4px">'+d.caption+'</div>':'')
+        +'<div style="font-size:10px;color:var(--text-faint)">'+( d.timeStr||'' )+'</div>'
+        +'</div>'
+        +'<button onclick="delGalleryPhoto(\''+doc.id+'\')" style="position:absolute;top:6px;right:6px;background:rgba(239,68,68,0.85);border:none;color:#fff;width:26px;height:26px;border-radius:50%;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">✕</button>';
+      g.appendChild(card);
+    });
+  }).catch(function(e){ g.innerHTML='<div style="color:#f87171;text-align:center;padding:20px;grid-column:1/-1;">সমস্যা হয়েছে: '+e.message+'</div>'; });
+}
+
+function delGalleryPhoto(id){
+  if(!confirm('এই ফটো ডিলিট করবেন?'))return;
+  db.collection('photos').doc(id).delete()
+    .then(function(){ toast('ফটো ডিলিট হয়েছে','green'); loadAdminGallery(); loadHomePhotos(); })
+    .catch(function(e){ toast(e.message,'red'); });
 }
 
 /* ════════════════════════════════════════════════════════════
