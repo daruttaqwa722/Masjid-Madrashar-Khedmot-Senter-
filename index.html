@@ -6864,19 +6864,19 @@ document.addEventListener('click', function(e){
 
 function initNotifListener(){
   if(!db) return;
-  if(notifUnsubscribe) notifUnsubscribe();
-  /* Firebase থেকে সর্বশেষ ২০টি পোস্ট real-time শুনবে */
-  notifUnsubscribe = db.collection('posts')
+  /* onSnapshot বন্ধ — একবার getDocs দিয়ে লোড করা হচ্ছে (read কমাতে) */
+  db.collection('posts')
     .orderBy('created', 'desc')
     .limit(20)
-    .onSnapshot(function(snap){
+    .get()
+    .then(function(snap){
       var posts = [];
       snap.forEach(function(doc){
         var d = doc.data();
         posts.push({ id: doc.id, text: d.text || '', cats: d.cats || [], created: d.created || 0, timeStr: d.timeStr || '' });
       });
       renderNotifList(posts);
-    }, function(){ /* error — silent */ });
+    }).catch(function(){ /* error — silent */ });
 }
 
 function renderNotifList(posts){
@@ -7299,7 +7299,8 @@ function renderCatByFilter(period){
   var yestStart = new Date(yestStr+'T00:00:00').getTime();
   var yestEnd   = todayStart;
 
-  db.collection('posts').get().then(function(pSnap){
+  /* limit(500) — unbounded get বন্ধ করা হয়েছে (read কমাতে) */
+  db.collection('posts').limit(500).get().then(function(pSnap){
     var catMap={};
     pSnap.forEach(function(doc){
       var d=doc.data();
@@ -7477,8 +7478,8 @@ function loadDashStats(){
       if(visTrend){ visTrend.textContent=(pct>=0?'↑ ':'↓ ')+Math.abs(pct)+'%'; visTrend.className='dash-kpi-trend '+(pct>=0?'up':'down'); }
     }
   }).catch(function(){});
-  /* posts count */
-  db.collection('posts').get().then(function(snap){
+  /* posts count — limit(500) দিয়ে read কমানো হয়েছে */
+  db.collection('posts').limit(500).get().then(function(snap){
     var kpi=document.getElementById('dash-kpi-posts');
     if(kpi)kpi.textContent=snap.size;
     var badge=document.getElementById('dash-post-count-badge');
@@ -7497,7 +7498,8 @@ function loadDashStats(){
     set('dash-cat-masjid',masjid); set('dash-cat-madrasa',madrasa); set('dash-cat-mahila',mahila);
   }).catch(function(){});
   /* pending */
-  db.collection('pending_posts').get().then(function(snap){
+  /* limit(100) — read কমাতে */
+  db.collection('pending_posts').limit(100).get().then(function(snap){
     var kpi=document.getElementById('dash-kpi-pending');
     if(kpi)kpi.textContent=snap.size;
   }).catch(function(){});
@@ -7512,7 +7514,8 @@ function renderBarCharts(){
     dates.push(d.toISOString().slice(0,10));
     labels.push(i===0?'আজ':dayNames[d.getDay()]);
   }
-  db.collection('visitors').get().then(function(snap){
+  /* limit(30) — শুধু শেষ ৩০ দিনের data (read কমাতে) */
+  db.collection('visitors').limit(30).get().then(function(snap){
     var map={};
     snap.forEach(function(doc){ map[doc.id]=doc.data().count||0; });
     var vals=dates.map(function(dt){ return map[dt]||0; });
@@ -8229,7 +8232,8 @@ function loadUserList(){
   if(!db)return;
   var c=document.getElementById('ul-wrap');
   c.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:14px;font-size:14px">⏳ লোড হচ্ছে...</div>';
-  db.collection('users').orderBy('createdAt','desc').get()
+  /* limit(200) — read কমাতে */
+  db.collection('users').orderBy('createdAt','desc').limit(200).get()
     .then(function(snap){
       if(snap.empty){
         allUsersCache=[];
@@ -8424,7 +8428,8 @@ function loadHomePreviewPosts(){
   var container = document.getElementById('home-preview-posts-container');
   if(!container) return;
   container.innerHTML = '<div class="posts-loading"><div class="spinner"></div>লোড হচ্ছে...</div>';
-  db.collection('posts').orderBy('created','desc').limit(100).get().then(function(snap){
+  /* limit(30) — প্রথমে ৩০টি লোড, "আরো দেখুন" বাটনে pagination (read কমাতে) */
+  db.collection('posts').orderBy('created','desc').limit(30).get().then(function(snap){
     homePostsCache = [];
     snap.forEach(function(doc){
       var d = doc.data(); d._id = doc.id;
@@ -8686,8 +8691,8 @@ function loadPosts() {
     } catch(e){}
   }
 
-  /* Cache নেই বা মেয়াদ শেষ — Firestore থেকে লোড */
-  db.collection('posts').orderBy('created', 'desc').limit(200).get().then(function(snap) {
+  /* Cache নেই বা মেয়াদ শেষ — Firestore থেকে লোড (limit 50 — read কমাতে) */
+  db.collection('posts').orderBy('created', 'desc').limit(50).get().then(function(snap) {
     var posts = [];
     snap.forEach(function(doc) {
       var d = doc.data(); d._id = doc.id;
@@ -9032,10 +9037,12 @@ function escT(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').re
 /* ── Load ── */
 function loadTestimonials(){
   if(!db) return;
-  if(testimonialUnsub) testimonialUnsub();
-  testimonialUnsub = db.collection('testimonials')
+  /* onSnapshot বন্ধ — getDocs দিয়ে একবার লোড (read কমাতে) */
+  db.collection('testimonials')
     .orderBy('created','desc')
-    .onSnapshot(function(snap){
+    .limit(50)
+    .get()
+    .then(function(snap){
       var docs = [];
       snap.forEach(function(doc){
         var d = doc.data();
@@ -9043,7 +9050,7 @@ function loadTestimonials(){
         if(isAdmin || d.approved === true) docs.push(doc);
       });
       renderTestimonials(docs);
-    }, function(){ /* silent error */ });
+    }).catch(function(){ /* silent error */ });
   /* Admin হলে pending count দেখাও */
   if(isAdmin) loadPendingTestimonialCount();
 }
@@ -9359,14 +9366,16 @@ function submitUserPost() {
 ═══════════════════════════════════════════════════ */
 function loadPendingCount() {
   if (!db) return;
+  /* onSnapshot বন্ধ — getDocs দিয়ে একবার লোড (read কমাতে) */
   db.collection('pendingPosts').where('status', '==', 'pending')
-    .onSnapshot(function(snap) {
+    .get()
+    .then(function(snap) {
       var cnt = snap.size;
       var badge = document.getElementById('pending-count-badge');
       if (badge) badge.textContent = cnt;
       var tabCnt = document.getElementById('pending-tab-count');
       if (tabCnt) tabCnt.textContent = cnt;
-    });
+    }).catch(function(){});
 }
 
 function loadPendingPosts() {
@@ -9712,10 +9721,10 @@ function renderSinglePost(container, postId, d){
       '</div>' +
     '</div>';
 
-  /* View count — শুধু Admin দেখবে */
+  /* View count — শুধু Admin দেখবে — posts collection থেকে পড়া (post_views বাদ) */
   if(db && isAdmin){
     var bnNums2=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-    db.collection('post_views').doc(postId).get().then(function(doc){
+    db.collection('posts').doc(postId).get().then(function(doc){
       var el = document.getElementById('single-post-views');
       if(el) el.textContent = doc.exists ? (doc.data().views||0)+'বার দেখা' : '০ বার দেখা';
       if(el) el.textContent = el.textContent.split('').map(function(c){return bnNums2[+c]!==undefined?bnNums2[+c]:c;}).join('');
@@ -10003,19 +10012,20 @@ function publishImg(){
 }
 function loadHomePhotos(){
   if(!db)return;
-  db.collection('photos').orderBy('created','desc').onSnapshot(function(snap){
+  /* onSnapshot বন্ধ — limit(30) দিয়ে একবার লোড (read কমাতে) */
+  db.collection('photos').orderBy('created','desc').limit(30).get().then(function(snap){
     var g=document.getElementById('home-photo-grid');
     var s=document.getElementById('home-photos-sec');
-    if(snap.empty){s.style.display='none';return;}
-    s.style.display='block';g.innerHTML='';
+    if(snap.empty){if(s)s.style.display='none';return;}
+    if(s)s.style.display='block';if(g)g.innerHTML='';
     snap.forEach(function(doc){
       var d=doc.data();
       var card=document.createElement('div');card.className='photo-card';
       var dBtn=isAdmin?'<button class="del-photo-btn" onclick="delPhoto(\''+doc.id+'\')">✕</button>':'';
       card.innerHTML='<img src="'+(d.imgUrl||d.imgData||'')+'" alt="'+(d.caption||'')+'" loading="lazy">'+(d.caption?'<div class="photo-caption-text">'+d.caption+'</div>':'')+dBtn;
-      g.appendChild(card);
+      if(g)g.appendChild(card);
     });
-  });
+  }).catch(function(){});
 }
 function delPhoto(id){
   if(!confirm('এই ফটো ডিলিট করবেন?'))return;
@@ -10108,7 +10118,8 @@ function loadAdminGallery(){
   var g=document.getElementById('admin-gallery-grid');
   if(!g)return;
   g.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:20px;grid-column:1/-1;font-size:14px">⏳ লোড হচ্ছে...</div>';
-  db.collection('photos').orderBy('created','desc').get().then(function(snap){
+  /* limit(50) — read কমাতে */
+  db.collection('photos').orderBy('created','desc').limit(50).get().then(function(snap){
     if(snap.empty){
       g.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:30px;grid-column:1/-1;font-size:14px">কোনো ফটো নেই</div>';
       return;
@@ -10192,39 +10203,29 @@ function trackVisitor(){
     var isReturning = localStorage.getItem('kh_ever_visited') === '1';
     localStorage.setItem('kh_ever_visited', '1');
 
-    /* শুধু একটি write — visitors collection এ */
+    /* increment() দিয়ে একটিমাত্র write — get() ছাড়াই (read কমাতে) */
+    var inc = firebase.firestore.FieldValue.increment(1);
     var dayRef = db.collection('visitors').doc(today);
-    dayRef.get().then(function(doc){
-      var prev = doc.exists ? doc.data() : {};
-      var upd = { date: today };
-      upd.count = (prev.count||0)+1;
-      var srcs = prev.sources||{};
-      srcs[src] = (srcs[src]||0)+1;
-      upd.sources = srcs;
-      var pages = prev.pages||{};
-      pages[pageName] = (pages[pageName]||0)+1;
-      upd.pages = pages;
-      var nr = prev.newReturning||{new:0,returning:0};
-      if(isReturning){ nr.returning=(nr.returning||0)+1; }
-      else { nr.new=(nr.new||0)+1; }
-      upd.newReturning = nr;
-      /* ── categories field ── */
-      var currentCat = sessionStorage.getItem('v_current_cat') || '';
-      var catKeyMap = {'মসজিদ':'masjid','পুরুষ মাদ্রাসা':'madrasa','মহিলা মাদ্রাসা':'mahila'};
-      var catKey = catKeyMap[currentCat] || null;
-      var cats = prev.categories||{};
-      if(catKey){
-        cats[catKey] = (cats[catKey]||0)+1;
-      } else {
-        /* "সকল পোস্ট" বা category অজানা — সব ক্যাটাগরিতেই ১ যোগ করি */
-        cats['masjid']  = (cats['masjid']||0)+1;
-        cats['madrasa'] = (cats['madrasa']||0)+1;
-        cats['mahila']  = (cats['mahila']||0)+1;
-      }
-      upd.categories = cats;
-      if(doc.exists) dayRef.update(upd);
-      else dayRef.set(upd);
-    }).catch(function(){});
+    var updV = { date: today, count: inc };
+    /* sources */
+    updV['sources.' + src] = inc;
+    /* pages */
+    updV['pages.' + pageName] = inc;
+    /* newReturning */
+    if(isReturning){ updV['newReturning.returning'] = inc; }
+    else { updV['newReturning.new'] = inc; }
+    /* categories */
+    var currentCat = sessionStorage.getItem('v_current_cat') || '';
+    var catKeyMap = {'মসজিদ':'masjid','পুরুষ মাদ্রাসা':'madrasa','মহিলা মাদ্রাসা':'mahila'};
+    var catKey = catKeyMap[currentCat] || null;
+    if(catKey){
+      updV['categories.' + catKey] = inc;
+    } else {
+      updV['categories.masjid']  = inc;
+      updV['categories.madrasa'] = inc;
+      updV['categories.mahila']  = inc;
+    }
+    dayRef.set(updV, {merge: true}).catch(function(){});
 
     /* ── জেলা detect — বাংলাদেশের ৬৪ জেলা + Bot ফিল্টার ── */
     (function detectBDDistrict(){
@@ -10314,20 +10315,17 @@ function trackVisitor(){
         sessionStorage.setItem('v_district', cachedDist);
         /* Firebase এ update করো (নতুন track হলে) */
         if(!alreadyTrackedToday){
-          /* visitors/{today}.districts */
-          var dayRef2 = db.collection('visitors').doc(today);
-          dayRef2.get().then(function(doc){
-            var prev = doc.exists ? doc.data() : {};
-            var dists = prev.districts||{};
-            dists[cachedDist] = (dists[cachedDist]||0)+1;
-            if(doc.exists) dayRef2.update({districts: dists});
-          }).catch(function(){});
-          /* districtVisitors collection */
-          var dRef2 = db.collection('districtVisitors').doc(cachedDist);
-          dRef2.get().then(function(d){
-            if(d.exists) dRef2.update({count:(d.data().count||0)+1, lastSeen:Date.now()});
-            else dRef2.set({count:1, district:cachedDist, lastSeen:Date.now()});
-          }).catch(function(){});
+          /* increment() — get() ছাড়াই district count বাড়ানো হচ্ছে (read কমাতে) */
+          var inc2 = firebase.firestore.FieldValue.increment(1);
+          var distKey2 = 'districts.' + cachedDist;
+          var upd2 = {};
+          upd2[distKey2] = inc2;
+          db.collection('visitors').doc(today).update(upd2).catch(function(){});
+          /* districtVisitors — increment() দিয়ে (read বাদ) */
+          db.collection('districtVisitors').doc(cachedDist).set(
+            {count: inc2, district: cachedDist, lastSeen: Date.now()},
+            {merge: true}
+          ).catch(function(){});
         }
         return;
       }
@@ -10336,20 +10334,18 @@ function trackVisitor(){
       function saveDistrict(district){
         sessionStorage.setItem('v_district', district);
         localStorage.setItem('kh_bd_district', district);
+        /* increment() — get() ছাড়াই কাজ করে (read কমাতে) */
+        var incD = firebase.firestore.FieldValue.increment(1);
         /* districtVisitors collection আপডেট */
-        var dRef = db.collection('districtVisitors').doc(district);
-        dRef.get().then(function(d){
-          if(d.exists) dRef.update({count:(d.data().count||0)+1, lastSeen:Date.now()});
-          else dRef.set({count:1, district:district, lastSeen:Date.now()});
-        }).catch(function(){});
+        db.collection('districtVisitors').doc(district).set(
+          {count: incD, district: district, lastSeen: Date.now()},
+          {merge: true}
+        ).catch(function(){});
         /* visitors/{today}.districts আপডেট */
-        var dayRef3 = db.collection('visitors').doc(today);
-        dayRef3.get().then(function(doc){
-          var prev2 = doc.exists ? doc.data() : {};
-          var dists2 = prev2.districts||{};
-          dists2[district] = (dists2[district]||0)+1;
-          if(doc.exists) dayRef3.update({districts:dists2});
-        }).catch(function(){});
+        var distKeyD = 'districts.' + district;
+        var updD = {};
+        updD[distKeyD] = incD;
+        db.collection('visitors').doc(today).update(updD).catch(function(){});
       }
 
       function tryIpApi2(){
@@ -10428,19 +10424,12 @@ function updatePresencePage(pageName, catName){
   var sessId = sessionStorage.getItem('v_sessid');
   if(!sessId||!db) return;
   if(catName) sessionStorage.setItem('v_current_cat', catName);
+  /* শুধু presence আপডেট — visitors read+write বাদ দেওয়া হয়েছে (read কমাতে) */
   db.collection('presence').doc(sessId).update({
     page: pageName||document.title||'হোম',
     category: catName||sessionStorage.getItem('v_current_cat')||'সাধারণ',
     ts: Date.now(),
     expires: Date.now()+360000
-  }).catch(function(){});
-  /* page view count */
-  var today=new Date().toISOString().slice(0,10);
-  db.collection('visitors').doc(today).get().then(function(doc){
-    if(!doc.exists) return;
-    var pages = doc.data().pages||{};
-    pages[pageName||'হোম'] = (pages[pageName||'হোম']||0)+1;
-    doc.ref.update({pages:pages});
   }).catch(function(){});
 }
 
@@ -10712,22 +10701,13 @@ function trackPostView(postId){
   if(sessionStorage.getItem(key)) return;
   sessionStorage.setItem(key, '1');
 
-  /* posts collection এ views increment */
-  var postRef = db.collection('posts').doc(postId);
-  postRef.get().then(function(doc){
-    if(doc.exists){
-      postRef.update({ views: (doc.data().views||0)+1, last_view: Date.now() });
-    }
+  /* FieldValue.increment() — get() ছাড়াই কাজ করে, read শূন্য (read কমাতে) */
+  var inc = firebase.firestore.FieldValue.increment(1);
+  db.collection('posts').doc(postId).update({
+    views: inc,
+    last_view: Date.now()
   }).catch(function(){});
-
-  /* post_views collection এও রাখি (legacy) */
-  db.collection('post_views').doc(postId).get().then(function(doc){
-    if(doc.exists){
-      doc.ref.update({ views: (doc.data().views||0)+1, last_view: Date.now() });
-    } else {
-      doc.ref.set({ views:1, postId:postId, last_view:Date.now() });
-    }
-  }).catch(function(){});
+  /* post_views collection বাদ দেওয়া হয়েছে — duplicate ছিল (read+write কমাতে) */
 }
 
 /* ════════════════════════════════════════════════════
@@ -10777,7 +10757,8 @@ function loadAdminStories(){
   var container = document.getElementById('adm-story-list');
   if(!container || !db) return;
   container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>';
-  db.collection('testimonials').orderBy('created','desc').get().then(function(snap){
+  /* limit(100) — read কমাতে */
+  db.collection('testimonials').orderBy('created','desc').limit(100).get().then(function(snap){
     if(snap.empty){
       container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:13px">কোনো গল্প নেই</div>';
       return;
@@ -10954,7 +10935,8 @@ function loadTopPosts(){
   if(!container || !db) return;
   var bnNums = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
   function toBN(n){ return String(n).split('').map(function(c){ return bnNums[+c]!==undefined?bnNums[+c]:c; }).join(''); }
-  db.collection('post_views').orderBy('views','desc').limit(10).get().then(function(snap){
+  /* posts collection থেকে পড়া — post_views collection বাদ দেওয়া হয়েছে */
+  db.collection('posts').orderBy('views','desc').limit(10).get().then(function(snap){
     if(snap.empty){ container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">এখনো কোনো view নেই</div>'; return; }
     var html = '';
     var rank = 1;
@@ -10986,7 +10968,8 @@ function loadStats(){
   var today=new Date().toISOString().slice(0,10);
   var yest=new Date(Date.now()-86400000).toISOString().slice(0,10);
   var mon=today.slice(0,7);
-  db.collection('visitors').get().then(function(snap){
+  /* limit(60) — শেষ ২ মাসের data যথেষ্ট (read কমাতে) */
+  db.collection('visitors').limit(60).get().then(function(snap){
     var tc=0,yc=0,mc=0,tot=0;
     snap.forEach(function(doc){
       var cnt=doc.data().count||0;
