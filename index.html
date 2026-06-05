@@ -5264,16 +5264,6 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
         <div class="dash-nav-icon">📊</div> ভিজিটর পরিসংখ্যান
         <span class="dash-nav-badge">LIVE</span>
       </div>
-      <div class="dash-nav-item" onclick="switchDashSection('realtime')">
-        <div class="dash-nav-icon">🟢</div> Real Time Live Tracking
-        <span class="dash-nav-badge" style="background:rgba(248,113,113,0.15);border-color:rgba(248,113,113,0.3);color:#f87171">LIVE</span>
-      </div>
-
-      <span class="dash-sidebar-section-label">📋 পোস্ট Analytics</span>
-      <div class="dash-nav-item" onclick="switchDashSection('post-analytics')">
-        <div class="dash-nav-icon">📝</div> পোস্ট Analytics
-      </div>
-
       <!-- Footer -->
       <div class="dash-sidebar-footer">
         <div class="dash-user-pill">
@@ -5312,58 +5302,25 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
         <!-- ══ 👥 VISITOR ANALYTICS SECTION ══ -->
         <div class="dash-section active" id="dash-visitor-analytics">
 
-          <!-- ══ VISITOR SUMMARY CARD — সবার উপরে ══ -->
-          <div style="background:linear-gradient(135deg,#071f12 0%,#0a2e1a 50%,#071f12 100%);border:1.5px solid rgba(26,181,102,0.2);border-radius:16px;padding:16px;margin-bottom:18px;position:relative;overflow:hidden">
-            <!-- Background decoration -->
-            <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(26,181,102,0.08),transparent);pointer-events:none"></div>
-            <div style="position:absolute;bottom:-30px;left:-10px;width:80px;height:80px;background:radial-gradient(circle,rgba(13,122,69,0.06),transparent);pointer-events:none"></div>
 
+          <!-- ══ LIVE ACTIVE USERS CARD ══ -->
+          <div style="background:linear-gradient(135deg,#071f12 0%,#0a2e1a 50%,#071f12 100%);border:1.5px solid rgba(26,181,102,0.35);border-radius:16px;padding:16px;margin-bottom:18px;position:relative;overflow:hidden">
+            <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(26,181,102,0.10),transparent);pointer-events:none"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
               <div style="display:flex;align-items:center;gap:8px">
-                <div style="width:3px;height:18px;background:linear-gradient(180deg,#1ab566,#0d7a45);border-radius:2px"></div>
-                <span style="font-size:13px;font-weight:800;color:#e0f0e8;letter-spacing:.2px">📊 ভিজিটর সারসংক্ষেপ</span>
+                <span style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ff6060,#ff1a1a);box-shadow:0 0 10px rgba(255,50,50,0.9);animation:notif-pulse 1.5s ease-in-out infinite;display:inline-block;flex-shrink:0;"></span>
+                <span style="font-size:13px;font-weight:800;color:#e0f0e8;letter-spacing:.2px">এখন একটিভ আছেন</span>
               </div>
-              <button onclick="loadVisitorAnalytics()" style="font-size:10px;color:#6ee7b7;background:rgba(26,181,102,0.1);border:1px solid rgba(26,181,102,0.2);border-radius:20px;padding:4px 10px;cursor:pointer;font-family:inherit">🔄 রিফ্রেশ</button>
+              <button onclick="loadActiveUsers()" style="font-size:10px;color:#6ee7b7;background:rgba(26,181,102,0.1);border:1px solid rgba(26,181,102,0.2);border-radius:20px;padding:4px 10px;cursor:pointer;font-family:inherit">🔄 রিফ্রেশ</button>
             </div>
-
-            <!-- 5 stats in a horizontal scroll row -->
-            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;overflow-x:auto">
-
-              <!-- আজকে -->
-              <div style="background:rgba(26,181,102,0.1);border:1px solid rgba(26,181,102,0.22);border-radius:12px;padding:10px 8px;text-align:center;min-width:58px">
-                <div style="font-size:9px;color:#6ee7b7;font-weight:700;letter-spacing:.4px;margin-bottom:5px;white-space:nowrap">📅 আজকে</div>
-                <div style="font-size:22px;font-weight:900;color:#1ab566;line-height:1;font-family:'Baloo Da 2','Noto Sans Bengali',sans-serif" id="sum-today">—</div>
-                <div style="font-size:8.5px;color:var(--text-faint);margin-top:3px" id="sum-today-trend"></div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="text-align:center">
+                <div style="font-size:48px;font-weight:900;color:#1ab566;line-height:1;font-family:'Baloo Da 2','Noto Sans Bengali',sans-serif" id="vis-active-now">—</div>
+                <div style="font-size:11px;color:#6ee7b7;margin-top:4px;font-weight:600">জন এখন সাইটে আছেন</div>
               </div>
-
-              <!-- গতকাল -->
-              <div style="background:rgba(240,212,120,0.08);border:1px solid rgba(240,212,120,0.2);border-radius:12px;padding:10px 8px;text-align:center;min-width:58px">
-                <div style="font-size:9px;color:#fde68a;font-weight:700;letter-spacing:.4px;margin-bottom:5px;white-space:nowrap">🗓️ গতকাল</div>
-                <div style="font-size:22px;font-weight:900;color:#f0d478;line-height:1;font-family:'Baloo Da 2','Noto Sans Bengali',sans-serif" id="sum-yesterday">—</div>
-                <div style="font-size:8.5px;color:var(--text-faint);margin-top:3px">ভিজিট</div>
+              <div style="flex:1" id="vis-active-list">
+                <div style="font-size:12px;color:var(--text-muted);text-align:center">⏳ লোড হচ্ছে...</div>
               </div>
-
-              <!-- গত ৭ দিন -->
-              <div style="background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.2);border-radius:12px;padding:10px 8px;text-align:center;min-width:58px">
-                <div style="font-size:9px;color:#93c5fd;font-weight:700;letter-spacing:.4px;margin-bottom:5px;white-space:nowrap">📆 ৭ দিন</div>
-                <div style="font-size:22px;font-weight:900;color:#60a5fa;line-height:1;font-family:'Baloo Da 2','Noto Sans Bengali',sans-serif" id="sum-weekly">—</div>
-                <div style="font-size:8.5px;color:var(--text-faint);margin-top:3px">ভিজিট</div>
-              </div>
-
-              <!-- গত ৩০ দিন -->
-              <div style="background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:12px;padding:10px 8px;text-align:center;min-width:58px">
-                <div style="font-size:9px;color:#fdba74;font-weight:700;letter-spacing:.4px;margin-bottom:5px;white-space:nowrap">🗃️ ৩০ দিন</div>
-                <div style="font-size:22px;font-weight:900;color:#fb923c;line-height:1;font-family:'Baloo Da 2','Noto Sans Bengali',sans-serif" id="sum-monthly">—</div>
-                <div style="font-size:8.5px;color:var(--text-faint);margin-top:3px">ভিজিট</div>
-              </div>
-
-              <!-- সর্বমোট -->
-              <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:12px;padding:10px 8px;text-align:center;min-width:58px">
-                <div style="font-size:9px;color:#c4b5fd;font-weight:700;letter-spacing:.4px;margin-bottom:5px;white-space:nowrap">🌍 সর্বমোট</div>
-                <div style="font-size:22px;font-weight:900;color:#a78bfa;line-height:1;font-family:'Baloo Da 2','Noto Sans Bengali',sans-serif" id="sum-total">—</div>
-                <div style="font-size:8.5px;color:var(--text-faint);margin-top:3px">All Time</div>
-              </div>
-
             </div>
           </div>
 
@@ -5471,246 +5428,10 @@ body, p, span, div, a, li, td, th, label, input, textarea, select, button {
             </div>
           </div>
 
-          <!-- ══ Active / PageViews / Avg Time ══ -->
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
-            <div style="background:rgba(26,181,102,0.08);border:1px solid rgba(26,181,102,0.2);border-radius:12px;padding:12px 8px;text-align:center">
-              <div style="font-size:18px;margin-bottom:4px">🟢</div>
-              <div style="font-size:20px;font-weight:800;color:#1ab566" id="vis-active-now">—</div>
-              <div style="font-size:9.5px;color:var(--text-muted);margin-top:3px;line-height:1.3">এখন Active</div>
-            </div>
-            <div style="background:rgba(240,212,120,0.08);border:1px solid rgba(240,212,120,0.2);border-radius:12px;padding:12px 8px;text-align:center">
-              <div style="font-size:18px;margin-bottom:4px">👁️</div>
-              <div style="font-size:20px;font-weight:800;color:#f0d478" id="vis-pageviews">—</div>
-              <div style="font-size:9.5px;color:var(--text-muted);margin-top:3px;line-height:1.3">পেজ ভিউ</div>
-            </div>
-            <div style="background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.2);border-radius:12px;padding:12px 8px;text-align:center">
-              <div style="font-size:18px;margin-bottom:4px">⏱️</div>
-              <div style="font-size:20px;font-weight:800;color:#93c5fd" id="vis-avg-time">—</div>
-              <div style="font-size:9.5px;color:var(--text-muted);margin-top:3px;line-height:1.3">গড় সময়</div>
-            </div>
-          </div>
+          
 
-          <!-- Pages / Categories -->
-          <div class="dash-chart-grid">
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">📄 কোন Page দেখেছে</div>
-                <span class="dash-card-badge">Top Pages</span>
-              </div>
-              <div class="dash-card-body" style="padding:0">
-                <div id="vis-top-pages">
-                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
 
-            <!-- Category — Time Filter সহ -->
-            <div class="dash-card">
-              <div class="dash-card-header" style="flex-wrap:wrap;gap:8px">
-                <div class="dash-card-title">🗂️ Category ভিজিট</div>
-              </div>
-              <!-- Time Filter Tabs -->
-              <div style="display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid var(--border);flex-wrap:wrap">
-                <button class="tf-btn tf-cat active" data-tf="today" onclick="setCatFilter(this,'today')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid rgba(26,181,102,0.4);background:rgba(26,181,102,0.15);color:#6ee7b7;cursor:pointer;font-family:inherit;font-weight:700">আজ</button>
-                <button class="tf-btn tf-cat" data-tf="yesterday" onclick="setCatFilter(this,'yesterday')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">গতকাল</button>
-                <button class="tf-btn tf-cat" data-tf="week" onclick="setCatFilter(this,'week')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">৭ দিন</button>
-                <button class="tf-btn tf-cat" data-tf="month" onclick="setCatFilter(this,'month')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">৩০ দিন</button>
-                <button class="tf-btn tf-cat" data-tf="all" onclick="setCatFilter(this,'all')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">সর্বমোট</button>
-              </div>
-              <div class="dash-card-body" style="padding:0">
-                <div id="vis-top-categories">
-                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Districts / Sources -->
-          <div class="dash-chart-grid" style="margin-bottom:0">
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">🗺️ কোন জেলা থেকে এসেছে</div>
-                <span class="dash-card-badge">জেলাভিত্তিক</span>
-              </div>
-              <div class="dash-card-body" style="padding:0">
-                <div id="vis-districts">
-                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Traffic Source — Time Filter সহ -->
-            <div class="dash-card">
-              <div class="dash-card-header" style="flex-wrap:wrap;gap:8px">
-                <div class="dash-card-title">🔗 Traffic Source</div>
-              </div>
-              <!-- Time Filter Tabs -->
-              <div style="display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid var(--border);flex-wrap:wrap">
-                <button class="tf-btn tf-src active" data-tf="today" onclick="setSrcFilter(this,'today')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid rgba(26,181,102,0.4);background:rgba(26,181,102,0.15);color:#6ee7b7;cursor:pointer;font-family:inherit;font-weight:700">আজ</button>
-                <button class="tf-btn tf-src" data-tf="yesterday" onclick="setSrcFilter(this,'yesterday')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">গতকাল</button>
-                <button class="tf-btn tf-src" data-tf="week" onclick="setSrcFilter(this,'week')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">৭ দিন</button>
-                <button class="tf-btn tf-src" data-tf="month" onclick="setSrcFilter(this,'month')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">৩০ দিন</button>
-                <button class="tf-btn tf-src" data-tf="all" onclick="setSrcFilter(this,'all')" style="font-size:10.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">সর্বমোট</button>
-              </div>
-              <div class="dash-card-body" style="padding:12px 16px">
-                <div id="vis-src-body">
-                  <div style="padding:12px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-                <div id="src-note" style="display:none;margin-top:10px;padding:8px 10px;background:rgba(240,212,120,0.08);border:1px solid rgba(240,212,120,0.2);border-radius:8px;font-size:11px;color:var(--text-muted);text-align:center">
-                  ℹ️ ভিজিটর আসতে শুরু করলে এখানে real data দেখাবে
-                </div>
-              </div>
-            </div>
-          </div>
         </div><!-- /dash-visitor-analytics -->
-
-        <!-- ══ 🟢 REAL TIME LIVE TRACKING SECTION ══ -->
-        <div class="dash-section" id="dash-realtime">
-
-          <!-- Live count KPI -->
-          <div class="dash-kpi-grid">
-            <div class="dash-kpi-card green" style="position:relative">
-              <div class="dash-live-badge" style="position:absolute;top:12px;right:12px;font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
-              <div class="dash-kpi-icon">🟢</div>
-              <div class="dash-kpi-num" id="rt-online-count">—</div>
-              <div class="dash-kpi-label">এখন কতজন Online</div>
-            </div>
-            <div class="dash-kpi-card blue">
-              <div class="dash-kpi-icon">👁️</div>
-              <div class="dash-kpi-num" id="rt-live-views">—</div>
-              <div class="dash-kpi-label">Live Post Views</div>
-            </div>
-            <div class="dash-kpi-card gold">
-              <div class="dash-kpi-icon">📄</div>
-              <div class="dash-kpi-num" id="rt-active-pages">—</div>
-              <div class="dash-kpi-label">Active Pages Now</div>
-            </div>
-            <div class="dash-kpi-card red">
-              <div class="dash-kpi-icon">⚡</div>
-              <div class="dash-kpi-num" id="rt-activity-count">—</div>
-              <div class="dash-kpi-label">Live Activities</div>
-            </div>
-          </div>
-
-          <!-- Who is on which page + category -->
-          <div class="dash-chart-grid">
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">📄 কে কোন Page দেখছে</div>
-                <div class="dash-live-badge" style="font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
-              </div>
-              <div class="dash-card-body" style="padding:12px 16px">
-                <div class="dash-online-list" id="rt-who-page">
-                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">🗂️ কোন Category দেখছে</div>
-                <div class="dash-live-badge" style="font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
-              </div>
-              <div class="dash-card-body" style="padding:12px 16px">
-                <div class="dash-online-list" id="rt-who-category">
-                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recently Viewed + Live Activity -->
-          <div class="dash-chart-grid" style="margin-bottom:0">
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">🕐 Recently Viewed Pages</div>
-              </div>
-              <div class="dash-card-body" style="padding:0">
-                <div id="rt-recently-viewed">
-                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">⚡ Live Visitor Activity</div>
-                <div class="dash-live-badge" style="font-size:10px;padding:2px 7px"><div class="dash-live-dot"></div>LIVE</div>
-              </div>
-              <div class="dash-card-body" style="padding:12px 16px">
-                <div id="rt-live-activity" style="max-height:260px;overflow-y:auto">
-                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- /dash-realtime -->
-
-        <!-- ══ 📋 POST ANALYTICS SECTION ══ -->
-        <div class="dash-section" id="dash-post-analytics">
-
-          <!-- Post KPI Row -->
-          <div class="dash-kpi-grid">
-            <div class="dash-kpi-card green">
-              <span class="dash-kpi-trend up" id="pa-today-trend">↑</span>
-              <div class="dash-kpi-icon">📝</div>
-              <div class="dash-kpi-num" id="pa-today-posts">—</div>
-              <div class="dash-kpi-label">Today Posts</div>
-            </div>
-            <div class="dash-kpi-card red">
-              <div class="dash-kpi-icon">🚫</div>
-              <div class="dash-kpi-num" id="pa-hidden-posts">—</div>
-              <div class="dash-kpi-label">Hidden Posts</div>
-            </div>
-            <div class="dash-kpi-card gold">
-              <div class="dash-kpi-icon">⏳</div>
-              <div class="dash-kpi-num" id="pa-pending-posts">—</div>
-              <div class="dash-kpi-label">Pending Posts</div>
-            </div>
-            <div class="dash-kpi-card blue">
-              <div class="dash-kpi-icon">🔥</div>
-              <div class="dash-kpi-num" id="pa-total-posts">—</div>
-              <div class="dash-kpi-label">মোট পোস্ট</div>
-            </div>
-          </div>
-
-          <!-- Most Viewed Post + Trending Category -->
-          <div class="dash-chart-grid">
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">🔥 Most Viewed Post</div>
-                <span class="dash-card-badge">Top ১০</span>
-              </div>
-              <div class="dash-card-body" style="padding:0">
-                <div id="pa-most-viewed-posts">
-                  <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-            <div class="dash-card">
-              <div class="dash-card-header">
-                <div class="dash-card-title">📈 Trending Category</div>
-                <span class="dash-card-badge">এখন Trending</span>
-              </div>
-              <div class="dash-card-body" style="padding:12px 16px">
-                <div class="dash-online-list" id="pa-trending-categories">
-                  <div style="text-align:center;color:var(--text-muted);padding:12px;font-size:13px">⏳ লোড হচ্ছে...</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Top Performing Category -->
-          <div class="dash-card" style="margin-bottom:0">
-            <div class="dash-card-header">
-              <div class="dash-card-title">🏆 Top Performing Category</div>
-              <span class="dash-card-badge">সর্বোচ্চ পারফর্মার</span>
-            </div>
-            <div class="dash-card-body" style="padding:0">
-              <div id="pa-top-performing">
-                <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">⏳ লোড হচ্ছে...</div>
-              </div>
-            </div>
-          </div>
-        </div><!-- /dash-post-analytics -->
 
       </div><!-- /dash-content -->
     </div><!-- /dash-main -->
@@ -7295,8 +7016,6 @@ function switchDashSection(name){
   /* title */
   var titles = {
     'visitor-analytics':'👥 ভিজিটর Analytics',
-    'realtime':'🟢 Real Time Live Tracking',
-    'post-analytics':'📋 পোস্ট Analytics',
     overview:'ওভারভিউ', analytics:'Analytics', posts:'পোস্ট ম্যানেজার',
     users:'ইউজার', notifications:'নোটিফিকেশন',
     visitors:'ভিজিটর Analytics', active:'সক্রিয় ব্যবহারকারী'
@@ -7305,10 +7024,7 @@ function switchDashSection(name){
   if(el) el.textContent = titles[name] || name;
   closeSidebar();
   if(name === 'visitor-analytics') loadVisitorAnalyticsCached();
-  if(name === 'realtime') loadRealtimeTracking();
-  if(name === 'post-analytics') loadPostAnalyticsCached();
   if(name === 'posts') loadDashPosts();
-  if(name === 'users') loadDashUsers();
 }
 function toggleSidebar(){
   document.getElementById('dash-sidebar').classList.toggle('open');
@@ -7322,7 +7038,6 @@ function closeSidebar(){
 function initDashboard(){
   /* ── Optimized: শুধু active section load করি, বাকিগুলো lazy ── */
   loadVisitorAnalyticsCached(); /* visitors — once per 10 min */
-  loadPostAnalyticsCached();    /* posts — once per 10 min */
   startClock();
   /* loadRealtimeTracking, loadDashUsers, loadVisitorLog — শুধু সেই tab খুললে */
 }
@@ -7345,18 +7060,17 @@ function loadVisitorAnalyticsCached(){
   if(isCacheValid('visitorAnalytics')){
     /* cache থেকে render করো — Firestore read নয় */
     if(window._visData) renderCatByFilter(window._activeCatFilter||'today');
-    if(window._visData) renderSrcByFilter(window._activeSrcFilter||'today');
-    return;
+  } else {
+    _cache['visitorAnalytics'] = { ts: Date.now() };
+    loadVisitorAnalytics();
   }
-  _cache['visitorAnalytics'] = { ts: Date.now() };
-  loadVisitorAnalytics();
+  /* Active users সবসময় fresh load — ৩০ সেকেন্ড পর পর আপডেট */
+  loadActiveUsers();
+  if(!window._activeUsersInterval){
+    window._activeUsersInterval = setInterval(loadActiveUsers, 30000);
+  }
 }
 
-function loadPostAnalyticsCached(){
-  if(isCacheValid('postAnalytics')) return;
-  _cache['postAnalytics'] = { ts: Date.now() };
-  loadPostAnalytics();
-}
 
 function loadVisitorAnalytics(){
   if(!db) return;
@@ -7410,8 +7124,7 @@ function loadVisitorAnalytics(){
       if(id>=monthStart)  mergeCat(catByPeriod.month,      d.categories);
       mergeCat(catByPeriod.all, d.categories);
 
-      /* districts & pages (all-time) */
-      if(d.districts){ Object.keys(d.districts).forEach(function(dist){ allDistricts[dist]=(allDistricts[dist]||0)+(d.districts[dist]||0); }); }
+      /* districts merged (removed) */
       if(d.pages)    { Object.keys(d.pages).forEach(function(pg){       allPages[pg]=(allPages[pg]||0)+(d.pages[pg]||0); }); }
     });
 
@@ -7470,8 +7183,6 @@ function loadVisitorAnalytics(){
     var avgEl=document.getElementById('vis-avg-time');
     if(avgEl&&(avgEl.textContent==='—'||avgEl.textContent==='')) avgEl.textContent='৩ মি ২০ সে';
 
-    /* ── Traffic Sources — active filter অনুযায়ী render ── */
-    renderSrcByFilter(window._activeSrcFilter || 'today');
 
     /* ── Top Pages ── */
     var sortedPages=Object.keys(allPages).sort(function(a,b){return allPages[b]-allPages[a];}).slice(0,8);
@@ -7490,117 +7201,51 @@ function loadVisitorAnalytics(){
     if(pgEl) pgEl.innerHTML=pgHtml||
       '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">এখনো page view ডেটা নেই</div>';
 
-    /* ── Districts — শুধু বাংলাদেশের ৬৪ জেলা ── */
-    var BD_BN_DISTRICTS = [
-      'ঢাকা','ফরিদপুর','গাজীপুর','গোপালগঞ্জ','কিশোরগঞ্জ','মাদারীপুর','মানিকগঞ্জ',
-      'মুন্সিগঞ্জ','নারায়ণগঞ্জ','নরসিংদী','রাজবাড়ী','শরীয়তপুর','টাঙ্গাইল',
-      'জামালপুর','ময়মনসিংহ','নেত্রকোণা','শেরপুর',
-      'বাগেরহাট','চুয়াডাঙ্গা','যশোর','ঝিনাইদহ','খুলনা','কুষ্টিয়া',
-      'মাগুরা','মেহেরপুর','নড়াইল','সাতক্ষীরা',
-      'বরগুনা','বরিশাল','ভোলা','ঝালকাঠি','পটুয়াখালী','পিরোজপুর',
-      'বান্দরবান','ব্রাহ্মণবাড়িয়া','চাঁদপুর','চট্টগ্রাম','কুমিল্লা','কক্সবাজার',
-      'ফেনী','খাগড়াছড়ি','লক্ষ্মীপুর','নোয়াখালী','রাঙামাটি',
-      'হবিগঞ্জ','মৌলভীবাজার','সুনামগঞ্জ','সিলেট',
-      'বগুড়া','জয়পুরহাট','নওগাঁ','নাটোর','চাঁপাইনবাবগঞ্জ','পাবনা','রাজশাহী','সিরাজগঞ্জ',
-      'দিনাজপুর','গাইবান্ধা','কুড়িগ্রাম','লালমনিরহাট','নীলফামারী','পঞ্চগড়','রংপুর','ঠাকুরগাঁও'
-    ];
-
-    /* visitors doc থেকে জেলা ডেটা merge + bot/foreign ফিল্টার */
-    var filteredDistricts = {};
-    Object.keys(allDistricts).forEach(function(dist){
-      if(BD_BN_DISTRICTS.indexOf(dist) > -1){
-        filteredDistricts[dist] = allDistricts[dist];
-      }
-    });
-
-    var sortedDists = Object.keys(filteredDistricts).sort(function(a,b){
-      return filteredDistricts[b]-filteredDistricts[a];
-    });
-    var de = document.getElementById('vis-districts');
-
-    function buildDistrictHTML(dists, countsObj){
-      if(!dists.length) return '';
-      var maxD = countsObj[dists[0]]||1;
-      var html = '<div style="padding:10px 14px 4px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);margin-bottom:4px">'
-        +'<span style="font-size:10.5px;color:var(--text-muted);font-weight:700;letter-spacing:.4px">জেলা</span>'
-        +'<span style="font-size:10.5px;color:var(--text-muted);font-weight:700;letter-spacing:.4px">ভিজিট</span>'
-        +'</div>';
-      var rankColors=['#f0d478','#93c5fd','#86efac','#f9a8d4','#a5b4fc','#fca5a5','#6ee7b7','#c4b5fd','#fde047','#34d399'];
-      dists.forEach(function(dist,i){
-        var cnt = countsObj[dist]||0;
-        var barW = Math.round(cnt/maxD*70);
-        var clr = rankColors[i] || '#93c5fd';
-        var medal = i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
-        html += '<div style="display:flex;align-items:center;padding:7px 14px;border-bottom:1px solid rgba(255,255,255,0.04);gap:8px">'
-          +'<div style="font-size:11px;font-weight:800;color:'+clr+';width:20px;text-align:center;flex-shrink:0">'+(medal||toBN(i+1))+'</div>'
-          +'<div style="flex:1;min-width:0">'
-            +'<div style="font-size:12.5px;color:var(--text-primary);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+dist+'</div>'
-            +'<div style="margin-top:3px"><span style="display:inline-block;height:3px;width:'+barW+'px;background:'+clr+';border-radius:2px;opacity:.7"></span></div>'
-          +'</div>'
-          +'<div style="font-size:13px;font-weight:800;color:'+clr+';flex-shrink:0">'+toBN(cnt)+'</div>'
-          +'</div>';
-      });
-      return html;
-    }
-
-    if(sortedDists.length > 0){
-      /* প্রথম ১০ দেখাও, "আরও দেখুন" বাটন */
-      var top10 = sortedDists.slice(0,10);
-      var restDists = sortedDists.slice(10);
-      var mainHtml = buildDistrictHTML(top10, filteredDistricts);
-      var moreHtml = restDists.length ? buildDistrictHTML(restDists, filteredDistricts) : '';
-      var totalBDVisit = Object.values(filteredDistricts).reduce(function(a,b){return a+b;},0);
-      if(de) de.innerHTML =
-        '<div style="padding:8px 14px 6px;background:rgba(147,197,253,0.05);border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center">'
-          +'<span style="font-size:11px;color:#93c5fd;font-weight:700">🗺️ মোট '+toBN(sortedDists.length)+' জেলা</span>'
-          +'<span style="font-size:10px;color:var(--text-muted)">•</span>'
-          +'<span style="font-size:11px;color:var(--text-muted)">'+toBN(totalBDVisit)+' বাংলাদেশি ভিজিট</span>'
-        +'</div>'
-        + mainHtml
-        + (moreHtml ? '<div id="dist-more-wrap" style="display:none">'+moreHtml+'</div>'
-            +'<div style="padding:10px;text-align:center"><button onclick="var w=document.getElementById(\'dist-more-wrap\');var b=document.getElementById(\'dist-more-btn\');if(w.style.display===\'none\'){w.style.display=\'block\';b.textContent=\'কম দেখুন ▲\';}else{w.style.display=\'none\';b.textContent=\'আরও '+toBN(restDists.length)+' জেলা দেখুন ▼\';}" id="dist-more-btn" style="font-size:11.5px;color:#93c5fd;background:rgba(147,197,253,0.08);border:1px solid rgba(147,197,253,0.2);border-radius:20px;padding:5px 16px;cursor:pointer">আরও '+toBN(restDists.length)+' জেলা দেখুন ▼</button></div>'
-          : '');
-    } else {
-      /* districtVisitors collection fallback — bot/foreign ফিল্টার করো */
-      db.collection('districtVisitors').orderBy('count','desc').get().then(function(dSnap){
-        var fbDists = {}, fbSorted = [];
-        dSnap.forEach(function(doc){
-          var d = doc.id;
-          if(BD_BN_DISTRICTS.indexOf(d) > -1){
-            fbDists[d] = doc.data().count||0;
-            fbSorted.push(d);
-          }
-        });
-        if(fbSorted.length > 0){
-          var top10fb = fbSorted.slice(0,10);
-          var restFb = fbSorted.slice(10);
-          var totalFB = Object.values(fbDists).reduce(function(a,b){return a+b;},0);
-          var fbHtml = buildDistrictHTML(top10fb, fbDists);
-          var fbMore = restFb.length ? buildDistrictHTML(restFb, fbDists) : '';
-          if(de) de.innerHTML =
-            '<div style="padding:8px 14px 6px;background:rgba(147,197,253,0.05);border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center">'
-              +'<span style="font-size:11px;color:#93c5fd;font-weight:700">🗺️ মোট '+toBN(fbSorted.length)+' জেলা</span>'
-              +'<span style="font-size:10px;color:var(--text-muted)">•</span>'
-              +'<span style="font-size:11px;color:var(--text-muted)">'+toBN(totalFB)+' বাংলাদেশি ভিজিট</span>'
-            +'</div>'
-            + fbHtml
-            + (fbMore ? '<div id="dist-more-wrap" style="display:none">'+fbMore+'</div>'
-                +'<div style="padding:10px;text-align:center"><button onclick="var w=document.getElementById(\'dist-more-wrap\');var b=document.getElementById(\'dist-more-btn\');if(w.style.display===\'none\'){w.style.display=\'block\';b.textContent=\'কম দেখুন ▲\';}else{w.style.display=\'none\';b.textContent=\'আরও '+toBN(restFb.length)+' জেলা দেখুন ▼\';}" id="dist-more-btn" style="font-size:11.5px;color:#93c5fd;background:rgba(147,197,253,0.08);border:1px solid rgba(147,197,253,0.2);border-radius:20px;padding:5px 16px;cursor:pointer">আরও '+toBN(restFb.length)+' জেলা দেখুন ▼</button></div>'
-              : '');
-        } else {
-          if(de) de.innerHTML='<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">🗺️ বাংলাদেশি ভিজিটর আসলেই জেলার ডেটা দেখাবে</div>';
-        }
-      }).catch(function(){
-        if(de) de.innerHTML='<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">🗺️ জেলার ডেটা লোড করা যায়নি</div>';
-      });
-    }
-
-    /* ── Categories — active filter অনুযায়ী render ── */
+    /* Districts removed */
+        /* ── Categories — active filter অনুযায়ী render ── */
     renderCatByFilter(window._activeCatFilter || 'today');
 
   }).catch(function(){
     ['vis-today','vis-yesterday','vis-weekly','vis-monthly',
      'vis-unique','vis-pageviews','vis-new','vis-returning'].forEach(function(id){ setEl(id,'০'); });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   ACTIVE USERS — presence collection থেকে এখন কতজন একটিভ
+   ══════════════════════════════════════════════════════════ */
+function loadActiveUsers(){
+  if(!db) return;
+  var now = Date.now();
+  db.collection('presence').where('expires','>',now).get().then(function(snap){
+    var count = snap.size;
+    var el = document.getElementById('vis-active-now');
+    if(el) el.textContent = toBN ? toBN(count) : count;
+
+    /* ছোট তালিকা — কোন পেজে আছে */
+    var listEl = document.getElementById('vis-active-list');
+    if(!listEl) return;
+    if(count === 0){
+      listEl.innerHTML = '<div style="font-size:12px;color:var(--text-muted);text-align:center">এখন কেউ অনলাইনে নেই</div>';
+      return;
+    }
+    var pages = {};
+    snap.forEach(function(doc){
+      var pg = doc.data().page || 'হোম';
+      pages[pg] = (pages[pg]||0)+1;
+    });
+    var html = '';
+    Object.keys(pages).sort(function(a,b){ return pages[b]-pages[a]; }).slice(0,5).forEach(function(pg){
+      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">' +
+        '<span style="width:7px;height:7px;border-radius:50%;background:#1ab566;flex-shrink:0;box-shadow:0 0 6px rgba(26,181,102,0.7)"></span>' +
+        '<span style="font-size:11.5px;color:var(--text-body);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">' + pg + '</span>' +
+        '<span style="font-size:11px;color:#6ee7b7;font-weight:700">' + (toBN ? toBN(pages[pg]) : pages[pg]) + '</span>' +
+        '</div>';
+    });
+    listEl.innerHTML = html;
+  }).catch(function(){
+    var el = document.getElementById('vis-active-now');
+    if(el) el.textContent = '০';
   });
 }
 
@@ -7750,189 +7395,8 @@ function renderCatHTML(el, catMap, period, periodLabel, catLabel, unit){
 /* ══════════════════════════════════════════════════════════
    TRAFFIC SOURCE FILTER — Time Filter বাটন ক্লিকে source data আপডেট
    ══════════════════════════════════════════════════════════ */
-function setSrcFilter(btn, period){
-  /* active class update */
-  document.querySelectorAll('.tf-src').forEach(function(b){
-    b.style.background='transparent';
-    b.style.color='var(--text-muted)';
-    b.style.border='1px solid var(--border)';
-    b.style.fontWeight='400';
-  });
-  btn.style.background='rgba(26,181,102,0.15)';
-  btn.style.color='#6ee7b7';
-  btn.style.border='1px solid rgba(26,181,102,0.4)';
-  btn.style.fontWeight='700';
-  window._activeSrcFilter = period;
-  renderSrcByFilter(period);
-}
 
-function renderSrcByFilter(period){
-  var data = window._visData;
-  var bodyEl = document.getElementById('vis-src-body');
-  var noteEl = document.getElementById('src-note');
-  if(!bodyEl) return;
 
-  var srcMap = (data && data.srcByPeriod && data.srcByPeriod[period]) ? data.srcByPeriod[period] : {};
-  var periodLabel={'today':'আজ','yesterday':'গতকাল','week':'গত ৭ দিন','month':'গত ৩০ দিন','all':'সর্বমোট'};
-
-  /* Source config */
-  var srcConfig = {
-    facebook:  {label:'Facebook',  icon:'📘', color:'#93c5fd'},
-    google:    {label:'Google',    icon:'🔍', color:'#86efac'},
-    telegram:  {label:'Telegram',  icon:'✈️',  color:'#7dd3fc'},
-    whatsapp:  {label:'WhatsApp',  icon:'💬', color:'#6ee7b7'},
-    direct:    {label:'Direct',    icon:'🔗', color:'#fde047'},
-    other:     {label:'অন্যান্য', icon:'🌐', color:'#f9a8d4'}
-  };
-
-  var keys = Object.keys(srcMap).sort(function(a,b){return srcMap[b]-srcMap[a];});
-  var total = keys.reduce(function(s,k){return s+(srcMap[k]||0);},0);
-
-  if(!keys.length || total===0){
-    bodyEl.innerHTML='<div style="padding:16px;text-align:center;color:var(--text-muted);font-size:13px">'+periodLabel[period]+'-এর জন্য ট্র্যাফিক ডেটা নেই</div>';
-    if(noteEl) noteEl.style.display='block';
-    return;
-  }
-  if(noteEl) noteEl.style.display='none';
-
-  var maxV = srcMap[keys[0]]||1;
-
-  /* Summary header */
-  var html='<div style="padding:6px 4px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);margin-bottom:8px">'+
-    '<span style="font-size:11px;color:#6ee7b7;font-weight:700">📊 '+periodLabel[period]+'</span>'+
-    '<span style="font-size:11px;color:var(--text-muted)">মোট '+toBN(total)+' ভিজিট</span>'+
-  '</div>';
-
-  keys.forEach(function(src,i){
-    var cfg=srcConfig[src]||(srcConfig[src.toLowerCase()])||{label:src,icon:'🔗',color:'#c4b5fd'};
-    var cnt=srcMap[src]||0;
-    var barW=Math.round(cnt/maxV*100);
-    var share=total>0?Math.round(cnt/total*100):0;
-    html+='<div style="margin-bottom:10px">'+
-      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">'+
-        '<div style="display:flex;align-items:center;gap:6px">'+
-          '<span style="font-size:14px">'+cfg.icon+'</span>'+
-          '<span style="font-size:12.5px;color:var(--text-primary);font-weight:600">'+cfg.label+'</span>'+
-        '</div>'+
-        '<div style="display:flex;align-items:center;gap:8px">'+
-          '<span style="font-size:10.5px;color:var(--text-muted)">'+toBN(share)+'%</span>'+
-          '<span style="font-size:13px;color:'+cfg.color+';font-weight:800">'+toBN(cnt)+'</span>'+
-        '</div>'+
-      '</div>'+
-      '<div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden">'+
-        '<div style="height:100%;width:'+barW+'%;background:'+cfg.color+';border-radius:3px;transition:width .4s ease"></div>'+
-      '</div>'+
-    '</div>';
-  });
-  bodyEl.innerHTML=html;
-}
-
-/* ══════════════════════════════════════════════════════════
-   REAL TIME LIVE TRACKING — presence collection থেকে real data
-   presence/{sessId}: { ts, expires, page, category, src, district }
-   ══════════════════════════════════════════════════════════ */
-function loadRealtimeTracking(){
-  if(!db) return;
-  function setEl(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
-
-  /* expired presence docs পরিষ্কার করি */
-  cleanupPresence();
-
-  /* ── Live presence onSnapshot ── */
-  var now = Date.now();
-  /* onSnapshot বাদ — get() দিয়ে শুধু একবার পড়ি, ৩০ সেকেন্ডে refresh */
-  function fetchPresence(){
-    var nowTs = Date.now();
-    db.collection('presence').where('expires','>',nowTs).get().then(function(snap){
-    var count = snap.size;
-    setEl('rt-online-count',   toBN(count));
-    setEl('rt-activity-count', toBN(count));
-    setEl('vis-active-now',    toBN(count));
-
-    var pageMap={}, catMap={}, srcMap={}, distMap={};
-    snap.forEach(function(doc){
-      var d=doc.data();
-      if(d.page)     pageMap[d.page]    =(pageMap[d.page]||0)+1;
-      if(d.category) catMap[d.category] =(catMap[d.category]||0)+1;
-      if(d.src)      srcMap[d.src]      =(srcMap[d.src]||0)+1;
-      if(d.district) distMap[d.district]=(distMap[d.district]||0)+1;
-    });
-
-    /* কে কোন Page দেখছে */
-    var catLabel={'masjid':'🕌 মসজিদ','madrasa':'📚 পুরুষ মাদ্রাসা','mahila':'👩 মহিলা মাদ্রাসা'};
-    var pageHtml='';
-    Object.keys(pageMap).sort(function(a,b){return pageMap[b]-pageMap[a];}).forEach(function(pg){
-      pageHtml+='<div class="dash-online-item">'+
-        '<div class="dash-online-dot"></div>'+
-        '<div class="dash-online-name" style="font-size:12.5px">'+pg+'</div>'+
-        '<div class="dash-online-time" style="color:#6ee7b7;font-weight:700">'+toBN(pageMap[pg])+' জন</div></div>';
-    });
-    var peEl=document.getElementById('rt-who-page');
-    if(peEl) peEl.innerHTML=pageHtml||'<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:13px">এখন কেউ নেই</div>';
-
-    /* কোন Category দেখছে */
-    var catHtml='';
-    Object.keys(catMap).sort(function(a,b){return catMap[b]-catMap[a];}).forEach(function(c){
-      catHtml+='<div class="dash-online-item">'+
-        '<div class="dash-online-dot" style="background:#f0d478;box-shadow:0 0 6px rgba(240,212,120,0.5)"></div>'+
-        '<div class="dash-online-name">'+(catLabel[c]||c)+'</div>'+
-        '<div class="dash-online-time" style="color:#f0d478;font-weight:700">'+toBN(catMap[c])+' জন</div></div>';
-    });
-    var ctEl=document.getElementById('rt-who-category');
-    if(ctEl) ctEl.innerHTML=catHtml||'<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:13px">ডেটা নেই</div>';
-
-    /* Live activity feed */
-    var actHtml='';
-    snap.docs.slice(0,10).forEach(function(doc){
-      var d=doc.data();
-      var pg=d.page||'হোম';
-      var cat=catLabel[d.category]||d.category||'সাধারণ';
-      var dist=d.district||'অজানা';
-      var srcIcon={'facebook':'📘','google':'🔍','telegram':'✈️','direct':'🌐','other':'🔗'}[d.src]||'🌐';
-      var ago=Math.max(0,Math.round((Date.now()-(d.ts||Date.now()))/60000));
-      var agoStr=ago<1?'এইমাত্র':toBN(ago)+' মি আগে';
-      actHtml+='<div class="dash-feed-item">'+
-        '<div class="dash-feed-avatar" style="background:rgba(26,181,102,0.12)">'+srcIcon+'</div>'+
-        '<div class="dash-feed-body">'+
-          '<div class="dash-feed-text" style="font-size:12px">'+pg+'</div>'+
-          '<div class="dash-feed-time">'+cat+' • '+dist+' • '+agoStr+'</div>'+
-        '</div></div>';
-    });
-    var actEl=document.getElementById('rt-live-activity');
-    if(actEl) actEl.innerHTML=actHtml||'<div style="text-align:center;color:var(--text-muted);padding:14px;font-size:13px">কোনো সক্রিয় ভিজিটর নেই</div>';
-
-  }).catch(function(){
-    /* presence error — নীরবে fail করো */
-  });
-  }
-  fetchPresence();
-  /* ৩০ সেকেন্ডে একবার refresh — onSnapshot বাদ দিয়ে */
-  if(window._presenceInterval) clearInterval(window._presenceInterval);
-  window._presenceInterval = setInterval(fetchPresence, 30000);
-
-  /* ── Live post views + Recently Viewed — একটি read-এ ── */
-  db.collection('visitors').doc(new Date().toISOString().slice(0,10)).get().then(function(doc){
-    var todayC=doc.exists?(doc.data().count||0):0;
-    setEl('rt-live-views', toBN(Math.round(todayC*1.8)));
-    setEl('rt-active-pages', toBN(3));
-    /* Recently Viewed */
-    if(!doc.exists||!doc.data().pages){ loadRecentlyViewedFallback(); return; }
-    var pages=doc.data().pages;
-    var sorted=Object.keys(pages).sort(function(a,b){return pages[b]-pages[a];}).slice(0,10);
-    if(sorted.length===0){ loadRecentlyViewedFallback(); return; }
-    var html='';
-    sorted.forEach(function(pg,i){
-      html+='<div class="dash-notif-item visit">'+
-        '<div class="dash-notif-icon-wrap">📄</div>'+
-        '<div class="dash-notif-body">'+
-          '<div class="dash-notif-text" style="font-size:12px">'+pg+'</div>'+
-          '<div class="dash-notif-time">আজ • '+toBN(pages[pg])+' বার</div>'+
-        '</div></div>';
-    });
-    var el=document.getElementById('rt-recently-viewed');
-    if(el) el.innerHTML=html;
-  }).catch(function(){ loadRecentlyViewedFallback(); });
-}
 
 function _removedDuplicate(){  /* ── Recently Viewed moved above ── */
   db.collection('visitors').doc(new Date().toISOString().slice(0,10)).get().then(function(doc){
@@ -7978,86 +7442,6 @@ function loadRecentlyViewedFallback(){
 /* ══════════════════════════════════════════════════════════
    POST ANALYTICS — posts + pending_posts collection থেকে
    ══════════════════════════════════════════════════════════ */
-function loadPostAnalytics(){
-  if(!db) return;
-  var since24h = Date.now() - 86400000;
-  function setEl(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
-
-  /* সব posts একবারেই পড়ি */
-  db.collection('posts').get().then(function(snap){
-    var total=0, hidden=0, todayC=0;
-    var catMap={}, catViews={};
-    var allPosts=[];
-
-    snap.forEach(function(doc){
-      var d=doc.data();
-      total++;
-      if(d.hidden===true || d.status==='hidden') hidden++;
-      if((d.created||0) >= since24h) todayC++;
-
-      var cats=d.cats||(d.mainCat?[d.mainCat]:[]);
-      cats.forEach(function(c){
-        if(c){
-          catMap[c]  = (catMap[c]||0)+1;
-          catViews[c]= (catViews[c]||0)+(d.views||0);
-        }
-      });
-      allPosts.push({id:doc.id, text:d.text||'', cats:cats, views:d.views||0, created:d.created||0});
-    });
-
-    setEl('pa-today-posts', toBN(todayC));
-    setEl('pa-hidden-posts',toBN(hidden));
-    setEl('pa-total-posts', toBN(total));
-
-    /* Most viewed posts */
-    allPosts.sort(function(a,b){ return b.views-a.views; });
-    var html='';
-    var catLabel={'masjid':'🕌 মসজিদ','madrasa':'📚 পুরুষ মাদ্রাসা','mahila':'👩 মহিলা মাদ্রাসা'};
-    allPosts.slice(0,10).forEach(function(p,i){
-      if(p.views===0) return;
-      var catName=p.cats.map(function(c){ return catLabel[c]||c; }).join(', ')||'সাধারণ';
-      var txt=p.text.substring(0,55)||(catName+' পোস্ট');
-      html+='<div class="dash-notif-item post"><div class="dash-notif-icon-wrap" style="font-size:11px;font-weight:800;color:#1ab566">'+toBN(i+1)+'</div><div class="dash-notif-body"><div class="dash-notif-text" style="font-size:12.5px">'+txt+'</div><div class="dash-notif-time">'+catName+'</div></div><div style="font-size:12px;color:#22c874;font-weight:700;flex-shrink:0;white-space:nowrap">👁 '+toBN(p.views)+'</div></div>';
-    });
-    var mvEl=document.getElementById('pa-most-viewed-posts');
-    if(mvEl) mvEl.innerHTML=html||'<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">ভিউ ডেটা নেই</div>';
-
-    /* Trending — সর্বোচ্চ পোস্ট count ক্যাটাগরি */
-    var sortedCats=Object.keys(catMap).sort(function(a,b){ return catMap[b]-catMap[a]; });
-    var medals=['🥇','🥈','🥉','📊','📊'];
-    var tHtml='';
-    sortedCats.slice(0,5).forEach(function(c,i){
-      var label=catLabel[c]||('📂 '+c);
-      tHtml+='<div class="dash-online-item"><div style="font-size:16px;flex-shrink:0">'+medals[i]+'</div><div class="dash-online-name">'+label+'</div><div class="dash-online-time">'+toBN(catMap[c])+' পোস্ট</div></div>';
-    });
-    var tEl=document.getElementById('pa-trending-categories');
-    if(tEl) tEl.innerHTML=tHtml||'<div style="padding:12px;text-align:center;color:var(--text-muted);font-size:13px">ডেটা নেই</div>';
-
-    /* Top performing — views by category, progress bar */
-    var maxViews=Math.max.apply(null,Object.values(catViews).concat([1]));
-    var sortedByViews=Object.keys(catViews).sort(function(a,b){ return catViews[b]-catViews[a]; });
-    var pHtml='';
-    sortedByViews.forEach(function(c,i){
-      var label=catLabel[c]||('📂 '+c);
-      var pct=Math.round(catViews[c]/maxViews*100);
-      pHtml+='<div style="padding:12px 16px;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:13px;color:var(--text-body);font-family:\'Baloo Da 2\',\'Noto Sans Bengali\',sans-serif;font-weight:600">'+toBN(i+1)+'. '+label+'</span><span style="font-size:12px;color:var(--gold);font-weight:700">'+toBN(catViews[c])+' ভিউ</span></div><div style="height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,#1ab566,#22c874);border-radius:3px"></div></div></div>';
-    });
-    var pEl=document.getElementById('pa-top-performing');
-    if(pEl) pEl.innerHTML=pHtml||'<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">ডেটা নেই</div>';
-
-  }).catch(function(err){
-    console.error('loadPostAnalytics error:',err);
-  });
-
-  /* Pending posts */
-  db.collection('pending_posts').get().then(function(snap){
-    setEl('pa-pending-posts', toBN(snap.size));
-  }).catch(function(){
-    db.collection('posts').where('status','==','pending').get().then(function(snap){
-      setEl('pa-pending-posts', toBN(snap.size));
-    }).catch(function(){ setEl('pa-pending-posts','০'); });
-  });
-}
 
 function loadDashStats(){
   if(!db)return;
@@ -8082,13 +7466,10 @@ function loadDashStats(){
     set('dash-qs-yest',yc); set('dash-qs-month',mc);
     /* নতুন dashboard IDs */
     set('vis-today',tc); set('vis-yesterday',yc); set('vis-weekly',weekC); set('vis-monthly',mc);
-    set('vis-active-now', Math.max(1,Math.round(tc*0.04)));
     set('vis-unique', tot);
     set('vis-pageviews', Math.round(tot*2.4));
     set('vis-new', Math.round(tot*0.65));
     set('vis-returning', Math.round(tot*0.35));
-    set('rt-online-count', Math.max(1,Math.round(tc*0.04)));
-    set('rt-live-views', Math.round(tc*1.8));
     if(tc>0&&yc>0){ var pct=Math.round((tc-yc)/yc*100);
       var trend=document.getElementById('dash-kpi-today-trend');
       if(trend){ trend.textContent=(pct>=0?'↑ ':'↓ ')+Math.abs(pct)+'%'; trend.className='dash-kpi-trend '+(pct>=0?'up':'down'); }
@@ -8181,51 +7562,7 @@ function loadDashPosts(){
   }).catch(function(){ container.innerHTML='<div style="padding:20px;text-align:center;color:var(--text-muted)">লোড করতে সমস্যা হয়েছে</div>'; });
 }
 
-function loadDashUsers(){
-  if(!db)return;
-  var container=document.getElementById('dash-user-list');
-  if(!container)return;
-  db.collection('users').get().then(function(snap){
-    if(snap.empty){ container.innerHTML='<div style="text-align:center;color:var(--text-muted);padding:20px">কোনো ইউজার নেই</div>'; return; }
-    var html='<div style="display:flex;flex-direction:column;gap:8px">';
-    snap.forEach(function(doc){
-      var d=doc.data();
-      var exp=d.expiry?new Date(d.expiry):null;
-      var ok=exp&&exp>new Date();
-      html+='<div style="display:flex;align-items:center;gap:10px;background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--r-md);padding:10px 14px">'+
-        '<div style="width:34px;height:34px;border-radius:50%;background:rgba(196,154,56,0.12);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">👤</div>'+
-        '<div style="flex:1;min-width:0">'+
-          '<div style="font-size:13px;color:var(--text-primary);font-weight:700;font-family:\'Noto Sans Bengali\',sans-serif">'+(d.name||'ইউজার')+'</div>'+
-          '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">'+(d.mobile||'')+'</div>'+
-        '</div>'+
-        '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;background:'+(ok?'rgba(26,181,102,0.12)':'rgba(248,113,113,0.1)')+';color:'+(ok?'var(--green-light)':'#f87171')+'">'+
-          (ok?'সক্রিয়':'মেয়াদ শেষ')+'</span>'+
-      '</div>';
-    });
-    html+='</div>';
-    container.innerHTML=html;
-  }).catch(function(){ container.innerHTML='<div style="text-align:center;color:var(--text-muted);padding:20px">লোড করতে সমস্যা</div>'; });
-}
 
-function loadVisitorLog(){
-  if(!db)return;
-  var container=document.getElementById('dash-visitor-log');
-  if(!container)return;
-  db.collection('visitors').orderBy('date','desc').limit(15).get().then(function(snap){
-    if(snap.empty){ container.innerHTML='<div style="padding:20px;text-align:center;color:var(--text-muted)">কোনো ডেটা নেই</div>'; return; }
-    var html='<table style="width:100%;border-collapse:collapse;font-family:\'Noto Sans Bengali\',sans-serif;font-size:13px">';
-    html+='<thead><tr style="border-bottom:1px solid var(--border)"><th style="padding:10px 16px;text-align:right;color:var(--gold-light);font-weight:700">তারিখ</th><th style="padding:10px 16px;text-align:center;color:var(--gold-light);font-weight:700">ভিজিটর সংখ্যা</th></tr></thead><tbody>';
-    snap.forEach(function(doc){
-      var d=doc.data();
-      html+='<tr style="border-bottom:1px solid var(--border)">'+
-        '<td style="padding:9px 16px;text-align:right;color:var(--text-muted)">'+(doc.id||d.date||'')+'</td>'+
-        '<td style="padding:9px 16px;text-align:center"><span style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--r-pill);padding:1px 10px;color:var(--green-vivid);font-weight:700">'+(d.count||0)+'</span></td>'+
-      '</tr>';
-    });
-    html+='</tbody></table>';
-    container.innerHTML=html;
-  }).catch(function(){});
-}
 
 function startClock(){
   function update(){
@@ -8274,26 +7611,79 @@ try{
   alert('Firebase Error: ' + e.message);
 }
 
-/* ══ SERVICE WORKER CACHE CLEAR — পুরনো cache মুছে নতুন version লোড করে ══ */
-(function clearOldCaches(){
-  if('serviceWorker' in navigator && 'caches' in window){
-    /* সমস্ত পুরনো cache মুছে ফেলো */
-    caches.keys().then(function(cacheNames){
-      cacheNames.forEach(function(cacheName){
-        caches.delete(cacheName).then(function(){
-          console.log('[Cache Cleared]', cacheName);
-        });
-      });
-    }).catch(function(){});
-    /* পুরনো service worker unregister করো */
+/* ══ AUTO UPDATE SYSTEM — পুরনো cache মুছে নতুন version স্বয়ংক্রিয়ভাবে লোড করে ══ */
+(function autoUpdateSystem(){
+
+  /* ── ১. সমস্ত পুরনো Service Worker ও Cache মুছে ফেলো ── */
+  if('serviceWorker' in navigator){
     navigator.serviceWorker.getRegistrations().then(function(registrations){
-      registrations.forEach(function(reg){
-        reg.unregister().then(function(){
-          console.log('[SW Unregistered]', reg.scope);
-        });
-      });
+      registrations.forEach(function(reg){ reg.unregister(); });
     }).catch(function(){});
   }
+  if('caches' in window){
+    caches.keys().then(function(names){
+      names.forEach(function(name){ caches.delete(name); });
+    }).catch(function(){});
+  }
+
+  /* ── ২. VERSION CHECK — Firebase থেকে সর্বশেষ ভার্সন চেক করে অটো-রিলোড ── */
+  /* এই ভার্সন নম্বরটি প্রতিবার সাইট আপডেট করার সময় বদলাও */
+  var CURRENT_VERSION = '2025.06.05.001';
+  var VERSION_KEY = 'khedmot_site_version';
+
+  /* প্রতি ৫ মিনিটে একবার ভার্সন চেক */
+  function checkVersion(){
+    try{
+      /* Firebase Firestore থেকে ভার্সন চেক */
+      if(typeof db !== 'undefined' && db){
+        db.collection('config').doc('site_version').get()
+          .then(function(doc){
+            if(doc.exists){
+              var serverVersion = doc.data().version;
+              var localVersion = localStorage.getItem(VERSION_KEY);
+              if(serverVersion && localVersion && serverVersion !== localVersion){
+                /* নতুন ভার্সন পাওয়া গেছে — সব cache মুছে রিলোড */
+                localStorage.setItem(VERSION_KEY, serverVersion);
+                if('caches' in window){
+                  caches.keys().then(function(names){
+                    Promise.all(names.map(function(n){ return caches.delete(n); }))
+                      .then(function(){ window.location.reload(true); });
+                  }).catch(function(){ window.location.reload(true); });
+                } else {
+                  window.location.reload(true);
+                }
+              } else if(serverVersion && !localVersion){
+                localStorage.setItem(VERSION_KEY, serverVersion);
+              }
+            }
+          }).catch(function(){});
+      }
+    } catch(e){}
+  }
+
+  /* পেজ লোড হওয়ার ৫ সেকেন্ড পরে প্রথম চেক */
+  setTimeout(checkVersion, 5000);
+  /* তারপর প্রতি ৫ মিনিটে চেক */
+  setInterval(checkVersion, 5 * 60 * 1000);
+
+  /* ── ৩. LOCAL STORAGE VERSION — প্রথমবার সেট করো ── */
+  if(!localStorage.getItem(VERSION_KEY)){
+    localStorage.setItem(VERSION_KEY, CURRENT_VERSION);
+  }
+
+  /* ── ৪. HARD RELOAD on Back/Forward Cache ── */
+  /* ব্যবহারকারী ব্যাক/ফরওয়ার্ড বাটন চাপলে পুরনো cache থেকে না দেখায় */
+  window.addEventListener('pageshow', function(e){
+    if(e.persisted){ window.location.reload(true); }
+  });
+
+  /* ── ৫. VISIBILITY CHANGE — ট্যাব সক্রিয় হলে ভার্সন চেক ── */
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'visible'){
+      setTimeout(checkVersion, 1000);
+    }
+  });
+
 })();
 
 /* ── State ── */
@@ -9256,25 +8646,26 @@ function loadPosts() {
   if (!db) { document.getElementById('posts-container').innerHTML = noPostsHTML(); return; }
   if (unsub) unsub();
   autoDeleteOldPosts();
-  /* onSnapshot বাদ — get() দিয়ে একবার পড়ি */
-  unsub = { unsubscribe: function(){} }; /* dummy */
-  db.collection('posts').orderBy('created', 'desc').limit(200).get().then(function(snap) {
+  unsub = { unsubscribe: function(){} };
+
+  /* ── localStorage Cache — ১৫ মিনিট ── */
+  var CACHE_KEY = 'kh_posts_cache';
+  var CACHE_TTL = 15 * 60 * 1000; /* ১৫ মিনিট */
+  var bnNs=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function toBNc(n){return String(n).split('').map(function(c){return bnNs[+c]!==undefined?bnNs[+c]:c;}).join('');}
+
+  function applyPostsData(posts){
     allTxt = [];
     allPostsData = [];
-    snap.forEach(function(doc) {
-      var d = doc.data(); d._id = doc.id;
-      if (d.text) allTxt.push(d.text);
+    posts.forEach(function(d){
+      if(d.text) allTxt.push(d.text);
       allPostsData.push(d);
     });
-    /* ৬০ ঘণ্টার ফিল্টার করা পোস্ট গণনা করো */
-    var bnNs=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-    function toBNc(n){return String(n).split('').map(function(c){return bnNs[+c]!==undefined?bnNs[+c]:c;}).join('');}
     var visible60 = isAdmin ? allPostsData : allPostsData.filter(function(d){ return isPostVisible(d.created||0); });
     document.getElementById('posts-count').textContent = toBNc(visible60.length);
     updateCounts(visible60, 'cac');
     updatePostTimeStats(allPostsData);
     renderCenterPosts();
-    /* এডমিন ঘণ্টাভিত্তিক স্ট্যাটিস্টিক্স */
     var hourlyEl = document.getElementById('admin-hourly-stats');
     if(isAdmin){
       if(hourlyEl) hourlyEl.style.display = 'block';
@@ -9282,6 +8673,31 @@ function loadPosts() {
     } else {
       if(hourlyEl) hourlyEl.style.display = 'none';
     }
+  }
+
+  /* Admin সবসময় fresh data নেবে — cache নয় */
+  if(!isAdmin){
+    try{
+      var cached = JSON.parse(localStorage.getItem(CACHE_KEY)||'null');
+      if(cached && cached.ts && (Date.now()-cached.ts) < CACHE_TTL && cached.posts && cached.posts.length){
+        applyPostsData(cached.posts);
+        return; /* Firestore read নয় — cache থেকে দেখাচ্ছে */
+      }
+    } catch(e){}
+  }
+
+  /* Cache নেই বা মেয়াদ শেষ — Firestore থেকে লোড */
+  db.collection('posts').orderBy('created', 'desc').limit(200).get().then(function(snap) {
+    var posts = [];
+    snap.forEach(function(doc) {
+      var d = doc.data(); d._id = doc.id;
+      posts.push(d);
+    });
+    /* cache সেভ করো — admin এর জন্য নয় */
+    if(!isAdmin){
+      try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ts:Date.now(), posts:posts})); }catch(e){}
+    }
+    applyPostsData(posts);
   }, function(e) {
     document.getElementById('posts-container').innerHTML = '<div class="no-posts"><span>⚠</span>লোড হয়নি: ' + e.message + '</div>';
   });
@@ -9365,44 +8781,53 @@ function loadPreviewPosts() {
   if (previewUnsub) { previewUnsub(); previewUnsub = null; }
   var c = document.getElementById('preview-posts-container');
   c.innerHTML = '<div class="posts-loading"><div class="spinner"></div>লোড হচ্ছে...</div>';
-  /* onSnapshot এর বদলে get() ব্যবহার — Firestore read অনেক কমবে */
-  /* ৫ মিনিট পরপর auto-refresh */
+
+  var PREV_CACHE_KEY = 'kh_preview_cache';
+  var PREV_CACHE_TTL = 15 * 60 * 1000; /* ১৫ মিনিট */
   var previewRefreshTimer = null;
-  function fetchPreviewPosts(){
-    /* রাত ৩টার cutoff থেকে ৬০ ঘণ্টা পিছনের সময় — এর আগের পোস্ট দরকার নেই */
-    var previewSince = get3AMCutoff() - POST_VISIBLE_MS;
-    db.collection('posts').orderBy('created', 'desc').where('created', '>=', previewSince).get().then(function(snap) {
-    allPreviewData = [];
-    snap.forEach(function(doc) {
-      var d = doc.data(); d._id = doc.id;
-      allPreviewData.push(d);
-    });
-    /* isPostVisible দিয়ে দৃশ্যমান পোস্ট ফিল্টার */
-    var visibleData = allPreviewData.filter(function(d) {
-      return isPostVisible(d.created || 0);
-    });
-    var bnDP=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-    function toBNP(n){return String(n).split('').map(function(c){return bnDP[+c]!==undefined?bnDP[+c]:c;}).join('');}
+
+  var bnDP=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function toBNP(n){return String(n).split('').map(function(c){return bnDP[+c]!==undefined?bnDP[+c]:c;}).join('');}
+
+  function applyPreviewData(posts){
+    allPreviewData = posts;
+    var visibleData = allPreviewData.filter(function(d){ return isPostVisible(d.created||0); });
     document.getElementById('preview-count').textContent = toBNP(visibleData.length);
-    /* Search cache আপডেট — শুধু দৃশ্যমান পোস্ট */
     previewPostsAll = visibleData.slice();
     updateCounts(visibleData, 'cap');
-    updatePostTimeStats(allPreviewData); /* raw সব পোস্ট — ফিল্টার ছাড়া */
-    /* হোমপেজ ক্যাটাগরি breakdown আপডেট করো — visibleData (৬০ঘণ্টার) পাঠাও */
+    updatePostTimeStats(allPreviewData);
     loadHomeTodayPostCount(visibleData);
-    /* যদি search active থাকে */
-    var searchVal = (document.getElementById('post-search-input') || {}).value || '';
-    if (searchVal.trim()) {
-      searchPosts(searchVal);
-    } else {
-      renderPreviewPosts();
-    }
-    /* ৫ মিনিট পরে আবার fetch */
-    if(previewRefreshTimer) clearTimeout(previewRefreshTimer);
-    previewRefreshTimer = setTimeout(fetchPreviewPosts, 5 * 60 * 1000);
-  }).catch(function(e) {
-    c.innerHTML = '<div class="no-posts"><span>⚠</span>লোড হয়নি: ' + e.message + '</div>';
-  });
+    var searchVal = (document.getElementById('post-search-input')||{}).value||'';
+    if(searchVal.trim()){ searchPosts(searchVal); } else { renderPreviewPosts(); }
+  }
+
+  function fetchPreviewPosts(){
+    /* Cache চেক — ১৫ মিনিটের মধ্যে থাকলে Firestore read নয় */
+    try{
+      var cached = JSON.parse(localStorage.getItem(PREV_CACHE_KEY)||'null');
+      if(cached && cached.ts && (Date.now()-cached.ts) < PREV_CACHE_TTL && cached.posts && cached.posts.length){
+        applyPreviewData(cached.posts);
+        /* ১৫ মিনিট পরে আবার fetch */
+        if(previewRefreshTimer) clearTimeout(previewRefreshTimer);
+        previewRefreshTimer = setTimeout(fetchPreviewPosts, PREV_CACHE_TTL);
+        return;
+      }
+    } catch(e){}
+
+    /* Cache নেই বা মেয়াদ শেষ — Firestore থেকে লোড */
+    var previewSince = get3AMCutoff() - POST_VISIBLE_MS;
+    db.collection('posts').orderBy('created','desc').where('created','>=',previewSince).get().then(function(snap){
+      var posts = [];
+      snap.forEach(function(doc){ var d=doc.data(); d._id=doc.id; posts.push(d); });
+      /* cache সেভ করো */
+      try{ localStorage.setItem(PREV_CACHE_KEY, JSON.stringify({ts:Date.now(), posts:posts})); }catch(e){}
+      applyPreviewData(posts);
+      /* ১৫ মিনিট পরে আবার fetch */
+      if(previewRefreshTimer) clearTimeout(previewRefreshTimer);
+      previewRefreshTimer = setTimeout(fetchPreviewPosts, PREV_CACHE_TTL);
+    }).catch(function(e){
+      c.innerHTML = '<div class="no-posts"><span>⚠</span>লোড হয়নি: '+e.message+'</div>';
+    });
   }
   fetchPreviewPosts();
 }
@@ -9780,6 +9205,8 @@ function publishPost() {
       clearPostImg();
       btn.disabled = false; btn.textContent = '📝 পোস্ট করুন';
       toast('পোস্ট প্রকাশিত হয়েছে', 'green');
+      /* নতুন পোস্ট হলে cache clear — ভিজিটররা নতুন পোস্ট দেখবে */
+      try{ localStorage.removeItem('kh_posts_cache'); localStorage.removeItem('kh_preview_cache'); }catch(e){}
     })
     .catch(function(e) { btn.disabled = false; btn.textContent = '📝 পোস্ট করুন'; toast('সমস্যা হয়েছে', 'red'); alert(e.message); });
   }
@@ -10007,6 +9434,7 @@ function approvePending(id) {
     })
     .then(function() {
       toast('পোস্ট Approve হয়েছে — প্রকাশিত হয়েছে ✅', 'green');
+      try{ localStorage.removeItem('kh_posts_cache'); localStorage.removeItem('kh_preview_cache'); }catch(e){}
       loadPendingPosts();
     })
     .catch(function(e) { toast('সমস্যা: ' + e.message, 'red'); });
@@ -10041,8 +9469,9 @@ function simScore(a,b){
 }
 function autoDeleteOldPosts(){
   if(!db)return;
-  /* ৩ মাস (90 দিন) পুরনো পোস্ট পার্মানেন্টলি ডিলিট করো */
-  var deleteLimit = Date.now() - (90 * 24 * 3600000);
+  /* ৬০ ঘণ্টার পুরনো পোস্ট ডিলিট করো — হাইড নয়, সরাসরি ডিলিট */
+  /* এতে Firestore এ পুরাতন পোস্ট জমবে না, রিড অনেক কমবে */
+  var deleteLimit = get3AMCutoff() - POST_VISIBLE_MS;
   db.collection('posts').where('created','<=',deleteLimit).get()
     .then(function(snap){ snap.forEach(function(doc){ doc.ref.delete().catch(function(){}); }); })
     .catch(function(){});
@@ -11831,9 +11260,9 @@ function updateContactWhatsAppLink(el){
   var cat = getCurrentCatLabel();
   var msg;
   if(cat){
-    msg = 'আস‌সালামু আলাইকুম। আমি ' + cat + '-এর পোস্ট দেখে আপনার ওয়েবসাইট থেকে যোগাযোগ করছি।';
+    msg = 'আমি ' + cat + '-এর পোস্ট দেখে আপনার ওয়েবসাইট থেকে যোগাযোগ করছি। আমার ওয়েবসাইটের পাসওয়ার্ড প্রয়োজন।';
   } else {
-    msg = 'আস‌সালামু আলাইকুম। আমি আপনার ওয়েবসাইট থেকে এসেছি।';
+    msg = 'আমি আপনার ওয়েবসাইট থেকে এসেছি। আমার ওয়েবসাইটের পাসওয়ার্ড প্রয়োজন।';
   }
   el.href = 'https://wa.me/8801408764722?text=' + encodeURIComponent(msg);
 }
@@ -11841,7 +11270,7 @@ function updateContactWhatsAppLink(el){
 /* মেয়াদ নবায়ন বাটন */
 function openRenewalWhatsApp(){
   var cat = getCurrentCatLabel();
-  var base = 'আস‌সালামু আলাইকুম। আমার অ্যাকাউন্টের মেয়াদ শেষ হয়েছে, নবায়ন করতে চাই।';
+  var base = 'আমার অ্যাকাউন্টের মেয়াদ শেষ হয়েছে, নবায়ন করতে চাই। আমার ওয়েবসাইটের পাসওয়ার্ড প্রয়োজন।';
   var msg = cat ? base + ' (আমি ' + cat + '-এর পোস্ট দেখছিলাম।)' : base;
   window.open('https://wa.me/8801408764722?text=' + encodeURIComponent(msg), '_blank');
 }
