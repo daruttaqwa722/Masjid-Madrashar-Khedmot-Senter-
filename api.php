@@ -2,22 +2,20 @@
 // =============================================
 // মসজিদ-মাদ্রাসার খেদমত সেন্টার — API
 // =============================================
-
 // ---------- CORS & Headers ----------
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, X-Admin-Token');
-
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(200); exit; }
-
 // ---------- DB Config ----------
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'khedmotdb');
 define('DB_USER', 'khedmotuser');
 define('DB_PASS', 'khedmot@722');
-define('ADMIN_TOKEN', 'khedmot_admin_jihadul_722'); // Admin requests must send this header
-
+define('ADMIN_TOKEN', 'khedmot_admin_jihadul_722');
+define('ADMIN_EMAIL', 'admin@khedmot.com');
+define('ADMIN_PASSWORD', 'khedmot_admin_jihadul_722');
 // ---------- Connect ----------
 function db(): PDO {
     static $pdo = null;
@@ -34,18 +32,15 @@ function db(): PDO {
     }
     return $pdo;
 }
-
 function resp(int $code, array $data): void {
     http_response_code($code);
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     exit;
 }
-
 function isAdmin(): bool {
     $token = $_SERVER['HTTP_X_ADMIN_TOKEN'] ?? '';
     return $token === ADMIN_TOKEN;
 }
-
 function banglaTime(): string {
     date_default_timezone_set('Asia/Dhaka');
     $months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন',
@@ -54,19 +49,13 @@ function banglaTime(): string {
     $t = date('g:i'); $ap = date('A') === 'AM' ? 'পূর্বাহ্ণ' : 'অপরাহ্ণ';
     return "$d {$months[$m]} $y, $t $ap";
 }
-
 // ---------- Router ----------
 $method = $_SERVER['REQUEST_METHOD'];
 $path   = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $parts  = explode('/', $path);
-
-// Expect: api.php/resource[/id]  OR  ?action=resource[&id=x]
-// Support both path-based and query-based routing
 $resource = $parts[1] ?? ($_GET['r'] ?? '');
 $id       = $parts[2] ?? ($_GET['id'] ?? null);
-
 switch ($resource) {
-
     // ==============================
     // POSTS
     // ==============================
@@ -100,7 +89,6 @@ switch ($resource) {
             resp(200, ['message' => 'ডিলিট হয়েছে']);
         }
         break;
-
     // ==============================
     // PHOTOS
     // ==============================
@@ -126,7 +114,6 @@ switch ($resource) {
             resp(200, ['message' => 'ফটো ডিলিট হয়েছে']);
         }
         break;
-
     // ==============================
     // VISITORS
     // ==============================
@@ -137,7 +124,6 @@ switch ($resource) {
             $today = date('Y-m-d');
             $yest  = date('Y-m-d', strtotime('-1 day'));
             $mon   = date('Y-m');
-
             $rows  = db()->query('SELECT visit_date, count FROM visitors ORDER BY visit_date DESC LIMIT 90')->fetchAll();
             $total = 0; $todayC = 0; $yesterdayC = 0; $monthC = 0;
             foreach ($rows as $r) {
@@ -155,7 +141,6 @@ switch ($resource) {
             ]);
         }
         if ($method === 'POST') {
-            // Track a visit (called by frontend, no auth needed)
             date_default_timezone_set('Asia/Dhaka');
             $today = date('Y-m-d');
             $stmt = db()->prepare(
@@ -166,7 +151,69 @@ switch ($resource) {
             resp(200, ['tracked' => true]);
         }
         break;
+    // ==============================
+    // USERS (register / login / admin_login)
+    // ==============================
+    case 'users':
+        if ($method === 'POST') {
+            $body   = json_decode(file_get_contents('php://input'), true);
+            $action = $body['action'] ?? '';
 
+            // --- নিবন্ধন ---
+            if ($action === 'register') {
+                $name    = trim($body['name']     ?? '');
+                $mobile  = trim($body['mobile']   ?? '');
+                $address = trim($body['address']  ?? '');
+                $pwd     = trim($body['password'] ?? '');
+                if (!$name || !$mobile || !$pwd)
+                    resp(400, ['error' => 'নাম, মোবাইল ও পাসওয়ার্ড আবশ্যক']);
+                $chk = db()->prepare('SELECT id FROM users WHERE mobile=?');
+                $chk->execute([$mobile]);
+                if ($chk->fetch())
+                    resp(409, ['error' => 'এই মোবাইল নম্বর আগেই নিবন্ধিত']);
+                $id   = bin2hex(random_bytes(16));
+                $hash = password_hash($pwd, PASSWORD_DEFAULT);
+                $now  = (int)(microtime(true) * 1000);
+                $exp  = $now + 20 * 24 * 3600 * 1000;
+                db()->prepare(
+                    'INSERT INTO users (id,name,mobile,address,password,role,created_at,expires_at)
+                     VALUES (?,?,?,?,?,?,?,?)'
+                )->execute([$id, $name, $mobile, $address, $hash, 'member', $now, $exp]);
+                resp(201, ['success' => true, 'message' => 'নিবন্ধন সফল হয়েছে']);
+            }
+
+            // --- ইউজার লগইন ---
+            if ($action === 'login') {
+                $mobile = trim($body['mobile']   ?? '');
+                $pwd    = trim($body['password'] ?? '');
+                if (!$mobile || !$pwd)
+                    resp(400, ['error' => 'মোবাইল ও পাসওয়ার্ড আবশ্যক']);
+                $stmt = db()->prepare('SELECT * FROM users WHERE mobile=?');
+                $stmt->execute([$mobile]);
+                $user = $stmt->fetch();
+                if (!$user || !password_verify($pwd, $user['password']))
+                    resp(401, ['error' => 'মোবাইল বা পাসওয়ার্ড সঠিক নয়']);
+                resp(200, [
+                    'success' => true,
+                    'name'    => $user['name'],
+                    'mobile'  => $user['mobile'],
+                    'address' => $user['address'],
+                    'role'    => $user['role']
+                ]);
+            }
+
+            // --- অ্যাডমিন লগইন ---
+            if ($action === 'admin_login') {
+                $email = trim($body['email']    ?? '');
+                $pwd   = trim($body['password'] ?? '');
+                if ($email === ADMIN_EMAIL && $pwd === ADMIN_PASSWORD) {
+                    resp(200, ['success' => true, 'token' => ADMIN_TOKEN, 'role' => 'admin']);
+                } else {
+                    resp(401, ['error' => 'Email বা পাসওয়ার্ড সঠিক নয়']);
+                }
+            }
+        }
+        break;
     default:
-        resp(404, ['error' => 'Unknown endpoint. Use /posts, /photos, /visitors']);
+        resp(404, ['error' => 'Unknown endpoint. Use /posts, /photos, /visitors, /users']);
 }
