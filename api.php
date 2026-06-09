@@ -64,7 +64,9 @@ switch ($resource) {
             $limit  = min((int)($_GET['limit'] ?? 100), 200);
             $offset = (int)($_GET['offset'] ?? 0);
             $stmt = db()->prepare('SELECT * FROM posts ORDER BY created DESC LIMIT ? OFFSET ?');
-            $stmt->execute([$limit, $offset]);
+            $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+            $stmt->bindValue(2, $offset, PDO::PARAM_INT);
+            $stmt->execute();
             $rows = $stmt->fetchAll();
             $total = db()->query('SELECT COUNT(*) FROM posts')->fetchColumn();
             resp(200, ['posts' => $rows, 'total' => (int)$total]);
