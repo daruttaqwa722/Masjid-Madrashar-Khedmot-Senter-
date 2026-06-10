@@ -1107,7 +1107,7 @@ function lsDoAdminLogin() {
   fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
-      if(data.success){closeLogin();showPage('admin');}
+      if(data.success){localStorage.setItem('adminEmail',email);closeLogin();showPage('admin');}
       else{document.getElementById('adminAlertMsg').textContent=data.message||'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';al.classList.add('show');}
     }).catch(()=>{btn.classList.remove('loading');document.getElementById('adminAlertMsg').textContent='সংযোগ সমস্যা।';al.classList.add('show');});
 }
