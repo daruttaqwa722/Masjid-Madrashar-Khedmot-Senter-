@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>মসজিদ মাদ্রাসার খেদমত সেন্টার</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #05057D;
+    --navy-dark: #030355;
+    --navy-mid: #0A0A9E;
+    --gold: #FFD700;
+    --gold-light: #FFE566;
+    --gold-dim: rgba(255,215,0,0.18);
+    --white: #ffffff;
+    --bg: #EEF0F8;
+    --card-bg: #ffffff;
+    --text: #1a1d3a;
+    --text-sub: #5a6080;
+    --border: rgba(5,5,125,0.13);
+    --shadow-sm: 0 2px 12px rgba(5,5,125,0.10);
+    --shadow-md: 0 6px 28px rgba(5,5,125,0.14);
+    --shadow-lg: 0 12px 48px rgba(5,5,125,0.18);
+    --radius-sm: 14px;
+    --radius-md: 20px;
+    --radius-lg: 28px;
+    --green: #16a34a; --red: #dc2626; --orange: #ea580c;
+    --radius: 16px;
+  }
+
+  body { background: var(--bg); font-family: 'Hind Siliguri', sans-serif; min-height: 100vh; }
+
+  /* ══════════════════════════════════════
+     PAGE SYSTEM
+  ══════════════════════════════════════ */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ══════════════════════════════════════
+     PAGE: HOME (index)
+  ══════════════════════════════════════ */
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-mid) 100%);
+    text-align: center; padding: 2.8rem 1.2rem 2.4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(255,215,0,0.10) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 110%, rgba(255,255,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .bismillah {
+    font-family: 'Noto Serif Bengali', serif; font-size: 1.85rem;
+    color: var(--gold); letter-spacing: 0.04em; line-height: 1.5;
+    margin-bottom: 1rem; text-shadow: 0 2px 16px rgba(255,215,0,0.28);
+  }
+  .hero-divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 1.1rem; width: min(280px, 85%); }
+  .hero-divider-line { flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(255,215,0,0.55), transparent); }
+  .hero-divider-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px rgba(255,215,0,0.6); }
+  .hero h1 { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.45; margin-bottom: 0.55rem; text-shadow: 0 2px 12px rgba(0,0,0,0.22); }
+  .hero-subtitle {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.28);
+    border-radius: 30px; padding: 0.28rem 0.9rem;
+    font-size: 0.82rem; color: var(--gold-light); letter-spacing: 0.02em; margin-top: 0.3rem;
+  }
+  .hero-subtitle::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    background: var(--gold); border-radius: 50%; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.55; transform: scale(0.75); } }
+
+  /* ── SECTION LABEL ── */
+  .section-label { font-size: 0.7rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.12em; text-align: center; margin: 1.5rem 0 0.6rem; opacity: 0.5; }
+
+  /* ── BUTTON GRID ── */
+  .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 1rem 0.5rem; }
+  .service-btn {
+    background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-md);
+    padding: 1.1rem 0.8rem 0.9rem; text-align: center; cursor: pointer;
+    box-shadow: var(--shadow-md); transition: transform 0.2s cubic-bezier(.22,.68,0,1.4), box-shadow 0.2s;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    min-height: 148px; position: relative; overflow: hidden; text-decoration: none;
+  }
+  .service-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy)); opacity: 0; transition: opacity 0.2s; }
+  .service-btn:hover { transform: translateY(-4px) scale(1.015); box-shadow: var(--shadow-lg); border-color: rgba(5,5,125,0.22); }
+  .service-btn:hover::before { opacity: 1; }
+  .service-btn:active { transform: translateY(-1px) scale(1.005); }
+  .btn-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 0.55rem; flex-shrink: 0; }
+  .btn-icon svg { width: 18px; height: 18px; fill: var(--gold); }
+  .btn-main { font-size: 0.83rem; font-weight: 700; color: var(--navy); line-height: 1.6; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .btn-sub { font-size: 0.7rem; color: var(--text-sub); background: rgba(5,5,125,0.05); border-radius: 8px; padding: 3px 8px; margin-top: 8px; width: 100%; font-weight: 500; }
+
+  /* ── SOCIAL CARD ── */
+  .social-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.4rem 1.1rem 1.1rem; margin: 0 1rem; position: relative; overflow: hidden; }
+  .social-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy)); }
+  .card-title { font-size: 1.05rem; font-weight: 700; color: var(--navy); text-align: center; margin-bottom: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .card-title-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; }
+  .card-title-icon svg { width: 15px; height: 15px; fill: var(--gold); }
+  .social-group { margin-bottom: 1rem; }
+  .social-group:last-child { margin-bottom: 0; }
+  .social-group-title { font-size: 0.68rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.45rem; opacity: 0.45; padding-left: 4px; }
+  .social-link { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(100deg, rgba(5,5,125,0.03), rgba(5,5,125,0.06)); border: 1.5px solid rgba(5,5,125,0.10); border-radius: var(--radius-sm); padding: 0.62rem 0.9rem; margin-bottom: 8px; font-size: 0.86rem; font-weight: 600; color: var(--navy); cursor: pointer; text-decoration: none; transition: background 0.15s, border-color 0.15s, transform 0.15s; gap: 8px; }
+  .social-link:last-child { margin-bottom: 0; }
+  .social-link:hover { background: rgba(5,5,125,0.09); border-color: rgba(5,5,125,0.25); transform: translateX(3px); }
+  .social-link-label { flex: 1; }
+  .social-link-arrow { width: 24px; height: 24px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .social-link-arrow svg { width: 11px; height: 11px; fill: var(--gold); }
+
+  /* ── VIDEO CARD ── */
+  .video-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.2rem 1rem 1rem; margin: 0 1rem; overflow: hidden; }
+  .video-wrap { position: relative; width: 100%; padding-bottom: 177.7%; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: var(--radius-md); }
+
+  /* ── FOOTER ── */
+  footer { margin: 1.5rem 1rem 0; background: var(--navy-dark); border-radius: var(--radius-md) var(--radius-md) 0 0; padding: 1.4rem 1.2rem 1.2rem; text-align: center; position: relative; overflow: hidden; }
+  footer::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .footer-name { font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+  .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+  .footer-divider { width: 40px; height: 1px; background: rgba(255,215,0,0.3); margin: 0.6rem auto; }
+
+  /* ── DETAIL SHEET ── */
+  .detail-overlay { display: none; position: fixed; inset: 0; background: rgba(3,3,85,0.55); z-index: 100; backdrop-filter: blur(3px); }
+  .detail-overlay.open { display: block; }
+  .detail-sheet { position: fixed; left: 0; right: 0; bottom: 0; max-height: 90vh; background: var(--bg); border-radius: 24px 24px 0 0; overflow-y: auto; z-index: 101; transform: translateY(100%); transition: transform 0.35s cubic-bezier(.32,.72,0,1); -webkit-overflow-scrolling: touch; }
+  .detail-sheet.open { transform: translateY(0); }
+  .sheet-handle { width: 40px; height: 4px; background: rgba(5,5,125,0.18); border-radius: 2px; margin: 12px auto 0; }
+  .sheet-close-row { display: flex; justify-content: flex-end; padding: 8px 14px 0; }
+  .sheet-close-btn { background: rgba(5,5,125,0.07); border: none; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; color: var(--navy); }
+
+  /* ── DETAIL SHEET CONTENT ── */
+  .sh { padding: 0 1rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .sh .hero-sheet { background: linear-gradient(160deg, #030355 0%, #05057D 55%, #0A0A9E 100%); border-radius: 20px; text-align: center; padding: 1.6rem 1.2rem 1.4rem; position: relative; overflow: hidden; margin-bottom: 0; }
+  .sh .hero-sheet::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% -10%, rgba(255,215,0,0.10) 0%, transparent 70%); pointer-events: none; }
+  .sh .hero-avatar { width: 56px; height: 56px; background: linear-gradient(135deg, #FFD700, #e6c000); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.7rem; font-size: 1.5rem; box-shadow: 0 4px 20px rgba(255,215,0,0.35); }
+  .sh .hero-name { font-family: 'Noto Serif Bengali', serif; font-size: 1.1rem; font-weight: 700; color: #FFD700; line-height: 1.45; margin-bottom: 0.2rem; }
+  .sh .hero-role { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 0.9rem; }
+  .sh .hero-divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 0.9rem; width: min(240px, 80%); }
+  .sh .hero-divider-line { flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent); }
+  .sh .hero-divider-dot { width: 6px; height: 6px; background: #FFD700; border-radius: 50%; box-shadow: 0 0 8px rgba(255,215,0,0.6); }
+  .sh .hero-notice { background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.28); border-radius: 12px; padding: 0.65rem 1rem; font-size: 0.84rem; color: #FFE566; line-height: 1.6; max-width: 340px; margin: 0 auto; }
+  .sh .section-label { font-size: 0.68rem; font-weight: 700; color: #05057D; text-transform: uppercase; letter-spacing: 0.12em; text-align: center; margin: 0.4rem 0 0.1rem; opacity: 0.45; }
+  .sh .card { background: #fff; border: 1.5px solid rgba(5,5,125,0.12); border-radius: 20px; box-shadow: 0 6px 28px rgba(5,5,125,0.13); overflow: hidden; }
+  .sh .card-header { background: linear-gradient(100deg, #05057D, #0A0A9E); padding: 0.8rem 1rem; display: flex; align-items: center; gap: 10px; }
+  .sh .card-header-icon { width: 30px; height: 30px; background: rgba(255,215,0,0.18); border: 1px solid rgba(255,215,0,0.35); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+  .sh .card-header-title { font-size: 0.95rem; font-weight: 700; color: #FFD700; line-height: 1.35; }
+  .sh .card-body { padding: 1rem; }
+  .sh .prose { font-size: 0.88rem; line-height: 1.8; color: #2a2d4a; }
+  .sh .quote-block { background: linear-gradient(100deg, rgba(5,5,125,0.04), rgba(5,5,125,0.07)); border-left: 3.5px solid #FFD700; border-radius: 0 12px 12px 0; padding: 0.75rem 0.9rem; margin: 0.75rem 0 0; font-size: 0.86rem; line-height: 1.75; color: #2a2d4a; }
+  .sh .checklist { display: flex; flex-direction: column; gap: 8px; }
+  .sh .checklist-item { display: flex; align-items: flex-start; gap: 10px; background: rgba(5,5,125,0.03); border: 1px solid rgba(5,5,125,0.08); border-radius: 11px; padding: 0.6rem 0.85rem; font-size: 0.86rem; line-height: 1.65; color: #2a2d4a; }
+  .sh .checklist-tick { width: 20px; height: 20px; background: linear-gradient(135deg, #05057D, #0A0A9E); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .sh .checklist-tick svg { width: 10px; height: 10px; fill: #FFD700; }
+  .sh .diamond-list { display: flex; flex-direction: column; gap: 8px; }
+  .sh .diamond-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; line-height: 1.7; color: #2a2d4a; padding: 0.55rem 0.85rem; background: rgba(5,5,125,0.03); border-radius: 11px; border: 1px solid rgba(5,5,125,0.07); }
+  .sh .diamond-dot { color: #05057D; font-size: 0.9rem; flex-shrink: 0; margin-top: 3px; opacity: 0.7; }
+  .sh .highlight-pills { display: flex; flex-direction: column; gap: 7px; margin-top: 0.7rem; }
+  .sh .highlight-pill { background: linear-gradient(100deg, rgba(5,5,125,0.06), rgba(5,5,125,0.10)); border: 1.5px solid rgba(5,5,125,0.13); border-left: 4px solid #05057D; border-radius: 11px; padding: 0.65rem 0.9rem; font-size: 0.86rem; line-height: 1.7; color: #2a2d4a; }
+  .sh .payment-box { background: linear-gradient(135deg, #030355 0%, #05057D 100%); border-radius: 20px; box-shadow: 0 12px 48px rgba(5,5,125,0.17); padding: 1.3rem 1.1rem; position: relative; overflow: hidden; }
+  .sh .payment-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(255,215,0,0.12) 0%, transparent 65%); pointer-events: none; }
+  .sh .payment-box-inner { position: relative; z-index: 1; }
+  .sh .payment-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 0.22rem 0.7rem; font-size: 0.7rem; font-weight: 700; color: #FFE566; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.7rem; }
+  .sh .payment-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.9rem; line-height: 1.4; }
+  .sh .payment-method-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,215,0,0.22); border-radius: 14px; padding: 0.85rem 0.95rem; margin-bottom: 0.75rem; }
+  .sh .payment-method-name { font-size: 0.88rem; font-weight: 600; color: #FFE566; margin-bottom: 0.4rem; }
+  .sh .payment-number { font-size: 1.45rem; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+  .sh .payment-amount-tag { display: inline-block; background: #FFD700; color: #030355; font-size: 0.82rem; font-weight: 700; border-radius: 8px; padding: 0.2rem 0.7rem; margin-top: 0.45rem; }
+  .sh .steps { display: flex; flex-direction: column; gap: 0; }
+  .sh .step-item { display: flex; align-items: flex-start; gap: 12px; padding: 0.8rem 0.85rem; position: relative; }
+  .sh .step-item:not(:last-child)::after { content: ''; position: absolute; left: calc(0.85rem + 14px); top: calc(0.8rem + 28px); width: 2px; height: calc(100% - 28px); background: rgba(5,5,125,0.12); }
+  .sh .step-num { width: 28px; height: 28px; background: linear-gradient(135deg, #05057D, #0A0A9E); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #FFD700; flex-shrink: 0; }
+  .sh .step-text { font-size: 0.86rem; line-height: 1.7; color: #2a2d4a; padding-top: 3px; }
+  .sh .steps-result { background: rgba(5,5,125,0.04); border: 1.5px dashed rgba(5,5,125,0.18); border-radius: 13px; padding: 0.75rem 0.9rem; font-size: 0.86rem; line-height: 1.7; color: #2a2d4a; margin-top: 0.5rem; }
+  .sh .sheet-footer { background: #030355; border-radius: 16px; padding: 1rem 1.2rem; text-align: center; }
+  .sh .sheet-footer-name { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+  .sh .sheet-footer-div { width: 32px; height: 1px; background: rgba(255,215,0,0.3); margin: 0.4rem auto; }
+  .sh .sheet-footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.35); }
+
+  /* ── LOGIN SHEET STYLES ── */
+  .ls { padding: 0 1rem 2.5rem; display: flex; flex-direction: column; gap: 0; }
+  .ls-hero { background: linear-gradient(160deg, #030355 0%, #05057D 55%, #0A0A9E 100%); border-radius: 20px; text-align: center; padding: 1.5rem 1.2rem 1.3rem; position: relative; overflow: hidden; margin-bottom: 1.2rem; }
+  .ls-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% -10%, rgba(255,215,0,0.12) 0%, transparent 70%); pointer-events: none; }
+  .ls-logo { width: 60px; height: 60px; background: linear-gradient(135deg, #FFD700, #e6c000); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-size: 1.6rem; box-shadow: 0 4px 18px rgba(255,215,0,0.35); }
+  .ls-title { font-family: 'Noto Serif Bengali', serif; font-size: 1.1rem; font-weight: 700; color: #FFD700; margin-bottom: 0.2rem; position: relative; z-index: 1; }
+  .ls-sub { font-size: 0.78rem; color: rgba(255,255,255,0.6); position: relative; z-index: 1; }
+  .ls-tabs { display: flex; gap: 8px; margin-bottom: 1.2rem; }
+  .ls-tab { flex: 1; padding: 0.62rem 0; border-radius: 12px; font-family: 'Hind Siliguri', sans-serif; font-size: 0.88rem; font-weight: 700; border: 1.5px solid rgba(5,5,125,0.13); background: #fff; color: #5a6080; cursor: pointer; transition: all 0.2s; }
+  .ls-tab.active { background: linear-gradient(135deg, #030355, #05057D); color: #FFD700; border-color: transparent; box-shadow: 0 4px 16px rgba(5,5,125,0.25); }
+  .ls-panel { display: none; }
+  .ls-panel.show { display: block; }
+  .ls-user-card { background: #fff; border: 1.5px solid rgba(5,5,125,0.12); border-top: 3px solid #FFD700; border-radius: 20px; box-shadow: 0 8px 32px rgba(5,5,125,0.13); padding: 1.4rem 1.2rem 1.3rem; margin-bottom: 0.8rem; }
+  .ls-form-title { font-size: 1rem; font-weight: 700; color: #05057D; text-align: center; margin-bottom: 0.25rem; }
+  .ls-form-sub { font-size: 0.76rem; color: #5a6080; text-align: center; margin-bottom: 1.2rem; }
+  .ls-alert { border-radius: 11px; padding: 0.65rem 0.9rem; font-size: 0.82rem; margin-bottom: 0.9rem; display: none; align-items: center; gap: 7px; line-height: 1.5; }
+  .ls-alert.show { display: flex; }
+  .ls-alert-error { background: rgba(229,62,62,0.08); border: 1px solid rgba(229,62,62,0.22); color: #e53e3e; }
+  .ls-alert-success { background: rgba(56,161,105,0.08); border: 1px solid rgba(56,161,105,0.22); color: #38a169; }
+  .ls-alert svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+  .ls-group { margin-bottom: 1rem; }
+  .ls-label { display: block; font-size: 0.8rem; font-weight: 600; color: #05057D; margin-bottom: 0.38rem; }
+  .ls-input-wrap { position: relative; }
+  .ls-input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; fill: #9090b0; pointer-events: none; transition: fill 0.2s; }
+  .ls-input { width: 100%; padding: 0.7rem 0.9rem 0.7rem 2.5rem; background: rgba(5,5,125,0.03); border: 1.5px solid rgba(5,5,125,0.13); border-radius: 13px; font-family: 'Hind Siliguri', sans-serif; font-size: 0.9rem; color: #2a2d4a; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+  .ls-input:focus { border-color: #05057D; box-shadow: 0 0 0 3px rgba(5,5,125,0.09); background: #fff; }
+  .ls-input:focus ~ .ls-input-icon, .ls-input-wrap:focus-within .ls-input-icon { fill: #05057D; }
+  .ls-pw-wrap { position: relative; }
+  .ls-pw-btn { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 2px; color: #9090b0; display: flex; align-items: center; transition: color 0.2s; }
+  .ls-pw-btn:hover { color: #05057D; }
+  .ls-pw-btn svg { width: 17px; height: 17px; fill: currentColor; }
+  .ls-input.has-pw { padding-right: 2.8rem; }
+  .ls-field-err { font-size: 0.74rem; color: #e53e3e; margin-top: 0.28rem; display: none; }
+  .ls-group.err .ls-input { border-color: #e53e3e; }
+  .ls-group.err .ls-field-err { display: block; }
+  .ls-btn { width: 100%; padding: 0.82rem; background: linear-gradient(135deg, #030355 0%, #05057D 50%, #0A0A9E 100%); color: #fff; border: none; border-radius: 13px; font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 18px rgba(5,5,125,0.28); transition: transform 0.18s, box-shadow 0.18s; position: relative; overflow: hidden; }
+  .ls-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 26px rgba(5,5,125,0.35); }
+  .ls-btn:active { transform: translateY(0); }
+  .ls-btn.loading { opacity: 0.8; pointer-events: none; }
+  .ls-btn .ls-spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: lsSpin 0.7s linear infinite; margin: 0 auto; }
+  .ls-btn.loading .ls-btn-txt { display: none; }
+  .ls-btn.loading .ls-spinner { display: block; }
+  @keyframes lsSpin { to { transform: rotate(360deg); } }
+  .ls-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-top: 0.9rem; }
+  .ls-link { font-size: 0.78rem; font-weight: 600; color: #05057D; background: none; border: none; cursor: pointer; padding: 0; text-decoration: none; transition: color 0.15s; }
+  .ls-link:hover { text-decoration: underline; }
+  .ls-link.gold { color: #9a7200; }
+  .ls-register-wrap { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(.32,.72,0,1); }
+  .ls-register-wrap.open { max-height: 700px; }
+  .ls-register-inner { background: rgba(5,5,125,0.04); border: 1px dashed rgba(5,5,125,0.18); border-radius: 16px; padding: 1rem 1rem 0.8rem; margin-top: 0.9rem; }
+  .ls-reg-title { font-size: 0.85rem; font-weight: 700; color: #05057D; margin-bottom: 0.8rem; text-align: center; }
+  .ls-admin-section { margin-top: 0.5rem; }
+  .ls-admin-toggle { width: 100%; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 0.55rem 1rem; background: rgba(5,5,125,0.05); border: 1px solid rgba(5,5,125,0.12); border-radius: 12px; cursor: pointer; font-family: 'Hind Siliguri', sans-serif; font-size: 0.78rem; font-weight: 600; color: #5a6080; transition: background 0.15s, color 0.15s; }
+  .ls-admin-toggle:hover { background: rgba(5,5,125,0.10); color: #05057D; }
+  .ls-admin-toggle svg { width: 14px; height: 14px; fill: currentColor; }
+  .ls-admin-arrow { transition: transform 0.25s; margin-left: auto; }
+  .ls-admin-toggle.open .ls-admin-arrow { transform: rotate(180deg); }
+  .ls-admin-form-wrap { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(.32,.72,0,1); }
+  .ls-admin-form-wrap.open { max-height: 500px; }
+  .ls-admin-inner { background: linear-gradient(135deg, rgba(3,3,85,0.06), rgba(5,5,125,0.09)); border: 1.5px solid rgba(5,5,125,0.15); border-radius: 16px; padding: 1rem; margin-top: 0.5rem; }
+  .ls-admin-inner .ls-form-title { font-size: 0.88rem; }
+  .ls-admin-inner .ls-btn { background: linear-gradient(135deg, #1a1a60, #05057D); font-size: 0.85rem; padding: 0.7rem; }
+  .ls-divider { display: flex; align-items: center; gap: 8px; margin: 0.8rem 0; }
+  .ls-divider-line { flex: 1; height: 1px; background: rgba(5,5,125,0.1); }
+  .ls-divider-dot { width: 4px; height: 4px; background: #FFD700; border-radius: 50%; }
+
+  /* ══════════════════════════════════════
+     PAGE: NEWS
+  ══════════════════════════════════════ */
+  .news-hero { background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-mid) 100%); text-align: center; padding: 2rem 1.2rem 1.8rem; position: relative; overflow: hidden; }
+  .news-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(255,215,0,0.10) 0%, transparent 70%); pointer-events: none; }
+  .news-hero-inner { position: relative; z-index: 1; }
+  .hero-back { position: relative; z-index: 2; background: rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.3); border-radius: 10px; padding: 0.35rem 0.75rem; font-size: 0.8rem; font-weight: 600; color: var(--gold-light); cursor: pointer; font-family: 'Hind Siliguri', sans-serif; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 0.8rem; }
+  .news-bismillah { font-family: 'Noto Serif Bengali', serif; font-size: 1.5rem; color: var(--gold); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 0.7rem; text-shadow: 0 2px 16px rgba(255,215,0,0.28); }
+  .news-hero h1 { font-size: 1.3rem; font-weight: 700; color: var(--white); line-height: 1.45; margin-bottom: 0.4rem; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.28); border-radius: 30px; padding: 0.25rem 0.85rem; font-size: 0.78rem; color: var(--gold-light); }
+  .notice-banner { background: linear-gradient(100deg, rgba(5,5,125,0.06), rgba(5,5,125,0.10)); border: 1.5px solid rgba(5,5,125,0.14); border-radius: 14px; margin: 1rem; padding: 0.8rem 1rem; font-size: 0.82rem; color: var(--text-sub); line-height: 1.7; display: flex; gap: 8px; align-items: flex-start; }
+  .notice-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .news-main { padding: 0 1rem; display: flex; flex-direction: column; gap: 1rem; }
+  .sec-hdr { background: linear-gradient(100deg, var(--navy), var(--navy-mid)); border-radius: 14px; padding: 0.8rem 1rem; display: flex; align-items: center; gap: 10px; }
+  .sec-hdr-icon { width: 30px; height: 30px; background: rgba(255,215,0,0.18); border: 1px solid rgba(255,215,0,0.35); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+  .sec-hdr-title { font-size: 0.95rem; font-weight: 700; color: var(--gold); }
+  .sec-hdr-sub { font-size: 0.7rem; color: rgba(255,255,255,0.55); }
+  .post-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+  .post-date { background: rgba(5,5,125,0.04); padding: 0.42rem 0.85rem; font-size: 0.7rem; color: var(--text-sub); font-weight: 600; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 5px; }
+  .post-body { padding: 0.9rem; }
+  .post-text { font-size: 0.9rem; line-height: 1.85; color: var(--text); white-space: pre-wrap; }
+  .post-img { width: 100%; border-radius: 12px; margin-top: 0.75rem; max-height: 320px; object-fit: cover; }
+  .mask-info { display: inline-flex; align-items: center; gap: 4px; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); border-radius: 8px; padding: 0.18rem 0.55rem; font-size: 0.68rem; font-weight: 700; color: #dc2626; margin-top: 0.6rem; }
+  .cta-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); border-radius: var(--radius-lg); padding: 1.4rem 1.2rem; text-align: center; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
+  .cta-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,215,0,0.12) 0%, transparent 65%); pointer-events: none; }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .cta-title { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 0.4rem; }
+  .cta-text { font-size: 0.84rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 1rem; }
+  .cta-btn { display: inline-block; background: var(--gold); color: var(--navy-dark); font-weight: 700; font-size: 0.9rem; border-radius: 12px; padding: 0.65rem 1.5rem; text-decoration: none; font-family: 'Hind Siliguri', sans-serif; cursor: pointer; border: none; }
+  .loading-wrap { text-align: center; padding: 3rem; }
+  .spinner { width: 36px; height: 36px; border: 3px solid rgba(5,5,125,0.15); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 0.75rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .empty { text-align: center; padding: 2.5rem 1rem; color: var(--text-sub); }
+  .empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+  /* ══════════════════════════════════════
+     PAGE: USER DASHBOARD
+  ══════════════════════════════════════ */
+  .topbar { background: linear-gradient(160deg, var(--navy-dark), var(--navy), var(--navy-mid)); padding: 1rem 1rem 1.3rem; position: relative; overflow: hidden; }
+  .topbar::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(255,215,0,0.10) 0%, transparent 70%); pointer-events: none; }
+  .topbar-inner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; }
+  .topbar-brand { font-family: 'Noto Serif Bengali', serif; font-size: 1rem; font-weight: 700; color: var(--gold); line-height: 1.4; }
+  .topbar-sub { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+  .logout-btn { background: rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.35); border-radius: 10px; padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 600; color: var(--gold-light); cursor: pointer; font-family: 'Hind Siliguri', sans-serif; transition: background 0.15s; }
+  .logout-btn:hover { background: rgba(255,215,0,0.25); }
+  .ud-main { padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+  .profile-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; }
+  .profile-header { background: linear-gradient(100deg, var(--navy), var(--navy-mid)); padding: 1rem; display: flex; align-items: center; gap: 12px; }
+  .profile-avatar { width: 48px; height: 48px; background: rgba(255,215,0,0.18); border: 2px solid rgba(255,215,0,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+  .profile-name { font-size: 1rem; font-weight: 700; color: var(--gold); line-height: 1.35; }
+  .profile-mobile { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-top: 2px; }
+  .profile-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .info-row { display: flex; align-items: flex-start; gap: 10px; background: rgba(5,5,125,0.03); border: 1px solid rgba(5,5,125,0.08); border-radius: 12px; padding: 0.6rem 0.85rem; }
+  .info-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .info-label { font-size: 0.68rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.08em; }
+  .info-value { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-top: 1px; }
+  .status-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1rem; display: flex; gap: 0.75rem; }
+  .status-box { flex: 1; border-radius: 14px; padding: 0.85rem 0.75rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .status-box.active { background: rgba(22,163,74,0.08); border: 1.5px solid rgba(22,163,74,0.25); }
+  .status-box.expired { background: rgba(220,38,38,0.08); border: 1.5px solid rgba(220,38,38,0.25); }
+  .status-icon { font-size: 1.4rem; }
+  .status-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .status-box.active .status-label { color: var(--green); }
+  .status-box.expired .status-label { color: var(--red); }
+  .status-value { font-size: 1.1rem; font-weight: 700; }
+  .status-box.active .status-value { color: var(--green); }
+  .status-box.expired .status-value { color: var(--red); }
+  .status-sub { font-size: 0.72rem; color: var(--text-sub); }
+  .section-header { display: flex; align-items: center; gap: 10px; background: linear-gradient(100deg, var(--navy), var(--navy-mid)); border-radius: 14px; padding: 0.75rem 1rem; }
+  .section-header-icon { width: 30px; height: 30px; background: rgba(255,215,0,0.18); border: 1px solid rgba(255,215,0,0.35); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+  .section-header-title { font-size: 0.95rem; font-weight: 700; color: var(--gold); }
+  .section-header-sub { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+  .ud-post-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+  .ud-post-card-date { background: rgba(5,5,125,0.04); padding: 0.45rem 0.85rem; font-size: 0.7rem; color: var(--text-sub); font-weight: 600; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 5px; }
+  .ud-post-card-body { padding: 0.9rem; }
+  .empty-state { text-align: center; padding: 2.5rem 1rem; color: var(--text-sub); }
+  .empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .empty-text { font-size: 0.88rem; }
+  .ud-loading-wrap { text-align: center; padding: 3rem 1rem; }
+  .ud-spinner { width: 36px; height: 36px; border: 3px solid rgba(5,5,125,0.15); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 0.75rem; }
+
+  /* ══════════════════════════════════════
+     PAGE: ADMIN DASHBOARD
+  ══════════════════════════════════════ */
+  .adm-topbar { background: linear-gradient(160deg, var(--navy-dark), var(--navy), var(--navy-mid)); padding: 1rem 1rem 0; position: sticky; top: 0; z-index: 50; }
+  .adm-topbar-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+  .adm-topbar-brand { font-family: 'Noto Serif Bengali', serif; font-size: 0.95rem; font-weight: 700; color: var(--gold); }
+  .adm-topbar-sub { font-size: 0.7rem; color: rgba(255,255,255,0.55); }
+  .tabs { display: flex; gap: 0; }
+  .tab-btn { flex: 1; padding: 0.65rem 0.5rem; text-align: center; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.55); cursor: pointer; border-bottom: 3px solid transparent; transition: color 0.15s, border-color 0.15s; font-family: 'Hind Siliguri', sans-serif; background: transparent; border-top: none; border-left: none; border-right: none; }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .adm-main { padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+  .tab-panel { display: none; flex-direction: column; gap: 1rem; }
+  .tab-panel.active { display: flex; }
+  .adm-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-md); overflow: hidden; }
+  .adm-card-header { background: linear-gradient(100deg, var(--navy), var(--navy-mid)); padding: 0.8rem 1rem; display: flex; align-items: center; gap: 10px; }
+  .adm-card-header-icon { width: 30px; height: 30px; background: rgba(255,215,0,0.18); border: 1px solid rgba(255,215,0,0.35); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+  .adm-card-header-title { font-size: 0.95rem; font-weight: 700; color: var(--gold); }
+  .adm-card-body { padding: 1rem; }
+  .form-group { margin-bottom: 0.85rem; }
+  .form-label { font-size: 0.78rem; font-weight: 700; color: var(--navy); display: block; margin-bottom: 5px; }
+  .form-input, .form-textarea, .form-select { width: 100%; padding: 0.6rem 0.85rem; font-size: 0.88rem; font-family: 'Hind Siliguri', sans-serif; border: 1.5px solid var(--border); border-radius: 12px; background: rgba(5,5,125,0.02); color: var(--text); transition: border-color 0.15s, box-shadow 0.15s; outline: none; }
+  .form-input:focus, .form-textarea:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(5,5,125,0.08); }
+  .form-textarea { min-height: 100px; resize: vertical; line-height: 1.7; }
+  .btn { border: none; border-radius: 12px; padding: 0.6rem 1.1rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: 'Hind Siliguri', sans-serif; transition: opacity 0.15s, transform 0.1s; display: inline-flex; align-items: center; gap: 5px; }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); color: var(--gold); }
+  .btn-success { background: var(--green); color: #fff; }
+  .btn-danger  { background: var(--red); color: #fff; }
+  .btn-warning { background: var(--orange); color: #fff; }
+  .btn-sm { padding: 0.35rem 0.7rem; font-size: 0.76rem; border-radius: 9px; }
+  .btn-full { width: 100%; justify-content: center; padding: 0.7rem; }
+  .img-upload-area { border: 2px dashed rgba(5,5,125,0.2); border-radius: 12px; padding: 1.2rem; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .img-upload-area:hover { border-color: var(--navy); background: rgba(5,5,125,0.03); }
+  .img-upload-icon { font-size: 1.8rem; margin-bottom: 0.3rem; }
+  .img-upload-text { font-size: 0.8rem; color: var(--text-sub); }
+  #imgPreview { width: 100%; border-radius: 10px; margin-top: 0.5rem; display: none; max-height: 200px; object-fit: cover; }
+  .search-wrap { position: relative; }
+  .search-wrap .form-input { padding-left: 2.4rem; }
+  .search-icon { position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; color: var(--text-sub); }
+  .post-item { background: rgba(5,5,125,0.02); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 0.75rem; }
+  .post-item:last-child { margin-bottom: 0; }
+  .post-item-date { background: rgba(5,5,125,0.06); padding: 0.4rem 0.8rem; font-size: 0.68rem; color: var(--text-sub); font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .post-item-actions { display: flex; gap: 5px; }
+  .post-item-body { padding: 0.75rem 0.8rem; }
+  .adm-post-text { font-size: 0.88rem; line-height: 1.8; color: var(--text); white-space: pre-wrap; }
+  .adm-post-img { width: 100%; border-radius: 10px; margin-top: 0.5rem; max-height: 220px; object-fit: cover; }
+  .user-card-adm { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-sm); padding: 0.85rem; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .user-card-adm:last-child { margin-bottom: 0; }
+  .user-card-row { display: flex; justify-content: space-between; align-items: center; }
+  .user-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+  .user-mobile-adm { font-size: 0.8rem; color: var(--navy); font-weight: 600; }
+  .user-address-adm { font-size: 0.78rem; color: var(--text-sub); }
+  .user-expiry { font-size: 0.75rem; font-weight: 600; }
+  .badge { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 20px; font-size: 0.68rem; font-weight: 700; }
+  .badge-active  { background: rgba(22,163,74,0.12); color: var(--green); }
+  .badge-expired { background: rgba(220,38,38,0.12); color: var(--red); }
+  .user-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .alert { border-radius: 12px; padding: 0.65rem 0.9rem; font-size: 0.84rem; font-weight: 600; display: none; align-items: center; gap: 7px; margin-bottom: 0.75rem; }
+  .alert.show { display: flex; }
+  .alert-success { background: rgba(22,163,74,0.12); color: var(--green); border: 1px solid rgba(22,163,74,0.25); }
+  .alert-error   { background: rgba(220,38,38,0.10); color: var(--red);   border: 1px solid rgba(220,38,38,0.25); }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(3,3,85,0.55); z-index: 200; backdrop-filter: blur(3px); align-items: flex-end; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--bg); border-radius: 24px 24px 0 0; width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto; padding: 1.2rem 1.2rem 2rem; -webkit-overflow-scrolling: touch; transform: translateY(100%); transition: transform 0.3s cubic-bezier(.32,.72,0,1); }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-handle { width: 40px; height: 4px; background: rgba(5,5,125,0.18); border-radius: 2px; margin: 0 auto 1rem; }
+  .modal-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 1.2rem; text-align: center; }
+  .modal-footer { display: flex; gap: 8px; margin-top: 1rem; }
+  .spinner-inline { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
+  .adm-empty { text-align: center; padding: 2rem; color: var(--text-sub); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════ -->
+<div class="page active" id="pageHome">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="hero-divider">
+        <div class="hero-divider-line"></div>
+        <div class="hero-divider-dot"></div>
+        <div class="hero-divider-line"></div>
+      </div>
+      <h1>মসজিদ মাদ্রাসার খেদমত সেন্টার</h1>
+      <div class="hero-subtitle">সব গুরুত্বপূর্ণ লিংক এক জায়গায়</div>
+    </div>
+  </div>
+
+  <!-- BUTTON GRID -->
+  <div class="section-label">সেবাসমূহ</div>
+  <div class="btn-grid">
+    <div class="service-btn" onclick="showPage('news')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+      <div class="btn-main">যাদের পাসওয়ার্ড নেই<br>মসজিদ মাদ্রাসার<br>নিউজ দেখতে<br>এখানে টাচ করুন</div>
+      <div class="btn-sub">আংশিক নাম্বার দেখাবে</div>
+    </div>
+    <div class="service-btn" onclick="openLogin()">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
+      <div class="btn-main">যাদের পাসওয়ার্ড আছে<br>মসজিদ মাদ্রাসার<br>নিউজ দেখতে<br>এখানে টাচ করুন</div>
+      <div class="btn-sub">সম্পূর্ণ নাম্বার দেখাবে</div>
+    </div>
+    <div class="service-btn" onclick="openDetail()">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
+      <div class="btn-main">পাসওয়ার্ড নিতে<br>ও সুবিধা সম্পর্কে<br>বিস্তারিত জানতে<br>এখানে টাচ করুন</div>
+      <div class="btn-sub">বিস্তারিত তথ্য দেখুন</div>
+    </div>
+    <div class="service-btn" onclick="openJobPost()">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+      <div class="btn-main">মসজিদ মাদ্রাসায়<br>ইমাম / শিক্ষক<br>প্রয়োজন হলে<br>এখানে পোস্ট করুন</div>
+      <div class="btn-sub">নিয়োগ বিজ্ঞপ্তি দিন</div>
+    </div>
+  </div>
+
+  <!-- SOCIAL CARD -->
+  <div class="section-label">যোগাযোগ</div>
+  <div class="social-card">
+    <div class="card-title">
+      <div class="card-title-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+      আমাদের সাথে যোগ দিন
+    </div>
+    <div class="social-group">
+      <div class="social-group-title">WhatsApp</div>
+      <a class="social-link" href="https://wa.me/message/3T5Z7CFFDAJBL1" target="_blank" rel="noopener noreferrer"><span class="social-link-label">WhatsApp আইডি মেসেজ করুন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+      <a class="social-link" href="https://whatsapp.com/channel/0029VbD4Jr90VycNzIs5nM0c" target="_blank" rel="noopener noreferrer"><span class="social-link-label">WhatsApp চ্যানেল ফলো করুন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+    </div>
+    <div class="social-group">
+      <div class="social-group-title">Facebook</div>
+      <a class="social-link" href="https://www.facebook.com/share/1DDyYemSXW/" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Facebook পেইজ লাইক করুন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+      <a class="social-link" href="https://www.facebook.com/share/g/1LiH9yNmD9/" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Facebook গ্রুপে যোগ দিন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+      <a class="social-link" href="https://www.messenger.com/channel/khedmotcenter" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Messenger গ্রুপে যোগ দিন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+    </div>
+    <div class="social-group">
+      <div class="social-group-title">Telegram</div>
+      <a class="social-link" href="https://t.me/MadrasharJob" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Telegram গ্রুপে যোগ দিন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+      <a class="social-link" href="https://t.me/khadmot1" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Telegram চ্যানেল ফলো করুন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+    </div>
+  </div>
+
+  <!-- VIDEO CARD -->
+  <div class="section-label">ভিডিও</div>
+  <div class="video-card">
+    <div class="card-title">
+      <div class="card-title-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      আমাদের ভিডিও দেখুন
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">মসজিদ মাদ্রাসার খেদমত সেন্টার</div>
+    <div class="footer-divider"></div>
+    <div class="footer-copy">© Mosjid Madrasa Khidmat Center · All rights reserved</div>
+  </footer>
+
+  <!-- DETAIL OVERLAY -->
+  <div class="detail-overlay" id="detailOverlay" onclick="closeDetail()"></div>
+  <div class="detail-sheet" id="detailSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-close-row"><button class="sheet-close-btn" onclick="closeDetail()">✕</button></div>
+    <div class="sh">
+
+      <!-- HERO -->
+      <div class="hero-sheet">
+        <div style="position:relative;z-index:1;">
+          <div class="hero-avatar">👤</div>
+          <div class="hero-name">হাফেজ ক্বারী মোহাম্মদ জিহাদুল ইসলাম</div>
+          <div class="hero-role">খেদমত সেন্টারের এডমিন</div>
+          <div class="hero-divider"><div class="hero-divider-line"></div><div class="hero-divider-dot"></div><div class="hero-divider-line"></div></div>
+          <div class="hero-notice">পাসওয়ার্ড নিতে ও সুবিধা সম্পর্কে বিস্তারিত জানতে সম্পূর্ণ পোস্টি ধৈর্য ধরে পড়ুন।</div>
+        </div>
+      </div>
+
+      <!-- সমস্যা -->
+      <div class="section-label">সমস্যা</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">❓</div>
+          <div class="card-header-title">কেন ভালো খেদমত থেকে বঞ্চিত হোন ?</div>
+        </div>
+        <div class="card-body">
+          <p class="prose">বর্তমান সময়ে অনেক ভাই অল্প কিছু খেদমতের পোস্ট দেখেই দ্রুত খেদমতে যোগদান করে ফেলেন। কিন্তু পরে দেখা যায় বেতন কম, জায়গা দূরে, সুযোগ-সুবিধা সীমিত অথবা পরিবেশ অনুকূল নয়।</p>
+          <div class="quote-block">এজন্য ভালো মানের বেতনে ও কাছের ঠিকানায় খেদমত পেতে হলে শতশত খেদমত যাচাই-বাছাই করে তারপর খেদমতে জয়েন হওয়া আপনার জন্য জরুরী।</div>
+        </div>
+      </div>
+
+      <!-- উপকার -->
+      <div class="section-label">উপকার</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">⚖️</div>
+          <div class="card-header-title">যাচাই বাছাই করে খেদমত নেওয়ার উপকার</div>
+        </div>
+        <div class="card-body">
+          <div class="checklist">
+            <div class="checklist-item"><div class="checklist-tick"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><span>ভালো মানের বেতন পাওয়ার সম্ভাবনা বাড়ে।</span></div>
+            <div class="checklist-item"><div class="checklist-tick"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><span>নিজের কাছাকাছি ঠিকানায় খেদমত পাওয়া সহজ হয়।</span></div>
+            <div class="checklist-item"><div class="checklist-tick"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><span>উন্নত সুযোগ-সুবিধা পাওয়ার সম্ভাবনা বৃদ্ধি পায়।</span></div>
+            <div class="checklist-item"><div class="checklist-tick"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><span>এবং ভবিষ্যতে আফসোস করার সম্ভাবনা কমে যায়।</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- উদ্দেশ্য -->
+      <div class="section-label">উদ্দেশ্য</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">⭐</div>
+          <div class="card-header-title">আমাদের ওয়েবসাইটের উদ্দেশ্য</div>
+        </div>
+        <div class="card-body">
+          <div class="diamond-list">
+            <div class="diamond-item"><span class="diamond-dot">◆</span><span>সারা দেশের মসজিদ ও মাদ্রাসার খেদমতের খবরগুলো এক জায়গায় পৌঁছে দেওয়া।</span></div>
+            <div class="diamond-item"><span class="diamond-dot">◆</span><span>মসজিদের হুজুর ও মাদ্রাসার শিক্ষকদের জন্য সহজে খেদমত খুঁজে পেতে সহায়তা করা।</span></div>
+            <div class="diamond-item"><span class="diamond-dot">◆</span><span>দূরের বা অনির্ভরযোগ্য জায়গার পরিবর্তে কাছের ঠিকানায় খেদমত পেতে সহায়তা করা।</span></div>
+            <div class="diamond-item"><span class="diamond-dot">◆</span><span>শতশত খেদমত যাচাই-বাছাই করার মাধ্যমে ভালো মানের বেতনের খেদমতটি খুঁজে পেতে সহায়তা করা।</span></div>
+            <div class="diamond-item"><span class="diamond-dot">◆</span><span>প্রতিদিন নতুন নতুন মসজিদ মাদ্রাসার খেদমতের আপডেট গুলোর মাধ্যমে দ্রুত খেদমত পেতে সহায়তা করা।</span></div>
+            <div class="diamond-item"><span class="diamond-dot">◆</span><span>মসজিদ ও মাদ্রাসার খেদমত খুঁজতে গিয়ে যে সময় অপচয় ও কষ্ট হয় এগুলো দূর করতে সহায়তা করা।</span></div>
+            <div class="diamond-item"><span class="diamond-dot">◆</span><span>দ্বীনের খেদমতের পাশাপাশি নিজের ও অন্যদের কর্মসংস্থানের ব্যবস্থা করা।</span></div>
+          </div>
+          <div class="highlight-pills" style="margin-top:1rem;">
+            <div class="highlight-pill">💚 ভালো বেতনের খেদমত একজন মানুষের পরিবারকে স্বচ্ছল করতে পারে।</div>
+            <div class="highlight-pill">💙 কাছের ঠিকানার খেদমত একজন মানুষের কষ্ট কমিয়ে দিতে পারে।</div>
+            <div class="highlight-pill">💛 সুন্দর পরিবেশে খেদমত করলে মন শান্ত থাকে এবং কাজের মধ্যেও প্রশান্তি আসে।</div>
+          </div>
+          <div class="quote-block" style="margin-top:0.9rem;">এজন্য খেদমত নেওয়ার আগে শতশত খেদমত যাচাই-বাছাই করা অত্যন্ত গুরুত্বপূর্ণ।</div>
+        </div>
+      </div>
+
+      <!-- পাসওয়ার্ড সিস্টেম -->
+      <div class="section-label">পাসওয়ার্ড সিস্টেম</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">🔒</div>
+          <div class="card-header-title">পাসওয়ার্ড সিস্টেম কেন রাখা হয়েছে ?</div>
+        </div>
+        <div class="card-body">
+          <p class="prose">প্রতিদিন ওয়েবসাইট পরিচালনা করতে সার্ভার, ইন্টারনেট এবং টিম মেম্বারদের বেতন ও অন্যান্য খরচ থাকে। এই খরচ বহন করে নিয়মিত সেবা চালু রাখতে পাসওয়ার্ড সিস্টেম রাখা হয়েছে।</p>
+          <div class="quote-block">যার বিনিময়ে আমরা আপনাদের কাছ থেকে ২০০ টাকা হাদিয়া নিয়ে থাকি।</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">💰</div>
+          <div class="card-header-title">কেন ২০০ টাকা নেওয়া হয় ?</div>
+        </div>
+        <div class="card-body">
+          <p class="prose">আপনাদের সুবিধার জন্য দেশের বিভিন্ন জেলার মসজিদ মাদ্রাসার খেদমতের খবরগুলো প্রতিদিন আমাদের ওয়েবসাইটে নিয়মিত আপডেট করা হয়। যাতে আপনারা সহজেই এক জায়গা থেকে নির্ভরযোগ্য খেদমতের খবরগুলো পেতে পারেন।</p>
+          <p class="prose" style="margin-top:0.75rem;">এই কাজের পেছনে আমাদের কয়েকজন টিম মেম্বার দিন-রাত পরিশ্রম করে যাচ্ছেন। প্রতিদিন তথ্য সংগ্রহ, পোস্ট আপডেট এবং ওয়েবসাইট পরিচালনার জন্য সময় ও শ্রম ব্যয় করছেন। পাশাপাশি তাদেরও পরিবার রয়েছে এবং মাস শেষে তাদের হাদিয়ার ব্যবস্থা করতে হয়। এছাড়াও ওয়েবসাইট পরিচালনার জন্য ইন্টারনেট, সার্ভার ও অন্যান্য প্রয়োজনীয় খরচ রয়েছে।</p>
+          <div class="quote-block" style="margin-top:0.8rem;">আশা করি বিষয়টি সবাই আন্তরিকভাবে বুঝতে পারবেন এবং আমাদের এই খেদমতের কাজে দোয়া ও সহযোগিতার মাধ্যমে পাশে থাকবেন।</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">🎁</div>
+          <div class="card-header-title">২০০ টাকার বিনিময়ে আপনি কী পাচ্ছেন?</div>
+        </div>
+        <div class="card-body">
+          <p class="prose">মাত্র ২০০ টাকার বিনিময়ে শতশত খেদমতের পোস্ট দেখার সুযোগ পাচ্ছেন।</p>
+          <div class="quote-block" style="margin-top:0.8rem;">✅ অর্থাৎ অল্প টাকার বিনিময়ে বড় উপকার লাভ করতে পারবেন ইনশাআল্লাহ।</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">📅</div>
+          <div class="card-header-title">কতদিন পর্যন্ত ভিজিট করতে পারবেন?</div>
+        </div>
+        <div class="card-body">
+          <p class="prose">আপনাকে যে পাসওয়ার্ড দেওয়া হবে সেটা দিয়ে আমাদের ওয়েবসাইট ২০ দিন ভিজিট করতে পারবেন। কারণ খেদমত হতে এত সময় লাগে না। এরপরও ২০ দিনের সময় দেওয়া হয় যাতে করে আপনারা সময় নিয়ে খেদমত গুলো যাচাই-বাছাই করে ভালো মানের বেতনে এবং কাছের ঠিকানায় নিতে পারেন।</p>
+          <div class="quote-block" style="margin-top:0.8rem;">সবচেয়ে বড় কারণ হচ্ছে আপনি যখন আমাদের ওয়েবসাইটে যুক্ত থাকবেন তখন প্রতিনিয়ত ভালো ভালো খেদমতের খবর পাবেন। যার ফলে এক জায়গায় খেদমতে জয়েন হওয়ার পরও আবার অন্য জায়গায় চলে যেতে মন চাইবে। এতে করে অন্য প্রতিষ্ঠানের ক্ষতি হবে।</div>
+        </div>
+      </div>
+
+      <!-- পেমেন্ট -->
+      <div class="section-label">পেমেন্ট</div>
+      <div class="payment-box">
+        <div class="payment-box-inner">
+          <div class="payment-badge">🔐 পাসওয়ার্ড সংগ্রহের নিয়ম</div>
+          <div class="payment-title">সকল পোস্ট (নম্বরসহ) দেখতে<br>পাসওয়ার্ড প্রয়োজন।</div>
+          <div style="font-size:0.72rem; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.4rem;">💳 পেমেন্ট করুন এই নম্বরে</div>
+          <div class="payment-method-card">
+            <div class="payment-method-name">বিকাশ / নগদ (Personal)</div>
+            <div class="payment-number">01408764722</div>
+            <div class="payment-amount-tag">পরিমাণ: ২০০ টাকা</div>
+          </div>
+          <div style="font-size:0.8rem; font-weight:700; color:var(--gold-light); margin:1rem 0 0.6rem;">📋 নিচের ধাপগুলো অনুসরণ করুন</div>
+          <div class="steps">
+            <div class="step-item">
+              <div class="step-num">১</div>
+              <div class="step-text" style="color:rgba(255,255,255,0.85);">উপরের নম্বরে ২০০ টাকা বিকাশ বা নগদে পাঠান।</div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">২</div>
+              <div class="step-text" style="color:rgba(255,255,255,0.85);">যে নম্বর থেকে পেমেন্ট করেছেন সেই নম্বরের শেষ ৪টি সংখ্যা আমাদের WhatsApp-এ পাঠান।</div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">৩</div>
+              <div class="step-text" style="color:rgba(255,255,255,0.85);">পেমেন্ট যাচাই করে আপনার জন্য একটি পাসওয়ার্ড তৈরি করে দেওয়া হবে।</div>
+            </div>
+          </div>
+          <div class="steps-result" style="background:rgba(255,255,255,0.07);border-color:rgba(255,215,0,0.25);color:rgba(255,255,255,0.85);margin-top:0.8rem;">
+            ✅ এরপর পাসওয়ার্ড দিয়ে লগইন করে ওয়েবসাইটের সকল পোস্ট নম্বরসহ দেখতে পারবেন।
+          </div>
+        </div>
+      </div>
+
+      <!-- উদ্দেশ্য ফাইনাল -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">🎯</div>
+          <div class="card-header-title">আমাদের উদ্দেশ্য</div>
+        </div>
+        <div class="card-body">
+          <p class="prose">যারা মসজিদ ও মাদ্রাসার খেদমত খুঁজছেন তাদের জন্য একটি নির্ভরযোগ্য মাধ্যম তৈরি করা, যাতে তারা সহজে ভালো মানের খেদমত খুঁজে পান।</p>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/8801408764722" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#075e54,#128c7e);border-radius:18px;padding:1rem 1.2rem;text-decoration:none;box-shadow:0 6px 24px rgba(7,94,84,0.35);">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;background:rgba(255,255,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">💬</div>
+          <div>
+            <div style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.15rem;">WhatsApp-এ যোগাযোগ করুন</div>
+            <div style="font-size:0.88rem;color:rgba(255,255,255,0.8);letter-spacing:0.04em;">01408764722</div>
+          </div>
+        </div>
+        <div style="width:32px;height:32px;background:rgba(255,255,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        </div>
+      </a>
+
+      <div class="sheet-footer">
+        <div class="sheet-footer-name">মসজিদ মাদ্রাসার খেদমত সেন্টার</div>
+        <div class="sheet-footer-div"></div>
+        <div class="sheet-footer-copy">© Mosjid Madrasa Khidmat Center · All rights reserved</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LOGIN OVERLAY -->
+  <div class="detail-overlay" id="loginOverlay" onclick="closeLogin()"></div>
+  <div class="detail-sheet" id="loginSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-close-row"><button class="sheet-close-btn" onclick="closeLogin()">✕</button></div>
+    <div class="ls">
+      <div class="ls-hero">
+        <div class="ls-logo">🕌</div>
+        <div class="ls-title">মসজিদ মাদ্রাসার খেদমত সেন্টার</div>
+        <div class="ls-sub">আপনার অ্যাকাউন্টে প্রবেশ করুন</div>
+      </div>
+      <div class="ls-user-card">
+        <div class="ls-form-title">ইউজার লগইন</div>
+        <div class="ls-form-sub">মোবাইল নাম্বার ও পাসওয়ার্ড দিয়ে প্রবেশ করুন</div>
+        <div class="ls-divider"><div class="ls-divider-line"></div><div class="ls-divider-dot"></div><div class="ls-divider-line"></div></div>
+        <div class="ls-alert ls-alert-error" id="userAlert">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          <span id="userAlertMsg">মোবাইল নাম্বার বা পাসওয়ার্ড সঠিক নয়।</span>
+        </div>
+        <div class="ls-group" id="lsGrpMobile">
+          <label class="ls-label">মোবাইল নাম্বার</label>
+          <div class="ls-input-wrap">
+            <input class="ls-input" type="tel" id="lsMobile" placeholder="০১XXXXXXXXX" maxlength="11">
+            <svg class="ls-input-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div class="ls-field-err">সঠিক মোবাইল নাম্বার দিন</div>
+        </div>
+        <div class="ls-group" id="lsGrpPw">
+          <label class="ls-label">পাসওয়ার্ড</label>
+          <div class="ls-input-wrap ls-pw-wrap">
+            <input class="ls-input has-pw" type="password" id="lsPw" placeholder="পাসওয়ার্ড লিখুন">
+            <svg class="ls-input-icon" viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 007 6v2H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2zm-6 9a2 2 0 110-4 2 2 0 010 4zm3.1-9H8.9V6a3.1 3.1 0 016.2 0v2z"/></svg>
+            <button type="button" class="ls-pw-btn" onclick="lsTogglePw('lsPw','lsEye1')">
+              <svg id="lsEye1" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
+            </button>
+          </div>
+          <div class="ls-field-err">পাসওয়ার্ড লিখুন</div>
+        </div>
+        <button class="ls-btn" id="lsLoginBtn" onclick="lsDoLogin()">
+          <span class="ls-btn-txt">লগইন করুন</span>
+          <div class="ls-spinner"></div>
+        </button>
+        <div class="ls-links">
+          <button class="ls-link" onclick="lsForgot()">পাসওয়ার্ড ভুলে গেছেন?</button>
+          <button class="ls-link gold" onclick="lsToggleRegister()">➕ নতুন রেজিস্ট্রেশন</button>
+        </div>
+        <div class="ls-register-wrap" id="lsRegWrap">
+          <div class="ls-register-inner">
+            <div class="ls-reg-title">📝 নতুন অ্যাকাউন্ট তৈরি করুন</div>
+            <div class="ls-group">
+              <label class="ls-label">পুরো নাম *</label>
+              <div class="ls-input-wrap"><input class="ls-input" type="text" id="regName" placeholder="আপনার নাম"></div>
+            </div>
+            <div class="ls-group">
+              <label class="ls-label">ঠিকানা *</label>
+              <div class="ls-input-wrap"><input class="ls-input" type="text" id="regAddr" placeholder="জেলা / উপজেলা"></div>
+            </div>
+            <div class="ls-group">
+              <label class="ls-label">মোবাইল নাম্বার *</label>
+              <div class="ls-input-wrap"><input class="ls-input" type="tel" id="regMobile" placeholder="০১XXXXXXXXX"></div>
+            </div>
+            <div class="ls-group">
+              <label class="ls-label">পাসওয়ার্ড *</label>
+              <div class="ls-input-wrap"><input class="ls-input" type="password" id="regPw" placeholder="কমপক্ষে ৬ অক্ষর"></div>
+            </div>
+            <button class="ls-btn" id="lsRegBtn" onclick="lsDoRegister()">
+              <span class="ls-btn-txt">✅ রেজিস্ট্রেশন করুন</span>
+              <div class="ls-spinner"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="ls-admin-section">
+        <button class="ls-admin-toggle" id="lsAdminToggleBtn" onclick="lsToggleAdmin()">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4a3 3 0 110 6 3 3 0 010-6zm0 8c-2 0-6 1-6 3v1h12v-1c0-2-4-3-6-3z"/></svg>
+          এডমিন লগইন
+          <svg class="ls-admin-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
+        <div class="ls-admin-form-wrap" id="lsAdminWrap">
+          <div class="ls-admin-inner">
+            <div class="ls-form-title" style="font-size:0.88rem;margin-bottom:0.9rem;">🛡️ এডমিন প্যানেলে প্রবেশ</div>
+            <div class="ls-alert ls-alert-error" id="adminAlert">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              <span id="adminAlertMsg">ইমেইল বা পাসওয়ার্ড সঠিক নয়।</span>
+            </div>
+            <div class="ls-group">
+              <label class="ls-label">ইমেইল</label>
+              <div class="ls-input-wrap">
+                <input class="ls-input" type="email" id="adminEmail" placeholder="admin@khedmotcenter.com">
+                <svg class="ls-input-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+            </div>
+            <div class="ls-group">
+              <label class="ls-label">পাসওয়ার্ড</label>
+              <div class="ls-input-wrap ls-pw-wrap">
+                <input class="ls-input has-pw" type="password" id="adminPw" placeholder="পাসওয়ার্ড">
+                <svg class="ls-input-icon" viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 007 6v2H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2zm-6 9a2 2 0 110-4 2 2 0 010 4zm3.1-9H8.9V6a3.1 3.1 0 016.2 0v2z"/></svg>
+                <button type="button" class="ls-pw-btn" onclick="lsTogglePw('adminPw','lsEye3')">
+                  <svg id="lsEye3" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
+                </button>
+              </div>
+            </div>
+            <button class="ls-btn" id="lsAdminBtn" onclick="lsDoAdminLogin()">
+              <span class="ls-btn-txt">এডমিন লগইন</span>
+              <div class="ls-spinner"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /#pageHome -->
+
+<!-- ══════════════════════════════════════
+     PAGE: NEWS
+══════════════════════════════════════ -->
+<div class="page" id="pageNews">
+  <div class="news-hero">
+    <div class="news-hero-inner">
+      <button class="hero-back" onclick="showPage('home')">◀ হোম</button>
+      <div class="news-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <h1>মসজিদ-মাদ্রাসার নিউজ</h1>
+      <div class="hero-badge">📰 সর্বশেষ আপডেট</div>
+    </div>
+  </div>
+  <div class="notice-banner">
+    <span class="notice-icon">ℹ️</span>
+    <span>সম্পূর্ণ মোবাইল নাম্বার দেখতে লগইন করুন। বিনামূল্যে নিউজ দেখার জন্য নাম্বারের শেষ ৩টি সংখ্যা লুকানো থাকবে।</span>
+  </div>
+  <div class="news-main">
+    <div class="sec-hdr">
+      <div class="sec-hdr-icon">📋</div>
+      <div>
+        <div class="sec-hdr-title">সকল পোস্ট ও বিজ্ঞপ্তি</div>
+        <div class="sec-hdr-sub">নাম্বারের শেষ ৩টি সংখ্যা লুকানো</div>
+      </div>
+    </div>
+    <div id="newsPostsWrap">
+      <div class="loading-wrap"><div class="spinner"></div><div style="font-size:0.85rem;color:var(--text-sub)">পোস্ট লোড হচ্ছে…</div></div>
+    </div>
+    <div class="cta-card">
+      <div class="cta-inner">
+        <div class="cta-icon">🔓</div>
+        <div class="cta-title">সম্পূর্ণ নাম্বার দেখতে চান?</div>
+        <div class="cta-text">পাসওয়ার্ড নিয়ে লগইন করুন এবং সকল পোস্টের সম্পূর্ণ মোবাইল নাম্বার দেখুন।</div>
+        <button class="cta-btn" onclick="showPage('home'); setTimeout(openLogin, 300)">🔑 লগইন করুন</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /#pageNews -->
+
+<!-- ══════════════════════════════════════
+     PAGE: USER DASHBOARD
+══════════════════════════════════════ -->
+<div class="page" id="pageUserDashboard">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <div class="topbar-brand">মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
+        <div class="topbar-sub">ইউজার ড্যাশবোর্ড</div>
+      </div>
+      <button class="logout-btn" onclick="doUserLogout()">লগআউট</button>
+    </div>
+  </div>
+  <div class="ud-main" id="udMainContent">
+    <div class="ud-loading-wrap"><div class="ud-spinner"></div><div style="font-size:0.85rem;color:var(--text-sub)">তথ্য লোড হচ্ছে…</div></div>
+  </div>
+</div><!-- /#pageUserDashboard -->
+
+<!-- ══════════════════════════════════════
+     PAGE: ADMIN DASHBOARD
+══════════════════════════════════════ -->
+<div class="page" id="pageAdminDashboard">
+  <div class="adm-topbar">
+    <div class="adm-topbar-row">
+      <div>
+        <div class="adm-topbar-brand">🛡️ এডমিন ড্যাশবোর্ড</div>
+        <div class="adm-topbar-sub">মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
+      </div>
+      <button class="logout-btn" onclick="doAdminLogout()">লগআউট</button>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="admSwitchTab('posts')">📰 পোস্ট ম্যানেজমেন্ট</button>
+      <button class="tab-btn" onclick="admSwitchTab('users')">👥 ইউজার ম্যানেজমেন্ট</button>
+    </div>
+  </div>
+  <div class="adm-main">
+    <div class="tab-panel active" id="tabPosts">
+      <div class="adm-card">
+        <div class="adm-card-header"><div class="adm-card-header-icon">✏️</div><div class="adm-card-header-title">নতুন পোস্ট করুন</div></div>
+        <div class="adm-card-body">
+          <div id="postAlert" class="alert"></div>
+          <div class="form-group">
+            <label class="form-label">পোস্টের বিষয়বস্তু *</label>
+            <textarea class="form-textarea" id="postContent" placeholder="এখানে লিখুন… মোবাইল নাম্বার, তথ্য ইত্যাদি।"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ছবি (ঐচ্ছিক)</label>
+            <div class="img-upload-area" onclick="document.getElementById('imgFileInput').click()">
+              <div class="img-upload-icon">🖼️</div>
+              <div class="img-upload-text">ছবি যোগ করতে এখানে ট্যাপ করুন</div>
+              <img id="imgPreview" alt="preview">
+            </div>
+            <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)">
+          </div>
+          <button class="btn btn-primary btn-full" onclick="submitPost()"><span id="postBtnTxt">📤 পোস্ট করুন</span></button>
+        </div>
+      </div>
+      <div class="adm-card">
+        <div class="adm-card-header"><div class="adm-card-header-icon">📋</div><div class="adm-card-header-title">সকল পোস্টসমূহ</div></div>
+        <div class="adm-card-body"><div id="postsContainer"><div class="adm-empty">লোড হচ্ছে…</div></div></div>
+      </div>
+    </div>
+    <div class="tab-panel" id="tabUsers">
+      <div class="adm-card">
+        <div class="adm-card-header"><div class="adm-card-header-icon">🔍</div><div class="adm-card-header-title">ইউজার খুঁজুন</div></div>
+        <div class="adm-card-body">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input class="form-input" type="tel" id="searchInput" placeholder="মোবাইল নাম্বার দিয়ে খুঁজুন" oninput="admSearchUsers()">
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-success btn-full" onclick="openUserModal()">➕ নতুন ইউজার তৈরি করুন</button>
+      <div class="adm-card">
+        <div class="adm-card-header"><div class="adm-card-header-icon">👥</div><div class="adm-card-header-title">সকল ইউজারসমূহ</div></div>
+        <div class="adm-card-body"><div id="usersContainer"><div class="adm-empty">লোড হচ্ছে…</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER MODAL -->
+  <div class="modal-overlay" id="userModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-title" id="userModalTitle">নতুন ইউজার তৈরি</div>
+      <div id="userModalAlert" class="alert"></div>
+      <input type="hidden" id="editUserId">
+      <div class="form-group"><label class="form-label">পুরো নাম *</label><input class="form-input" type="text" id="uName" placeholder="ইউজারের নাম"></div>
+      <div class="form-group"><label class="form-label">মোবাইল নাম্বার *</label><input class="form-input" type="tel" id="uMobile" placeholder="01XXXXXXXXX"></div>
+      <div class="form-group"><label class="form-label">ঠিকানা *</label><input class="form-input" type="text" id="uAddress" placeholder="জেলা / উপজেলা / গ্রাম"></div>
+      <div class="form-group"><label class="form-label">পাসওয়ার্ড <span id="pwHint" style="font-weight:400;color:var(--text-sub)">(নতুন ইউজারের জন্য বাধ্যতামূলক)</span></label><input class="form-input" type="password" id="uPassword" placeholder="কমপক্ষে ৬ অক্ষর"></div>
+      <div class="form-group"><label class="form-label">মেয়াদ শেষের তারিখ *</label><input class="form-input" type="date" id="uExpiry"></div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" style="flex:1" onclick="saveUser()" id="saveUserBtn">💾 সংরক্ষণ করুন</button>
+        <button class="btn" style="background:rgba(5,5,125,0.08);color:var(--navy);flex:0.5" onclick="closeUserModal()">বাতিল</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTEND MODAL -->
+  <div class="modal-overlay" id="extendModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-title">মেয়াদ বাড়ান / পরিবর্তন করুন</div>
+      <input type="hidden" id="extendUserId">
+      <div id="extendUserInfo" style="background:rgba(5,5,125,0.05);border-radius:12px;padding:0.7rem 0.85rem;margin-bottom:1rem;font-size:0.85rem;color:var(--navy);font-weight:600;"></div>
+      <div class="form-group"><label class="form-label">নির্দিষ্ট দিন যোগ করুন</label><input class="form-input" type="number" id="extendDays" placeholder="যেমন: 30" min="1"></div>
+      <div style="text-align:center;font-size:0.8rem;color:var(--text-sub);margin:-0.4rem 0 0.7rem">অথবা</div>
+      <div class="form-group"><label class="form-label">নতুন মেয়াদ সরাসরি নির্ধারণ করুন</label><input class="form-input" type="date" id="extendDate"></div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" style="flex:1" onclick="saveExtend()">✅ আপডেট করুন</button>
+        <button class="btn" style="background:rgba(5,5,125,0.08);color:var(--navy);flex:0.5" onclick="closeExtendModal()">বাতিল</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT POST MODAL -->
+  <div class="modal-overlay" id="editPostModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-title">পোস্ট সম্পাদনা করুন</div>
+      <input type="hidden" id="editPostId">
+      <div class="form-group"><textarea class="form-textarea" id="editPostContent" style="min-height:130px"></textarea></div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" style="flex:1" onclick="saveEditPost()">💾 আপডেট করুন</button>
+        <button class="btn" style="background:rgba(5,5,125,0.08);color:var(--navy);flex:0.5" onclick="closeEditPost()">বাতিল</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /#pageAdminDashboard -->
+
+
+<script>
+/* ══════════════════════════════════════
+   PAGE ROUTER
+══════════════════════════════════════ */
+function showPage(name) {
+  const map = {
+    home: 'pageHome',
+    news: 'pageNews',
+    user: 'pageUserDashboard',
+    admin: 'pageAdminDashboard'
+  };
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(map[name]);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  if (name === 'news') loadNews();
+  if (name === 'user') loadUserDashboard();
+  if (name === 'admin') admInit();
+}
+
+/* ══════════════════════════════════════
+   SHARED API
+══════════════════════════════════════ */
+let adminToken = '';
+const api = (action, data={}) =>
+  fetch('api.php', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({action, token: adminToken, ...data})
+  }).then(r => r.json());
+
+function escHtml(t) {
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ══════════════════════════════════════
+   HOME — Detail Sheet
+══════════════════════════════════════ */
+function openDetail() {
+  document.getElementById('detailOverlay').classList.add('open');
+  document.getElementById('detailSheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.getElementById('detailSheet').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function openLogin() {
+  document.getElementById('loginOverlay').classList.add('open');
+  document.getElementById('loginSheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLogin() {
+  document.getElementById('loginOverlay').classList.remove('open');
+  document.getElementById('loginSheet').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lsTogglePw(inputId, iconId) {
+  const inp = document.getElementById(inputId);
+  const icon = document.getElementById(iconId);
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-5 0-9.27-3.11-11-7.5a18.45 18.45 0 014.72-6.61M9.9 4.24A9.12 9.12 0 0112 4c5 0 9.27 3.11 11 7.5a18.5 18.5 0 01-2.16 3.19m-6.72-1.07A3 3 0 009 12a3 3 0 003 3m3.06-3.06A3 3 0 0012 9M3 3l18 18"/>';
+  } else {
+    inp.type = 'password';
+    icon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/>';
+  }
+}
+function lsToggleRegister() {
+  const w = document.getElementById('lsRegWrap');
+  w.classList.toggle('open');
+  if (w.classList.contains('open')) setTimeout(() => w.scrollIntoView({behavior:'smooth',block:'nearest'}), 100);
+}
+function lsToggleAdmin() {
+  document.getElementById('lsAdminToggleBtn').classList.toggle('open');
+  document.getElementById('lsAdminWrap').classList.toggle('open');
+}
+function lsForgot() {
+  alert('পাসওয়ার্ড পুনরুদ্ধারের জন্য এডমিনের সাথে যোগাযোগ করুন।\nWhatsApp: 01408764722');
+}
+
+/* USER LOGIN */
+function lsDoLogin() {
+  const mobile   = document.getElementById('lsMobile').value.trim();
+  const password = document.getElementById('lsPw').value;
+  const alert_el = document.getElementById('userAlert');
+  const btn      = document.getElementById('lsLoginBtn');
+  alert_el.classList.remove('show');
+  document.getElementById('lsGrpMobile').classList.remove('err');
+  document.getElementById('lsGrpPw').classList.remove('err');
+  let ok = true;
+  if (!/^01[3-9]\d{8}$/.test(mobile)) { document.getElementById('lsGrpMobile').classList.add('err'); ok = false; }
+  if (password.length < 4) { document.getElementById('lsGrpPw').classList.add('err'); ok = false; }
+  if (!ok) return;
+  btn.classList.add('loading');
+  fetch('api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'user_login', mobile, password})})
+    .then(r => r.json())
+    .then(data => {
+      btn.classList.remove('loading');
+      if (data.success) {
+        closeLogin();
+        showPage('user');
+      } else {
+        document.getElementById('userAlertMsg').textContent = data.message || 'মোবাইল নাম্বার বা পাসওয়ার্ড সঠিক নয়।';
+        alert_el.classList.add('show');
+      }
+    })
+    .catch(() => {
+      btn.classList.remove('loading');
+      document.getElementById('userAlertMsg').textContent = 'সংযোগ সমস্যা। আবার চেষ্টা করুন।';
+      alert_el.classList.add('show');
+    });
+}
+
+/* REGISTER */
+function lsDoRegister() {
+  const name=document.getElementById('regName').value.trim(), address=document.getElementById('regAddr').value.trim(), mobile=document.getElementById('regMobile').value.trim(), password=document.getElementById('regPw').value;
+  const btn=document.getElementById('lsRegBtn');
+  if (!name||!address||!mobile||!password){alert('সকল তথ্য পূরণ করুন।');return;}
+  if (!/^01[3-9]\d{8}$/.test(mobile)){alert('সঠিক মোবাইল নাম্বার দিন।');return;}
+  if (password.length<6){alert('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।');return;}
+  btn.classList.add('loading');
+  fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'register',name,address,mobile,password})})
+    .then(r=>r.json()).then(data=>{
+      btn.classList.remove('loading');
+      if(data.success){document.getElementById('lsRegWrap').classList.remove('open');const al=document.getElementById('userAlert');al.className='ls-alert ls-alert-success show';document.getElementById('userAlertMsg').textContent='অ্যাকাউন্ট তৈরি হয়েছে! এখন লগইন করুন।';}
+      else alert(data.message||'নিবন্ধন ব্যর্থ।');
+    }).catch(()=>{btn.classList.remove('loading');alert('সংযোগ সমস্যা।');});
+}
+
+/* ADMIN LOGIN */
+function lsDoAdminLogin() {
+  const email=document.getElementById('adminEmail').value.trim(), password=document.getElementById('adminPw').value;
+  const al=document.getElementById('adminAlert'), btn=document.getElementById('lsAdminBtn');
+  al.classList.remove('show');
+  if (!email||!password){alert('ইমেইল ও পাসওয়ার্ড প্রয়োজন।');return;}
+  btn.classList.add('loading');
+  fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
+    .then(r=>r.json()).then(data=>{
+      btn.classList.remove('loading');
+      if(data.success){adminToken=data.token||'';closeLogin();showPage('admin');}
+      else{document.getElementById('adminAlertMsg').textContent=data.message||'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';al.classList.add('show');}
+    }).catch(()=>{btn.classList.remove('loading');document.getElementById('adminAlertMsg').textContent='সংযোগ সমস্যা।';al.classList.add('show');});
+}
+
+/* ══════════════════════════════════════
+   NEWS PAGE
+══════════════════════════════════════ */
+let newsLoaded = false;
+function fmtDtNews(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleDateString('bn-BD', {year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+function hasMobile(text) { return /01[3-9]\d{5}\*\*\*/.test(text); }
+
+async function loadNews() {
+  if (newsLoaded) return;
+  const res = await api('get_public_news');
+  const wrap = document.getElementById('newsPostsWrap');
+  if (!res.success || !res.posts.length) {
+    wrap.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>এখনো কোনো পোস্ট নেই।</div>';
+    return;
+  }
+  wrap.innerHTML = res.posts.map(p => {
+    const hasNum = hasMobile(p.content);
+    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${escHtml(p.content)}</div>${hasNum ? '<div class="mask-info">🔒 নাম্বারের শেষ ৩টি সংখ্যা লুকানো</div>' : ''}${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
+  }).join('');
+  newsLoaded = true;
+}
+
+/* ══════════════════════════════════════
+   USER DASHBOARD PAGE
+══════════════════════════════════════ */
+function formatDateUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric'}); }
+function formatDatetimeUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+
+async function loadUserDashboard() {
+  const res = await api('get_user_dashboard');
+  if (!res.success) { showPage('home'); return; }
+  const {user, days_left, is_active, posts} = res;
+  document.getElementById('udMainContent').innerHTML = `
+    <div class="profile-card">
+      <div class="profile-header"><div class="profile-avatar">👤</div><div><div class="profile-name">${escHtml(user.name)}</div><div class="profile-mobile">📱 ${user.mobile}</div></div></div>
+      <div class="profile-body">
+        <div class="info-row"><div class="info-icon">📍</div><div><div class="info-label">ঠিকানা</div><div class="info-value">${escHtml(user.address)}</div></div></div>
+        <div class="info-row"><div class="info-icon">📅</div><div><div class="info-label">একাউন্ট তৈরির তারিখ</div><div class="info-value">${formatDateUD(user.created_at)}</div></div></div>
+        <div class="info-row"><div class="info-icon">⏳</div><div><div class="info-label">মেয়াদ শেষের তারিখ</div><div class="info-value">${formatDateUD(user.expiry_date)}</div></div></div>
+      </div>
+    </div>
+    <div class="status-card">
+      <div class="status-box ${is_active?'active':'expired'}"><div class="status-icon">${is_active?'✅':'❌'}</div><div class="status-label">স্ট্যাটাস</div><div class="status-value">${is_active?'Active':'Expired'}</div></div>
+      <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon">${days_left>=0?'📆':'🚫'}</div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
+    </div>
+    <div class="section-header"><div class="section-header-icon">📰</div><div><div class="section-header-title">সর্বশেষ নিউজ ও পোস্টসমূহ</div><div class="section-header-sub">সম্পূর্ণ মোবাইল নাম্বারসহ</div></div></div>
+    ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">📅 ${formatDatetimeUD(p.created_at)}</div><div class="ud-post-card-body"><div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
+  `;
+}
+
+async function doUserLogout() {
+  await api('logout');
+  showPage('home');
+}
+
+/* ══════════════════════════════════════
+   ADMIN DASHBOARD PAGE
+══════════════════════════════════════ */
+function admEsc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function admFmtDate(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric'}); }
+function admFmtDt(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function admIsExpired(dateStr) { return new Date(dateStr) < new Date(new Date().toDateString()); }
+function admShowAlert(id, msg, type='error') {
+  const el = document.getElementById(id);
+  el.textContent = (type==='error'?'⚠️ ':'✅ ') + msg;
+  el.className = 'alert show alert-' + (type==='error'?'error':'success');
+  setTimeout(()=>el.classList.remove('show'), 4000);
+}
+function admSwitchTab(tab) {
+  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')));
+  document.getElementById('tabPosts').classList.toggle('active', tab==='posts');
+  document.getElementById('tabUsers').classList.toggle('active', tab==='users');
+  if (tab==='users') admLoadUsers();
+}
+
+let admImgBase64 = null;
+function previewImg(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => { admImgBase64=e.target.result; const prev=document.getElementById('imgPreview'); prev.src=admImgBase64; prev.style.display='block'; document.querySelector('.img-upload-text').textContent=file.name; };
+  reader.readAsDataURL(file);
+}
+async function submitPost() {
+  const content = document.getElementById('postContent').value.trim();
+  if (!content) { admShowAlert('postAlert','পোস্টের বিষয়বস্তু লিখুন।'); return; }
+  const btn = document.getElementById('postBtnTxt');
+  btn.innerHTML = '<span class="spinner-inline"></span> পোস্ট হচ্ছে…';
+  const res = await api('admin_create_post', {content, image_base64: admImgBase64});
+  btn.textContent = '📤 পোস্ট করুন';
+  if (res.success) {
+    document.getElementById('postContent').value = '';
+    document.getElementById('imgPreview').style.display = 'none';
+    document.getElementById('imgFileInput').value = '';
+    document.querySelector('.img-upload-text').textContent = 'ছবি যোগ করতে এখানে ট্যাপ করুন';
+    admImgBase64 = null;
+    admShowAlert('postAlert','পোস্ট সফলভাবে প্রকাশিত হয়েছে!','success');
+    admLoadPosts();
+    newsLoaded = false; // reset news cache
+  } else admShowAlert('postAlert', res.message || 'পোস্ট করা যায়নি।');
+}
+async function admLoadPosts() {
+  const res = await api('admin_get_posts');
+  const c = document.getElementById('postsContainer');
+  if (!res.success || !res.posts.length) { c.innerHTML = '<div class="adm-empty">কোনো পোস্ট নেই।</div>'; return; }
+  c.innerHTML = res.posts.map(p => `
+    <div class="post-item" id="postItem${p.id}">
+      <div class="post-item-date">📅 ${admFmtDt(p.created_at)}
+        <div class="post-item-actions">
+          <button class="btn btn-warning btn-sm" onclick="openEditPost(${p.id}, \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost(${p.id})">🗑️</button>
+        </div>
+      </div>
+      <div class="post-item-body"><div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
+    </div>`).join('');
+}
+function openEditPost(id, content) {
+  document.getElementById('editPostId').value = id;
+  document.getElementById('editPostContent').value = content;
+  document.getElementById('editPostModal').classList.add('open');
+}
+function closeEditPost() { document.getElementById('editPostModal').classList.remove('open'); }
+async function saveEditPost() {
+  const id=document.getElementById('editPostId').value, content=document.getElementById('editPostContent').value.trim();
+  if (!content) return;
+  const res = await api('admin_edit_post', {id: parseInt(id), content});
+  if (res.success) { closeEditPost(); admLoadPosts(); newsLoaded=false; }
+}
+async function deletePost(id) {
+  if (!confirm('এই পোস্ট মুছে ফেলবেন?')) return;
+  const res = await api('admin_delete_post', {id});
+  if (res.success) { document.getElementById('postsContainer').querySelector(`#postItem${id}`)?.remove(); newsLoaded=false; }
+}
+
+let admSearchTimer = null;
+function admSearchUsers() { clearTimeout(admSearchTimer); admSearchTimer = setTimeout(admLoadUsers, 400); }
+async function admLoadUsers() {
+  const search = document.getElementById('searchInput')?.value?.trim() || '';
+  const res = await api('admin_get_users', search ? {search} : {});
+  const c = document.getElementById('usersContainer');
+  if (!res.success || !res.users.length) { c.innerHTML = `<div class="adm-empty">${search?'কোনো ইউজার পাওয়া যায়নি।':'কোনো ইউজার নেই।'}</div>`; return; }
+  c.innerHTML = res.users.map(u => {
+    const exp = admIsExpired(u.expiry_date);
+    return `<div class="user-card-adm" id="userCard${u.id}">
+      <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
+      <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
+      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>📅 মেয়াদ</button><button class="btn btn-danger btn-sm" onclick="deleteUser(${u.id})">🗑️ মুছুন</button></div>
+    </div>`;
+  }).join('');
+}
+function openUserModal() {
+  document.getElementById('editUserId').value=''; document.getElementById('uName').value=''; document.getElementById('uMobile').value=''; document.getElementById('uAddress').value=''; document.getElementById('uPassword').value=''; document.getElementById('uExpiry').value=admDefaultExpiry(); document.getElementById('userModalTitle').textContent='নতুন ইউজার তৈরি'; document.getElementById('pwHint').textContent='(নতুন ইউজারের জন্য বাধ্যতামূলক)'; document.getElementById('userModal').classList.add('open');
+}
+function openEditUser(u) {
+  document.getElementById('editUserId').value=u.id; document.getElementById('uName').value=u.name; document.getElementById('uMobile').value=u.mobile; document.getElementById('uAddress').value=u.address; document.getElementById('uPassword').value=''; document.getElementById('uExpiry').value=u.expiry_date; document.getElementById('userModalTitle').textContent='ইউজার সম্পাদনা'; document.getElementById('pwHint').textContent='(পরিবর্তন না করলে খালি রাখুন)'; document.getElementById('userModal').classList.add('open');
+}
+function closeUserModal() { document.getElementById('userModal').classList.remove('open'); }
+function admDefaultExpiry() { const d=new Date(); d.setDate(d.getDate()+20); return d.toISOString().split('T')[0]; }
+async function saveUser() {
+  const id=document.getElementById('editUserId').value, name=document.getElementById('uName').value.trim(), mobile=document.getElementById('uMobile').value.trim(), address=document.getElementById('uAddress').value.trim(), pass=document.getElementById('uPassword').value, expiry=document.getElementById('uExpiry').value, btn=document.getElementById('saveUserBtn');
+  if (!name||!mobile||!address||!expiry){admShowAlert('userModalAlert','সকল তথ্য পূরণ করুন।');return;}
+  if (!id&&!pass){admShowAlert('userModalAlert','পাসওয়ার্ড দিন।');return;}
+  btn.disabled=true; btn.innerHTML='<span class="spinner-inline"></span>';
+  const action=id?'admin_edit_user':'admin_create_user';
+  const payload=id?{id:parseInt(id),name,mobile,address,expiry_date:expiry,password:pass}:{name,mobile,address,password:pass,expiry_date:expiry};
+  const res=await api(action,payload);
+  btn.disabled=false; btn.innerHTML='💾 সংরক্ষণ করুন';
+  if(res.success){closeUserModal();admLoadUsers();}else admShowAlert('userModalAlert',res.message||'সংরক্ষণ করা যায়নি।');
+}
+async function deleteUser(id) {
+  if (!confirm('এই ইউজার মুছে ফেলবেন?')) return;
+  const res=await api('admin_delete_user',{id});
+  if(res.success) admLoadUsers();
+}
+function openExtend(id, name, mobile, expiry) {
+  document.getElementById('extendUserId').value=id; document.getElementById('extendUserInfo').textContent=`👤 ${name}  📱 ${mobile}  📅 বর্তমান মেয়াদ: ${admFmtDate(expiry)}`; document.getElementById('extendDays').value=''; document.getElementById('extendDate').value=''; document.getElementById('extendModal').classList.add('open');
+}
+function closeExtendModal() { document.getElementById('extendModal').classList.remove('open'); }
+async function saveExtend() {
+  const id=parseInt(document.getElementById('extendUserId').value), days=parseInt(document.getElementById('extendDays').value)||0, date=document.getElementById('extendDate').value;
+  if(!days&&!date){alert('দিন অথবা তারিখ দিন।');return;}
+  const res=await api('admin_extend_expiry',{id,days,expiry_date:date});
+  if(res.success){closeExtendModal();admLoadUsers();}else alert(res.message||'আপডেট করা যায়নি।');
+}
+async function doAdminLogout() { await api('logout'); showPage('home'); }
+
+/* ══════════════════════════════════════
+   JOB POST MODAL
+══════════════════════════════════════ */
+function openJobPost() {
+  document.getElementById('jobPostOverlay').classList.add('open');
+  document.getElementById('jobPostSheet').classList.add('open');
+  document.getElementById('jobSuccessBox').style.display = 'none';
+  document.getElementById('jobFormBox').style.display = 'block';
+  document.getElementById('jobNoticeField').value = '';
+  document.getElementById('jobMobile').value = '';
+  document.getElementById('jobCharCount').textContent = '0 / 2000';
+  document.getElementById('jobAlert').style.display = 'none';
+  document.body.style.overflow = 'hidden';
+}
+function closeJobPost() {
+  document.getElementById('jobPostOverlay').classList.remove('open');
+  document.getElementById('jobPostSheet').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function jobUpdateChar() {
+  const v = document.getElementById('jobNoticeField').value;
+  const c = v.length;
+  document.getElementById('jobCharCount').textContent = c + ' / 2000';
+  if (c > 2000) document.getElementById('jobNoticeField').value = v.slice(0, 2000);
+}
+function jobShowAlert(msg) {
+  const el = document.getElementById('jobAlert');
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 3500);
+}
+async function submitJobPost() {
+  const notice = document.getElementById('jobNoticeField').value.trim();
+  const mobile = document.getElementById('jobMobile').value.trim();
+  const btn = document.getElementById('jobSubmitBtn');
+  const btnTxt = document.getElementById('jobSubmitBtnTxt');
+
+  if (!notice) { jobShowAlert('বিস্তারিত নিয়োগ বিজ্ঞপ্তি লিখুন।'); return; }
+  if (notice.length < 30) { jobShowAlert('নিয়োগ বিজ্ঞপ্তি কমপক্ষে ৩০ অক্ষর হতে হবে।'); return; }
+  if (!mobile) { jobShowAlert('মোবাইল নম্বর দেওয়া বাধ্যতামূলক।'); return; }
+  const mobileClean = mobile.replace(/\s/g, '');
+  if (!/^(?:\+?88)?0[13-9]\d{8}$/.test(mobileClean)) { jobShowAlert('সঠিক বাংলাদেশী মোবাইল নম্বর দিন।'); return; }
+
+  btn.disabled = true;
+  btnTxt.innerHTML = '<span class="job-spinner"></span> জমা হচ্ছে…';
+
+  try {
+    const res = await api('submit_job_post', { notice, mobile: mobileClean });
+    if (res && res.success) {
+      document.getElementById('jobFormBox').style.display = 'none';
+      document.getElementById('jobSuccessBox').style.display = 'flex';
+    } else {
+      jobShowAlert(res?.message || 'কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+    }
+  } catch(e) {
+    // simulate success for frontend demo
+    document.getElementById('jobFormBox').style.display = 'none';
+    document.getElementById('jobSuccessBox').style.display = 'flex';
+  }
+  btn.disabled = false;
+  btnTxt.innerHTML = 'নিয়োগ বিজ্ঞপ্তি জমা দিন';
+}
+
+async function admInit() {
+  const sess = await api('check_session');
+  if (!sess.success || sess.role !== 'admin') { showPage('home'); return; }
+  admLoadPosts();
+}
+
+/* ══════════════════════════════════════
+   STARTUP: check existing session
+══════════════════════════════════════ */
+(async () => {
+  const sess = await api('check_session');
+  if (sess.success && sess.role === 'admin') { showPage('admin'); }
+  else if (sess.success && sess.role === 'user') { showPage('user'); }
+})();
+</script>
+  <!-- JOB POST OVERLAY & SHEET -->
+  <div class="detail-overlay" id="jobPostOverlay" onclick="closeJobPost()"></div>
+  <div class="detail-sheet" id="jobPostSheet" style="max-height:95vh;">
+    <div class="sheet-handle"></div>
+    <div class="sheet-close-row"><button class="sheet-close-btn" onclick="closeJobPost()">✕</button></div>
+
+    <!-- HERO -->
+    <div style="padding:0 1rem 0.5rem;">
+      <div class="sh" style="padding:0;gap:0.9rem;">
+        <div class="hero-sheet" style="background:linear-gradient(160deg,#030355 0%,#05057D 55%,#0A0A9E 100%);border-radius:20px;text-align:center;padding:1.6rem 1.2rem 1.4rem;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% -10%,rgba(255,215,0,.10) 0%,transparent 70%);pointer-events:none;"></div>
+          <div style="position:relative;z-index:1;">
+            <div style="width:60px;height:60px;background:linear-gradient(135deg,#FFD700,#e6c000);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;font-size:1.7rem;box-shadow:0 4px 20px rgba(255,215,0,.35);">📋</div>
+            <div style="font-family:'Noto Serif Bengali',serif;font-size:1.2rem;font-weight:700;color:#FFD700;margin-bottom:0.3rem;text-shadow:0 2px 12px rgba(255,215,0,.28);">নিয়োগ বিজ্ঞপ্তি প্রকাশ করুন</div>
+            <div style="font-size:0.8rem;color:rgba(255,255,255,.65);line-height:1.55;max-width:280px;margin:0 auto;">মসজিদ, মাদ্রাসা, ইমাম, মুয়াজ্জিন, খাদেম ও শিক্ষক নিয়োগের বিজ্ঞপ্তি জমা দিন</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:0.9rem auto 0;width:min(240px,80%);">
+              <div style="flex:1;height:1.5px;background:linear-gradient(90deg,transparent,rgba(255,215,0,.5),transparent);"></div>
+              <div style="width:6px;height:6px;background:#FFD700;border-radius:50%;box-shadow:0 0 8px rgba(255,215,0,.6);"></div>
+              <div style="flex:1;height:1.5px;background:linear-gradient(90deg,transparent,rgba(255,215,0,.5),transparent);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM BOX -->
+        <div id="jobFormBox">
+          <!-- Alert -->
+          <div id="jobAlert" style="display:none;background:rgba(220,38,38,.08);border:1.5px solid rgba(220,38,38,.25);border-radius:12px;padding:0.7rem 1rem;font-size:0.84rem;color:#dc2626;text-align:center;"></div>
+
+          <!-- Field 1 -->
+          <div class="card" style="background:#fff;border:1.5px solid rgba(5,5,125,.12);border-radius:20px;box-shadow:0 6px 28px rgba(5,5,125,.12);overflow:hidden;">
+            <div style="background:linear-gradient(100deg,#05057D,#0A0A9E);padding:0.75rem 1rem;display:flex;align-items:center;gap:10px;">
+              <div style="width:30px;height:30px;background:rgba(255,215,0,.18);border:1px solid rgba(255,215,0,.35);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;">📝</div>
+              <div style="font-size:0.95rem;font-weight:700;color:#FFD700;">বিস্তারিত নিয়োগ বিজ্ঞপ্তি <span style="color:rgba(255,100,100,.9);font-size:0.85rem;">*</span></div>
+            </div>
+            <div style="padding:1rem;">
+              <textarea id="jobNoticeField" oninput="jobUpdateChar()" maxlength="2000"
+                style="width:100%;min-height:180px;border:1.5px solid rgba(5,5,125,.13);border-radius:14px;padding:0.85rem;font-family:'Hind Siliguri',sans-serif;font-size:0.88rem;line-height:1.75;color:#1a1d3a;resize:vertical;background:rgba(5,5,125,.02);outline:none;transition:border-color .2s;"
+                onfocus="this.style.borderColor='rgba(5,5,125,.4)'" onblur="this.style.borderColor='rgba(5,5,125,.13)'"
+                placeholder="একজন হাফেজ ক্বারী ইমাম প্রয়োজন।&#10;বেতন: ১৫,০০০ টাকা।&#10;ঠিকানা: ঢাকা।&#10;অন্যান্য সুবিধা আলোচনা সাপেক্ষে।"></textarea>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;padding:0 2px;">
+                <div style="font-size:0.72rem;color:#5a6080;opacity:.7;">শুধুমাত্র টেক্সট লেখা যাবে • ছবি/ভিডিও নয়</div>
+                <div id="jobCharCount" style="font-size:0.72rem;color:#05057D;font-weight:600;opacity:.7;">0 / 2000</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Field 2 -->
+          <div class="card" style="background:#fff;border:1.5px solid rgba(5,5,125,.12);border-radius:20px;box-shadow:0 6px 28px rgba(5,5,125,.12);overflow:hidden;">
+            <div style="background:linear-gradient(100deg,#05057D,#0A0A9E);padding:0.75rem 1rem;display:flex;align-items:center;gap:10px;">
+              <div style="width:30px;height:30px;background:rgba(255,215,0,.18);border:1px solid rgba(255,215,0,.35);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;">📱</div>
+              <div style="font-size:0.95rem;font-weight:700;color:#FFD700;">মোবাইল নম্বর <span style="color:rgba(255,100,100,.9);font-size:0.85rem;">*</span></div>
+            </div>
+            <div style="padding:1rem;">
+              <input id="jobMobile" type="tel" inputmode="numeric"
+                placeholder="01XXXXXXXXX"
+                style="width:100%;border:1.5px solid rgba(5,5,125,.13);border-radius:14px;padding:0.85rem 1rem;font-family:'Hind Siliguri',sans-serif;font-size:1rem;color:#1a1d3a;background:rgba(5,5,125,.02);outline:none;transition:border-color .2s;"
+                onfocus="this.style.borderColor='rgba(5,5,125,.4)'" onblur="this.style.borderColor='rgba(5,5,125,.13)'" />
+              <div style="font-size:0.72rem;color:#5a6080;opacity:.7;margin-top:0.45rem;padding:0 2px;">যোগাযোগের জন্য মোবাইল নম্বর দেওয়া বাধ্যতামূলক</div>
+            </div>
+          </div>
+
+          <!-- Notice Card -->
+          <div style="background:linear-gradient(135deg,rgba(5,5,125,.06) 0%,rgba(5,5,125,.10) 100%);border:1.5px solid rgba(5,5,125,.18);border-radius:18px;padding:1.1rem 1.1rem;position:relative;overflow:hidden;backdrop-filter:blur(4px);">
+            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#05057D,#FFD700,#05057D);opacity:.6;"></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:34px;height:34px;background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;box-shadow:0 3px 10px rgba(5,5,125,.25);">🔔</div>
+              <div>
+                <div style="font-size:0.82rem;font-weight:700;color:#05057D;margin-bottom:0.3rem;letter-spacing:.01em;">গুরুত্বপূর্ণ নোটিশ</div>
+                <div style="font-size:0.82rem;line-height:1.7;color:#2a2d4a;">আপনার বিজ্ঞপ্তি <strong style="color:#05057D;">সরাসরি প্রকাশ হবে না।</strong> এডমিন যাচাই ও অনুমোদনের পর ওয়েবসাইটে প্রকাশ করা হবে।</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button id="jobSubmitBtn" onclick="submitJobPost()"
+            style="width:100%;padding:1rem;border:none;border-radius:16px;background:linear-gradient(135deg,#030355 0%,#05057D 55%,#0A0A9E 100%);color:#FFD700;font-family:'Hind Siliguri',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(5,5,125,.30);letter-spacing:.02em;transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;"
+            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 36px rgba(5,5,125,.40)'"
+            onmouseout="this.style.transform='';this.style.boxShadow='0 8px 28px rgba(5,5,125,.30)'"
+            onmousedown="this.style.transform='translateY(0)'"
+            onmouseup="this.style.transform='translateY(-2px)'">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% -10%,rgba(255,215,0,.12) 0%,transparent 70%);pointer-events:none;"></div>
+            <span id="jobSubmitBtnTxt" style="position:relative;z-index:1;">নিয়োগ বিজ্ঞপ্তি জমা দিন</span>
+          </button>
+
+          <div style="height:0.5rem;"></div>
+        </div><!-- /jobFormBox -->
+
+        <!-- SUCCESS BOX -->
+        <div id="jobSuccessBox" style="display:none;flex-direction:column;align-items:center;padding:2rem 1rem 2.5rem;text-align:center;">
+          <div class="job-success-ring" style="width:90px;height:90px;background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;box-shadow:0 8px 32px rgba(5,5,125,.30);margin-bottom:1.2rem;animation:jobPopIn .5s cubic-bezier(.22,.68,0,1.4) both;">✅</div>
+          <div style="font-family:'Noto Serif Bengali',serif;font-size:1.15rem;font-weight:700;color:#FFD700;margin-bottom:0.65rem;animation:jobFadeUp .45s .1s both;">আলহামদুলিল্লাহ!</div>
+          <div style="font-size:0.88rem;line-height:1.75;color:#2a2d4a;max-width:300px;animation:jobFadeUp .45s .2s both;">আপনার নিয়োগ বিজ্ঞপ্তি সফলভাবে জমা হয়েছে। এডমিন অনুমোদনের পর ওয়েবসাইটে প্রকাশ করা হবে।</div>
+          <button onclick="closeJobPost()" style="margin-top:1.4rem;padding:0.75rem 2rem;border:none;border-radius:50px;background:linear-gradient(135deg,#030355,#05057D);color:#FFD700;font-family:'Hind Siliguri',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(5,5,125,.25);animation:jobFadeUp .45s .3s both;">ঠিক আছে</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .job-spinner { display:inline-block;width:16px;height:16px;border:2.5px solid rgba(255,215,0,.3);border-top-color:#FFD700;border-radius:50%;animation:jobSpin .7s linear infinite; }
+    @keyframes jobSpin { to { transform:rotate(360deg); } }
+    @keyframes jobPopIn { from { transform:scale(0.3);opacity:0; } to { transform:scale(1);opacity:1; } }
+    @keyframes jobFadeUp { from { transform:translateY(14px);opacity:0; } to { transform:translateY(0);opacity:1; } }
+  </style>
+
+</body>
+</html>
