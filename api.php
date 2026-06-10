@@ -1,4 +1,3 @@
-
 <?php
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
@@ -22,6 +21,32 @@ if ($db->connect_error) {
 $r = $_GET['r'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'];
 $body = json_decode(file_get_contents('php://input'), true) ?? [];
+
+// action parameter দিয়ে POST request handle
+$action = $body['action'] ?? '';
+if ($action === 'admin_login') {
+    $email = $body['email'] ?? '';
+    $pass  = $body['password'] ?? '';
+
+    if (!$email || !$pass) {
+        echo json_encode(['success' => false, 'message' => 'ইমেইল ও পাসওয়ার্ড প্রয়োজন।']);
+        exit();
+    }
+
+    $stmt = $db->prepare("SELECT * FROM users WHERE email=?");
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $user = $stmt->get_result()->fetch_assoc();
+
+    if (!$user || !password_verify($pass, $user['password'])) {
+        echo json_encode(['success' => false, 'message' => 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।']);
+        exit();
+    }
+
+    unset($user['password']);
+    echo json_encode(['success' => true, 'data' => $user]);
+    exit();
+}
 
 // ─── ROUTER ───────────────────────────────────────────────
 switch ($r) {
