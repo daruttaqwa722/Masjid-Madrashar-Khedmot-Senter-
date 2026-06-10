@@ -47,7 +47,23 @@ if ($action === 'admin_login') {
     echo json_encode(['success' => true, 'data' => $user]);
     exit();
 }
-
+if ($action === 'check_session') {
+    $email = $body['email'] ?? '';
+    if (!$email) {
+        echo json_encode(['success' => false]);
+        exit();
+    }
+    $stmt = $db->prepare("SELECT id,name,email,mobile,role,expiresAt FROM users WHERE email=?");
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $user = $stmt->get_result()->fetch_assoc();
+    if ($user) {
+        echo json_encode(['success' => true, 'role' => $user['role'], 'data' => $user]);
+    } else {
+        echo json_encode(['success' => false]);
+    }
+    exit();
+}
 // ─── ROUTER ───────────────────────────────────────────────
 switch ($r) {
 
