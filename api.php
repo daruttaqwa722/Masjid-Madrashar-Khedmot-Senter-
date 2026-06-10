@@ -63,7 +63,29 @@ if ($action === 'check_session') {
         echo json_encode(['success' => false]);
     }
     exit();
-}
+} sed -i '66a\
+\
+if ($action === '"'"'admin_create_post'"'"') {\
+    $id      = uniqid('"'"'p_'"'"', true);\
+    $content = $body['"'"'content'"'"'] ?? '"'"''"'"';\
+    $imgUrl  = $body['"'"'image_base64'"'"'] ?? '"'"''"'"';\
+    $created = time() * 1000;\
+    $timeStr = date('"'"'d M Y'"'"');\
+    $stmt = $db->prepare("INSERT INTO posts (id,text,author,cats,mainCat,subCat,created,timeStr,likes,views,imgUrl,hasNumber) VALUES (?,?,'"'"'admin'"'"','"'"'[]'"'"','"'"''"'"','"'"''"'"',?,?,0,0,?,0)");\
+    $stmt->bind_param('"'"'sssss'"'"', $id, $content, $created, $timeStr, $imgUrl);\
+    $stmt->execute();\
+    echo json_encode(['"'"'success'"'"' => true, '"'"'id'"'"' => $id]);\
+    exit();\
+}\
+\
+if ($action === '"'"'admin_get_posts'"'"') {\
+    $rows = $db->query("SELECT * FROM posts ORDER BY created DESC")->fetch_all(MYSQLI_ASSOC);\
+    foreach ($rows as &$row) {\
+        $row['"'"'cats'"'"'] = json_decode($row['"'"'cats'"'"'], true);\
+    }\
+    echo json_encode(['"'"'success'"'"' => true, '"'"'posts'"'"' => $rows]);\
+    exit();\
+}' /home/khedmotcenter/htdocs/khedmotcenter.com/api.php
 // ─── ROUTER ───────────────────────────────────────────────
 switch ($r) {
 
