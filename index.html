@@ -1364,7 +1364,7 @@ async function submitJobPost() {
 }
 
 async function admInit() {
-  const sess = await api('check_session');
+  const sess = await api('check_session', {email: localStorage.getItem('adminEmail')});
   if (!sess.success || sess.role !== 'admin') { showPage('home'); return; }
   admLoadPosts();
 }
