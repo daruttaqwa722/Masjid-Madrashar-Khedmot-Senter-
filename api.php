@@ -137,6 +137,7 @@ if ($action === 'admin_create_user') {
     $name    = $body['name'] ?? '';
     $mobile  = $body['mobile'] ?? '';
     $pass    = $body['password'] ?? '';
+    $address = $body['address'] ?? '';
     $expiry  = $body['expiry_date'] ?? $body['expiry'] ?? '';
     if (!$name || !$mobile || !$expiry) {
         echo json_encode(['success' => false, 'message' => 'নাম, মোবাইল ও মেয়াদ আবশ্যক।']);
@@ -166,15 +167,16 @@ if ($action === 'admin_edit_user') {
     $name    = $body['name'] ?? '';
     $mobile  = $body['mobile'] ?? '';
     $pass    = $body['password'] ?? '';
+    $address = $body['address'] ?? '';
     $expiry  = $body['expiry_date'] ?? $body['expiry'] ?? '';
     $expiresAt = strtotime(str_replace('/', '-', $expiry)) * 1000;
     if ($pass) {
         $hash = password_hash($pass, PASSWORD_DEFAULT);
-        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, password=?, expiresAt=? WHERE id=?");
-        $stmt->bind_param('sssis', $name, $mobile, $hash, $expiresAt, $id);
+        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, password=?, expiresAt=? WHERE id=?");
+        $stmt->bind_param('ssssis', $name, $mobile, $address, $hash, $expiresAt, $id);
     } else {
-        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, expiresAt=? WHERE id=?");
-        $stmt->bind_param('ssis', $name, $mobile, $expiresAt, $id);
+        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, expiresAt=? WHERE id=?");
+        $stmt->bind_param('sssis', $name, $mobile, $address, $expiresAt, $id);
     }
     $stmt->execute();
     echo json_encode(['success' => true]);
