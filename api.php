@@ -29,23 +29,20 @@ $action = $body['action'] ?? $_GET['action'] ?? '';
 
 // ── ফোন নম্বর mask ───────────────────────────────────────────
 function maskPhone($text) {
-    // English digits: 01XXXXXXXXX → 01XXXXXX***
-    $text = preg_replace_callback(
-        '/(\+?880|0)(1[3-9])(\d{2})([\s\-]?)(\d{3})([\s\-]?)(\d{3})/u',
-        function($m) {
-            return $m[1].$m[2].$m[3].$m[4].$m[5].$m[6].'***';
-        },
-        $text
-    );
-    // Bengali digits
     $bengali = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
     $english = ['0','1','2','3','4','5','6','7','8','9'];
     $text_en = str_replace($bengali, $english, $text);
-    if ($text_en !== $text) {
-        $masked_en = maskPhone($text_en);
-        $text = str_replace($english, $bengali, $masked_en);
-    }
-    return $text;
+    $is_bengali = ($text_en !== $text);
+    $masked = preg_replace_callback(
+        '/(\+?880[\s\-]?|0)(1[3-9])(\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d)/u',
+        function($m) {
+            $last = preg_replace('/\d([\s\-]?\d[\s\-]?\d)$/u', '***', $m[3]);
+            return $m[1].$m[2].$last;
+        },
+        $text_en
+    );
+    if ($is_bengali) $masked = str_replace($english, $bengali, $masked);
+    return $masked;
 }
 
 // ── পোস্ট row format ──────────────────────────────────────────
