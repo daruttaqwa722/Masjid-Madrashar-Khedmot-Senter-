@@ -405,6 +405,13 @@
 </style>
 </head>
 <body>
+<script>
+function isAdmin() { return typeof adminToken !== 'undefined' && adminToken === 'admin_session'; }
+document.addEventListener('contextmenu', e => { if (!isAdmin()) e.preventDefault(); });
+document.addEventListener('copy', e => { if (!isAdmin()) e.preventDefault(); });
+document.addEventListener('cut', e => { if (!isAdmin()) e.preventDefault(); });
+document.addEventListener('selectstart', e => { if (!isAdmin()) e.preventDefault(); });
+</script>
 
 <!-- ══════════════════════════════════════
      PAGE: HOME
