@@ -1140,7 +1140,7 @@ async function loadNews() {
   const isMasked = res.masked || false;
   wrap.innerHTML = res.posts.map(p => {
     const hasNum = hasMobile(p.content);
-    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="openDetail()">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
+    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
 }
