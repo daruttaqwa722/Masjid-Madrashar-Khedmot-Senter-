@@ -95,6 +95,15 @@ if ($action === 'login' || $action === 'user_login') {
 if ($action === 'admin_create_post') {
     $id      = uniqid('p_', true);
     $text    = $body['content'] ?? '';
+    // ডুপ্লিকেট চেক
+    $dup_stmt = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
+    $dup_stmt->bind_param('s', $text);
+    $dup_stmt->execute();
+    $dup_stmt->store_result();
+    if ($dup_stmt->num_rows > 0) {
+        echo json_encode(['success' => false, 'message' => '⚠️ এই পোস্টটি আগেই করা হয়েছে! ডুপ্লিকেট পোস্ট করা যাবে না।']);
+        exit();
+    }
     $author  = $body['author'] ?? 'Admin';
     $cats    = json_encode($body['cats'] ?? []);
     $mainCat = $body['mainCat'] ?? '';
