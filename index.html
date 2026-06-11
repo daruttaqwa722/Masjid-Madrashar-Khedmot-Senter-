@@ -269,9 +269,9 @@
   .post-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
   .post-date { background: rgba(5,5,125,0.04); padding: 0.42rem 0.85rem; font-size: 0.7rem; color: var(--text-sub); font-weight: 600; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 5px; }
   .post-body { padding: 0.9rem; }
-  .post-text { font-size: 0.9rem; line-height: 1.85; color: var(--text); white-space: pre-wrap; }
+  .post-text { font-size: 1.05rem; line-height: 2; color: var(--text); white-space: pre-wrap; font-family: "Noto Serif Bengali", serif; }
   .post-img { width: 100%; border-radius: 12px; margin-top: 0.75rem; max-height: 320px; object-fit: cover; }
-  .mask-info { display: inline-flex; align-items: center; gap: 4px; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); border-radius: 8px; padding: 0.18rem 0.55rem; font-size: 0.68rem; font-weight: 700; color: #dc2626; margin-top: 0.6rem; }
+  .mask-info { display: inline-flex; align-items: center; gap: 6px; background: #dc2626; border: none; border-radius: 8px; padding: 0.3rem 0.8rem; font-size: 0.8rem; font-weight: 700; color: #ffffff; margin-top: 0.7rem; cursor: pointer; }
   .cta-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); border-radius: var(--radius-lg); padding: 1.4rem 1.2rem; text-align: center; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
   .cta-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,215,0,0.12) 0%, transparent 65%); pointer-events: none; }
   .cta-inner { position: relative; z-index: 1; }
@@ -1140,7 +1140,7 @@ async function loadNews() {
   const isMasked = res.masked || false;
   wrap.innerHTML = res.posts.map(p => {
     const hasNum = hasMobile(p.content);
-    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div>${hasNum ? '<div class="mask-info">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>' : ''}${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
+    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="openDetail()">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
 }
