@@ -1261,7 +1261,7 @@ async function admLoadUsers() {
     return `<div class="user-card-adm" id="userCard${u.id}">
       <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
       <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
-      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>📅 মেয়াদ</button><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
+      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>${u.expiresAt ? Math.ceil((u.expiresAt - Date.now()) / 86400000) + ' দিন বাকি' : 'মেয়াদ নেই'}</button><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
     </div>`;
   }).join('');
 }
