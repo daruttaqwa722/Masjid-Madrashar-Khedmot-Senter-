@@ -1068,7 +1068,6 @@ function lsDoLogin() {
     .then(data => {
       btn.classList.remove('loading');
       if (data.success) {
-        adminToken = data.token || 'user_session';
         closeLogin();
         showPage('user');
       } else {
@@ -1134,7 +1133,7 @@ async function loadNews() {
   }
   wrap.innerHTML = res.posts.map(p => {
     const hasNum = hasMobile(p.content);
-    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${escHtml(p.content)}</div>${hasNum ? '<div class="mask-info">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>' : ''}${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
+    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${escHtml(p.content)}</div>${hasNum ? '<div class="mask-info">🔒 নাম্বারের শেষ ৩টি সংখ্যা লুকানো</div>' : ''}${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
 }

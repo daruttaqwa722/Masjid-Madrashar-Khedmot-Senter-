@@ -95,6 +95,10 @@ if ($action === 'check_session') {
         echo json_encode(['success' => true, 'role' => 'admin']);
         exit();
     }
+    if ($token === 'user_session') {
+        echo json_encode(['success' => true, 'role' => 'user']);
+        exit();
+    }
     echo json_encode(['success' => false]);
     exit();
 }
@@ -131,7 +135,7 @@ if ($action === 'user_login') {
         exit();
     }
     unset($user['password']);
-    echo json_encode(['success' => true, 'user' => $user]);
+    echo json_encode(['success' => true, 'user' => $user, 'token' => 'user_session']);
     exit();
 }
 
