@@ -138,6 +138,7 @@ if ($action === 'admin_create_user') {
     $mobile  = $body['mobile'] ?? '';
     $pass    = $body['password'] ?? '';
     $address = $body['address'] ?? '';
+    $address = $body['address'] ?? '';
     $expiry  = $body['expiry_date'] ?? $body['expiry'] ?? '';
     if (!$name || !$mobile || !$expiry) {
         echo json_encode(['success' => false, 'message' => 'নাম, মোবাইল ও মেয়াদ আবশ্যক।']);
@@ -168,6 +169,7 @@ if ($action === 'admin_edit_user') {
     $mobile  = $body['mobile'] ?? '';
     $pass    = $body['password'] ?? '';
     $address = $body['address'] ?? '';
+    $address = $body['address'] ?? '';
     $expiry  = $body['expiry_date'] ?? $body['expiry'] ?? '';
     $expiresAt = strtotime(str_replace('/', '-', $expiry)) * 1000;
     if ($pass) {
@@ -185,7 +187,7 @@ if ($action === 'admin_edit_user') {
 
 
 if ($action === 'admin_get_users') {
-    $rows = $db->query("SELECT id, name, mobile, role, createdAt, expiresAt FROM users ORDER BY createdAt DESC")->fetch_all(MYSQLI_ASSOC);
+    $rows = $db->query("SELECT id, name, mobile, address, role, createdAt, expiresAt FROM users ORDER BY createdAt DESC")->fetch_all(MYSQLI_ASSOC);
     echo json_encode(['success' => true, 'users' => $rows]);
     exit();
 }
@@ -417,6 +419,7 @@ switch ($r) {
         $name    = $body['name'] ?? '';
         $mobile  = $body['mobile'] ?? '';
         $pass    = $body['password'] ?? '';
+    $address = $body['address'] ?? '';
 
         if (!$name || !$mobile || !$pass) {
             echo json_encode(['error' => 'name, mobile, password required']); break;
