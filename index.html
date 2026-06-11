@@ -1279,7 +1279,7 @@ async function saveUser() {
   if (!id&&!pass){admShowAlert('userModalAlert','পাসওয়ার্ড দিন।');return;}
   btn.disabled=true; btn.innerHTML='<span class="spinner-inline"></span>';
   const action=id?'admin_edit_user':'admin_create_user';
-  const payload=id?{id:parseInt(id),name,mobile,address,expiry_date:expiry,password:pass}:{name,mobile,address,password:pass,expiry_date:expiry};
+  const payload=id?{id:String(id),name,mobile,address,expiry_date:expiry,password:pass}:{name,mobile,address,password:pass,expiry_date:expiry};
   const res=await api(action,payload);
   btn.disabled=false; btn.innerHTML='💾 সংরক্ষণ করুন';
   if(res.success){closeUserModal();admLoadUsers();}else admShowAlert('userModalAlert',res.message||'সংরক্ষণ করা যায়নি।');
