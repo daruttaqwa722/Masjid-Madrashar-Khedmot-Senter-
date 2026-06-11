@@ -36,7 +36,7 @@ function maskPhone($text) {
     $masked = preg_replace_callback(
         '/(\+?880[\s\-]?|0)(1[3-9])(\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d)/u',
         function($m) {
-            $last = preg_replace('/\d([\s\-]?\d[\s\-]?\d)$/u', '***', $m[3]);
+            $last = preg_replace('/\d\d$/u', '**', $m[3]);
             return $m[1].$m[2].$last;
         },
         $text_en
