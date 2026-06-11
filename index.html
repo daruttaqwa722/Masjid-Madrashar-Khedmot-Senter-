@@ -1108,7 +1108,7 @@ function lsDoAdminLogin() {
   fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
-      if(data.success){adminToken=data.token||'';closeLogin();showPage('admin');}
+      if(data.success){adminToken='admin_session';closeLogin();showPage('admin');}
       else{document.getElementById('adminAlertMsg').textContent=data.message||'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';al.classList.add('show');}
     }).catch(()=>{btn.classList.remove('loading');document.getElementById('adminAlertMsg').textContent='সংযোগ সমস্যা।';al.classList.add('show');});
 }
@@ -1224,8 +1224,8 @@ async function admLoadPosts() {
     <div class="post-item" id="postItem${p.id}">
       <div class="post-item-date">📅 ${admFmtDt(p.created_at)}
         <div class="post-item-actions">
-          <button class="btn btn-warning btn-sm" onclick="openEditPost(${p.id}, \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button>
-          <button class="btn btn-danger btn-sm" onclick="deletePost(${p.id})">🗑️</button>
+          <button class="btn btn-warning btn-sm" onclick="openEditPost('${p.id}', \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button>
         </div>
       </div>
       <div class="post-item-body"><div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
@@ -1240,13 +1240,13 @@ function closeEditPost() { document.getElementById('editPostModal').classList.re
 async function saveEditPost() {
   const id=document.getElementById('editPostId').value, content=document.getElementById('editPostContent').value.trim();
   if (!content) return;
-  const res = await api('admin_edit_post', {id: parseInt(id), content});
+  const res = await api('admin_edit_post', {id: String(id), content});
   if (res.success) { closeEditPost(); admLoadPosts(); newsLoaded=false; }
 }
 async function deletePost(id) {
-  if (!confirm('এই পোস্ট মুছে ফেলবেন?')) return;
+
   const res = await api('admin_delete_post', {id});
-  if (res.success) { document.getElementById('postsContainer').querySelector(`#postItem${id}`)?.remove(); newsLoaded=false; }
+  if (res.success) { document.getElementById(`postItem${id}`)?.remove(); newsLoaded=false; admLoadPosts(); }
 }
 
 let admSearchTimer = null;
@@ -1261,7 +1261,7 @@ async function admLoadUsers() {
     return `<div class="user-card-adm" id="userCard${u.id}">
       <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
       <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
-      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>📅 মেয়াদ</button><button class="btn btn-danger btn-sm" onclick="deleteUser(${u.id})">🗑️ মুছুন</button></div>
+      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>📅 মেয়াদ</button><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
     </div>`;
   }).join('');
 }
