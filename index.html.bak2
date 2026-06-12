@@ -31,7 +31,7 @@
     --radius: 16px;
   }
 
-  body { background: var(--bg); font-family: 'Hind Siliguri', sans-serif; min-height: 100vh; }
+  body { background: var(--bg); font-family: 'Noto Serif Bengali', serif; min-height: 100vh; }
 
   /* ══════════════════════════════════════
      PAGE SYSTEM
@@ -146,14 +146,14 @@
   .sh .hero-divider-line { flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent); }
   .sh .hero-divider-dot { width: 6px; height: 6px; background: #FFD700; border-radius: 50%; box-shadow: 0 0 8px rgba(255,215,0,0.6); }
   .sh .hero-notice { background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.28); border-radius: 12px; padding: 0.65rem 1rem; font-size: 0.84rem; color: #FFE566; line-height: 1.6; max-width: 340px; margin: 0 auto; }
-  .sh .section-label { font-size: 0.68rem; font-weight: 700; color: #05057D; text-transform: uppercase; letter-spacing: 0.12em; text-align: center; margin: 0.4rem 0 0.1rem; opacity: 0.45; }
-  .sh .card { background: #fff; border: 1.5px solid rgba(5,5,125,0.12); border-radius: 20px; box-shadow: 0 6px 28px rgba(5,5,125,0.13); overflow: hidden; }
+  .sh .section-label { font-size: 0.72rem; font-weight: 800; color: #05057D; text-transform: uppercase; letter-spacing: 0.15em; text-align: center; margin: 1.2rem 0 0.5rem; opacity: 0.75; position: relative; } .sh .section-label::before, .sh .section-label::after { content: "──"; opacity: 0.3; margin: 0 6px; }
+  .sh .card { background: #fff; border: 1.5px solid rgba(5,5,125,0.10); border-radius: 22px; box-shadow: 0 8px 40px rgba(5,5,125,0.12), 0 2px 8px rgba(5,5,125,0.06); overflow: hidden; transition: box-shadow 0.25s, transform 0.25s; } .sh .card:hover { box-shadow: 0 16px 48px rgba(5,5,125,0.18), 0 4px 12px rgba(5,5,125,0.10); transform: translateY(-2px); }
   .sh .card-header { background: linear-gradient(100deg, #05057D, #0A0A9E); padding: 0.8rem 1rem; display: flex; align-items: center; gap: 10px; }
   .sh .card-header-icon { width: 30px; height: 30px; background: rgba(255,215,0,0.18); border: 1px solid rgba(255,215,0,0.35); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
   .sh .card-header-title { font-size: 0.95rem; font-weight: 700; color: #FFD700; line-height: 1.35; }
   .sh .card-body { padding: 1rem; }
-  .sh .prose { font-size: 0.88rem; line-height: 1.8; color: #2a2d4a; }
-  .sh .quote-block { background: linear-gradient(100deg, rgba(5,5,125,0.04), rgba(5,5,125,0.07)); border-left: 3.5px solid #FFD700; border-radius: 0 12px 12px 0; padding: 0.75rem 0.9rem; margin: 0.75rem 0 0; font-size: 0.86rem; line-height: 1.75; color: #2a2d4a; }
+  .sh .prose { font-size: 0.92rem; line-height: 1.9; color: #1e2240; }
+  .sh .quote-block { background: linear-gradient(100deg, rgba(5,5,125,0.05), rgba(5,5,125,0.09)); border-left: 4px solid #FFD700; border-radius: 0 14px 14px 0; padding: 0.9rem 1.1rem; margin: 0.9rem 0 0; font-size: 0.9rem; line-height: 1.85; color: #1e2240; font-style: italic; }
   .sh .checklist { display: flex; flex-direction: column; gap: 8px; }
   .sh .checklist-item { display: flex; align-items: flex-start; gap: 10px; background: rgba(5,5,125,0.03); border: 1px solid rgba(5,5,125,0.08); border-radius: 11px; padding: 0.6rem 0.85rem; font-size: 0.86rem; line-height: 1.65; color: #2a2d4a; }
   .sh .checklist-tick { width: 20px; height: 20px; background: linear-gradient(135deg, #05057D, #0A0A9E); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
@@ -166,6 +166,7 @@
   .sh .payment-box { background: linear-gradient(135deg, #030355 0%, #05057D 100%); border-radius: 20px; box-shadow: 0 12px 48px rgba(5,5,125,0.17); padding: 1.3rem 1.1rem; position: relative; overflow: hidden; }
   .sh .payment-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(255,215,0,0.12) 0%, transparent 65%); pointer-events: none; }
   .sh .payment-box-inner { position: relative; z-index: 1; }
+  .sh { font-family: "Noto Serif Bengali", serif; }
   .sh .payment-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 0.22rem 0.7rem; font-size: 0.7rem; font-weight: 700; color: #FFE566; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.7rem; }
   .sh .payment-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.9rem; line-height: 1.4; }
   .sh .payment-method-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,215,0,0.22); border-radius: 14px; padding: 0.85rem 0.95rem; margin-bottom: 0.75rem; }
@@ -269,9 +270,9 @@
   .post-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
   .post-date { background: rgba(5,5,125,0.04); padding: 0.42rem 0.85rem; font-size: 0.7rem; color: var(--text-sub); font-weight: 600; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 5px; }
   .post-body { padding: 0.9rem; }
-  .post-text { font-size: 0.9rem; line-height: 1.85; color: var(--text); white-space: pre-wrap; }
+  .post-text { font-size: 1.05rem; line-height: 2; color: var(--text); white-space: pre-wrap; font-family: "Noto Serif Bengali", serif; }
   .post-img { width: 100%; border-radius: 12px; margin-top: 0.75rem; max-height: 320px; object-fit: cover; }
-  .mask-info { display: inline-flex; align-items: center; gap: 4px; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); border-radius: 8px; padding: 0.18rem 0.55rem; font-size: 0.68rem; font-weight: 700; color: #dc2626; margin-top: 0.6rem; }
+  .mask-info { display: inline-flex; align-items: center; gap: 6px; background: #dc2626; border: none; border-radius: 8px; padding: 0.3rem 0.8rem; font-size: 0.8rem; font-weight: 700; color: #ffffff; margin-top: 0.7rem; cursor: pointer; }
   .cta-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); border-radius: var(--radius-lg); padding: 1.4rem 1.2rem; text-align: center; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
   .cta-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,215,0,0.12) 0%, transparent 65%); pointer-events: none; }
   .cta-inner { position: relative; z-index: 1; }
@@ -1068,6 +1069,8 @@ function lsDoLogin() {
     .then(data => {
       btn.classList.remove('loading');
       if (data.success) {
+        adminToken = data.token || 'user_session';
+        window._userMobile = mobile;
         closeLogin();
         showPage('user');
       } else {
@@ -1108,7 +1111,7 @@ function lsDoAdminLogin() {
   fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
-      if(data.success){adminToken=data.token||'';closeLogin();showPage('admin');}
+      if(data.success){adminToken='admin_session';closeLogin();showPage('admin');}
       else{document.getElementById('adminAlertMsg').textContent=data.message||'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';al.classList.add('show');}
     }).catch(()=>{btn.classList.remove('loading');document.getElementById('adminAlertMsg').textContent='সংযোগ সমস্যা।';al.classList.add('show');});
 }
@@ -1121,7 +1124,11 @@ function fmtDtNews(d) {
   if (!d) return '';
   return new Date(d).toLocaleDateString('bn-BD', {year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
 }
-function hasMobile(text) { return /01[3-9]\d{5}\*\*\*/.test(text); }
+function hasMobile(text) { return /1[3-9]\d+\*\*/.test(text); }
+function highlightMasked(text) {
+  return text.replace(/([\+\d০-৯\s\-]*[1১][3-9৩-৯][\d০-৯\s\-]{5,12}\*\*)/g,
+    '<span style="background:#fff3cd;color:#856404;font-weight:700;padding:1px 5px;border-radius:4px;border:1px solid #ffc107;white-space:nowrap">$1 🔒</span>');
+}
 
 async function loadNews() {
   if (newsLoaded) return;
@@ -1131,9 +1138,10 @@ async function loadNews() {
     wrap.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>এখনো কোনো পোস্ট নেই।</div>';
     return;
   }
+  const isMasked = res.masked || false;
   wrap.innerHTML = res.posts.map(p => {
     const hasNum = hasMobile(p.content);
-    return `<div class="post-card"><div class="post-date">📅 ${fmtDtNews(p.created_at)}</div><div class="post-body"><div class="post-text">${escHtml(p.content)}</div>${hasNum ? '<div class="mask-info">🔒 নাম্বারের শেষ ৩টি সংখ্যা লুকানো</div>' : ''}${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
+    return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div><div class="post-body"><div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
 }
@@ -1142,10 +1150,10 @@ async function loadNews() {
    USER DASHBOARD PAGE
 ══════════════════════════════════════ */
 function formatDateUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric'}); }
-function formatDatetimeUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function formatDatetimeUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
 
 async function loadUserDashboard() {
-  const res = await api('get_user_dashboard');
+  const res = await api('get_user_dashboard', {mobile: window._userMobile || ''});
   if (!res.success) { showPage('home'); return; }
   const {user, days_left, is_active, posts} = res;
   document.getElementById('udMainContent').innerHTML = `
@@ -1162,7 +1170,7 @@ async function loadUserDashboard() {
       <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon">${days_left>=0?'📆':'🚫'}</div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
     </div>
     <div class="section-header"><div class="section-header-icon">📰</div><div><div class="section-header-title">সর্বশেষ নিউজ ও পোস্টসমূহ</div><div class="section-header-sub">সম্পূর্ণ মোবাইল নাম্বারসহ</div></div></div>
-    ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">📅 ${formatDatetimeUD(p.created_at)}</div><div class="ud-post-card-body"><div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
+    ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div><div class="ud-post-card-body"><div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
   `;
 }
 
@@ -1176,7 +1184,7 @@ async function doUserLogout() {
 ══════════════════════════════════════ */
 function admEsc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function admFmtDate(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric'}); }
-function admFmtDt(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function admFmtDt(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
 function admIsExpired(dateStr) { return new Date(dateStr) < new Date(new Date().toDateString()); }
 function admShowAlert(id, msg, type='error') {
   const el = document.getElementById(id);
@@ -1222,10 +1230,10 @@ async function admLoadPosts() {
   if (!res.success || !res.posts.length) { c.innerHTML = '<div class="adm-empty">কোনো পোস্ট নেই।</div>'; return; }
   c.innerHTML = res.posts.map(p => `
     <div class="post-item" id="postItem${p.id}">
-      <div class="post-item-date">📅 ${admFmtDt(p.created_at)}
+      <div class="post-item-date">${admFmtDt(p.created)}
         <div class="post-item-actions">
-          <button class="btn btn-warning btn-sm" onclick="openEditPost(${p.id}, \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button>
-          <button class="btn btn-danger btn-sm" onclick="deletePost(${p.id})">🗑️</button>
+          <button class="btn btn-warning btn-sm" onclick="openEditPost('${p.id}', \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button>
         </div>
       </div>
       <div class="post-item-body"><div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
@@ -1240,13 +1248,13 @@ function closeEditPost() { document.getElementById('editPostModal').classList.re
 async function saveEditPost() {
   const id=document.getElementById('editPostId').value, content=document.getElementById('editPostContent').value.trim();
   if (!content) return;
-  const res = await api('admin_edit_post', {id: parseInt(id), content});
+  const res = await api('admin_edit_post', {id: String(id), content});
   if (res.success) { closeEditPost(); admLoadPosts(); newsLoaded=false; }
 }
 async function deletePost(id) {
-  if (!confirm('এই পোস্ট মুছে ফেলবেন?')) return;
+
   const res = await api('admin_delete_post', {id});
-  if (res.success) { document.getElementById('postsContainer').querySelector(`#postItem${id}`)?.remove(); newsLoaded=false; }
+  if (res.success) { document.getElementById(`postItem${id}`)?.remove(); newsLoaded=false; admLoadPosts(); }
 }
 
 let admSearchTimer = null;
@@ -1261,7 +1269,7 @@ async function admLoadUsers() {
     return `<div class="user-card-adm" id="userCard${u.id}">
       <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
       <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
-      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>📅 মেয়াদ</button><button class="btn btn-danger btn-sm" onclick="deleteUser(${u.id})">🗑️ মুছুন</button></div>
+      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>${u.expiresAt ? Math.ceil((u.expiresAt - Date.now()) / 86400000) + ' দিন বাকি' : 'মেয়াদ নেই'}</button><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
     </div>`;
   }).join('');
 }
@@ -1279,7 +1287,7 @@ async function saveUser() {
   if (!id&&!pass){admShowAlert('userModalAlert','পাসওয়ার্ড দিন।');return;}
   btn.disabled=true; btn.innerHTML='<span class="spinner-inline"></span>';
   const action=id?'admin_edit_user':'admin_create_user';
-  const payload=id?{id:parseInt(id),name,mobile,address,expiry_date:expiry,password:pass}:{name,mobile,address,password:pass,expiry_date:expiry};
+  const payload=id?{id:String(id),name,mobile,address,expiry_date:expiry,password:pass}:{name,mobile,address,password:pass,expiry_date:expiry};
   const res=await api(action,payload);
   btn.disabled=false; btn.innerHTML='💾 সংরক্ষণ করুন';
   if(res.success){closeUserModal();admLoadUsers();}else admShowAlert('userModalAlert',res.message||'সংরক্ষণ করা যায়নি।');
@@ -1290,7 +1298,7 @@ async function deleteUser(id) {
   if(res.success) admLoadUsers();
 }
 function openExtend(id, name, mobile, expiry) {
-  document.getElementById('extendUserId').value=id; document.getElementById('extendUserInfo').textContent=`👤 ${name}  📱 ${mobile}  📅 বর্তমান মেয়াদ: ${admFmtDate(expiry)}`; document.getElementById('extendDays').value=''; document.getElementById('extendDate').value=''; document.getElementById('extendModal').classList.add('open');
+  document.getElementById('extendUserId').value=id; document.getElementById('extendUserInfo').textContent=`👤 ${name}  📱 ${mobile}  বর্তমান মেয়াদ: ${admFmtDate(expiry)}`; document.getElementById('extendDays').value=''; document.getElementById('extendDate').value=''; document.getElementById('extendModal').classList.add('open');
 }
 function closeExtendModal() { document.getElementById('extendModal').classList.remove('open'); }
 async function saveExtend() {

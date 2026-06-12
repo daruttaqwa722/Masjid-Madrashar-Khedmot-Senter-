@@ -225,7 +225,17 @@ if ($action === 'admin_create_post') {
     $cats     = json_encode($body['cats'] ?? []);
     $mainCat  = $body['mainCat'] ?? '';
     $subCat   = $body['subCat'] ?? '';
-    $imgUrl   = $body['image_base64'] ?? '';
+    $imgBase64 = $body['image_base64'] ?? '';
+    $imgUrl = '';
+    if ($imgBase64) {
+        $imgData = base64_decode(preg_replace('#^data:image/\w+;base64,#', '', $imgBase64));
+        $imgExt  = 'jpg';
+        if (str_contains($imgBase64, 'image/png')) $imgExt = 'png';
+        if (str_contains($imgBase64, 'image/webp')) $imgExt = 'webp';
+        $imgName = 'uploads/' . uniqid() . '.' . $imgExt;
+        file_put_contents('/home/khedmotcenter/htdocs/khedmotcenter.com/' . $imgName, $imgData);
+        $imgUrl  = $imgName;
+    }
     $hasNum   = (int)($body['hasNumber'] ?? 0);
     $category = $body['category'] ?? 'mosque';
     $created  = time() * 1000;
