@@ -531,5 +531,16 @@ switch ($r) {
         if (!$action) echo json_encode(['error' => 'invalid route']);
         break;
 }
+
+// CHECK DUPLICATE
+if ($action === "check_duplicate") {
+    $text = $body["content"] ?? "";
+    $dup = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
+    $dup->bind_param("s", $text);
+    $dup->execute();
+    $dup->store_result();
+    echo json_encode(["duplicate" => $dup->num_rows > 0]);
+    exit();
+}
 $db->close();
 ?>
