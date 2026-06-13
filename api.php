@@ -219,6 +219,21 @@ if ($action === 'get_user_dashboard') {
 }
 
 
+// 24/48/72 ঘণ্টার ফিল্টার count
+if ($action === 'get_filter_counts') {
+    $hours = [24, 48, 72];
+    $result = [];
+    foreach ($hours as $h) {
+        $since = (time() - $h * 3600) * 1000;
+        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE created>=?");
+        $stmt->bind_param('s', $since);
+        $stmt->execute();
+        $result[$h] = (int)$stmt->get_result()->fetch_assoc()['cnt'];
+    }
+    echo json_encode(['success' => true, 'counts' => $result]);
+    exit();
+}
+
 // ৭২ ঘণ্টার পোস্ট count
 if ($action === 'get_72h_counts') {
     $since = (time() - 72 * 3600) * 1000;
