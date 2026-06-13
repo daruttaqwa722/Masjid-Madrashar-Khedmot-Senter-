@@ -1372,14 +1372,10 @@ async function submitJobPost() {
   btnTxt.innerHTML = '<span class="job-spinner"></span> জমা হচ্ছে…';
 
   try {
-    const jobCats = Array.from(document.querySelectorAll('.jobCatChk:checked')).map(x=>x.value);
-    const res = await api('submit_job_post', { notice, mobile: mobileClean, categories: jobCats });
+    const res = await api('submit_job_post', { notice, mobile: mobileClean });
     if (res && res.success) {
       document.getElementById('jobFormBox').style.display = 'none';
       document.getElementById('jobSuccessBox').style.display = 'flex';
-      document.querySelectorAll('.jobCatChk').forEach(x=>x.checked=false);
-      document.getElementById('jobNoticeField').value='';
-      document.getElementById('jobMobile').value='';
     } else {
       jobShowAlert(res?.message || 'কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।');
     }
