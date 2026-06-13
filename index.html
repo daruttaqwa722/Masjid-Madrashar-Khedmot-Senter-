@@ -1141,22 +1141,23 @@ function highlightMasked(text) {
 }
 
 async function load72hBar(containerId) {
-  // প্রথমে ফিল্টার বার যোগ করি
-  await loadFilterBar(containerId);
-  // তারপর ৭২ ঘন্টার ক্যাটাগরি বার
-  const res = await api('get_72h_counts');
-  if (!res.success) return;
-  const c = res.counts;
-  const bar = `<div style="display:flex;flex-direction:column;gap:6px;background:#f0f4ff;border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;font-weight:600;">
-    <div style="display:flex;justify-content:space-between;"><span>🕌 মসজিদের নিয়োগ বিজ্ঞপ্তি</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${c['mosque-jobs']||0}</span></div>
-    <div style="display:flex;justify-content:space-between;"><span>📚 পুরুষ মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${c['male-madrasa-jobs']||0}</span></div>
-    <div style="display:flex;justify-content:space-between;"><span>🎓 মহিলা মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${c['female-madrasa-jobs']||0}</span></div>
-  </div>`;
   const el = document.getElementById(containerId);
   if (!el) return;
-  const hdr = el.querySelector('.section-header');
-  if (hdr) hdr.insertAdjacentHTML('afterend', bar);
-  else el.insertAdjacentHTML('afterbegin', bar);
+  // প্রথমে ৭২ ঘন্টার ক্যাটাগরি বার
+  const res = await api('get_72h_counts');
+  if (res.success) {
+    const c = res.counts;
+    const catBar = `<div id="catBar_${containerId}" style="display:flex;flex-direction:column;gap:6px;background:#f0f4ff;border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;font-weight:600;">
+      <div style="display:flex;justify-content:space-between;"><span>🕌 মসজিদের নিয়োগ বিজ্ঞপ্তি</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${c['mosque-jobs']||0}</span></div>
+      <div style="display:flex;justify-content:space-between;"><span>📚 পুরুষ মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${c['male-madrasa-jobs']||0}</span></div>
+      <div style="display:flex;justify-content:space-between;"><span>🎓 মহিলা মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${c['female-madrasa-jobs']||0}</span></div>
+    </div>`;
+    const hdr = el.querySelector('.section-header');
+    if (hdr) hdr.insertAdjacentHTML('afterend', catBar);
+    else el.insertAdjacentHTML('afterbegin', catBar);
+  }
+  // তারপর ফিল্টার বার — ক্যাটাগরি বারের উপরে
+  await loadFilterBar(containerId);
 }
 
 async function loadFilterBar(containerId) {
