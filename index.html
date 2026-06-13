@@ -1141,6 +1141,9 @@ function highlightMasked(text) {
 }
 
 async function load72hBar(containerId) {
+  // প্রথমে ফিল্টার বার যোগ করি
+  await loadFilterBar(containerId);
+  // তারপর ৭২ ঘন্টার ক্যাটাগরি বার
   const res = await api('get_72h_counts');
   if (!res.success) return;
   const c = res.counts;
@@ -1154,6 +1157,53 @@ async function load72hBar(containerId) {
   const hdr = el.querySelector('.section-header');
   if (hdr) hdr.insertAdjacentHTML('afterend', bar);
   else el.insertAdjacentHTML('afterbegin', bar);
+}
+
+async function loadFilterBar(containerId) {
+  const res = await api('get_filter_counts');
+  if (!res.success) return;
+  const c = res.counts;
+  const barId = 'filterBar_' + containerId;
+  if (document.getElementById(barId)) return; // ইতিমধ্যে আছে
+  const bar = `<div id="${barId}" style="display:flex;gap:8px;margin-bottom:10px;justify-content:center;">
+    <button onclick="filterByHours(24,'${containerId}')" id="fbtn24_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
+      ২৪ ঘন্টা<br><span style="font-size:0.95rem;">(${c[24]||0})</span>
+    </button>
+    <button onclick="filterByHours(48,'${containerId}')" id="fbtn48_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
+      ৪৮ ঘন্টা<br><span style="font-size:0.95rem;">(${c[48]||0})</span>
+    </button>
+    <button onclick="filterByHours(72,'${containerId}')" id="fbtn72_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
+      ৭২ ঘন্টা<br><span style="font-size:0.95rem;">(${c[72]||0})</span>
+    </button>
+  </div>`;
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.insertAdjacentHTML('afterbegin', bar);
+}
+
+function filterByHours(hours, containerId) {
+  // বাটন হাইলাইট
+  [24,48,72].forEach(h => {
+    const btn = document.getElementById('fbtn'+h+'_'+containerId);
+    if (!btn) return;
+    if (h === hours) {
+      btn.style.background = '#05057D';
+      btn.style.color = '#FFD700';
+    } else {
+      btn.style.background = '#fff';
+      btn.style.color = '#05057D';
+    }
+  });
+  // পোস্ট ফিল্টার করি
+  const since = Date.now() - hours * 3600 * 1000;
+  const cards = document.querySelectorAll('#' + containerId + ' .post-card, #' + containerId + ' .post-item, #' + containerId + ' .ud-post-card');
+  cards.forEach(card => {
+    const dateEl = card.querySelector('.post-date, .post-item-date, .ud-post-card-date');
+    if (!dateEl) { card.style.display=''; return; }
+    const dateText = dateEl.textContent;
+    const postDate = new Date(dateText);
+    card.style.display = (isNaN(postDate) || postDate.getTime() >= since) ? '' : 'none';
+  });
 }
 async function loadNews() {
   if (newsLoaded) return;
