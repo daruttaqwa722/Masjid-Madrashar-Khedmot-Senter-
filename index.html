@@ -1166,15 +1166,16 @@ async function loadFilterBar(containerId) {
   const c = res.counts;
   const barId = 'filterBar_' + containerId;
   if (document.getElementById(barId)) return; // ইতিমধ্যে আছে
+  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
   const bar = `<div id="${barId}" style="display:flex;gap:8px;margin-bottom:10px;justify-content:center;">
     <button onclick="filterByHours(24,'${containerId}')" id="fbtn24_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
-      ২৪ ঘন্টা<br><span style="font-size:0.95rem;">(${c[24]||0})</span>
+      ২৪ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(c[24]||0)}</span>
     </button>
     <button onclick="filterByHours(48,'${containerId}')" id="fbtn48_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
-      ৪৮ ঘন্টা<br><span style="font-size:0.95rem;">(${c[48]||0})</span>
+      ৪৮ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(c[48]||0)}</span>
     </button>
     <button onclick="filterByHours(72,'${containerId}')" id="fbtn72_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
-      ৭২ ঘন্টা<br><span style="font-size:0.95rem;">(${c[72]||0})</span>
+      ৭২ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(c[72]||0)}</span>
     </button>
   </div>`;
   const el = document.getElementById(containerId);
@@ -1256,14 +1257,13 @@ async function loadUserDashboard() {
   const fres = await api('get_filter_counts');
   if (fres.success) {
     const c = fres.counts;
+    const bn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
     document.getElementById('udFilterBarWrap').innerHTML = `<div style="display:flex;gap:8px;margin-bottom:10px;justify-content:center;">
-      <button onclick="filterByHours(24,'udMainContent')" id="fbtn24_udMainContent" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">২৪ ঘন্টা<br><span style="font-size:0.95rem;">(${c[24]||0})</span></button>
-      <button onclick="filterByHours(48,'udMainContent')" id="fbtn48_udMainContent" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৪৮ ঘন্টা<br><span style="font-size:0.95rem;">(${c[48]||0})</span></button>
-      <button onclick="filterByHours(72,'udMainContent')" id="fbtn72_udMainContent" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৭২ ঘন্টা<br><span style="font-size:0.95rem;">(${c[72]||0})</span></button>
+      <button onclick="filterByHours(24,'udMainContent')" id="fbtn24_udMainContent" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">২৪ ঘন্টা<br><span style="font-size:0.95rem;">${bn(c[24]||0)}</span></button>
+      <button onclick="filterByHours(48,'udMainContent')" id="fbtn48_udMainContent" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৪৮ ঘন্টা<br><span style="font-size:0.95rem;">${bn(c[48]||0)}</span></button>
+      <button onclick="filterByHours(72,'udMainContent')" id="fbtn72_udMainContent" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৭২ ঘন্টা<br><span style="font-size:0.95rem;">${bn(c[72]||0)}</span></button>
     </div>`;
   }
-  // ক্যাটাগরি বার
-  load72hBar('udMainContent');
 }
 
 async function doUserLogout() {
