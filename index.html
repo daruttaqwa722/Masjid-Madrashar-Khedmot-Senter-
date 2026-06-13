@@ -887,7 +887,7 @@
 <label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;"><input type="checkbox" value="male-madrasa-jobs" class="admCatChk"> পুরুষ মাদ্রাসার নিয়োগ</label>
 <label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;"><input type="checkbox" value="female-madrasa-jobs" class="admCatChk"> মহিলা মাদ্রাসার নিয়োগ</label>
 </div>
-<textarea class="form-textarea" id="postContent" placeholder="এখানে লিখুন… মোবাইল নাম্বার, তথ্য ইত্যাদি।"></textarea>
+<div class="form-group"><label class="form-label">পদের নাম *</label><input class="form-input" type="text" id="postPosition" placeholder="যেমন: ইমাম, হাফেজ শিক্ষক"></div><div class="form-group"><label class="form-label">ঠিকানা *</label><input class="form-input" type="text" id="postAddress" placeholder="জেলা / উপজেলা / গ্রাম"></div><input type="hidden" id="postTitle"><input type="hidden" id="postSlug"><input type="hidden" id="postMetaTitle"><input type="hidden" id="postMetaDesc"><textarea class="form-textarea" id="postContent" placeholder="এখানে লিখুন… মোবাইল নাম্বার, তথ্য ইত্যাদি।"></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">ছবি (ঐচ্ছিক)</label>
@@ -1152,8 +1152,8 @@ async function loadNews() {
   wrap.innerHTML = res.posts.map(p => {
     const hasNum = hasMobile(p.content);
     const catMap={"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
-    const catTags=(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e8e8ff;color:#05057D;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap[c]||c}</span>`).join("");
-    return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags?`<div style="padding:0.3rem 0.85rem;">${catTags}</div>`:""}<div class="post-body"><div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
+    const catTags=(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap[c]||c}</span>`).join("");
+    return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags?`<div style="padding:0.3rem 0.85rem;">${catTags}</div>`:""}<div class="post-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
 }
@@ -1182,7 +1182,7 @@ async function loadUserDashboard() {
       <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon">${days_left>=0?'📆':'🚫'}</div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
     </div>
     <div class="section-header"><div class="section-header-icon">📰</div><div><div class="section-header-title">সর্বশেষ নিউজ ও পোস্টসমূহ</div><div class="section-header-sub">সম্পূর্ণ মোবাইল নাম্বারসহ</div></div></div>
-    ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e8e8ff;color:#05057D;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?`<div style="margin:0.3rem 0.8rem;">`+(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e8e8ff;color:#05057D;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`</div>`:''}<div class="ud-post-card-body"><div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
+    ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?`<div style="margin:0.3rem 0.8rem;">`+(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;margin-top:2px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
   `;
 }
 
@@ -1195,9 +1195,9 @@ async function doUserLogout() {
    ADMIN DASHBOARD PAGE
 ══════════════════════════════════════ */
 function admEsc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function admFmtDate(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric'}); }
+function admFmtDate(d) { if (!d) return '—'; if (typeof d === 'string' && d.includes('/')) { const p=d.split('/'); d=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric'}); }
 function admFmtDt(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
-function admIsExpired(dateStr) { return new Date(dateStr) < new Date(new Date().toDateString()); }
+function admIsExpired(dateStr) { if (!dateStr) return true; if (typeof dateStr === 'string' && dateStr.includes('/')) { const p=dateStr.split('/'); dateStr=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(dateStr) < new Date(new Date().toDateString()); }
 function admShowAlert(id, msg, type='error') {
   const el = document.getElementById(id);
   el.textContent = (type==='error'?'⚠️ ':'✅ ') + msg;
@@ -1226,10 +1226,10 @@ async function submitPost() {
   if (!content) { admShowAlert('postAlert','পোস্টের বিষয়বস্তু লিখুন।'); return; }
   const btn = document.getElementById('postBtnTxt');
   btn.innerHTML = '<span class="spinner-inline"></span> পোস্ট হচ্ছে…';
-  const res = await api('admin_create_post', {content, image_base64: admImgBase64, categories: admCats});
+  const title = document.getElementById('postTitle').value.trim(); const slug = document.getElementById('postSlug').value.trim(); const meta_title = document.getElementById('postMetaTitle').value.trim(); const meta_desc = document.getElementById('postMetaDesc').value.trim(); const position = document.getElementById('postPosition').value.trim(); const address = document.getElementById('postAddress').value.trim(); const res = await api('admin_create_post', {content, title, position, address, slug, meta_title, meta_desc, image_base64: admImgBase64, categories: admCats});
   btn.textContent = '📤 পোস্ট করুন';
   if (res.success) {
-    document.getElementById('postContent').value = '';
+    document.getElementById('postContent').value = ''; document.getElementById('postTitle').value = ''; document.getElementById('postPosition').value = ''; document.getElementById('postAddress').value = ''; document.getElementById('postSlug').value = ''; document.getElementById('postMetaTitle').value = ''; document.getElementById('postMetaDesc').value = '';
     document.querySelectorAll('.admCatChk').forEach(x=>x.checked=false);
     document.getElementById('imgPreview').style.display = 'none';
     document.getElementById('imgFileInput').value = '';
@@ -1252,7 +1252,7 @@ async function admLoadPosts() {
           <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button>
         </div>
       </div>
-      <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e8e8ff;color:#05057D;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e8e8ff;color:#05057D;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
+      <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
     </div>`).join('');
 }
 function openEditPost(id, content) {
@@ -1285,9 +1285,27 @@ async function admLoadUsers() {
     return `<div class="user-card-adm" id="userCard${u.id}">
       <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
       <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
-      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>${u.expiresAt ? Math.ceil((u.expiresAt - Date.now()) / 86400000) + ' দিন বাকি' : 'মেয়াদ নেই'}</button><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
+      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>${u.expiresAt ? Math.ceil((u.expiresAt - Date.now()) / 86400000) + ' দিন বাকি' : 'মেয়াদ নেই'}</button><button class="btn btn-sm" style="background:#6c757d;color:#fff;" onclick="showUserPass('${u.id}',this)">👁 পাসওয়ার্ড</button><span id="pass_${u.id}" style="display:none;font-size:13px;background:#fff3cd;padding:2px 8px;border-radius:4px;margin-left:4px;"></span><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
     </div>`;
   }).join('');
+}
+async function showUserPass(id, btn) { if (btn.dataset.loaded) { const span = document.getElementById("pass_"+id); span.style.display = span.style.display==="inline" ? "none" : "inline"; btn.textContent = span.style.display==="inline" ? "🙈 লুকান" : "👁 পাসওয়ার্ড"; return; } const res = await api("admin_get_password", {id}); const span = document.getElementById("pass_"+id); if (res.success) { span.textContent = res.plain_pass || "(সেট নেই)"; span.style.display = "inline"; btn.textContent = "🙈 লুকান"; btn.dataset.loaded = "1"; } else { alert("পাসওয়ার্ড পাওয়া যায়নি"); } }
+async function showUserPass(id, btn) {
+  const span = document.getElementById('pass_'+id);
+  if (btn.dataset.loaded) {
+    span.style.display = span.style.display==='inline' ? 'none' : 'inline';
+    btn.textContent = span.style.display==='inline' ? '🙈 লুকান' : '👁 পাসওয়ার্ড';
+    return;
+  }
+  const res = await api('admin_get_password', {id});
+  if (res.success) {
+    span.textContent = res.plain_pass || '(সেট নেই)';
+    span.style.display = 'inline';
+    btn.textContent = '🙈 লুকান';
+    btn.dataset.loaded = '1';
+  } else {
+    alert('পাসওয়ার্ড পাওয়া যায়নি');
+  }
 }
 function openUserModal() {
   document.getElementById('editUserId').value=''; document.getElementById('uName').value=''; document.getElementById('uMobile').value=''; document.getElementById('uAddress').value=''; document.getElementById('uPassword').value=''; document.getElementById('uExpiry').value=admDefaultExpiry(); document.getElementById('userModalTitle').textContent='নতুন ইউজার তৈরি'; document.getElementById('pwHint').textContent='(নতুন ইউজারের জন্য বাধ্যতামূলক)'; document.getElementById('userModal').classList.add('open');

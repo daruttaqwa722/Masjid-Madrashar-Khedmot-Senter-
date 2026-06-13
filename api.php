@@ -66,12 +66,21 @@ function getCatName($cat) {
     return $names[$cat] ?? 'নিয়োগ বিজ্ঞপ্তি';
 }
 
-function autoSEO($text, $category, $id) {
-    $catName    = getCatName($category);
-    $first_line = explode("\n", trim($text))[0];
-    $title      = mb_substr($first_line, 0, 55) . ' | ' . $catName;
+function autoSEO($text, $category, $id, $position='', $address='') {
+    $catName = getCatName($category);
+    $year    = date('Y');
+    if ($position && $address) {
+        $title = $address . 'এ ' . $position . ' নিয়োগ ' . $year;
+    } elseif ($position) {
+        $title = $position . ' নিয়োগ ' . $year . ' | ' . $catName;
+    } elseif ($address) {
+        $title = $address . 'এ ' . $catName . ' নিয়োগ ' . $year;
+    } else {
+        $first_line = explode("\n", trim($text))[0];
+        $title = mb_substr($first_line, 0, 55);
+    }
     $slug       = $id;
-    $meta_title = mb_substr($title, 0, 60) . ' | খেদমত সেন্টার';
+    $meta_title = mb_substr($title, 0, 55) . ' | খেদমত সেন্টার';
     $clean      = preg_replace('/\s+/', ' ', strip_tags($text));
     $meta_desc  = mb_substr($clean, 0, 150) . '...';
     return [$title, $slug, $meta_title, $meta_desc];
@@ -149,8 +158,8 @@ if ($action === 'register') {
     $hash      = password_hash($pass, PASSWORD_DEFAULT);
     $createdAt = time() * 1000;
     $expiresAt = $createdAt + (30 * 86400 * 1000);
-    $stmt = $db->prepare("INSERT INTO users (id, name, mobile, address, password, role, createdAt, expiresAt) VALUES (?,?,?,?,?,'user',?,?)");
-    $stmt->bind_param('sssssii', $id, $name, $mobile, $address, $hash, $createdAt, $expiresAt);
+    $stmt = $db->prepare("INSERT INTO users (id, name, mobile, address, password, plain_pass, role, createdAt, expiresAt) VALUES (?,?,?,?,?,?,'user',?,?)");
+    $stmt->bind_param('ssssssii', $id, $name, $mobile, $address, $hash, $pass, $createdAt, $expiresAt);
     $stmt->execute();
     echo json_encode(['success' => true]);
     exit();
@@ -225,22 +234,9 @@ if ($action === 'admin_create_post') {
     $cats     = json_encode($body['cats'] ?? []);
     $mainCat  = $body['mainCat'] ?? '';
     $subCat   = $body['subCat'] ?? '';
-    $imgBase64 = $body['image_base64'] ?? '';
-    $imgUrl = '';
-    if ($imgBase64) {
-        $imgData = base64_decode(preg_replace('#^data:image/\w+;base64,#', '', $imgBase64));
-        $imgExt  = 'jpg';
-        if (str_contains($imgBase64, 'image/png')) $imgExt = 'png';
-        if (str_contains($imgBase64, 'image/webp')) $imgExt = 'webp';
-        $imgName = 'uploads/' . uniqid() . '.' . $imgExt;
-        file_put_contents('/home/khedmotcenter/htdocs/khedmotcenter.com/' . $imgName, $imgData);
-        $imgUrl  = $imgName;
-    }
+    $imgUrl   = $body['image_base64'] ?? '';
     $hasNum   = (int)($body['hasNumber'] ?? 0);
-    $cats_arr = $body['categories'] ?? [];
-    if (empty($cats_arr)) { echo json_encode(['success' => false, 'message' => 'ক্যাটাগরি সিলেক্ট করুন।']); exit(); }
-    $category = $cats_arr[0];
-    $cats     = json_encode($cats_arr, JSON_UNESCAPED_UNICODE);
+    $category = $body['category'] ?? 'mosque';
     $created  = time() * 1000;
     $timeStr  = date('d/m/Y');
     if (!$text) { echo json_encode(['success' => false, 'message' => 'পোস্ট লিখুন।']); exit(); }
@@ -253,13 +249,13 @@ if ($action === 'admin_create_post') {
     $slug       = $body['slug'] ?? '';
     $meta_title = $body['meta_title'] ?? '';
     $meta_desc  = $body['meta_desc'] ?? '';
-    list($autoTitle, $autoSlug, $autoMeta, $autoDesc) = autoSEO($text, $category, $id);
+    list($autoTitle, $autoSlug, $autoMeta, $autoDesc) = autoSEO($text, $category, $id, $position, $address);
     if (!$title)      $title      = $autoTitle;
     if (!$slug)       $slug       = $autoSlug;
     if (!$meta_title) $meta_title = $autoMeta;
     if (!$meta_desc)  $meta_desc  = $autoDesc;
-    $stmt = $db->prepare("INSERT INTO posts (id, text, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc) VALUES (?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?)");
-    $stmt->bind_param('sssssssisssssss', $id, $text, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $title, $slug, $category, $meta_title, $meta_desc);
+    $position = $body["position"] ?? ""; $address = $body["address"] ?? ""; if (!$title) $title = trim(($position ? $position : "") . ($address ? " - " . $address : "") . " নিয়োগ " . date("Y")); $stmt = $db->prepare("INSERT INTO posts (id, text, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc, position, address) VALUES (?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssssisssssssss', $id, $text, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $title, $slug, $category, $meta_title, $meta_desc, $position, $address);
     $stmt->execute();
     echo json_encode(['success' => true, 'id' => $id]);
     exit();
@@ -303,12 +299,12 @@ if ($action === 'admin_get_users') {
     $search = $body['search'] ?? '';
     if ($search) {
         $s = "%$search%";
-        $stmt = $db->prepare("SELECT id, name, mobile, address, role, createdAt, expiresAt FROM users WHERE mobile LIKE ? OR name LIKE ? ORDER BY createdAt DESC");
+        $stmt = $db->prepare("SELECT id, name, mobile, address, role, plain_pass, createdAt, expiresAt FROM users WHERE mobile LIKE ? OR name LIKE ? ORDER BY createdAt DESC");
         $stmt->bind_param('ss', $s, $s);
         $stmt->execute();
         $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     } else {
-        $rows = $db->query("SELECT id, name, mobile, address, role, createdAt, expiresAt FROM users ORDER BY createdAt DESC")->fetch_all(MYSQLI_ASSOC);
+        $rows = $db->query("SELECT id, name, mobile, address, role, plain_pass, createdAt, expiresAt FROM users ORDER BY createdAt DESC")->fetch_all(MYSQLI_ASSOC);
     }
     foreach ($rows as &$row) {
         $row['expiry_date'] = $row['expiresAt'] ? date('d/m/Y', intval($row['expiresAt']) / 1000) : '';
@@ -334,8 +330,8 @@ if ($action === 'admin_create_user') {
     $hash      = password_hash($pass, PASSWORD_DEFAULT);
     $expiresAt = strtotime(str_replace('/', '-', $expiry)) * 1000;
     $createdAt = time() * 1000;
-    $stmt = $db->prepare("INSERT INTO users (id, name, mobile, address, password, role, createdAt, expiresAt) VALUES (?,?,?,?,?,'user',?,?)");
-    $stmt->bind_param('sssssii', $id, $name, $mobile, $address, $hash, $createdAt, $expiresAt);
+    $stmt = $db->prepare("INSERT INTO users (id, name, mobile, address, password, plain_pass, role, createdAt, expiresAt) VALUES (?,?,?,?,?,?,'user',?,?)");
+    $stmt->bind_param('ssssssii', $id, $name, $mobile, $address, $hash, $pass, $createdAt, $expiresAt);
     $stmt->execute();
     echo json_encode(['success' => true]);
     exit();
@@ -352,8 +348,8 @@ if ($action === 'admin_edit_user') {
     $expiresAt = $expiry ? strtotime(str_replace('/', '-', $expiry)) * 1000 : 0;
     if ($pass) {
         $hash = password_hash($pass, PASSWORD_DEFAULT);
-        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, password=?, expiresAt=? WHERE id=?");
-        $stmt->bind_param('ssssis', $name, $mobile, $address, $hash, $expiresAt, $id);
+        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, password=?, plain_pass=?, expiresAt=? WHERE id=?");
+        $stmt->bind_param('sssssis', $name, $mobile, $address, $hash, $pass, $expiresAt, $id);
     } else {
         $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, expiresAt=? WHERE id=?");
         $stmt->bind_param('sssis', $name, $mobile, $address, $expiresAt, $id);
@@ -363,6 +359,20 @@ if ($action === 'admin_edit_user') {
     exit();
 }
 
+
+// ADMIN — GET USER PASSWORD
+if ($action === 'admin_get_password') {
+    $token = $body['token'] ?? '';
+    if ($token !== 'admin_session') { echo json_encode(['success' => false, 'message' => 'অনুমতি নেই']); exit(); }
+    $id = $body['id'] ?? '';
+    if (!$id) { echo json_encode(['success' => false, 'message' => 'id প্রয়োজন']); exit(); }
+    $stmt = $db->prepare("SELECT plain_pass FROM users WHERE id=? LIMIT 1");
+    $stmt->bind_param('s', $id);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    echo json_encode(['success' => true, 'plain_pass' => $row['plain_pass'] ?? '']);
+    exit();
+}
 // ADMIN — DELETE USER
 if ($action === 'admin_delete_user') {
     $id = $body['id'] ?? '';
