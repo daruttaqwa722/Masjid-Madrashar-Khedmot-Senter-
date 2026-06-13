@@ -237,10 +237,7 @@ if ($action === 'admin_create_post') {
         $imgUrl  = $imgName;
     }
     $hasNum   = (int)($body['hasNumber'] ?? 0);
-    $cats_arr = $body['categories'] ?? [];
-    if (empty($cats_arr)) { echo json_encode(['success' => false, 'message' => 'ক্যাটাগরি সিলেক্ট করুন।']); exit(); }
-    $category = $cats_arr[0];
-    $cats     = json_encode($cats_arr, JSON_UNESCAPED_UNICODE);
+    $category = $body['category'] ?? 'mosque';
     $created  = time() * 1000;
     $timeStr  = date('d/m/Y');
     if (!$text) { echo json_encode(['success' => false, 'message' => 'পোস্ট লিখুন।']); exit(); }
