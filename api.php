@@ -218,6 +218,21 @@ if ($action === 'get_user_dashboard') {
     exit();
 }
 
+
+// ৭২ ঘণ্টার পোস্ট count
+if ($action === 'get_72h_counts') {
+    $since = (time() - 72 * 3600) * 1000;
+    $cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
+    $counts = [];
+    foreach ($cats as $cat) {
+        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE category=? AND created>=?");
+        $stmt->bind_param('ss', $cat, $since);
+        $stmt->execute();
+        $counts[$cat] = $stmt->get_result()->fetch_assoc()['cnt'];
+    }
+    echo json_encode(['success' => true, 'counts' => $counts]);
+    exit();
+}
 // ADMIN — GET POSTS
 if ($action === 'admin_get_posts') {
     $rows  = $db->query("SELECT * FROM posts ORDER BY created DESC")->fetch_all(MYSQLI_ASSOC);
