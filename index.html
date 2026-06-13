@@ -1003,7 +1003,7 @@ function showPage(name) {
 ══════════════════════════════════════ */
 let adminToken = '';
 const api = (action, data={}) =>
-  fetch('api.php', {
+  fetch('https://khedmotcenter.com/api.php', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({action, token: adminToken, ...data})
@@ -1074,7 +1074,7 @@ function lsDoLogin() {
   if (password.length < 4) { document.getElementById('lsGrpPw').classList.add('err'); ok = false; }
   if (!ok) return;
   btn.classList.add('loading');
-  fetch('api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'user_login', mobile, password})})
+  fetch('https://khedmotcenter.com/api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'user_login', mobile, password})})
     .then(r => r.json())
     .then(data => {
       btn.classList.remove('loading');
@@ -1103,7 +1103,7 @@ function lsDoRegister() {
   if (!/^01[3-9]\d{8}$/.test(mobile)){alert('সঠিক মোবাইল নাম্বার দিন।');return;}
   if (password.length<6){alert('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।');return;}
   btn.classList.add('loading');
-  fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'register',name,address,mobile,password})})
+  fetch('https://khedmotcenter.com/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'register',name,address,mobile,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
       if(data.success){document.getElementById('lsRegWrap').classList.remove('open');const al=document.getElementById('userAlert');al.className='ls-alert ls-alert-success show';document.getElementById('userAlertMsg').textContent='অ্যাকাউন্ট তৈরি হয়েছে! এখন লগইন করুন।';}
@@ -1118,7 +1118,7 @@ function lsDoAdminLogin() {
   al.classList.remove('show');
   if (!email||!password){alert('ইমেইল ও পাসওয়ার্ড প্রয়োজন।');return;}
   btn.classList.add('loading');
-  fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
+  fetch('https://khedmotcenter.com/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
       if(data.success){adminToken='admin_session';closeLogin();showPage('admin');}
@@ -1513,7 +1513,7 @@ async function checkDuplicateNow() {
   const text = document.getElementById('postContent').value.trim();
   const el = document.getElementById('postAlert');
   if (!text) { el.className = 'alert'; return; }
-  const res = await fetch('api.php', {
+  const res = await fetch('https://khedmotcenter.com/api.php', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({action: 'check_duplicate', content: text})
