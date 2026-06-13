@@ -1268,7 +1268,7 @@ async function saveEditPost() {
   if (res.success) { closeEditPost(); admLoadPosts(); newsLoaded=false; }
 }
 async function deletePost(id) {
-
+  if (!confirm('এই পোস্ট মুছে ফেলবেন?')) return;
   const res = await api('admin_delete_post', {id});
   if (res.success) { document.getElementById(`postItem${id}`)?.remove(); newsLoaded=false; admLoadPosts(); }
 }
