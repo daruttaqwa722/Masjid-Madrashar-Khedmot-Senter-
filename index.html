@@ -1264,6 +1264,8 @@ async function loadUserDashboard() {
       <button onclick="filterByHours(72,'udMainContent')" id="fbtn72_udMainContent" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৭২ ঘন্টা<br><span style="font-size:0.95rem;">${bn(c[72]||0)}</span></button>
     </div>`;
   }
+  // ৭২ ঘন্টার ক্যাটাগরি বার
+  load72hBar('udMainContent');
 }
 
 async function doUserLogout() {
