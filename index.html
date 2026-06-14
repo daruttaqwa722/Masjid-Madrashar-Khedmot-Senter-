@@ -1199,7 +1199,7 @@ async function loadFilterBar(containerId) {
   el.insertAdjacentHTML('afterbegin', bar);
 }
 
-function filterByHours(hours, containerId) {
+async function filterByHours(hours, containerId) {
   // বাটন হাইলাইট
   [24,48,72].forEach(h => {
     const btn = document.getElementById('fbtn'+h+'_'+containerId);
@@ -1212,16 +1212,20 @@ function filterByHours(hours, containerId) {
       btn.style.color = '#05057D';
     }
   });
-  // পোস্ট ফিল্টার করি
-  const since = Date.now() - hours * 3600 * 1000;
-  const cards = document.querySelectorAll('#' + containerId + ' .post-card, #' + containerId + ' .post-item, #' + containerId + ' .ud-post-card');
-  cards.forEach(card => {
-    const dateEl = card.querySelector('.post-date, .post-item-date, .ud-post-card-date');
-    if (!dateEl) { card.style.display=''; return; }
-    const dateText = dateEl.textContent;
-    const postDate = new Date(dateText);
-    card.style.display = (isNaN(postDate) || postDate.getTime() >= since) ? '' : 'none';
-  });
+  // ক্যাটাগরি কাউন্ট আপডেট
+  const res = await api('get_filter_counts');
+  if (res.success && res.counts.cat && res.counts.cat[hours]) {
+    const cc = res.counts.cat[hours];
+    const catBar = document.getElementById('catBar_' + containerId);
+    if (catBar) {
+      const rows = catBar.querySelectorAll('div');
+      const cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
+      rows.forEach((row, i) => {
+        const span = row.querySelector('span:last-child');
+        if (span && cats[i]) span.textContent = cc[cats[i]] || 0;
+      });
+    }
+  }
 }
 async function loadNews() {
   if (newsLoaded) return;
