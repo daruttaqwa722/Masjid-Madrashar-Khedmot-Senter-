@@ -433,6 +433,7 @@
 
   <div class="live-update-section">
     <div class="live-total-card">
+      <div class="live-header"><span class="live-dot"></span>লাইভ আপডেট</div>
       <div class="live-count" id="liveTotal">...</div>
       <div class="live-label">নতুন খেদমতের পোস্ট এসেছে</div>
     </div>
@@ -1690,6 +1691,9 @@ document.getElementById('postContent').addEventListener('input', function(e) {
     @keyframes jobPopIn { from { transform:scale(0.3);opacity:0; } to { transform:scale(1);opacity:1; } }
     @keyframes jobFadeUp { from { transform:translateY(14px);opacity:0; } to { transform:translateY(0);opacity:1; } }
   .live-update-section { padding: 1.2rem 1rem 0.5rem; }
+  .live-dot { width: 10px; height: 10px; background: #ff0000; border-radius: 50%; display: inline-block; margin-right: 6px; animation: livePulse 1.5s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
+  @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); } 70% { box-shadow: 0 0 0 8px rgba(255,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); } }
+  .live-header { display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem; font-size: 0.9rem; font-weight: 700; color: var(--white); }
   .live-total-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy-mid)); border-radius: var(--radius-md); padding: 1.4rem 1rem; text-align: center; margin-bottom: 0.9rem; box-shadow: var(--shadow-md); }
   .live-count { font-size: 3rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.4rem; }
   .live-label { font-size: 0.9rem; color: var(--white); opacity: 0.9; }
