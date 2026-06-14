@@ -1533,8 +1533,40 @@ async function checkDuplicateNow() {
     el.className = 'alert';
   }
 }
+function autoFormatPost(text) {
+  if (!text.trim()) return text;
+  const lines = text.split(/
+/).map(l => l.trim()).filter(l => l);
+  if (lines.length === 0) return text;
+  const mobRegex = /01[3-9]\d{8}/g;
+  const salRegex = /(?:বেতন|মাসিক)[^\d০-৯]*([০-৯\d][০-৯\d,]*)/i;
+  const districts = ['ঢাকা','চট্টগ্রাম','সিলেট','রাজশাহী','খুলনা','বরিশাহল','ময়মনসিংহ','রংপুর','কুমিল্লা','নোয়াখালী','ফেনী','ব্রাহ্মণবাড়িয়া','নারায়ণগঞ্জ','গাজীপুর','বগুড়া','যশোর','কক্সবাজার','হবিগঞ্জ','মৌলভীবাজার','সুনামগঞ্জ','দিনাজপুর','পাবনা'];
+  const fullText = lines.join(' ');
+  const mobiles = [...new Set(fullText.match(mobRegex) || [])];
+  const salMatch = fullText.match(salRegex);
+  const salary = salMatch ? salMatch[1] : '';
+  const district = districts.find(d => fullText.includes(d)) || '';
+  const title = lines[0];
+  const others = lines.slice(1).filter(l => {
+    const hasMob = /01[3-9]\d{8}/.test(l);
+    const hasSal = /(?:বেতন|মাসিক)/i.test(l);
+    return !hasMob && !hasSal;
+  });
+  let result = [title];
+  if (district) result.push('📍 ' + district);
+  if (salary) result.push('💰 বেতন: ' + salary + ' টাকা');
+  if (others.length) result.push(...others);
+  if (mobiles.length) result.push('📞 যোগাযোগ: ' + mobiles.join(', '));
+  return result.join('
+');
+}
+
 document.getElementById('postContent').addEventListener('paste', function(e) {
-  setTimeout(checkDuplicateNow, 100);
+  setTimeout(() => {
+    const ta = document.getElementById('postContent');
+    ta.value = autoFormatPost(ta.value);
+    checkDuplicateNow();
+  }, 150);
 });
 document.getElementById('postContent').addEventListener('input', function(e) {
   setTimeout(checkDuplicateNow, 100);
