@@ -1533,60 +1533,8 @@ async function checkDuplicateNow() {
     el.className = 'alert';
   }
 }
-function autoFormatPost(text) {
-  if (!text.trim()) return text;
-  const lines = text.split(/
-/).map(l => l.trim()).filter(l => l);
-  const mobileRegex = /(?:01[3-9]\d{8})/g;
-  const salaryRegex = /(?:বেতন|salary|মাসিক)[^\d]*(\d[\d,০-৯]*)/i;
-  const districtList = ['ঢাকা','চট্টগ্রাম','সিলেট','রাজশাহী','খুলনা','বরিশাল','ময়মনসিংহ','রংপুর','কুমিল্লা','নোয়াখালী','ফেনী','লক্ষ্মীপুর','চাঁদপুর','ব্রাহ্মণবাড়িয়া','নারায়ণগঞ্জ','গাজীপুর','মানিকগঞ্জ','মুন্সিগঞ্জ','ফরিদপুর','গোপালগঞ্জ','মাদারীপুর','শরীয়তপুর','নরসিংদী','কিশোরগঞ্জ','টাঙ্গাইল','জামালপুর','নেত্রকোনা','শেরপুর','ময়মনসিংহ','পটুয়াখালী','ভোলা','পিরোজপুর','ঝালকাঠি','বরগুনা','বগুড়া','সিরাজগঞ্জ','নাটোর','নওগাঁ','চাঁপাইনবাবগঞ্জ','পাবনা','জয়পুরহাট','যশোর','ঝিনাইদহ','মাগুরা','নড়াইল','সাতক্ষীরা','বাগেরহাট','মেহেরপুর','কুষ্টিয়া','চুয়াডাঙ্গা','দিনাজপুর','ঠাকুরগাঁও','পঞ্চগড়','নীলফামারী','লালমনিরহাট','কুড়িগ্রাম','গাইবান্ধা','হবিগঞ্জ','মৌলভীবাজার','সুনামগঞ্জ','কক্সবাজার','বান্দরবান','রাঙ্গামাটি','খাগড়াছড়ি'];
-
-  let title = '', address = '', salary = '', mobile = [], others = [];
-  let fullText = lines.join(' ');
-
-  // মোবাইল নম্বর খুঁজি
-  const mobiles = fullText.match(mobileRegex) || [];
-  mobile = [...new Set(mobiles)];
-
-  // বেতন খুঁজি
-  const salaryMatch = fullText.match(salaryRegex);
-  if (salaryMatch) salary = salaryMatch[1].replace(/,/g, '');
-
-  // জেলা খুঁজি
-  let foundDistrict = '';
-  for (const d of districtList) {
-    if (fullText.includes(d)) { foundDistrict = d; break; }
-  }
-
-  // প্রতিটা লাইন প্রসেস করি
-  lines.forEach((line, i) => {
-    const hasMob = mobileRegex.test(line); mobileRegex.lastIndex = 0;
-    const hasSalary = salaryRegex.test(line);
-    const hasDistrict = districtList.some(d => line.includes(d));
-    if (i === 0) { title = line; }
-    else if (hasMob) { /* skip — নিচে যোগ হবে */ }
-    else if (hasSalary) { /* skip — নিচে যোগ হবে */ }
-    else { others.push(line); }
-  });
-
-  // সাজানো পোস্ট তৈরি
-  let result = [];
-  if (title) result.push(title);
-  if (foundDistrict) result.push('📍 ' + foundDistrict);
-  if (salary) result.push('💰 বেতন: ' + salary + ' টাকা');
-  if (others.length) result.push(...others);
-  if (mobile.length) result.push('📞 যোগাযোগ: ' + mobile.join(', '));
-
-  return result.join('
-');
-}
-
 document.getElementById('postContent').addEventListener('paste', function(e) {
-  setTimeout(() => {
-    const ta = document.getElementById('postContent');
-    ta.value = autoFormatPost(ta.value);
-    checkDuplicateNow();
-  }, 100);
+  setTimeout(checkDuplicateNow, 100);
 });
 document.getElementById('postContent').addEventListener('input', function(e) {
   setTimeout(checkDuplicateNow, 100);
