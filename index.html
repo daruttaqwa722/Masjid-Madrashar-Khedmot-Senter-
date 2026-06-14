@@ -1158,10 +1158,10 @@ async function load72hBar(containerId) {
   }
   if (cres.success) {
     const cc = cres.counts;
-    catHtml = `<div id="catBar_${containerId}" style="display:flex;flex-direction:column;gap:6px;background:#f0f4ff;border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;font-weight:600;">
-      <div style="display:flex;justify-content:space-between;"><span>🕌 মসজিদের নিয়োগ বিজ্ঞপ্তি</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${cc['mosque-jobs']||0}</span></div>
-      <div style="display:flex;justify-content:space-between;"><span>📚 পুরুষ মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${cc['male-madrasa-jobs']||0}</span></div>
-      <div style="display:flex;justify-content:space-between;"><span>🎓 মহিলা মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:1px 10px;">${cc['female-madrasa-jobs']||0}</span></div>
+    catHtml = `<div id="catBar_${containerId}" style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;">
+      <div style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #f0f4ff;background:#f0f4ff;color:#05057D;font-weight:700;font-size:0.8rem;text-align:center;font-family:inherit;">মসজিদের নিয়োগ<br><span style="font-size:0.95rem;">${cc['mosque-jobs']||0}</span></div>
+      <div style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #f0f4ff;background:#f0f4ff;color:#05057D;font-weight:700;font-size:0.8rem;text-align:center;font-family:inherit;">পুরুষ মাদ্রাসার নিয়োগ<br><span style="font-size:0.95rem;">${cc['male-madrasa-jobs']||0}</span></div>
+      <div style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #f0f4ff;background:#f0f4ff;color:#05057D;font-weight:700;font-size:0.8rem;text-align:center;font-family:inherit;">মহিলা মাদ্রাসার নিয়োগ<br><span style="font-size:0.95rem;">${cc['female-madrasa-jobs']||0}</span></div>
     </div>`;
   }
   const combined = filterHtml + catHtml;
