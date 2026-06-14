@@ -249,12 +249,21 @@ if ($action === 'get_72h_counts') {
     $cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
     $counts = [];
     foreach ($cats as $cat) {
-        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE category=? AND created>=?");
-        $stmt->bind_param('ss', $cat, $since);
+        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE (category=? OR cats LIKE ?) AND created>=?");
+        $like = '%' . $cat . '%';
+        $stmt->bind_param('sss', $cat, $like, $since);
         $stmt->execute();
-        $counts[$cat] = $stmt->get_result()->fetch_assoc()['cnt'];
+        $counts[$cat] = (int)$stmt->get_result()->fetch_assoc()['cnt'];
     }
-    echo json_encode(['success' => true, 'counts' => $counts]);
+    $total = array_sum($counts);
+    echo json_encode([
+        'success' => true,
+        'counts' => $counts,
+        'total' => $total,
+        'mosque' => $counts['mosque-jobs'] ?? 0,
+        'male_madrasa' => $counts['male-madrasa-jobs'] ?? 0,
+        'female_madrasa' => $counts['female-madrasa-jobs'] ?? 0
+    ]);
     exit();
 }
 // ADMIN — GET POSTS
