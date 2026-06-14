@@ -70,11 +70,11 @@ function autoSEO($text, $category, $id, $position='', $address='') {
     $catName = getCatName($category);
     $year    = date('Y');
     if ($position && $address) {
-        $title = $address . 'এ ' . $position . ' নিয়োগ ' . $year;
+        $title = $address . ' ' . $position;
     } elseif ($position) {
-        $title = $position . ' নিয়োগ ' . $year . ' | ' . $catName;
+        $title = $position . ' | ' . $catName;
     } elseif ($address) {
-        $title = $address . 'এ ' . $catName . ' নিয়োগ ' . $year;
+        $title = $address . ' ' . $catName;
     } else {
         $first_line = explode("\n", trim($text))[0];
         $title = mb_substr($first_line, 0, 55);
@@ -279,6 +279,8 @@ if ($action === 'admin_create_post') {
     $slug       = $body['slug'] ?? '';
     $meta_title = $body['meta_title'] ?? '';
     $meta_desc  = $body['meta_desc'] ?? '';
+    $position   = $body['position'] ?? '';
+    $address    = $body['address'] ?? '';
     list($autoTitle, $autoSlug, $autoMeta, $autoDesc) = autoSEO($text, $category, $id, $position, $address);
     if (!$title)      $title      = $autoTitle;
     if (!$slug)       $slug       = $autoSlug;
