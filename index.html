@@ -431,7 +431,27 @@
     </div>
   </div>
 
-  <!-- BUTTON GRID -->
+  <div class="live-update-section">
+    <div class="live-total-card">
+      <div class="live-count" id="liveTotal">...</div>
+      <div class="live-label">নতুন খেদমতের পোস্ট এসেছে</div>
+    </div>
+    <div class="live-cat-grid">
+      <div class="live-cat-card">
+        <div class="live-cat-count" id="liveMosque">...</div>
+        <div class="live-cat-name">মসজিদের নিয়োগ</div>
+      </div>
+      <div class="live-cat-card">
+        <div class="live-cat-count" id="liveMaleMadrasa">...</div>
+        <div class="live-cat-name">পুরুষ মাদ্রাসা</div>
+      </div>
+      <div class="live-cat-card">
+        <div class="live-cat-count" id="liveFemaleMadrasa">...</div>
+        <div class="live-cat-name">মহিলা মাদ্রাসা</div>
+      </div>
+    </div>
+  </div>
+    <!-- BUTTON GRID -->
   <div class="section-label">সেবাসমূহ</div>
   <div class="btn-grid">
     <div class="service-btn" onclick="showPage('news')">
@@ -1543,6 +1563,20 @@ document.getElementById('postContent').addEventListener('input', function(e) {
   setTimeout(checkDuplicateNow, 100);
 });
 
+  async function loadLiveUpdate() {
+    try {
+      const res = await api('get_72h_counts');
+      if (res.success) {
+        const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+        document.getElementById('liveTotal').textContent = toBn(res.total || 0);
+        document.getElementById('liveMosque').textContent = toBn(res.mosque || 0);
+        document.getElementById('liveMaleMadrasa').textContent = toBn(res.male_madrasa || 0);
+        document.getElementById('liveFemaleMadrasa').textContent = toBn(res.female_madrasa || 0);
+      }
+    } catch(e) {}
+  }
+  loadLiveUpdate();
+  setInterval(loadLiveUpdate, 60000);
 </script>
   <!-- JOB POST OVERLAY & SHEET -->
   <div class="detail-overlay" id="jobPostOverlay" onclick="closeJobPost()"></div>
@@ -1655,6 +1689,14 @@ document.getElementById('postContent').addEventListener('input', function(e) {
     @keyframes jobSpin { to { transform:rotate(360deg); } }
     @keyframes jobPopIn { from { transform:scale(0.3);opacity:0; } to { transform:scale(1);opacity:1; } }
     @keyframes jobFadeUp { from { transform:translateY(14px);opacity:0; } to { transform:translateY(0);opacity:1; } }
+  .live-update-section { padding: 1.2rem 1rem 0.5rem; }
+  .live-total-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy-mid)); border-radius: var(--radius-md); padding: 1.4rem 1rem; text-align: center; margin-bottom: 0.9rem; box-shadow: var(--shadow-md); }
+  .live-count { font-size: 3rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.4rem; }
+  .live-label { font-size: 0.9rem; color: var(--white); opacity: 0.9; }
+  .live-cat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .live-cat-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 0.5rem; text-align: center; box-shadow: var(--shadow-sm); }
+  .live-cat-count { font-size: 1.8rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 0.3rem; }
+  .live-cat-name { font-size: 0.72rem; color: var(--text-sub); font-weight: 600; }
   </style>
 
 </body>
