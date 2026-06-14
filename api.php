@@ -249,13 +249,17 @@ if ($action === 'get_72h_counts') {
     $cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
     $counts = [];
     foreach ($cats as $cat) {
-        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE (category=? OR cats LIKE ?) AND created>=?");
         $like = '%' . $cat . '%';
-        $stmt->bind_param('sss', $cat, $like, $since);
+        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE (category=? OR category=REPLACE(?,'-jobs','') OR cats LIKE ?) AND created>=?");
+        $stmt->bind_param('ssss', $cat, $cat, $like, $since);
         $stmt->execute();
         $counts[$cat] = (int)$stmt->get_result()->fetch_assoc()['cnt'];
     }
-    $total = array_sum($counts);
+    // মোট সব পোস্ট ৭২ ঘন্টার
+    $stmtTotal = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE created>=?");
+    $stmtTotal->bind_param('s', $since);
+    $stmtTotal->execute();
+    $total = (int)$stmtTotal->get_result()->fetch_assoc()['cnt'];
     echo json_encode([
         'success' => true,
         'counts' => $counts,
