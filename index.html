@@ -1151,17 +1151,23 @@ async function load72hBar(containerId) {
   if (fres.success) {
     const fc = fres.counts;
     filterHtml = `<div id="filterBar_${containerId}" style="display:flex;gap:8px;margin-bottom:10px;justify-content:center;">
-      <button onclick="filterByHours(24,'${containerId}')" id="fbtn24_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">২৪ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[24]||0)}</span></button>
+      <button onclick="filterByHours(24,'${containerId}')" id="fbtn24_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">২৪ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[24]||0)}</span></button>
       <button onclick="filterByHours(48,'${containerId}')" id="fbtn48_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৪৮ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[48]||0)}</span></button>
-      <button onclick="filterByHours(72,'${containerId}')" id="fbtn72_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৭২ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[72]||0)}</span></button>
+      <button onclick="filterByHours(72,'${containerId}')" id="fbtn72_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৭২ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[72]||0)}</span></button>
     </div>`;
   }
   if (cres.success) {
     const cc = cres.counts;
-    catHtml = `<div id="catBar_${containerId}" style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;">
-      <div style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #f0f4ff;background:#f0f4ff;color:#05057D;font-weight:700;font-size:0.8rem;text-align:center;font-family:inherit;">মসজিদের নিয়োগ<br><span style="font-size:0.95rem;">${cc['mosque-jobs']||0}</span></div>
-      <div style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #f0f4ff;background:#f0f4ff;color:#05057D;font-weight:700;font-size:0.8rem;text-align:center;font-family:inherit;">পুরুষ মাদ্রাসার নিয়োগ<br><span style="font-size:0.95rem;">${cc['male-madrasa-jobs']||0}</span></div>
-      <div style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #f0f4ff;background:#f0f4ff;color:#05057D;font-weight:700;font-size:0.8rem;text-align:center;font-family:inherit;">মহিলা মাদ্রাসার নিয়োগ<br><span style="font-size:0.95rem;">${cc['female-madrasa-jobs']||0}</span></div>
+    catHtml = `<div id="catBar_${containerId}" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;">
+        <span>মসজিদের নিয়োগ বিজ্ঞপ্তি</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['mosque-jobs']||0}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;">
+        <span>পুরুষ মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['male-madrasa-jobs']||0}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;">
+        <span>মহিলা মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['female-madrasa-jobs']||0}</span>
+      </div>
     </div>`;
   }
   const combined = filterHtml + catHtml;
