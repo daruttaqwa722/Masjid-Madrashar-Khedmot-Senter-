@@ -555,3 +555,4 @@ if ($action === "check_duplicate") {
 }
 $db->close();
 ?>
+
