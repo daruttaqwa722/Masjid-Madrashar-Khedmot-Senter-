@@ -15,29 +15,54 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy: #05057D;
-    --navy-dark: #030355;
-    --navy-mid: #0A0A9E;
-    --gold: #FFD700;
-    --gold-light: #FFE566;
-    --gold-dim: rgba(255,215,0,0.18);
+    /* ── Core Brand ── */
+    --navy: #04046B;
+    --navy-dark: #020248;
+    --navy-mid: #0808A0;
+    --navy-light: #1212C0;
+    --gold: #F5C800;
+    --gold-light: #FFD93D;
+    --gold-dim: rgba(245,200,0,0.15);
+    --gold-glow: rgba(245,200,0,0.35);
     --white: #ffffff;
-    --bg: #EEF0F8;
+
+    /* ── Backgrounds ── */
+    --bg: #F0F2FA;
+    --bg-subtle: #F7F8FC;
     --card-bg: #ffffff;
-    --text: #1a1d3a;
-    --text-sub: #5a6080;
-    --border: rgba(5,5,125,0.13);
-    --shadow-sm: 0 2px 12px rgba(5,5,125,0.10);
-    --shadow-md: 0 6px 28px rgba(5,5,125,0.14);
-    --shadow-lg: 0 12px 48px rgba(5,5,125,0.18);
-    --radius-sm: 14px;
-    --radius-md: 20px;
-    --radius-lg: 28px;
-    --green: #16a34a; --red: #dc2626; --orange: #ea580c;
+    --card-bg-2: #FAFBFF;
+
+    /* ── Text ── */
+    --text: #12153A;
+    --text-main: #12153A;
+    --text-sub: #4A5280;
+    --text-muted: #8890B0;
+
+    /* ── Borders ── */
+    --border: rgba(4,4,107,0.10);
+    --border-strong: rgba(4,4,107,0.18);
+
+    /* ── Premium Shadows ── */
+    --shadow-xs: 0 1px 4px rgba(4,4,107,0.06);
+    --shadow-sm: 0 2px 12px rgba(4,4,107,0.08), 0 1px 3px rgba(4,4,107,0.05);
+    --shadow-md: 0 6px 24px rgba(4,4,107,0.10), 0 2px 8px rgba(4,4,107,0.06);
+    --shadow-lg: 0 16px 48px rgba(4,4,107,0.14), 0 4px 16px rgba(4,4,107,0.08);
+    --shadow-xl: 0 24px 64px rgba(4,4,107,0.18), 0 8px 24px rgba(4,4,107,0.10);
+    --shadow-gold: 0 4px 20px rgba(245,200,0,0.25);
+
+    /* ── Radius System ── */
+    --radius-xs: 8px;
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
     --radius: 16px;
+
+    /* ── Status Colors ── */
+    --green: #15803d; --red: #dc2626; --orange: #ea580c;
   }
 
-  body { background: var(--bg); font-family: 'Noto Serif Bengali', serif; min-height: 100vh; }
+  body { background: linear-gradient(160deg, #ECEFFE 0%, #F2F4FB 50%, #EEF0F8 100%); background-attachment: fixed; font-family: 'Hind Siliguri', sans-serif; min-height: 100vh; color: var(--text); }
 
   /* ══════════════════════════════════════
      PAGE SYSTEM
@@ -901,18 +926,34 @@
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">✏️</div><div class="adm-card-header-title">নতুন পোস্ট করুন</div></div>
         <div class="adm-card-body">
-          
+
           <div class="form-group">
-            <label class="form-label">পোস্টের বিষয়বস্তু *</label>
-            <div class="form-group" style="margin-bottom:1rem;">
-<label style="font-size:0.88rem;font-weight:700;color:#05057D;display:block;margin-bottom:0.5rem;">ক্যাটাগরি সিলেক্ট করুন <span style="color:red">*</span></label>
-<div id="admCatError" style="display:none;color:red;font-size:0.78rem;margin-bottom:0.4rem;">অন্তত একটি ক্যাটাগরি সিলেক্ট করুন।</div>
-<label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;"><input type="checkbox" value="mosque-jobs" class="admCatChk"> মসজিদের নিয়োগ বিজ্ঞপ্তি</label>
-<label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;"><input type="checkbox" value="male-madrasa-jobs" class="admCatChk"> পুরুষ মাদ্রাসার নিয়োগ</label>
-<label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;"><input type="checkbox" value="female-madrasa-jobs" class="admCatChk"> মহিলা মাদ্রাসার নিয়োগ</label>
-</div>
-<div class="form-group"><label class="form-label">পদের নাম *</label><input class="form-input" type="text" id="postPosition" placeholder="যেমন: ইমাম, হাফেজ শিক্ষক"></div><div class="form-group"><label class="form-label">ঠিকানা *</label><input class="form-input" type="text" id="postAddress" placeholder="জেলা / উপজেলা / গ্রাম"></div><input type="hidden" id="postTitle"><input type="hidden" id="postSlug"><input type="hidden" id="postMetaTitle"><input type="hidden" id="postMetaDesc"><div id="postAlert" class="alert" style="margin-bottom:0.5rem;"></div><textarea class="form-textarea" id="postContent" placeholder="এখানে লিখুন… মোবাইল নাম্বার, তথ্য ইত্যাদি।"></textarea>
+            <label class="form-label">ক্যাটাগরি <span style="color:red">*</span></label>
+            <div id="admCatError" style="display:none;color:red;font-size:0.78rem;margin-bottom:0.4rem;">একটি ক্যাটাগরি সিলেক্ট করুন।</div>
+            <select id="admCatDropdown" onchange="syncAdmCat(this.value)" style="width:100%;padding:0.8rem 1rem;border:1.5px solid var(--border);border-radius:12px;font-size:0.9rem;font-family:inherit;background:#f8f9ff;color:var(--text-main);outline:none;cursor:pointer;box-sizing:border-box;">
+              <option value="">-- ক্যাটাগরি বেছে নিন --</option>
+              <option value="mosque-jobs">🕌 মসজিদের নিয়োগ বিজ্ঞপ্তি</option>
+              <option value="male-madrasa-jobs">📚 পুরুষ মাদ্রাসার নিয়োগ</option>
+              <option value="female-madrasa-jobs">🎓 মহিলা মাদ্রাসার নিয়োগ</option>
+            </select>
+            <input type="checkbox" value="mosque-jobs" class="admCatChk" style="display:none">
+            <input type="checkbox" value="male-madrasa-jobs" class="admCatChk" style="display:none">
+            <input type="checkbox" value="female-madrasa-jobs" class="admCatChk" style="display:none">
           </div>
+
+          <div class="form-group"><label class="form-label">পদের নাম</label><input class="form-input" type="text" id="postPosition" placeholder="যেমন: ইমাম, হাফেজ শিক্ষক"></div>
+          <div class="form-group"><label class="form-label">ঠিকানা</label><input class="form-input" type="text" id="postAddress" placeholder="জেলা / উপজেলা / গ্রাম"></div>
+          <input type="hidden" id="postTitle">
+          <input type="hidden" id="postSlug">
+          <input type="hidden" id="postMetaTitle">
+          <input type="hidden" id="postMetaDesc">
+
+          <div class="form-group">
+            <label class="form-label">পোস্টের বিবরণ <span style="color:red">*</span></label>
+            <div id="postAlert" class="alert" style="margin-bottom:0.5rem;"></div>
+            <textarea class="form-textarea" id="postContent" rows="8" placeholder="এখানে নিয়োগ বিজ্ঞপ্তির সম্পূর্ণ লেখা পেস্ট করুন…" style="min-height:160px;"></textarea>
+          </div>
+
           <div class="form-group">
             <label class="form-label">ছবি (ঐচ্ছিক)</label>
             <div class="img-upload-area" onclick="document.getElementById('imgFileInput').click()">
@@ -922,7 +963,8 @@
             </div>
             <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)">
           </div>
-          <button class="btn btn-primary btn-full" onclick="submitPost()"><span id="postBtnTxt">📤 পোস্ট করুন</span></button>
+
+          <button class="btn btn-primary btn-full" onclick="submitPost()" style="border-radius:14px;padding:0.9rem;font-size:1rem;"><span id="postBtnTxt">📤 পোস্ট করুন</span></button>
         </div>
       </div>
       <div class="adm-card">
@@ -1334,6 +1376,7 @@ function previewImg(input) {
 }
 async function submitPost() {
   const content = document.getElementById('postContent').value.trim();
+  const dropVal = document.getElementById('admCatDropdown')?.value; if (dropVal) syncAdmCat(dropVal);
   const admCats = Array.from(document.querySelectorAll('.admCatChk:checked')).map(x=>x.value);
   if (!admCats.length) { document.getElementById('admCatError').style.display='block'; return; }
   document.getElementById('admCatError').style.display='none';
@@ -1345,6 +1388,7 @@ async function submitPost() {
   if (res.success) {
     document.getElementById('postContent').value = ''; document.getElementById('postTitle').value = ''; document.getElementById('postPosition').value = ''; document.getElementById('postAddress').value = ''; document.getElementById('postSlug').value = ''; document.getElementById('postMetaTitle').value = ''; document.getElementById('postMetaDesc').value = '';
     document.querySelectorAll('.admCatChk').forEach(x=>x.checked=false);
+    const dd=document.getElementById('admCatDropdown'); if(dd) dd.value='';
     document.getElementById('imgPreview').style.display = 'none';
     document.getElementById('imgFileInput').value = '';
     document.querySelector('.img-upload-text').textContent = 'ছবি যোগ করতে এখানে ট্যাপ করুন';
