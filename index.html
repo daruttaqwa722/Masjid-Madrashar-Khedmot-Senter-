@@ -1621,6 +1621,19 @@ async function admInit() {
 })();
 
 
+function toggleCatStyle(label) {
+  const chk = label.querySelector('input');
+  if (chk.checked) {
+    label.style.background = '#05057D';
+    label.style.color = '#FFD700';
+    label.style.borderColor = '#05057D';
+  } else {
+    label.style.background = '#f8f9ff';
+    label.style.color = '#05057D';
+    label.style.borderColor = 'var(--border)';
+  }
+  updateSmartPreview();
+}
 function syncAdmCat(val) {
   document.querySelectorAll('.admCatChk').forEach(x => { x.checked = x.value === val; });
   updateSmartPreview();
