@@ -1225,13 +1225,13 @@ async function load72hBar(containerId) {
   if (cres.success) {
     const cc = cres.counts;
     catHtml = `<div id="catBar_${containerId}" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;">
+      <div onclick="filterByCat('mosque-jobs','${containerId}')" id="ccat_mosque_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
         <span>মসজিদের নিয়োগ বিজ্ঞপ্তি</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['mosque-jobs']||0}</span>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;">
+      <div onclick="filterByCat('male-madrasa-jobs','${containerId}')" id="ccat_male_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
         <span>পুরুষ মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['male-madrasa-jobs']||0}</span>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;">
+      <div onclick="filterByCat('female-madrasa-jobs','${containerId}')" id="ccat_female_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
         <span>মহিলা মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['female-madrasa-jobs']||0}</span>
       </div>
     </div>`;
@@ -1263,6 +1263,35 @@ async function loadFilterBar(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
   el.insertAdjacentHTML('afterbegin', bar);
+}
+
+function filterByCat(cat, containerId) {
+  // ক্যাটাগরি বাটন হাইলাইট
+  ['mosque','male','female'].forEach(k => {
+    const el = document.getElementById('ccat_'+k+'_'+containerId);
+    if (!el) return;
+    if ((cat==='mosque-jobs'&&k==='mosque')||(cat==='male-madrasa-jobs'&&k==='male')||(cat==='female-madrasa-jobs'&&k==='female')) {
+      el.style.background = '#05057D';
+      el.style.color = '#FFD700';
+      el.querySelector('span:last-child').style.background = '#FFD700';
+      el.querySelector('span:last-child').style.color = '#05057D';
+    } else {
+      el.style.background = '#f0f4ff';
+      el.style.color = '#05057D';
+      el.querySelector('span:last-child').style.background = '#05057D';
+      el.querySelector('span:last-child').style.color = '#fff';
+    }
+  });
+  // পোস্ট ফিল্টার করি
+  const cards = document.querySelectorAll('#'+containerId+' .post-card, #'+containerId+' .post-item, #'+containerId+' .ud-post-card');
+  cards.forEach(card => {
+    const badges = card.querySelectorAll('span[style*="e6f4ea"], span[style*="1a7a3c"]');
+    const catMap = {'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'};
+    const targetName = catMap[cat] || cat;
+    let match = false;
+    badges.forEach(b => { if (b.textContent.trim() === targetName) match = true; });
+    card.style.display = match ? '' : 'none';
+  });
 }
 
 async function filterByHours(hours, containerId) {
