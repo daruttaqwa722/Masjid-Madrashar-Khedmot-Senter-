@@ -7,62 +7,34 @@
 <title>খেদমত সেন্টার | মসজিদ, মাদ্রাসা ও ইসলামী খেদমতের নিয়োগ বিজ্ঞপ্তি</title>
 <meta name="description" content="বাংলাদেশের ৬৪ জেলার মসজিদের ইমাম, খতিব, মুয়াজ্জিন ও খাদেম, নূরানী, নাজেরা, হেফজ ও কিতাবখানা, পুরুষ ও মহিলা মাদ্রাসার শিক্ষক এবং বিভিন্ন ইসলামী খেদমতের নিয়োগ বিজ্ঞপ্তি প্রকাশ করা হয়।">
 <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    /* ── Core Brand ── */
-    --navy: #04046B;
-    --navy-dark: #020248;
-    --navy-mid: #0808A0;
-    --navy-light: #1212C0;
-    --gold: #F5C800;
-    --gold-light: #FFD93D;
-    --gold-dim: rgba(245,200,0,0.15);
-    --gold-glow: rgba(245,200,0,0.35);
+    --navy: #05057D;
+    --navy-dark: #030355;
+    --navy-mid: #0A0A9E;
+    --gold: #FFD700;
+    --gold-light: #FFE566;
+    --gold-dim: rgba(255,215,0,0.18);
     --white: #ffffff;
-
-    /* ── Backgrounds ── */
-    --bg: #F0F2FA;
-    --bg-subtle: #F7F8FC;
+    --bg: #EEF0F8;
     --card-bg: #ffffff;
-    --card-bg-2: #FAFBFF;
-
-    /* ── Text ── */
-    --text: #12153A;
-    --text-main: #12153A;
-    --text-sub: #4A5280;
-    --text-muted: #8890B0;
-
-    /* ── Borders ── */
-    --border: rgba(4,4,107,0.10);
-    --border-strong: rgba(4,4,107,0.18);
-
-    /* ── Premium Shadows ── */
-    --shadow-xs: 0 1px 4px rgba(4,4,107,0.06);
-    --shadow-sm: 0 2px 12px rgba(4,4,107,0.08), 0 1px 3px rgba(4,4,107,0.05);
-    --shadow-md: 0 6px 24px rgba(4,4,107,0.10), 0 2px 8px rgba(4,4,107,0.06);
-    --shadow-lg: 0 16px 48px rgba(4,4,107,0.14), 0 4px 16px rgba(4,4,107,0.08);
-    --shadow-xl: 0 24px 64px rgba(4,4,107,0.18), 0 8px 24px rgba(4,4,107,0.10);
-    --shadow-gold: 0 4px 20px rgba(245,200,0,0.25);
-
-    /* ── Radius System ── */
-    --radius-xs: 8px;
-    --radius-sm: 12px;
-    --radius-md: 18px;
-    --radius-lg: 24px;
-    --radius-xl: 32px;
+    --text: #1a1d3a;
+    --text-sub: #5a6080;
+    --border: rgba(5,5,125,0.13);
+    --shadow-sm: 0 2px 12px rgba(5,5,125,0.10);
+    --shadow-md: 0 6px 28px rgba(5,5,125,0.14);
+    --shadow-lg: 0 12px 48px rgba(5,5,125,0.18);
+    --radius-sm: 14px;
+    --radius-md: 20px;
+    --radius-lg: 28px;
+    --green: #16a34a; --red: #dc2626; --orange: #ea580c;
     --radius: 16px;
-
-    /* ── Status Colors ── */
-    --green: #15803d; --red: #dc2626; --orange: #ea580c;
   }
 
-  body { background: linear-gradient(160deg, #ECEFFE 0%, #F2F4FB 50%, #EEF0F8 100%); background-attachment: fixed; font-family: 'Noto Serif Bengali', serif; min-height: 100vh; color: var(--text); }
+  body { background: var(--bg); font-family: 'Noto Serif Bengali', serif; min-height: 100vh; }
 
   /* ══════════════════════════════════════
      PAGE SYSTEM
@@ -456,28 +428,7 @@
     </div>
   </div>
 
-  <div class="live-update-section">
-    <div class="live-total-card">
-      <div class="live-header"><span class="live-dot"></span>লাইভ আপডেট</div>
-      <div class="live-count" id="liveTotal">...</div>
-      <div class="live-label">নতুন খেদমতের পোস্ট এসেছে</div>
-    </div>
-    <div class="live-cat-grid">
-      <div class="live-cat-card">
-        <div class="live-cat-count" id="liveMosque">...</div>
-        <div class="live-cat-name">মসজিদের নিয়োগ</div>
-      </div>
-      <div class="live-cat-card">
-        <div class="live-cat-count" id="liveMaleMadrasa">...</div>
-        <div class="live-cat-name">পুরুষ মাদ্রাসা</div>
-      </div>
-      <div class="live-cat-card">
-        <div class="live-cat-count" id="liveFemaleMadrasa">...</div>
-        <div class="live-cat-name">মহিলা মাদ্রাসা</div>
-      </div>
-    </div>
-  </div>
-    <!-- BUTTON GRID -->
+  <!-- BUTTON GRID -->
   <div class="section-label">সেবাসমূহ</div>
   <div class="btn-grid">
     <div class="service-btn" onclick="showPage('news')">
@@ -892,12 +843,9 @@
 <div class="page" id="pageUserDashboard">
   <div class="topbar">
     <div class="topbar-inner">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button class="back-btn" onclick="showPage('home')">হোম</button>
-        <div>
-          <div class="topbar-brand">মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
-          <div class="topbar-sub">ইউজার ড্যাশবোর্ড</div>
-        </div>
+      <div>
+        <div class="topbar-brand">মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
+        <div class="topbar-sub">ইউজার ড্যাশবোর্ড</div>
       </div>
       <button class="logout-btn" onclick="doUserLogout()">লগআউট</button>
     </div>
@@ -913,12 +861,9 @@
 <div class="page" id="pageAdminDashboard">
   <div class="adm-topbar">
     <div class="adm-topbar-row">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button class="back-btn" onclick="showPage('home')">হোম</button>
-        <div>
-          <div class="adm-topbar-brand">🛡️ এডমিন ড্যাশবোর্ড</div>
-          <div class="adm-topbar-sub">মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
-        </div>
+      <div>
+        <div class="adm-topbar-brand">🛡️ এডমিন ড্যাশবোর্ড</div>
+        <div class="adm-topbar-sub">মসজিদ-মাদ্রাসার খেদমত সেন্টার</div>
       </div>
       <button class="logout-btn" onclick="doAdminLogout()">লগআউট</button>
     </div>
@@ -932,42 +877,28 @@
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">✏️</div><div class="adm-card-header-title">নতুন পোস্ট করুন</div></div>
         <div class="adm-card-body">
-
+          <div id="postAlert" class="alert"></div>
           <div class="form-group">
-            <label class="form-label">ক্যাটাগরি <span style="color:red">*</span></label>
-            <div id="admCatError" style="display:none;color:red;font-size:0.78rem;margin-bottom:0.4rem;">কমপক্ষে একটি ক্যাটাগরি সিলেক্ট করুন।</div>
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
-                <input type="checkbox" value="mosque-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> মসজিদের নিয়োগ বিজ্ঞপ্তি
-              </label>
-              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
-                <input type="checkbox" value="male-madrasa-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> পুরুষ মাদ্রাসার নিয়োগ
-              </label>
-              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
-                <input type="checkbox" value="female-madrasa-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> মহিলা মাদ্রাসার নিয়োগ
-              </label>
+            <label class="form-label">পোস্টের বিষয়বস্তু *</label>
+            <div class="form-group" style="margin-bottom:1rem;">
+<label style="font-size:0.88rem;font-weight:700;color:#05057D;display:block;margin-bottom:0.5rem;">ক্যাটাগরি সিলেক্ট করুন <span style="color:red">*</span></label>
+<div id="admCatError" style="display:none;color:red;font-size:0.78rem;margin-bottom:0.4rem;">অন্তত একটি ক্যাটাগরি সিলেক্ট করুন।</div>
+<label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;"><input type="checkbox" value="mosque-jobs" class="admCatChk"> মসজিদের নিয়োগ বিজ্ঞপ্তি</label>
+<label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;"><input type="checkbox" value="male-madrasa-jobs" class="admCatChk"> পুরুষ মাদ্রাসার নিয়োগ</label>
+<label style="display:flex;align-items:center;gap:8px;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;"><input type="checkbox" value="female-madrasa-jobs" class="admCatChk"> মহিলা মাদ্রাসার নিয়োগ</label>
+</div>
+<div class="form-group"><label class="form-label">পদের নাম *</label><input class="form-input" type="text" id="postPosition" placeholder="যেমন: ইমাম, হাফেজ শিক্ষক"></div><div class="form-group"><label class="form-label">ঠিকানা *</label><input class="form-input" type="text" id="postAddress" placeholder="জেলা / উপজেলা / গ্রাম"></div><input type="hidden" id="postTitle"><input type="hidden" id="postSlug"><input type="hidden" id="postMetaTitle"><input type="hidden" id="postMetaDesc"><textarea class="form-textarea" id="postContent" placeholder="এখানে লিখুন… মোবাইল নাম্বার, তথ্য ইত্যাদি।"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ছবি (ঐচ্ছিক)</label>
+            <div class="img-upload-area" onclick="document.getElementById('imgFileInput').click()">
+              <div class="img-upload-icon">🖼️</div>
+              <div class="img-upload-text">ছবি যোগ করতে এখানে ট্যাপ করুন</div>
+              <img id="imgPreview" alt="preview">
             </div>
+            <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)">
           </div>
-
-          <div class="form-group">
-            <label class="form-label">SEO শিরোনাম <span style="color:red">*</span> <span style="color:#888;font-size:0.75rem;">(Meta Title)</span></label>
-            <input class="form-input" type="text" id="postTitle" placeholder="যেমন: হাফেজ শিক্ষক নিয়োগ – কুমিল্লা">
-            <div id="postTitleError" style="display:none;color:red;font-size:0.78rem;margin-top:0.3rem;">শিরোনাম লিখুন।</div>
-          </div>
-
-          <input type="hidden" id="postSlug">
-          <input type="hidden" id="postMetaTitle">
-          <input type="hidden" id="postMetaDesc">
-          <input type="hidden" id="postPosition">
-          <input type="hidden" id="postAddress">
-
-          <div class="form-group">
-            <label class="form-label">পোস্টের বিবরণ <span style="color:red">*</span></label>
-            <textarea class="form-textarea" id="postContent" rows="8" placeholder="এখানে নিয়োগ বিজ্ঞপ্তির সম্পূর্ণ লেখা পেস্ট করুন…" style="min-height:160px;"></textarea>
-          </div>
-
-          <div id="postAlert" class="alert" style="margin-bottom:0.5rem;"></div>
-          <button class="btn btn-primary btn-full" onclick="submitPost()" style="border-radius:14px;padding:0.9rem;font-size:1rem;"><span id="postBtnTxt">📤 প্রকাশ করুন</span></button>
+          <button class="btn btn-primary btn-full" onclick="submitPost()"><span id="postBtnTxt">📤 পোস্ট করুন</span></button>
         </div>
       </div>
       <div class="adm-card">
@@ -1072,7 +1003,7 @@ function showPage(name) {
 ══════════════════════════════════════ */
 let adminToken = '';
 const api = (action, data={}) =>
-  fetch('https://khedmotcenter.com/api.php', {
+  fetch('api.php', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({action, token: adminToken, ...data})
@@ -1143,7 +1074,7 @@ function lsDoLogin() {
   if (password.length < 4) { document.getElementById('lsGrpPw').classList.add('err'); ok = false; }
   if (!ok) return;
   btn.classList.add('loading');
-  fetch('https://khedmotcenter.com/api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'user_login', mobile, password})})
+  fetch('api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'user_login', mobile, password})})
     .then(r => r.json())
     .then(data => {
       btn.classList.remove('loading');
@@ -1172,7 +1103,7 @@ function lsDoRegister() {
   if (!/^01[3-9]\d{8}$/.test(mobile)){alert('সঠিক মোবাইল নাম্বার দিন।');return;}
   if (password.length<6){alert('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।');return;}
   btn.classList.add('loading');
-  fetch('https://khedmotcenter.com/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'register',name,address,mobile,password})})
+  fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'register',name,address,mobile,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
       if(data.success){document.getElementById('lsRegWrap').classList.remove('open');const al=document.getElementById('userAlert');al.className='ls-alert ls-alert-success show';document.getElementById('userAlertMsg').textContent='অ্যাকাউন্ট তৈরি হয়েছে! এখন লগইন করুন।';}
@@ -1187,7 +1118,7 @@ function lsDoAdminLogin() {
   al.classList.remove('show');
   if (!email||!password){alert('ইমেইল ও পাসওয়ার্ড প্রয়োজন।');return;}
   btn.classList.add('loading');
-  fetch('https://khedmotcenter.com/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
+  fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
       if(data.success){adminToken='admin_session';closeLogin();showPage('admin');}
@@ -1209,122 +1140,6 @@ function highlightMasked(text) {
     '<span style="background:#fff3cd;color:#856404;font-weight:700;padding:1px 5px;border-radius:4px;border:1px solid #ffc107;white-space:nowrap">$1 🔒</span>');
 }
 
-async function load72hBar(containerId) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  if (document.getElementById('filterBar_' + containerId)) return;
-  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
-  const [fres, cres] = await Promise.all([api('get_filter_counts'), api('get_72h_counts')]);
-  let filterHtml = '';
-  let catHtml = '';
-  if (fres.success) {
-    const fc = fres.counts;
-    filterHtml = `<div id="filterBar_${containerId}" style="display:flex;gap:8px;margin-bottom:10px;justify-content:center;">
-      <button onclick="filterByHours(24,'${containerId}')" id="fbtn24_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">২৪ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[24]||0)}</span></button>
-      <button onclick="filterByHours(48,'${containerId}')" id="fbtn48_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৪৮ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[48]||0)}</span></button>
-      <button onclick="filterByHours(72,'${containerId}')" id="fbtn72_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">৭২ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(fc[72]||0)}</span></button>
-    </div>`;
-  }
-  if (cres.success) {
-    const cc = cres.counts;
-    catHtml = `<div id="catBar_${containerId}" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
-      <div onclick="filterByCat('mosque-jobs','${containerId}')" id="ccat_mosque_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
-        <span>মসজিদের নিয়োগ বিজ্ঞপ্তি</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['mosque-jobs']||0}</span>
-      </div>
-      <div onclick="filterByCat('male-madrasa-jobs','${containerId}')" id="ccat_male_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
-        <span>পুরুষ মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['male-madrasa-jobs']||0}</span>
-      </div>
-      <div onclick="filterByCat('female-madrasa-jobs','${containerId}')" id="ccat_female_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
-        <span>মহিলা মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['female-madrasa-jobs']||0}</span>
-      </div>
-    </div>`;
-  }
-  const combined = filterHtml + catHtml;
-  const hdr = el.querySelector('.section-header');
-  if (hdr) hdr.insertAdjacentHTML('afterend', combined);
-  else el.insertAdjacentHTML('afterbegin', combined);
-}
-
-async function loadFilterBar(containerId) {
-  const res = await api('get_filter_counts');
-  if (!res.success) return;
-  const c = res.counts;
-  const barId = 'filterBar_' + containerId;
-  if (document.getElementById(barId)) return; // ইতিমধ্যে আছে
-  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
-  const bar = `<div id="${barId}" style="display:flex;gap:8px;margin-bottom:10px;justify-content:center;">
-    <button onclick="filterByHours(24,'${containerId}')" id="fbtn24_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#05057D;color:#FFD700;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
-      ২৪ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(c[24]||0)}</span>
-    </button>
-    <button onclick="filterByHours(48,'${containerId}')" id="fbtn48_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
-      ৪৮ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(c[48]||0)}</span>
-    </button>
-    <button onclick="filterByHours(72,'${containerId}')" id="fbtn72_${containerId}" style="flex:1;padding:8px 4px;border-radius:20px;border:2px solid #05057D;background:#fff;color:#05057D;font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;">
-      ৭২ ঘন্টা<br><span style="font-size:0.95rem;">${toBn(c[72]||0)}</span>
-    </button>
-  </div>`;
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  el.insertAdjacentHTML('afterbegin', bar);
-}
-
-function filterByCat(cat, containerId) {
-  // ক্যাটাগরি বাটন হাইলাইট
-  ['mosque','male','female'].forEach(k => {
-    const el = document.getElementById('ccat_'+k+'_'+containerId);
-    if (!el) return;
-    if ((cat==='mosque-jobs'&&k==='mosque')||(cat==='male-madrasa-jobs'&&k==='male')||(cat==='female-madrasa-jobs'&&k==='female')) {
-      el.style.background = '#05057D';
-      el.style.color = '#FFD700';
-      el.querySelector('span:last-child').style.background = '#FFD700';
-      el.querySelector('span:last-child').style.color = '#05057D';
-    } else {
-      el.style.background = '#f0f4ff';
-      el.style.color = '#05057D';
-      el.querySelector('span:last-child').style.background = '#05057D';
-      el.querySelector('span:last-child').style.color = '#fff';
-    }
-  });
-  // পোস্ট ফিল্টার করি
-  const cards = document.querySelectorAll('#'+containerId+' .post-card, #'+containerId+' .post-item, #'+containerId+' .ud-post-card');
-  cards.forEach(card => {
-    const badges = card.querySelectorAll('span[style*="e6f4ea"], span[style*="1a7a3c"]');
-    const catMap = {'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'};
-    const targetName = catMap[cat] || cat;
-    let match = false;
-    badges.forEach(b => { if (b.textContent.trim() === targetName) match = true; });
-    card.style.display = match ? '' : 'none';
-  });
-}
-
-async function filterByHours(hours, containerId) {
-  // বাটন হাইলাইট
-  [24,48,72].forEach(h => {
-    const btn = document.getElementById('fbtn'+h+'_'+containerId);
-    if (!btn) return;
-    if (h === hours) {
-      btn.style.background = '#05057D';
-      btn.style.color = '#FFD700';
-    } else {
-      btn.style.background = '#fff';
-      btn.style.color = '#05057D';
-    }
-  });
-  // ক্যাটাগরি কাউন্ট আপডেট
-  const res = await api('get_filter_counts');
-  if (res.success && res.counts.cat && res.counts.cat[hours]) {
-    const cc = res.counts.cat[hours];
-    const catBar = document.getElementById('catBar_' + containerId);
-    if (catBar) {
-      const rows = catBar.querySelectorAll('div');
-      const cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
-      rows.forEach((row, i) => {
-        const span = row.querySelector('span:last-child');
-        if (span && cats[i]) span.textContent = cc[cats[i]] || 0;
-      });
-    }
-  }
-}
 async function loadNews() {
   if (newsLoaded) return;
   const res = await api('get_public_news');
@@ -1341,7 +1156,6 @@ async function loadNews() {
     return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags?`<div style="padding:0.3rem 0.85rem;">${catTags}</div>`:""}<div class="post-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
-  load72hBar('newsPostsWrap');
 }
 
 /* ══════════════════════════════════════
@@ -1368,10 +1182,8 @@ async function loadUserDashboard() {
       <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon">${days_left>=0?'📆':'🚫'}</div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
     </div>
     <div class="section-header"><div class="section-header-icon">📰</div><div><div class="section-header-title">সর্বশেষ নিউজ ও পোস্টসমূহ</div><div class="section-header-sub">সম্পূর্ণ মোবাইল নাম্বারসহ</div></div></div>
-    
     ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?`<div style="margin:0.3rem 0.8rem;">`+(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;margin-top:2px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
   `;
-  load72hBar('udMainContent');
 }
 
 async function doUserLogout() {
@@ -1408,23 +1220,17 @@ function previewImg(input) {
 }
 async function submitPost() {
   const content = document.getElementById('postContent').value.trim();
-  const dropVal = document.getElementById('admCatDropdown')?.value; if (dropVal) syncAdmCat(dropVal);
   const admCats = Array.from(document.querySelectorAll('.admCatChk:checked')).map(x=>x.value);
   if (!admCats.length) { document.getElementById('admCatError').style.display='block'; return; }
   document.getElementById('admCatError').style.display='none';
-  const postTitleVal = document.getElementById('postTitle').value.trim();
-  if (!postTitleVal) { document.getElementById('postTitleError').style.display='block'; document.getElementById('postTitle').focus(); return; }
-  document.getElementById('postTitleError').style.display='none';
-  document.getElementById('postMetaTitle').value = postTitleVal;
   if (!content) { admShowAlert('postAlert','পোস্টের বিষয়বস্তু লিখুন।'); return; }
   const btn = document.getElementById('postBtnTxt');
   btn.innerHTML = '<span class="spinner-inline"></span> পোস্ট হচ্ছে…';
-  const title = document.getElementById('postTitle').value.trim(); const slug = document.getElementById('postSlug').value.trim(); const meta_title = document.getElementById('postMetaTitle').value.trim(); const meta_desc = document.getElementById('postMetaDesc').value.trim(); const position = document.getElementById('postPosition').value.trim(); const address = document.getElementById('postAddress').value.trim(); const res = await api('admin_create_post', {content, title, position, address, slug, meta_title, meta_desc, image_base64: admImgBase64, cats: admCats, category: admCats[0] || 'mosque'});
+  const title = document.getElementById('postTitle').value.trim(); const slug = document.getElementById('postSlug').value.trim(); const meta_title = document.getElementById('postMetaTitle').value.trim(); const meta_desc = document.getElementById('postMetaDesc').value.trim(); const position = document.getElementById('postPosition').value.trim(); const address = document.getElementById('postAddress').value.trim(); const res = await api('admin_create_post', {content, title, position, address, slug, meta_title, meta_desc, image_base64: admImgBase64, categories: admCats});
   btn.textContent = '📤 পোস্ট করুন';
   if (res.success) {
     document.getElementById('postContent').value = ''; document.getElementById('postTitle').value = ''; document.getElementById('postPosition').value = ''; document.getElementById('postAddress').value = ''; document.getElementById('postSlug').value = ''; document.getElementById('postMetaTitle').value = ''; document.getElementById('postMetaDesc').value = '';
     document.querySelectorAll('.admCatChk').forEach(x=>x.checked=false);
-    const dd=document.getElementById('admCatDropdown'); if(dd) dd.value='';
     document.getElementById('imgPreview').style.display = 'none';
     document.getElementById('imgFileInput').value = '';
     document.querySelector('.img-upload-text').textContent = 'ছবি যোগ করতে এখানে ট্যাপ করুন';
@@ -1436,7 +1242,6 @@ async function submitPost() {
 }
 async function admLoadPosts() {
   const res = await api('admin_get_posts');
-  load72hBar('postsContainer');
   const c = document.getElementById('postsContainer');
   if (!res.success || !res.posts.length) { c.innerHTML = '<div class="adm-empty">কোনো পোস্ট নেই।</div>'; return; }
   c.innerHTML = res.posts.map(p => `
@@ -1463,7 +1268,7 @@ async function saveEditPost() {
   if (res.success) { closeEditPost(); admLoadPosts(); newsLoaded=false; }
 }
 async function deletePost(id) {
-  if (!confirm('এই পোস্ট মুছে ফেলবেন?')) return;
+
   const res = await api('admin_delete_post', {id});
   if (res.success) { document.getElementById(`postItem${id}`)?.remove(); newsLoaded=false; admLoadPosts(); }
 }
@@ -1605,6 +1410,25 @@ async function submitJobPost() {
   btnTxt.innerHTML = 'নিয়োগ বিজ্ঞপ্তি জমা দিন';
 }
 
+
+/* ══════════════════════════════════════
+   COPY PROTECTION - Admin only can copy
+══════════════════════════════════════ */
+(function() {
+  function isAdmin() { return adminToken === 'admin_session'; }
+  document.addEventListener('contextmenu', function(e) { if (!isAdmin()) { e.preventDefault(); showCopyWarn(); } });
+  document.addEventListener('keydown', function(e) { if (!isAdmin()) { if ((e.ctrlKey && ['c','a','u','s','p'].includes(e.key.toLowerCase())) || e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()))) { e.preventDefault(); showCopyWarn(); } } });
+  document.addEventListener('copy', function(e) { if (!isAdmin()) { e.preventDefault(); showCopyWarn(); } });
+  function applyProt() { if (!isAdmin()) { document.body.style.userSelect='none'; document.body.style.webkitUserSelect='none'; } else { document.body.style.userSelect=''; document.body.style.webkitUserSelect=''; } }
+  function showCopyWarn() {
+    let t = document.getElementById('cpToast');
+    if (!t) { t = document.createElement('div'); t.id = 'cpToast'; t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1.4rem;border-radius:50px;font-size:.85rem;font-weight:600;z-index:99999;box-shadow:0 4px 20px rgba(220,38,38,.4);font-family:Hind Siliguri,sans-serif;display:none;align-items:center;gap:8px;'; document.body.appendChild(t); }
+    /* silent block */
+  }
+  const _sp = window.showPage; window.showPage = function(n) { _sp(n); setTimeout(applyProt, 150); };
+  applyProt();
+})();
+
 async function admInit() {
   const sess = await api('check_session');
   if (!sess.success || sess.role !== 'admin') { showPage('home'); return; }
@@ -1619,95 +1443,6 @@ async function admInit() {
   if (sess.success && sess.role === 'admin') { showPage('admin'); }
   else if (sess.success && sess.role === 'user') { showPage('user'); }
 })();
-
-
-function toggleCatStyle(label) {
-  const chk = label.querySelector('input');
-  if (chk.checked) {
-    label.style.background = '#05057D';
-    label.style.color = '#FFD700';
-    label.style.borderColor = '#05057D';
-  } else {
-    label.style.background = '#f8f9ff';
-    label.style.color = '#05057D';
-    label.style.borderColor = 'var(--border)';
-  }
-  updateSmartPreview();
-}
-function syncAdmCat(val) {
-  document.querySelectorAll('.admCatChk').forEach(x => { x.checked = x.value === val; });
-  updateSmartPreview();
-}
-
-function updateSmartPreview() {
-  const text = (document.getElementById('postContent')?.value || '').trim();
-  const pos = (document.getElementById('postPosition')?.value || '').trim();
-  const addr = (document.getElementById('postAddress')?.value || '').trim();
-  const cat = document.getElementById('admCatDropdown')?.value || '';
-  const catNames = {'mosque-jobs':'মসজiদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ'};
-
-  // Auto title
-  let title = '';
-  if (pos && addr) title = pos + ' – ' + addr;
-  else if (pos) title = pos + ' নিয়োগ বিজ্ঞপ্তি';
-  if (title) {
-    document.getElementById('postTitle').value = title;
-    document.getElementById('postMetaTitle').value = title;
-  }
-
-  // Preview দেখাই
-  const box = document.getElementById('smartPreviewBox');
-  if (!box) return;
-  if (text || cat) {
-    box.style.display = 'block';
-    document.getElementById('pvCatBadge').textContent = catNames[cat] || '';
-    document.getElementById('pvTitle').textContent = title;
-    document.getElementById('pvContent').textContent = text.slice(0, 200) + (text.length > 200 ? '…' : '');
-  } else {
-    box.style.display = 'none';
-  }
-}
-
-async function checkDuplicateNow() {
-  const text = document.getElementById('postContent').value.trim();
-  const el = document.getElementById('postAlert');
-  if (!text) { el.className = 'alert'; return; }
-  const res = await fetch('https://khedmotcenter.com/api.php', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({action: 'check_duplicate', content: text})
-  }).then(r => r.json());
-  if (res.duplicate) {
-    el.textContent = '⚠️ এই পোস্টটি আগেই করা হয়েছে! ডুপ্লিকেট পোস্ট।';
-    el.className = 'alert show alert-error';
-  } else {
-    el.className = 'alert';
-  }
-}
-document.getElementById('postContent').addEventListener('paste', function(e) {
-  setTimeout(checkDuplicateNow, 100);
-});
-document.getElementById('postContent').addEventListener('input', function(e) {
-  setTimeout(checkDuplicateNow, 100);
-  updateSmartPreview();
-});
-document.getElementById('postPosition')?.addEventListener('input', updateSmartPreview);
-document.getElementById('postAddress')?.addEventListener('input', updateSmartPreview);
-
-  async function loadLiveUpdate() {
-    try {
-      const res = await api('get_72h_counts');
-      if (res.success) {
-        const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
-        document.getElementById('liveTotal').textContent = toBn(res.total || 0);
-        document.getElementById('liveMosque').textContent = toBn(res.mosque || 0);
-        document.getElementById('liveMaleMadrasa').textContent = toBn(res.male_madrasa || 0);
-        document.getElementById('liveFemaleMadrasa').textContent = toBn(res.female_madrasa || 0);
-      }
-    } catch(e) {}
-  }
-  loadLiveUpdate();
-  setInterval(loadLiveUpdate, 60000);
 </script>
   <!-- JOB POST OVERLAY & SHEET -->
   <div class="detail-overlay" id="jobPostOverlay" onclick="closeJobPost()"></div>
@@ -1820,28 +1555,6 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
     @keyframes jobSpin { to { transform:rotate(360deg); } }
     @keyframes jobPopIn { from { transform:scale(0.3);opacity:0; } to { transform:scale(1);opacity:1; } }
     @keyframes jobFadeUp { from { transform:translateY(14px);opacity:0; } to { transform:translateY(0);opacity:1; } }
-  .live-update-section { padding: 1.2rem 1rem 0.5rem; }
-  .live-dot { width: 10px; height: 10px; background: #ff0000; border-radius: 50%; display: inline-block; margin-right: 6px; animation: livePulse 1.5s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
-  @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); } 70% { box-shadow: 0 0 0 8px rgba(255,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); } }
-  .live-header { display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.05em; }
-  .live-total-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy-mid)); border-radius: var(--radius-md); padding: 1.4rem 1rem; text-align: center; margin-bottom: 0.9rem; box-shadow: var(--shadow-md); }
-  .live-count { font-size: 3rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.4rem; }
-  .live-label { font-size: 0.9rem; color: var(--white); opacity: 0.9; }
-  .live-cat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-  .live-cat-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 0.5rem; text-align: center; box-shadow: var(--shadow-sm); }
-  .live-cat-count { font-size: 1.8rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 0.3rem; }
-  .live-cat-name { font-size: 0.72rem; color: var(--text-sub); font-weight: 600; }
-
-  .back-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
-    color: var(--white); border-radius: 30px; padding: 0.4rem 1rem;
-    font-size: 0.82rem; font-weight: 600; cursor: pointer;
-    backdrop-filter: blur(8px); transition: all 0.2s;
-    font-family: inherit; letter-spacing: 0.02em;
-  }
-  .back-btn:active { background: rgba(255,255,255,0.22); transform: scale(0.97); }
-  .back-btn::before { content: '←'; font-size: 0.9rem; }
   </style>
 
 </body>
