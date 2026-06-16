@@ -1287,15 +1287,17 @@ function filterByCat(cat, containerId) {
       el.querySelector('span:last-child').style.color = '#fff';
     }
   });
-  // পোস্ট ফিল্টার করি
-  const cards = document.querySelectorAll('#'+containerId+' .post-card, #'+containerId+' .post-item, #'+containerId+' .ud-post-card');
-  cards.forEach(card => {
-    const badges = card.querySelectorAll('span[style*="e6f4ea"], span[style*="1a7a3c"]');
-    const catMap = {'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'};
-    const targetName = catMap[cat] || cat;
-    let match = false;
-    badges.forEach(b => { if (b.textContent.trim() === targetName) match = true; });
-    card.style.display = match ? '' : 'none';
+  // API থেকে পোস্ট লোড করি
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = '<div class="loading-spinner"></div>';
+  const hours = window._currentHours || 72;
+  api('get_public_news', {category: cat, hours: hours, limit: 50}).then(res => {
+    if (!res.success) return;
+    const posts = res.posts || [];
+    if (containerId === 'newsPostsWrap') renderNewsPosts(posts, containerId);
+    else if (containerId === 'udMainContent') renderUDPosts(posts, containerId);
+    else renderNewsPosts(posts, containerId);
   });
 }
 
@@ -1338,7 +1340,7 @@ async function loadNews() {
   const isMasked = res.masked || false;
   wrap.innerHTML = res.posts.map(p => {
     const hasNum = hasMobile(p.content);
-    const catMap={"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
+    const catMap={"mosque-jobs":"মসজিদের নিয়োগ বিজ্ঞপ্তি","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ বিজ্ঞপ্তি","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
     const catTags=(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap[c]||c}</span>`).join("");
     return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags?`<div style="padding:0.3rem 0.85rem;">${catTags}</div>`:""}<div class="post-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
@@ -1371,7 +1373,7 @@ async function loadUserDashboard() {
     </div>
     <div class="section-header"><div class="section-header-icon">📰</div><div><div class="section-header-title">সর্বশেষ নিউজ ও পোস্টসমূহ</div><div class="section-header-sub">সম্পূর্ণ মোবাইল নাম্বারসহ</div></div></div>
     
-    ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?`<div style="margin:0.3rem 0.8rem;">`+(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;margin-top:2px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
+    ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?`<div style="margin:0.3rem 0.8rem;">`+(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;margin-top:2px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
   `;
   load72hBar('udMainContent');
 }
@@ -1449,7 +1451,7 @@ async function admLoadPosts() {
           <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button>
         </div>
       </div>
-      <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
+      <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ বিজ্ঞপ্তি','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
     </div>`).join('');
 }
 function openEditPost(id, content) {
