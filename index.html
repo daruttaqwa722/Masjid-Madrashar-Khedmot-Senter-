@@ -935,16 +935,8 @@
           <div class="form-group">
             <label class="form-label">ক্যাটাগরি <span style="color:red">*</span></label>
             <div id="admCatError" style="display:none;color:red;font-size:0.78rem;margin-bottom:0.4rem;">কমপক্ষে একটি ক্যাটাগরি সিলেক্ট করুন।</div>
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
-                <input type="checkbox" value="mosque-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> মসজিদের নিয়োগ বিজ্ঞপ্তি
-              </label>
-              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
-                <input type="checkbox" value="male-madrasa-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> পুরুষ মাদ্রাসার নিয়োগ
-              </label>
-              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
-                <input type="checkbox" value="female-madrasa-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> মহিলা মাদ্রাসার নিয়োগ
-              </label>
+            <div id="admCatList" style="display:flex;flex-direction:column;gap:8px;">
+              <div style="font-size:0.82rem;color:var(--text-sub);">লোড হচ্ছে…</div>
             </div>
           </div>
 
@@ -1397,6 +1389,7 @@ function admShowAlert(id, msg, type='error') {
   setTimeout(()=>el.classList.remove('show'), 4000);
 }
 function admSwitchTab(tab) {
+  if (tab === 'posts') loadCategories().then(renderAdmCatList);
   document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')));
   document.getElementById('tabPosts').classList.toggle('active', tab==='posts');
   document.getElementById('tabUsers').classList.toggle('active', tab==='users');
@@ -1624,6 +1617,29 @@ async function admInit() {
   else if (sess.success && sess.role === 'user') { showPage('user'); }
 })();
 
+
+// ডেটাবেস থেকে ক্যাটাগরি লোড
+let _categories = [];
+async function loadCategories() {
+  if (_categories.length) return _categories;
+  const res = await api('get_categories');
+  if (res.success) _categories = res.categories;
+  return _categories;
+}
+
+function renderAdmCatList(cats) {
+  const wrap = document.getElementById('admCatList');
+  if (!wrap) return;
+  wrap.innerHTML = cats.map(c => `
+    <label style="display:flex;align-items:center;gap:10px;padding:0.7rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;transition:all 0.2s;" onclick="toggleCatStyle(this);">
+      <input type="checkbox" value="${c.slug}" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;"> ${c.name}
+    </label>`).join('');
+}
+
+function getCatName(slug) {
+  const cat = _categories.find(c => c.slug === slug);
+  return cat ? cat.name : slug;
+}
 
 function toggleCatStyle(label) {
   const chk = label.querySelector('input');
