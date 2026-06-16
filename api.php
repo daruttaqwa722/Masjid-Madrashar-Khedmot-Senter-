@@ -163,6 +163,13 @@ if ($action === 'register') {
     echo json_encode(['success' => true]);
     exit();
 }
+// ক্যাটাগরি লোড
+if ($action === 'get_categories') {
+    $rows = $db->query("SELECT id, name, slug, description, meta_title, meta_desc FROM categories ORDER BY id ASC")->fetch_all(MYSQLI_ASSOC);
+    echo json_encode(['success' => true, 'categories' => $rows]);
+    exit();
+}
+
 if ($action === 'get_public_news') {
     $cat    = $body['category'] ?? $_GET['category'] ?? '';
     $hours  = intval($body['hours'] ?? $_GET['hours'] ?? 0);
