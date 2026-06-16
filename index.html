@@ -76,29 +76,68 @@
 
   /* ── HERO ── */
   .hero {
-    background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-mid) 100%);
-    text-align: center; padding: 2.8rem 1.2rem 2.4rem;
+    background: linear-gradient(165deg, #020240 0%, #04046B 50%, #07079A 100%);
+    text-align: center; padding: 2.6rem 1.4rem 2.8rem;
     position: relative; overflow: hidden;
   }
   .hero::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(255,215,0,0.10) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 20% 110%, rgba(255,255,255,0.04) 0%, transparent 60%);
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -5%, rgba(245,200,0,0.13) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 90% 100%, rgba(255,255,255,0.03) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 10% 100%, rgba(255,255,255,0.03) 0%, transparent 60%);
     pointer-events: none;
   }
-  .hero-inner { position: relative; z-index: 1; }
-  .bismillah {
-    font-family: 'Noto Serif Bengali', serif; font-size: 1.85rem;
-    color: var(--gold); letter-spacing: 0.04em; line-height: 1.5;
-    margin-bottom: 1rem; text-shadow: 0 2px 16px rgba(255,215,0,0.28);
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(245,200,0,0.6), transparent);
+    pointer-events: none;
   }
-  .hero-divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 1.1rem; width: min(280px, 85%); }
-  .hero-divider-line { flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(255,215,0,0.55), transparent); }
-  .hero-divider-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px rgba(255,215,0,0.6); }
-  .hero h1 { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.45; margin-bottom: 0.55rem; text-shadow: 0 2px 12px rgba(0,0,0,0.22); }
+  .hero-inner { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; }
+  .bismillah {
+    font-family: 'Noto Serif Bengali', serif; font-size: 1.75rem;
+    color: var(--gold); letter-spacing: 0.05em; line-height: 1.5;
+    margin-bottom: 1.2rem; text-shadow: 0 2px 20px rgba(245,200,0,0.30);
+  }
+  .hero-divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 1.2rem; width: min(260px, 80%); }
+  .hero-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(245,200,0,0.50), transparent); }
+  .hero-divider-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px rgba(245,200,0,0.7); }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(245,200,0,0.10); border: 1px solid rgba(245,200,0,0.25);
+    border-radius: 30px; padding: 0.25rem 1rem;
+    font-size: 0.75rem; color: rgba(255,255,255,0.65); letter-spacing: 0.06em;
+    margin-bottom: 1rem; text-transform: uppercase; font-weight: 600;
+  }
+  .hero-badge::before {
+    content: ''; display: inline-block; width: 5px; height: 5px;
+    background: var(--gold); border-radius: 50%; animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 1.55rem; font-weight: 700; color: var(--white);
+    line-height: 1.5; margin-bottom: 1rem;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-desc {
+    font-size: 0.88rem; color: rgba(255,255,255,0.72);
+    line-height: 1.75; margin-bottom: 1.5rem;
+    padding: 0 0.4rem;
+  }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 0; margin-bottom: 1.4rem;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(245,200,0,0.15);
+    border-radius: 16px; overflow: hidden; max-width: 320px; margin-left: auto; margin-right: auto;
+  }
+  .hero-stat { flex: 1; padding: 0.75rem 0.5rem; text-align: center; border-right: 1px solid rgba(245,200,0,0.12); }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num { font-size: 0.9rem; font-weight: 700; color: var(--gold); line-height: 1.2; }
+  .hero-stat-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
   .hero-subtitle {
     display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.28);
+    background: rgba(245,200,0,0.12); border: 1px solid rgba(245,200,0,0.28);
     border-radius: 30px; padding: 0.28rem 0.9rem;
     font-size: 0.82rem; color: var(--gold-light); letter-spacing: 0.02em; margin-top: 0.3rem;
   }
@@ -451,7 +490,23 @@
         <div class="hero-divider-dot"></div>
         <div class="hero-divider-line"></div>
       </div>
-      <h1>মসজিদ মাদ্রাসার খেদমত সেন্টার</h1>
+      <div class="hero-badge">বাংলাদেশের ৬৪ জেলা</div>
+      <h1>খেদমত সেন্টারে<br><span>আপনাকে স্বাগতম</span></h1>
+      <p class="hero-desc">যারা ভালো মানের বেতনে এবং কাছের ঠিকানায় খেদমত খোঁজছেন, তাদের জন্য আমাদের ওয়েবসাইট একটি উপকারী মাধ্যম। বাংলাদেশের ৬৪ জেলার মসজিদ, পুরুষ ও মহিলা মাদ্রাসার খেদমতের খবর প্রতিদিন আমাদের ওয়েবসাইটে প্রকাশ করা হয়।</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">মসজিদ</div>
+          <div class="hero-stat-lbl">নিয়োগ বিজ্ঞপ্তি</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">মাদ্রাসা</div>
+          <div class="hero-stat-lbl">পুরুষ ও মহিলা</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">প্রতিদিন</div>
+          <div class="hero-stat-lbl">নতুন পোস্ট</div>
+        </div>
+      </div>
       <div class="hero-subtitle">সব গুরুত্বপূর্ণ লিংক এক জায়গায়</div>
     </div>
   </div>
