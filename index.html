@@ -1433,8 +1433,13 @@ async function submitPost() {
     admShowAlert('postAlert','পোস্ট সফলভাবে প্রকাশিত হয়েছে!','success');
     admLoadPosts();
     newsLoaded = false; // reset news cache
-    await loadNewsForce(); // নতুন পোস্ট সাথে সাথে লোড করি
+    await loadNewsForce(); // নিউজ পেইজ আপডেট
     loadLiveUpdate(); // লাইভ কাউন্টার আপডেট
+    // ইউজার ড্যাশবোর্ড cache reset
+    if (typeof loadUserDashboard === 'function') {
+      const udPage = document.getElementById('pageUserDashboard');
+      if (udPage && udPage.classList.contains('active')) loadUserDashboard();
+    }
   } else admShowAlert('postAlert', res.message || 'পোস্ট করা যায়নি।');
 }
 async function admLoadPosts() {
