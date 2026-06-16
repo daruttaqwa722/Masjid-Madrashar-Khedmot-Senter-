@@ -147,25 +147,22 @@ if ($action === 'register') {
     $name    = $body['name'] ?? '';
     $mobile  = $body['mobile'] ?? '';
     $address = $body['address'] ?? '';
-    $pass    = $body['password'] ?? '';
-    if (!$name || !$mobile || !$pass) { echo json_encode(['success' => false, 'message' => 'সব তথ্য পূরণ করুন।']); exit(); }
+    if (!$name || !$mobile) { echo json_encode(['success' => false, 'message' => 'সব তথ্য পূরণ করুন।']); exit(); }
     $check = $db->prepare("SELECT id FROM users WHERE mobile=? LIMIT 1");
     $check->bind_param('s', $mobile);
     $check->execute();
     $check->store_result();
     if ($check->num_rows > 0) { echo json_encode(['success' => false, 'message' => 'এই মোবাইল নম্বর আগেই নিবন্ধিত।']); exit(); }
     $id        = uniqid('u_', true);
-    $hash      = password_hash($pass, PASSWORD_DEFAULT);
     $createdAt = time() * 1000;
     $expiresAt = $createdAt + (30 * 86400 * 1000);
     $stmt = $db->prepare("INSERT INTO users (id, name, mobile, address, password, plain_pass, role, createdAt, expiresAt) VALUES (?,?,?,?,?,?,'user',?,?)");
-    $stmt->bind_param('ssssssii', $id, $name, $mobile, $address, $hash, $pass, $createdAt, $expiresAt);
+    $empty = '';
+    $stmt->bind_param('ssssssii', $id, $name, $mobile, $address, $empty, $empty, $createdAt, $expiresAt);
     $stmt->execute();
     echo json_encode(['success' => true]);
     exit();
 }
-
-// GET PUBLIC NEWS (masked)
 if ($action === 'get_public_news') {
     $cat    = $body['category'] ?? $_GET['category'] ?? '';
     $hours  = intval($body['hours'] ?? $_GET['hours'] ?? 0);
