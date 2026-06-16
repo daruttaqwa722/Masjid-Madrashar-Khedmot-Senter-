@@ -163,13 +163,6 @@ if ($action === 'register') {
     echo json_encode(['success' => true]);
     exit();
 }
-// ক্যাটাগরি লোড
-if ($action === 'get_categories') {
-    $rows = $db->query("SELECT id, name, slug, description, meta_title, meta_desc FROM categories ORDER BY id ASC")->fetch_all(MYSQLI_ASSOC);
-    echo json_encode(['success' => true, 'categories' => $rows]);
-    exit();
-}
-
 if ($action === 'get_public_news') {
     $cat    = $body['category'] ?? $_GET['category'] ?? '';
     $hours  = intval($body['hours'] ?? $_GET['hours'] ?? 0);
@@ -230,13 +223,13 @@ if ($action === 'get_filter_counts') {
     $cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
     foreach ($hours as $h) {
         $since = (time() - $h * 3600) * 1000;
-        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE created>=?");
+        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE status='active' AND created>=?");
         $stmt->bind_param('s', $since);
         $stmt->execute();
         $result[$h] = (int)$stmt->get_result()->fetch_assoc()['cnt'];
         // ক্যাটাগরি অনুযায়ী কাউন্ট
         foreach ($cats as $cat) {
-            $stmt2 = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE created>=? AND (category=? OR cats LIKE ?)");
+            $stmt2 = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE status='active' AND created>=? AND (category=? OR cats LIKE ?)");
             $like = '%' . $cat . '%';
             $stmt2->bind_param('sss', $since, $cat, $like);
             $stmt2->execute();
@@ -260,7 +253,7 @@ if ($action === 'get_72h_counts') {
         $counts[$cat] = (int)$stmt->get_result()->fetch_assoc()['cnt'];
     }
     // মোট সব পোস্ট ৭২ ঘন্টার
-    $stmtTotal = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE created>=?");
+    $stmtTotal = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE status='active' AND created>=?");
     $stmtTotal->bind_param('s', $since);
     $stmtTotal->execute();
     $total = (int)$stmtTotal->get_result()->fetch_assoc()['cnt'];
