@@ -76,30 +76,19 @@
 
   /* ── HERO ── */
   .hero {
-    background: linear-gradient(165deg, #020240 0%, #04046B 50%, #07079A 100%);
-    text-align: center; padding: 1.8rem 1.4rem 1.6rem;
+    background: var(--bg);
+    text-align: center; padding: 1.8rem 1.4rem 1.4rem;
     position: relative; overflow: hidden;
   }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 55% at 50% -5%, rgba(245,200,0,0.13) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 40% at 90% 100%, rgba(255,255,255,0.03) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 40% at 10% 100%, rgba(255,255,255,0.03) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, transparent, rgba(245,200,0,0.6), transparent);
-    pointer-events: none;
-  }
+  .hero::before { display: none; }
+  .hero::after { display: none; }
   .hero-inner { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; }
   .hero-main-title {
     font-family: 'Noto Serif Bengali', serif;
     font-size: 2rem; font-weight: 700;
-    color: #ffffff;
+    color: var(--navy);
     line-height: 1.4; margin-bottom: 1rem;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    text-shadow: none;
     letter-spacing: 0.01em;
   }
   .bismillah {
@@ -112,14 +101,14 @@
   .hero-divider-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px rgba(245,200,0,0.7); }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(245,200,0,0.10); border: 1px solid rgba(245,200,0,0.25);
+    background: rgba(4,4,107,0.07); border: 1px solid rgba(4,4,107,0.15);
     border-radius: 30px; padding: 0.25rem 1rem;
-    font-size: 0.75rem; color: rgba(255,255,255,0.65); letter-spacing: 0.06em;
+    font-size: 0.75rem; color: var(--navy); letter-spacing: 0.06em;
     margin-bottom: 1rem; text-transform: uppercase; font-weight: 600;
   }
   .hero-badge::before {
     content: ''; display: inline-block; width: 5px; height: 5px;
-    background: var(--gold); border-radius: 50%; animation: pulse 2s infinite;
+    background: var(--navy); border-radius: 50%; animation: pulse 2s infinite;
     flex-shrink: 0;
   }
   .hero h1 {
@@ -130,7 +119,7 @@
   }
   .hero h1 span { color: var(--gold); }
   .hero-desc {
-    font-size: 0.88rem; color: rgba(255,255,255,0.72);
+    font-size: 0.88rem; color: var(--text-sub);
     line-height: 1.75; margin-bottom: 1.5rem;
     padding: 0 0.4rem;
   }
@@ -1967,10 +1956,10 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
   .live-update-section { padding: 1.2rem 1rem 0.5rem; }
   .live-dot { width: 10px; height: 10px; background: #ff0000; border-radius: 50%; display: inline-block; margin-right: 6px; animation: livePulse 1.5s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
   @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); } 70% { box-shadow: 0 0 0 8px rgba(255,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); } }
-  .live-header { display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.05em; }
-  .live-total-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy-mid)); border-radius: var(--radius-md); padding: 1.4rem 1rem; text-align: center; margin-bottom: 0.9rem; box-shadow: var(--shadow-md); }
-  .live-count { font-size: 3rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.4rem; }
-  .live-label { font-size: 0.9rem; color: var(--white); opacity: 0.9; }
+    .live-header { display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; }
+  .live-total-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-md); padding: 1.4rem 1rem; text-align: center; margin-bottom: 0.9rem; box-shadow: var(--shadow-md); }
+  .live-count { font-size: 3rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 0.4rem; }
+  .live-label { font-size: 0.9rem; color: var(--text-sub); opacity: 1; }
   .live-cat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; max-height: 85px; overflow: hidden; position: relative; }
   .live-cat-grid::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 35px; background: linear-gradient(transparent, rgba(240,242,250,0.95)); pointer-events: none; }
   .live-cat-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 0.5rem; text-align: center; box-shadow: var(--shadow-sm); }
