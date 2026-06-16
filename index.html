@@ -1321,6 +1321,10 @@ async function filterByHours(hours, containerId) {
     }
   }
 }
+async function loadNewsForce() {
+  newsLoaded = false;
+  await loadNews();
+}
 async function loadNews() {
   if (newsLoaded) return;
   const res = await api('get_public_news');
@@ -1429,7 +1433,7 @@ async function submitPost() {
     admShowAlert('postAlert','পোস্ট সফলভাবে প্রকাশিত হয়েছে!','success');
     admLoadPosts();
     newsLoaded = false; // reset news cache
-    loadNews(); // নতুন পোস্ট সাথে সাথে লোড করি
+    await loadNewsForce(); // নতুন পোস্ট সাথে সাথে লোড করি
     loadLiveUpdate(); // লাইভ কাউন্টার আপডেট
   } else admShowAlert('postAlert', res.message || 'পোস্ট করা যায়নি।');
 }
