@@ -580,6 +580,31 @@
     </div>
   </div>
 
+  <!-- উদ্দেশ্য SECTION (HOMEPAGE) -->
+  <div class="section-label">উদ্দেশ্য</div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon"></div>
+      <div class="card-header-title">আমাদের ওয়েবসাইটের উদ্দেশ্য</div>
+    </div>
+    <div class="card-body">
+      <div class="diamond-list">
+        <div class="diamond-item"><span class="diamond-dot">◆</span><span>সারা দেশের মসজিদ ও মাদ্রাসার খেদমতের খবরগুলো এক জায়গায় পৌঁছে দেওয়া।</span></div>
+        <div class="diamond-item"><span class="diamond-dot">◆</span><span>মসজিদের হুজুর ও মাদ্রাসার শিক্ষকদের জন্য সহজে খেদমত খুঁজে পেতে সহায়তা করা।</span></div>
+        <div class="diamond-item"><span class="diamond-dot">◆</span><span>দূরের বা অনির্ভরযোগ্য জায়গার পরিবর্তে কাছের ঠিকানায় খেদমত পেতে সহায়তা করা।</span></div>
+        <div class="diamond-item"><span class="diamond-dot">◆</span><span>শতশত খেদমত যাচাই-বাছাই করার মাধ্যমে ভালো মানের বেতনের খেদমতটি খুঁজে পেতে সহায়তা করা।</span></div>
+        <div class="diamond-item"><span class="diamond-dot">◆</span><span>প্রতিদিন নতুন নতুন মসজিদ মাদ্রাসার খেদমতের আপডেট গুলোর মাধ্যমে দ্রুত খেদমত পেতে সহায়তা করা।</span></div>
+        <div class="diamond-item"><span class="diamond-dot">◆</span><span>মসজিদ ও মাদ্রাসার খেদমত খুঁজতে গিয়ে যে সময় অপচয় ও কষ্ট হয় এগুলো দূর করতে সহায়তা করা।</span></div>
+        <div class="diamond-item"><span class="diamond-dot">◆</span><span>দ্বীনের খেদমতের পাশাপাশি নিজের ও অন্যদের কর্মসংস্থানের ব্যবস্থা করা।</span></div>
+      </div>
+      <div class="highlight-pills" style="margin-top:1rem;">
+        <div class="highlight-pill">ভালো বেতনের খেদমত একজন মানুষের পরিবারকে স্বচ্ছল করতে পারে।</div>
+        <div class="highlight-pill">কাছের ঠিকানার খেদমত একজন মানুষের কষ্ট কমিয়ে দিতে পারে।</div>
+        <div class="highlight-pill">সুন্দর পরিবেশে খেদমত করলে মন শান্ত থাকে এবং কাজের মধ্যেও প্রশান্তি আসে।</div>
+      </div>
+      <div class="quote-block" style="margin-top:0.9rem;">এজন্য খেদমত নেওয়ার আগে শতশত খেদমত যাচাই-বাছাই করা অত্যন্ত গুরুত্বপূর্ণ।</div>
+    </div>
+  </div>
   <!-- FOOTER -->
   <footer>
     <div class="footer-name">মসজিদ মাদ্রাসার খেদমত সেন্টার</div>
@@ -653,9 +678,9 @@
             <div class="diamond-item"><span class="diamond-dot">◆</span><span>দ্বীনের খেদমতের পাশাপাশি নিজের ও অন্যদের কর্মসংস্থানের ব্যবস্থা করা।</span></div>
           </div>
           <div class="highlight-pills" style="margin-top:1rem;">
-            <div class="highlight-pill">💚 ভালো বেতনের খেদমত একজন মানুষের পরিবারকে স্বচ্ছল করতে পারে।</div>
-            <div class="highlight-pill">💙 কাছের ঠিকানার খেদমত একজন মানুষের কষ্ট কমিয়ে দিতে পারে।</div>
-            <div class="highlight-pill">💛 সুন্দর পরিবেশে খেদমত করলে মন শান্ত থাকে এবং কাজের মধ্যেও প্রশান্তি আসে।</div>
+            <div class="highlight-pill">ভালো বেতনের খেদমত একজন মানুষের পরিবারকে স্বচ্ছল করতে পারে।</div>
+            <div class="highlight-pill">কাছের ঠিকানার খেদমত একজন মানুষের কষ্ট কমিয়ে দিতে পারে।</div>
+            <div class="highlight-pill">সুন্দর পরিবেশে খেদমত করলে মন শান্ত থাকে এবং কাজের মধ্যেও প্রশান্তি আসে।</div>
           </div>
           <div class="quote-block" style="margin-top:0.9rem;">এজন্য খেদমত নেওয়ার আগে শতশত খেদমত যাচাই-বাছাই করা অত্যন্ত গুরুত্বপূর্ণ।</div>
         </div>
@@ -699,7 +724,7 @@
 
       <div class="card">
         <div class="card-header">
-          <div class="card-header-icon">📅</div>
+          <div class="card-header-icon"></div>
           <div class="card-header-title">কতদিন পর্যন্ত ভিজিট করতে পারবেন?</div>
         </div>
         <div class="card-body">
@@ -1480,7 +1505,7 @@ async function loadUserDashboard() {
       <div class="profile-header"><div class="profile-avatar">👤</div><div><div class="profile-name">${escHtml(user.name)}</div><div class="profile-mobile">📱 ${user.mobile}</div></div></div>
       <div class="profile-body">
         <div class="info-row"><div class="info-icon">📍</div><div><div class="info-label">ঠিকানা</div><div class="info-value">${escHtml(user.address)}</div></div></div>
-        <div class="info-row"><div class="info-icon">📅</div><div><div class="info-label">একাউন্ট তৈরির তারিখ</div><div class="info-value">${formatDateUD(user.created_at)}</div></div></div>
+        <div class="info-row"><div class="info-icon"></div><div><div class="info-label">একাউন্ট তৈরির তারিখ</div><div class="info-value">${formatDateUD(user.created_at)}</div></div></div>
         <div class="info-row"><div class="info-icon">⏳</div><div><div class="info-label">মেয়াদ শেষের তারিখ</div><div class="info-value">${formatDateUD(user.expiry_date)}</div></div></div>
       </div>
     </div>
