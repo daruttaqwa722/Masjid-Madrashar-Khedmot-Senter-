@@ -79,7 +79,14 @@ function autoSEO($text, $category, $id, $position='', $address='') {
         $first_line = explode("\n", trim($text))[0];
         $title = mb_substr($first_line, 0, 55);
     }
-    $slug       = $id;
+    $slugWords  = preg_split('/\s+/u', trim($title), -1, PREG_SPLIT_NO_EMPTY);
+    $slugWords  = array_slice($slugWords, 0, 6);
+    $slugBase   = implode('-', $slugWords);
+    $slugBase   = preg_replace('/[^\p{L}\p{N}\-]/u', '', $slugBase);
+    $slugBase   = preg_replace('/-+/', '-', $slugBase);
+    $slugBase   = trim($slugBase, '-');
+    if (empty($slugBase)) $slugBase = 'post';
+    $slug       = $slugBase . '-' . substr(md5($id), 0, 6);
     $meta_title = mb_substr($title, 0, 55) . ' | খেদমত সেন্টার';
     $clean      = preg_replace('/\s+/', ' ', strip_tags($text));
     $meta_desc  = mb_substr($clean, 0, 150) . '...';
