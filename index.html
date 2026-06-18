@@ -62,7 +62,9 @@
     --green: #15803d; --red: #dc2626; --orange: #ea580c;
   }
 
-  body { background: linear-gradient(160deg, #ECEFFE 0%, #F2F4FB 50%, #EEF0F8 100%); background-attachment: fixed; font-family: 'Noto Serif Bengali', serif; min-height: 100vh; color: var(--text); }
+  body { background: linear-gradient(160deg, #ECEFFE 0%, #F2F4FB 50%, #EEF0F8 100%); background-attachment: fixed; font-family: 'Noto Serif Bengali', serif; min-height: 100vh; color: var(--text); -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+  body.admin-mode { -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text; }
+  input, textarea, select { -webkit-user-select: text; -moz-user-select: text; user-select: text; }
 
   /* ══════════════════════════════════════
      PAGE SYSTEM
@@ -1149,6 +1151,9 @@ function showPage(name) {
    SHARED API
 ══════════════════════════════════════ */
 let adminToken = '';
+// কপি প্রোটেকশন - এডমিন ছাড়া কেউ কপি করতে পারবে না
+document.addEventListener('contextmenu', function(e) { if (adminToken !== 'admin_session') e.preventDefault(); });
+document.addEventListener('copy', function(e) { if (adminToken !== 'admin_session') e.preventDefault(); });
 const api = (action, data={}) =>
   fetch('https://khedmotcenter.com/api.php', {
     method: 'POST',
@@ -1271,7 +1276,7 @@ function lsDoAdminLogin() {
   fetch('https://khedmotcenter.com/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
-      if(data.success){adminToken='admin_session';closeLogin();showPage('admin');}
+      if(data.success){adminToken='admin_session';document.body.classList.add('admin-mode');closeLogin();showPage('admin');}
       else{document.getElementById('adminAlertMsg').textContent=data.message||'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';al.classList.add('show');}
     }).catch(()=>{btn.classList.remove('loading');document.getElementById('adminAlertMsg').textContent='সংযোগ সমস্যা।';al.classList.add('show');});
 }
