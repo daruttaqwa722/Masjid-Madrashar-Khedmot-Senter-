@@ -1024,6 +1024,7 @@
     <div class="tabs">
       <button class="tab-btn active" onclick="admSwitchTab('posts')">📰 পোস্ট ম্যানেজমেন্ট</button>
       <button class="tab-btn" onclick="admSwitchTab('users')">👥 ইউজার ম্যানেজমেন্ট</button>
+      <button class="tab-btn" onclick="admSwitchTab('visitors')">📊 ভিজিটর এনালাইসিস</button>
     </div>
   </div>
   <div class="adm-main">
@@ -1088,7 +1089,16 @@
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">👥</div><div class="adm-card-header-title">সকল ইউজারসমূহ</div></div>
         <div class="adm-card-body"><div id="usersContainer"><div class="adm-empty">লোড হচ্ছে…</div></div></div>
+    </div>
       </div>
+    <div class="tab-panel" id="tabVisitors">
+      <div class="adm-card">
+        <div class="adm-card-header"><div class="adm-card-header-icon">📊</div><div class="adm-card-header-title">ভিজিটর স্ট্যাটস</div></div>
+        <div class="adm-card-body" id="visitorStatsContainer">
+          <div class="adm-empty">লোড হচ্ছে…</div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 
@@ -1640,7 +1650,7 @@ async function submitPost() {
   } else admShowAlert('postAlert', res.message || 'পোস্ট করা যায়নি।');
 }
 async function admLoadPosts() {
-  const res = await api('admin_get_posts');
+  const res = await api('admin_get_posts', {limit: 10, offset: window._admOffset || 0});
   load72hBar('postsContainer');
   const c = document.getElementById('postsContainer');
   if (!res.success || !res.posts.length) { c.innerHTML = '<div class="adm-empty">কোনো পোস্ট নেই।</div>'; return; }
@@ -1654,6 +1664,15 @@ async function admLoadPosts() {
       </div>
       <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
     </div>`).join('');
+  window._admOffset = (window._admOffset || 0) + res.posts.length;
+  if (res.posts.length >= 10) {
+    const admMore = document.createElement('div');
+    admMore.id = 'admLoadMore';
+    admMore.style = 'text-align:center;padding:1rem;';
+    admMore.innerHTML = '<button onclick="admLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;">খেদমতের খবর আরো দেখুন</button>';
+    c.appendChild(admMore);
+  }
+async function admLoadMorePosts() { const lm = document.getElementById("admLoadMore"); if (lm) lm.remove(); const btn = document.querySelector("#admLoadMore button"); if (btn) btn.textContent = "লোড হচ্ছে..."; const res = await api("admin_get_posts", {limit: 20, offset: window._admOffset || 10}); if (!res.success || !res.posts.length) return; const c = document.getElementById("postsContainer"); res.posts.forEach(p => { const div = document.createElement("div"); div.className = "post-item"; div.id = "postItem"+p.id; div.innerHTML = "<div class=adm-post-text>"+p.content+"</div>"; c.appendChild(div); }); window._admOffset = (window._admOffset || 10) + res.posts.length; if (res.posts.length >= 20) { const more = document.createElement("div"); more.id = "admLoadMore"; more.style = "text-align:center;padding:1rem;"; more.innerHTML = "<button onclick=admLoadMorePosts() style=background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;>খেদমতের খবর আরো দেখুন</button>"; c.appendChild(more); } }
 }
 function openEditPost(id, content) {
   document.getElementById('editPostId').value = id;

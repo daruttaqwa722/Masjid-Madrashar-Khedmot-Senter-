@@ -170,6 +170,73 @@ if ($action === 'register') {
     echo json_encode(['success' => true]);
     exit();
 }
+// VISITOR TRACKING
+if ($action === 'track_visitor') {
+    $vid = $body['visitor_id'] ?? '';
+    $source = $body['source'] ?? 'direct';
+    if (!$vid) { echo json_encode(['success'=>false]); exit(); }
+    $now = time() * 1000;
+    $check = $db->prepare("SELECT visitor_id FROM visitor_logs WHERE visitor_id=?");
+    $check->bind_param('s', $vid);
+    $check->execute();
+    $isNew = $check->get_result()->num_rows === 0;
+    $stmt = $db->prepare("INSERT INTO visitor_logs (visitor_id, first_visit, last_visit, visit_count, source) VALUES (?,?,?,1,?) ON DUPLICATE KEY UPDATE last_visit=?, visit_count=visit_count+1");
+    $stmt->bind_param('siisi', $vid, $now, $now, $source, $now);
+    $stmt->execute();
+    echo json_encode(['success'=>true, 'isNew'=>$isNew]);
+    exit();
+}
+// GET VISITOR STATS (ADMIN ONLY)
+if ($action === 'get_visitor_stats') {
+    session_start();
+    if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+        echo json_encode(['success'=>false, 'message'=>'Unauthorized']);
+        exit();
+    }
+    $now = time();
+    $todayStart = strtotime('today') * 1000;
+    $yesterdayStart = strtotime('yesterday') * 1000;
+    $sevenDaysStart = ($now - 7*86400) * 1000;
+
+    function countVisitors($db, $since, $until, $isNew) {
+        if ($isNew) {
+            $sql = "SELECT COUNT(*) as cnt FROM visitor_logs WHERE first_visit>=? AND first_visit<?";
+        } else {
+            $sql = "SELECT COUNT(*) as cnt FROM visitor_logs WHERE last_visit>=? AND last_visit<? AND first_visit<?";
+        }
+        $stmt = $db->prepare($sql);
+        if ($isNew) { $stmt->bind_param('ii', $since, $until); }
+        else { $stmt->bind_param('iii', $since, $until, $since); }
+        $stmt->execute();
+        return (int)$stmt->get_result()->fetch_assoc()['cnt'];
+    }
+
+    $nowMs = $now * 1000;
+    $todayNew = countVisitors($db, $todayStart, $nowMs, true);
+    $todayReturning = countVisitors($db, $todayStart, $nowMs, false);
+    $yestNew = countVisitors($db, $yesterdayStart, $todayStart, true);
+    $yestReturning = countVisitors($db, $yesterdayStart, $todayStart, false);
+    $weekNew = countVisitors($db, $sevenDaysStart, $nowMs, true);
+    $weekReturning = countVisitors($db, $sevenDaysStart, $nowMs, false);
+
+    $totalAll = (int)$db->query("SELECT COUNT(*) as cnt FROM visitor_logs")->fetch_assoc()['cnt'];
+    $totalReturning = (int)$db->query("SELECT COUNT(*) as cnt FROM visitor_logs WHERE visit_count>1")->fetch_assoc()['cnt'];
+    $totalNew = $totalAll - $totalReturning;
+
+    $sourceRows = $db->query("SELECT source, COUNT(*) as cnt FROM visitor_logs GROUP BY source ORDER BY cnt DESC")->fetch_all(MYSQLI_ASSOC);
+    $sources = [];
+    foreach ($sourceRows as $row) { $sources[$row['source']] = (int)$row['cnt']; }
+
+    echo json_encode([
+        'success'=>true,
+        'today_new'=>$todayNew, 'today_returning'=>$todayReturning,
+        'yesterday_new'=>$yestNew, 'yesterday_returning'=>$yestReturning,
+        'week_new'=>$weekNew, 'week_returning'=>$weekReturning,
+        'total'=>$totalAll, 'total_new'=>$totalNew, 'total_returning'=>$totalReturning,
+        'sources'=>$sources
+    ]);
+    exit();
+}
 if ($action === 'get_public_news') {
     $cat    = $body['category'] ?? $_GET['category'] ?? '';
     $hours  = intval($body['hours'] ?? $_GET['hours'] ?? 0);
@@ -276,9 +343,19 @@ if ($action === 'get_72h_counts') {
 }
 // ADMIN — GET POSTS
 if ($action === 'admin_get_posts') {
-    $rows  = $db->query("SELECT * FROM posts ORDER BY created DESC")->fetch_all(MYSQLI_ASSOC);
+    $limit  = intval($body['limit'] ?? 10);
+    $offset = intval($body['offset'] ?? 0);
+    $cat    = $body['category'] ?? '';
+    $where  = "WHERE status='active'";
+    if ($cat) { $where = "WHERE status='active' AND (category='$cat' OR cats LIKE '%$cat%')"; }
+    $total_stmt = $db->query("SELECT COUNT(*) as cnt FROM posts");
+    $total = (int)$total_stmt->fetch_assoc()['cnt'];
+    $stmt = $db->prepare("SELECT * FROM posts ORDER BY created DESC LIMIT ? OFFSET ?");
+    $stmt->bind_param('ii', $limit, $offset);
+    $stmt->execute();
+    $rows  = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $posts = array_map(fn($r) => formatPost($r, false), $rows);
-    echo json_encode(['success' => true, 'posts' => $posts]);
+    echo json_encode(['success' => true, 'posts' => $posts, 'total' => $total]);
     exit();
 }
 
