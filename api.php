@@ -178,7 +178,7 @@ if ($action === 'get_public_news') {
     $where  = "WHERE status='active'";
     $params = [];
     $types  = '';
-    if ($cat) { $where .= " AND category=?"; $params[] = $cat; $types .= 's'; }
+    if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
     if ($hours > 0) { $since = (time() - ($hours * 3600)) * 1000; $where .= " AND created >= ?"; $params[] = $since; $types .= 'i'; }
     $params[] = $limit;
     $params[] = $offset;
@@ -209,7 +209,7 @@ if ($action === 'get_user_dashboard') {
     $where  = "WHERE status='active'";
     $params = [];
     $types  = '';
-    if ($cat) { $where .= " AND category=?"; $params[] = $cat; $types .= 's'; }
+    if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
     if ($hours > 0) { $since = (time() - ($hours * 3600)) * 1000; $where .= " AND created >= ?"; $params[] = $since; $types .= 'i'; }
     $params[] = 50;
     $types   .= 'i';
