@@ -1608,10 +1608,76 @@ function admShowAlert(id, msg, type='error') {
   setTimeout(()=>el.classList.remove('show'), 4000);
 }
 function admSwitchTab(tab) {
-  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')));
+  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')||(i===2&&tab==='visitors')));
   document.getElementById('tabPosts').classList.toggle('active', tab==='posts');
   document.getElementById('tabUsers').classList.toggle('active', tab==='users');
+  document.getElementById('tabVisitors').classList.toggle('active', tab==='visitors');
   if (tab==='users') admLoadUsers();
+  if (tab==='visitors') loadVisitorStats();
+}
+
+async function loadVisitorStats() {
+  const res = await api('get_visitor_stats');
+  const cont = document.getElementById('visitorStatsContainer');
+  if (!res.success) { cont.innerHTML = '<div class="adm-empty">'+res.message+'</div>'; return; }
+  const h = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.today_new}</div>
+        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">আজকের নতুন ভিজিটর</div>
+      </div>
+      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.today_returning}</div>
+        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">আজকের রিটার্নিং ভিজিটর</div>
+      </div>
+      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.yesterday_new}</div>
+        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গতকালের নতুন ভিজিটর</div>
+      </div>
+      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.yesterday_returning}</div>
+        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গতকালের রিটার্নিং ভিজিটর</div>
+      </div>
+      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.week_new}</div>
+        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গত ৭ দিনের নতুন ভিজিটর</div>
+      </div>
+      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.week_returning}</div>
+        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গত ৭ দিনের রিটার্নিং ভিজিটর</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:12px;padding:1rem;text-align:center;color:#fff;">
+        <div style="font-size:2rem;font-weight:700;color:#FFD700;">${res.total}</div>
+        <div style="font-size:0.85rem;color:#fff;margin-top:0.3rem;opacity:0.9;">মোট ভিজিটর</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:12px;padding:1rem;text-align:center;color:#fff;">
+        <div style="font-size:2rem;font-weight:700;color:#FFD700;">${res.total_new}</div>
+        <div style="font-size:0.85rem;color:#fff;margin-top:0.3rem;opacity:0.9;">মোট নতুন ভিজিটর</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:12px;padding:1rem;text-align:center;color:#fff;">
+        <div style="font-size:2rem;font-weight:700;color:#FFD700;">${res.total_returning}</div>
+        <div style="font-size:0.85rem;color:#fff;margin-top:0.3rem;opacity:0.9;">মোট রিটার্নিং ভিজিটর</div>
+      </div>
+    </div>
+    <div class="adm-card" style="margin-top:1.5rem;">
+      <div class="adm-card-header"><div class="adm-card-header-icon">🌐</div><div class="adm-card-header-title">ট্রাফিক সোর্স</div></div>
+      <div class="adm-card-body">
+        ${Object.entries(res.sources || {}).map(([src,cnt])=>`<div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(0,0,0,0.05);"><span>${src}</span><strong>${cnt}</strong></div>`).join('')}
+      </div>
+    </div>
+  `;
+  cont.innerHTML = h;
+}
+async function trackVisitor() {
+  let vid = localStorage.getItem('visitor_id');
+  if (!vid) { vid = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2,9); localStorage.setItem('visitor_id', vid); }
+  let source = 'direct';
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('utm_source')) source = params.get('utm_source');
+  else if (document.referrer.includes('google')) source = 'google';
+  else if (document.referrer.includes('facebook')) source = 'facebook';
+  else if (document.referrer.includes('whatsapp')) source = 'whatsapp';
+  await api('track_visitor', {visitor_id: vid, source: source});
 }
 
 let admImgBase64 = null;
@@ -2068,5 +2134,8 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
   .back-btn::before { content: '←'; font-size: 0.9rem; }
   </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', trackVisitor);
+</script>
 </body>
 </html>
