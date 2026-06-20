@@ -1549,7 +1549,7 @@ async function loadUserDashboard() {
   const {user, days_left, is_active, posts} = res;
   document.getElementById('udMainContent').innerHTML = `
     <div class="profile-card">
-      <div class="profile-header"><div class="profile-avatar">👤</div><div><div class="profile-name">${escHtml(user.name)}</div><div class="profile-mobile">📱 ${user.mobile}</div></div></div>
+      <div class="info-row"><div class="info-icon">👤</div><div><div class="info-label">নাম</div><div class="info-value">${escHtml(user.name)}</div></div></div><div class="info-row"><div class="info-icon">📱</div><div><div class="info-label">মোবাইল</div><div class="info-value">${user.mobile}</div></div></div>
       <div class="profile-body">
         <div class="info-row"><div class="info-icon">📍</div><div><div class="info-label">ঠিকানা</div><div class="info-value">${escHtml(user.address)}</div></div></div>
         <div class="info-row"><div class="info-icon"></div><div><div class="info-label">একাউন্ট তৈরির তারিখ</div><div class="info-value">${formatDateUD(user.created_at)}</div></div></div>
