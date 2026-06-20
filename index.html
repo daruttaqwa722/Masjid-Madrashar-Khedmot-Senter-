@@ -1559,7 +1559,7 @@ async function loadUserDashboard() {
     </div>
     <div class="status-card">
       <div class="status-box ${is_active?'active':'expired'}"><div class="status-icon">${is_active?'✅':'❌'}</div><div class="status-label">স্ট্যাটাস</div><div class="status-value">${is_active?'Active':'Expired'}</div></div>
-      <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon">${days_left>=0?'📆':'🚫'}</div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
+      <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon"></div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
     </div>
     <div class="section-header"><div class="section-header-icon">📰</div><div><div class="section-header-title">সর্বশেষ নিউজ ও পোস্টসমূহ</div><div class="section-header-sub">সম্পূর্ণ মোবাইল নাম্বারসহ</div></div></div>
     
