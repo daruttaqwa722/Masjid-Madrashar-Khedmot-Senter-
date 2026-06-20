@@ -1974,42 +1974,7 @@ async function checkDuplicateNow() {
     el.className = 'alert';
   }
 }
-async function checkDuplicate() {
-  const content = document.getElementById('postContent').value.trim();
-  const position = document.getElementById('postPosition').value.trim();
-  const address = document.getElementById('postAddress').value.trim();
-  
-  if (!content || !position || !address) return;
-  
-  const res = await api('check_duplicate', {content, position, address});
-  const alert = document.getElementById('postAlert');
-  
-  if (res.duplicate) {
-    alert.style.display = 'block';
-    alert.className = 'alert alert-warning';
-    alert.innerHTML = '⚠️ সতর্কতা: এই পদ ও ঠিকানায় ৫ দিনের মধ্যে '+res.similarity+'% মিলে এমন পোস্ট আছে!';
-    document.querySelector('button[onclick="spShowPreview()"]').disabled = true;
-  } else if (res.message) {
-    alert.style.display = 'block';
-    alert.className = 'alert';
-    alert.innerHTML = res.message;
-    document.querySelector('button[onclick="spShowPreview()"]').disabled = false;
-  } else {
-    alert.style.display = 'none';
-    document.querySelector('button[onclick="spShowPreview()"]').disabled = false;
-  }
-}
-
 document.getElementById('postContent').addEventListener('paste', function(e) {
-  setTimeout(checkDuplicate, 100);
-});
-document.getElementById('postContent').addEventListener('input', function(e) {
-  if (e.target.value.length % 20 === 0) checkDuplicate();
-});
-document.getElementById('postPosition').addEventListener('input', checkDuplicate);
-document.getElementById('postAddress').addEventListener('input', checkDuplicate);
-
-document.getElementById('postContent').addEventListener('pastedocument.getElementById('postContent').addEventListener('paste', function(e) {
   setTimeout(checkDuplicateNow, 100);
 });
 document.getElementById('postContent').addEventListener('input', function(e) {
