@@ -144,7 +144,7 @@ if ($action === 'user_login') {
         echo json_encode(['success' => false, 'message' => 'আপনার মেয়াদ শেষ হয়েছে।']);
         exit();
     }
-    unset($user['password']);
+    unset($user['password']); $user['created_at'] = $user['createdAt'] ? date('d/m/Y', intval($user['createdAt']) / 1000) : ''; $user['expiry_date'] = $user['expiresAt'] ? date('d/m/Y', intval($user['expiresAt']) / 1000) : '';
     echo json_encode(['success' => true, 'user' => $user]);
     exit();
 }
@@ -267,7 +267,7 @@ if ($action === 'get_user_dashboard') {
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
     if (!$user) { echo json_encode(['success' => false]); exit(); }
-    unset($user['password']);
+    unset($user['password']); $user['created_at'] = $user['createdAt'] ? date('d/m/Y', intval($user['createdAt']) / 1000) : ''; $user['expiry_date'] = $user['expiresAt'] ? date('d/m/Y', intval($user['expiresAt']) / 1000) : '';
     $now       = time() * 1000;
     $days_left = $user['expiresAt'] ? (int)(($user['expiresAt'] - $now) / 86400000) : 0;
     $is_active = $days_left >= 0;
