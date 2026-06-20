@@ -360,6 +360,39 @@ if ($action === 'admin_get_posts') {
 }
 
 // ADMIN — CREATE POST
+// CHECK DUPLICATE (Real-time)
+if ($action === 'check_duplicate') {
+    $content = $body['content'] ?? '';
+    $position = $body['position'] ?? '';
+    $address = $body['address'] ?? '';
+    
+    if (!$content || !$position || !$address) {
+        echo json_encode(['success'=>true, 'duplicate'=>false]);
+        exit();
+    }
+    
+    $since_5days = (time() - 5 * 86400) * 1000;
+    $stmt = $db->prepare("SELECT text FROM posts WHERE position=? AND address=? AND created>=? AND status='active'");
+    $stmt->bind_param('ssi', $position, $address, $since_5days);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $max_similarity = 0;
+    while ($row = $result->fetch_assoc()) {
+        $sim = 0;
+        similar_text($content, $row['text'], $sim);
+        if ($sim > $max_similarity) $max_similarity = $sim;
+        if ($sim >= 70) break;
+    }
+    
+    echo json_encode([
+        'success'=>true,
+        'duplicate'=>($max_similarity >= 70),
+        'similarity'=>round($max_similarity)
+    ]);
+    exit();
+}
+
 if ($action === 'admin_create_post') {
     $id       = uniqid('p_', true);
     $text     = $body['content'] ?? '';
