@@ -188,8 +188,8 @@ if ($action === 'track_visitor') {
 }
 // GET VISITOR STATS (ADMIN ONLY)
 if ($action === 'get_visitor_stats') {
-    session_start();
-    if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    $token = $body['token'] ?? '';
+    if ($token !== 'admin_session') {
         echo json_encode(['success'=>false, 'message'=>'Unauthorized']);
         exit();
     }
