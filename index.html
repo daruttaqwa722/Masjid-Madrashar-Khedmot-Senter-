@@ -1540,7 +1540,7 @@ async function loadMoreNews() {
 /* ══════════════════════════════════════
    USER DASHBOARD PAGE
 ══════════════════════════════════════ */
-function formatDateUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric'}); }
+function formatDateUD(d) { if (!d) return '—'; if (typeof d==='string' && d.includes('/')) { const p=d.split('/'); d=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric'}); }
 function formatDatetimeUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
 
 async function loadUserDashboard() {
