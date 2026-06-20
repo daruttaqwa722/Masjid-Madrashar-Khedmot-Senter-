@@ -278,9 +278,12 @@ if ($action === 'get_user_dashboard') {
     $types  = '';
     if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
     if ($hours > 0) { $since = (time() - ($hours * 3600)) * 1000; $where .= " AND created >= ?"; $params[] = $since; $types .= 'i'; }
-    $params[] = 50;
-    $types   .= 'i';
-    $stmt2 = $db->prepare("SELECT * FROM posts $where ORDER BY created DESC LIMIT ?");
+    $limit2 = intval($body['limit'] ?? 10);
+    $offset2 = intval($body['offset'] ?? 0);
+    $params[] = $limit2;
+    $params[] = $offset2;
+    $types   .= 'ii';
+    $stmt2 = $db->prepare("SELECT * FROM posts $where ORDER BY created DESC LIMIT ? OFFSET ?");
     $stmt2->bind_param($types, ...$params);
     $stmt2->execute();
     $rows  = $stmt2->get_result()->fetch_all(MYSQLI_ASSOC);
