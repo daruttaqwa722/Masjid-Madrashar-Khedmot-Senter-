@@ -1425,38 +1425,38 @@ async function applyFilter(containerId) {
   wrap.insertAdjacentHTML('beforeend', html);
   // newsLoaded reset করি না — filter state ধরে রাখি
   if (containerId === 'newsPostsWrap') { newsLoaded = true; window._newsOffset = res.posts.length; }
-  // Infinite scroll setup
+  // Infinite scroll for filter
   window._filterState = window._filterState || {};
-  window._filterState[containerId] = {hours: hours, cat: cat, offset: res.posts.length, done: res.posts.length < 10};
-  const oldSentinel = document.getElementById('scroll_sentinel_' + containerId);
-  if (oldSentinel) oldSentinel.remove();
-  if (!window._filterState[containerId].done) {
-    const sentinel = document.createElement('div');
-    sentinel.id = 'scroll_sentinel_' + containerId;
-    sentinel.style.height = '20px';
-    wrap.appendChild(sentinel);
-    const obs = new IntersectionObserver(async (entries) => {
+  window._filterState[containerId] = {hours: hours, cat: cat, offset: res.posts.length, done: res.posts.length < 10, loading: false};
+  const oldSen2 = document.getElementById('scroll_sentinel_' + containerId);
+  if (oldSen2) oldSen2.remove();
+  if (res.posts.length >= 10) {
+    const sen2 = document.createElement('div');
+    sen2.id = 'scroll_sentinel_' + containerId;
+    sen2.style.height = '10px';
+    wrap.appendChild(sen2);
+    const obs2 = new IntersectionObserver(async (entries) => {
       if (!entries[0].isIntersecting) return;
-      const state = window._filterState[containerId];
-      if (!state || state.done || state.loading) return;
-      state.loading = true;
-      const p2 = {limit: 10, offset: state.offset, hours: state.hours};
-      if (state.cat) p2.category = state.cat;
-      const r2 = await api('get_public_news', p2);
-      if (r2.success && r2.posts.length) {
-        const isMasked2 = r2.masked || false;
-        const catMap2 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
-        const html2 = r2.posts.map(p => {
-          const catTags2 = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(cc=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap2[cc]||cc}</span>`).join('');
-          return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags2?`<div style="padding:0.3rem 0.85rem;">${catTags2}</div>`:''}<div class="post-body">${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${isMasked2?highlightMasked(escHtml(p.content)):escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
+      const st2 = window._filterState[containerId];
+      if (!st2 || st2.done || st2.loading) return;
+      st2.loading = true;
+      const p2 = {limit: 10, offset: st2.offset, hours: st2.hours};
+      if (st2.cat) p2.category = st2.cat;
+      const r3 = await api('get_public_news', p2);
+      if (r3.success && r3.posts.length) {
+        const isMasked3 = r3.masked || false;
+        const catMap3 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
+        const html3 = r3.posts.map(p => {
+          const ct3 = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(cc=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap3[cc]||cc}</span>`).join('');
+          return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${ct3?`<div style="padding:0.3rem 0.85rem;">${ct3}</div>`:''}<div class="post-body">${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${isMasked3?highlightMasked(escHtml(p.content)):escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
         }).join('');
-        sentinel.insertAdjacentHTML('beforebegin', html2);
-        state.offset += r2.posts.length;
-        if (r2.posts.length < 10) { state.done = true; obs.disconnect(); sentinel.remove(); }
-      } else { state.done = true; obs.disconnect(); sentinel.remove(); }
-      state.loading = false;
-    }, {rootMargin: '200px'});
-    obs.observe(sentinel);
+        sen2.insertAdjacentHTML('beforebegin', html3);
+        st2.offset += r3.posts.length;
+        if (r3.posts.length < 10) { st2.done = true; obs2.disconnect(); sen2.remove(); }
+      } else { st2.done = true; obs2.disconnect(); sen2.remove(); }
+      st2.loading = false;
+    }, {rootMargin: '300px'});
+    obs2.observe(sen2);
   }
 }
 
@@ -1540,35 +1540,39 @@ async function loadNews() {
     return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags?`<div style="padding:0.3rem 0.85rem;">${catTags}</div>`:""}<div class="post-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
-  window._newsOffset = 10;
+  window._newsOffset = res.posts.length;
   load72hBar('newsPostsWrap');
-  // Infinite scroll for news
+  // Infinite scroll
   window._filterState = window._filterState || {};
-  window._filterState['newsPostsWrap'] = {hours: 72, cat: '', offset: res.posts.length, done: res.posts.length < 10};
-  const newsSentinel = document.createElement('div');
-  newsSentinel.id = 'scroll_sentinel_newsPostsWrap';
-  newsSentinel.style.height = '20px';
-  document.getElementById('newsPostsWrap').appendChild(newsSentinel);
-  const newsObs = new IntersectionObserver(async (entries) => {
-    if (!entries[0].isIntersecting) return;
-    const state = window._filterState['newsPostsWrap'];
-    if (!state || state.done || state.loading) return;
-    state.loading = true;
-    const r2 = await api('get_public_news', {limit: 10, offset: state.offset});
-    if (r2.success && r2.posts.length) {
-      const isMasked2 = r2.masked || false;
-      const catMap2 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
-      const html2 = r2.posts.map(p => {
-        const catTags2 = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(cc=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap2[cc]||cc}</span>`).join('');
-        return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags2?`<div style="padding:0.3rem 0.85rem;">${catTags2}</div>`:''}<div class="post-body">${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${isMasked2?highlightMasked(escHtml(p.content)):escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
-      }).join('');
-      newsSentinel.insertAdjacentHTML('beforebegin', html2);
-      state.offset += r2.posts.length;
-      if (r2.posts.length < 10) { state.done = true; newsObs.disconnect(); newsSentinel.remove(); }
-    } else { state.done = true; newsObs.disconnect(); newsSentinel.remove(); }
-    state.loading = false;
-  }, {rootMargin: '200px'});
-  newsObs.observe(newsSentinel);
+  window._filterState['newsPostsWrap'] = {hours: 0, cat: '', offset: res.posts.length, done: res.posts.length < 10, loading: false};
+  const oldSen = document.getElementById('scroll_sentinel_newsPostsWrap');
+  if (oldSen) oldSen.remove();
+  if (res.posts.length >= 10) {
+    const sen = document.createElement('div');
+    sen.id = 'scroll_sentinel_newsPostsWrap';
+    sen.style.height = '10px';
+    document.getElementById('newsPostsWrap').appendChild(sen);
+    const obs = new IntersectionObserver(async (entries) => {
+      if (!entries[0].isIntersecting) return;
+      const st = window._filterState['newsPostsWrap'];
+      if (!st || st.done || st.loading) return;
+      st.loading = true;
+      const r2 = await api('get_public_news', {limit: 10, offset: st.offset});
+      if (r2.success && r2.posts.length) {
+        const isMasked2 = r2.masked || false;
+        const catMap2 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
+        const html2 = r2.posts.map(p => {
+          const ct = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(cc=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap2[cc]||cc}</span>`).join('');
+          return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${ct?`<div style="padding:0.3rem 0.85rem;">${ct}</div>`:''}<div class="post-body">${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${isMasked2?highlightMasked(escHtml(p.content)):escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
+        }).join('');
+        sen.insertAdjacentHTML('beforebegin', html2);
+        st.offset += r2.posts.length;
+        if (r2.posts.length < 10) { st.done = true; obs.disconnect(); sen.remove(); }
+      } else { st.done = true; obs.disconnect(); sen.remove(); }
+      st.loading = false;
+    }, {rootMargin: '300px'});
+    obs.observe(sen);
+  }
 }
 async function loadMoreNews() {
   const btn = document.querySelector('#newsLoadMore button');
@@ -1628,7 +1632,7 @@ async function loadUserDashboard() {
   window._udOffset = posts.length;
   if (posts.length >= 10) {
     document.getElementById('udMainContent').insertAdjacentHTML('beforeend',
-'';
+      '<div id="udLoadMore" style="text-align:center;padding:1rem;"><button onclick="udLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:inherit;">খেদমতের খবর আরো দেখুন</button></div>');
   }
   load72hBar('udMainContent');
 }
@@ -1649,7 +1653,7 @@ async function udLoadMorePosts() {
   window._udOffset = (window._udOffset || 10) + res.posts.length;
   if (res.posts.length >= 20) {
     document.getElementById('udMainContent').insertAdjacentHTML('beforeend',
-'';
+      '<div id="udLoadMore" style="text-align:center;padding:1rem;"><button onclick="udLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:inherit;">খেদমতের খবর আরো দেখুন</button></div>');
   }
 }
 async function applyFilterUD(containerId) {
@@ -1657,49 +1661,22 @@ async function applyFilterUD(containerId) {
   if (!window._activeFilter[containerId]) window._activeFilter[containerId] = {hours: 72, cat: ""};
   const hours = window._activeFilter[containerId].hours || 72;
   const cat = window._activeFilter[containerId].cat || "";
-  const params = {limit: 10, offset: 0, hours: hours, mobile: window._userMobile || ""};
+  const params = {limit: 200, offset: 0, hours: hours, mobile: window._userMobile || ""};
   if (cat) params.category = cat;
   const res = await api("get_user_dashboard", params);
   if (!res.success) return;
   const posts = res.posts;
+  const catMap = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
   const wrap = document.getElementById(containerId);
   if (!wrap) return;
   wrap.querySelectorAll(".ud-post-card, .post-card, .empty-state").forEach(c => c.remove());
-  const catMapUD = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
-  const renderUD = p => {
+  const catMap2 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
+  const html = posts.length ? posts.map(p => {
     const cats = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean);
-    const catTags = cats.map(cc=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMapUD[cc]||cc}</span>`).join('');
-    return `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${catTags?`<div style="margin:0.3rem 0.8rem;">${catTags}</div>`:''}<div class="ud-post-card-body">${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
-  };
-  const html = posts.length ? posts.map(renderUD).join('') : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এই ফিল্টারে কোনো পোস্ট নেই।</div></div>`;
+    const catTags = cats.map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap2[c]||c}</span>`).join('');
+    return `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${catTags?`<div style="margin:0.3rem 0.8rem;">${catTags}</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:''}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:''}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
+  }).join('') : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এই ফিল্টারে কোনো পোস্ট নেই।</div></div>`;
   wrap.insertAdjacentHTML("beforeend", html);
-  // Infinite scroll
-  const oldSentUD = document.getElementById('scroll_sentinel_ud');
-  if (oldSentUD) oldSentUD.remove();
-  if (posts.length >= 10) {
-    window._filterState = window._filterState || {};
-    window._filterState['udMainContent'] = {hours: hours, cat: cat, offset: posts.length, done: false, loading: false};
-    const sentUD = document.createElement('div');
-    sentUD.id = 'scroll_sentinel_ud';
-    sentUD.style.height = '20px';
-    wrap.appendChild(sentUD);
-    const obsUD = new IntersectionObserver(async (entries) => {
-      if (!entries[0].isIntersecting) return;
-      const st = window._filterState['udMainContent'];
-      if (!st || st.done || st.loading) return;
-      st.loading = true;
-      const p2 = {limit: 10, offset: st.offset, hours: st.hours, mobile: window._userMobile || ""};
-      if (st.cat) p2.category = st.cat;
-      const r2 = await api("get_user_dashboard", p2);
-      if (r2.success && r2.posts && r2.posts.length) {
-        sentUD.insertAdjacentHTML('beforebegin', r2.posts.map(renderUD).join(''));
-        st.offset += r2.posts.length;
-        if (r2.posts.length < 10) { st.done = true; obsUD.disconnect(); sentUD.remove(); }
-      } else { st.done = true; obsUD.disconnect(); sentUD.remove(); }
-      st.loading = false;
-    }, {rootMargin: '200px'});
-    obsUD.observe(sentUD);
-  }
 }
 
 async function doUserLogout() {
@@ -1848,7 +1825,7 @@ async function admLoadPosts() {
     const admMore = document.createElement('div');
     admMore.id = 'admLoadMore';
     admMore.style = 'text-align:center;padding:1rem;';
-admMore.innerHTML = '';
+    admMore.innerHTML = '<button onclick="admLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;">খেদমতের খবর আরো দেখুন</button>';
     c.appendChild(admMore);
   }
 async function admLoadMorePosts() { const lm = document.getElementById("admLoadMore"); if (lm) lm.remove(); const btn = document.querySelector("#admLoadMore button"); if (btn) btn.textContent = "লোড হচ্ছে..."; const res = await api("admin_get_posts", {limit: 20, offset: window._admOffset || 10}); if (!res.success || !res.posts.length) return; const c = document.getElementById("postsContainer"); res.posts.forEach(p => { const div = document.createElement("div"); div.className = "post-item"; div.id = "postItem"+p.id; div.innerHTML = "<div class=adm-post-text>"+p.content+"</div>"; c.appendChild(div); }); window._admOffset = (window._admOffset || 10) + res.posts.length; if (res.posts.length >= 20) { const more = document.createElement("div"); more.id = "admLoadMore"; more.style = "text-align:center;padding:1rem;"; more.innerHTML = "<button onclick=admLoadMorePosts() style=background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;>খেদমতের খবর আরো দেখুন</button>"; c.appendChild(more); } }
