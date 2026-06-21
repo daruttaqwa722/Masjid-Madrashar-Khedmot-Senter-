@@ -1628,7 +1628,7 @@ async function loadUserDashboard() {
   window._udOffset = posts.length;
   if (posts.length >= 10) {
     document.getElementById('udMainContent').insertAdjacentHTML('beforeend',
-      '<div id="udLoadMore" style="text-align:center;padding:1rem;"><button onclick="udLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:inherit;">খেদমতের খবর আরো দেখুন</button></div>');
+'';
   }
   load72hBar('udMainContent');
 }
@@ -1649,7 +1649,7 @@ async function udLoadMorePosts() {
   window._udOffset = (window._udOffset || 10) + res.posts.length;
   if (res.posts.length >= 20) {
     document.getElementById('udMainContent').insertAdjacentHTML('beforeend',
-      '<div id="udLoadMore" style="text-align:center;padding:1rem;"><button onclick="udLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:inherit;">খেদমতের খবর আরো দেখুন</button></div>');
+'';
   }
 }
 async function applyFilterUD(containerId) {
@@ -1848,7 +1848,7 @@ async function admLoadPosts() {
     const admMore = document.createElement('div');
     admMore.id = 'admLoadMore';
     admMore.style = 'text-align:center;padding:1rem;';
-    admMore.innerHTML = '<button onclick="admLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;">খেদমতের খবর আরো দেখুন</button>';
+admMore.innerHTML = '';
     c.appendChild(admMore);
   }
 async function admLoadMorePosts() { const lm = document.getElementById("admLoadMore"); if (lm) lm.remove(); const btn = document.querySelector("#admLoadMore button"); if (btn) btn.textContent = "লোড হচ্ছে..."; const res = await api("admin_get_posts", {limit: 20, offset: window._admOffset || 10}); if (!res.success || !res.posts.length) return; const c = document.getElementById("postsContainer"); res.posts.forEach(p => { const div = document.createElement("div"); div.className = "post-item"; div.id = "postItem"+p.id; div.innerHTML = "<div class=adm-post-text>"+p.content+"</div>"; c.appendChild(div); }); window._admOffset = (window._admOffset || 10) + res.posts.length; if (res.posts.length >= 20) { const more = document.createElement("div"); more.id = "admLoadMore"; more.style = "text-align:center;padding:1rem;"; more.innerHTML = "<button onclick=admLoadMorePosts() style=background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;>খেদমতের খবর আরো দেখুন</button>"; c.appendChild(more); } }
