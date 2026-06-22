@@ -377,11 +377,8 @@ if ($action === 'admin_create_post') {
     $created  = time() * 1000;
     $timeStr  = date('d/m/Y');
     if (!$text) { echo json_encode(['success' => false, 'message' => 'পোস্ট লিখুন।']); exit(); }
-    $dup = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
-    $dup->bind_param('s', $text);
-    $dup->execute();
-    $dup->store_result();
-    if ($dup->num_rows > 0) { echo json_encode(['success' => false, 'message' => '⚠️ এই পোস্টটি আগেই করা হয়েছে!']); exit(); }
+    // Compact version তৈরি
+    $compact = preg_replace('/[\s]+/u', ' ', trim($text));
     $title      = $body['title'] ?? '';
     $slug       = $body['slug'] ?? '';
     $meta_title = $body['meta_title'] ?? '';
@@ -393,8 +390,8 @@ if ($action === 'admin_create_post') {
     if (!$slug)       $slug       = $autoSlug;
     if (!$meta_title) $meta_title = $autoMeta;
     if (!$meta_desc)  $meta_desc  = $autoDesc;
-    $position = $body["position"] ?? ""; $address = $body["address"] ?? ""; if (!$title) $title = trim(($position ? $position : "") . ($address ? " - " . $address : "") . " নিয়োগ " . date("Y")); $stmt = $db->prepare("INSERT INTO posts (id, text, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc, position, address) VALUES (?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('sssssssisssssssss', $id, $text, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $title, $slug, $category, $meta_title, $meta_desc, $position, $address);
+    $position = $body["position"] ?? ""; $address = $body["address"] ?? ""; if (!$title) $title = trim(($position ? $position : "") . ($address ? " - " . $address : "") . " নিয়োগ " . date("Y")); $stmt = $db->prepare("INSERT INTO posts (id, text, compact_content, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc, position, address) VALUES (?,?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('ssssssssisssssssss', $id, $text, $compact, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $title, $slug, $category, $meta_title, $meta_desc, $position, $address);
     $stmt->execute();
     echo json_encode(['success' => true, 'id' => $id]);
     exit();
@@ -641,16 +638,64 @@ switch ($r) {
         break;
 }
 
-// CHECK DUPLICATE
-if ($action === "check_duplicate") {
-    $text = $body["content"] ?? "";
-    $dup = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
-    $dup->bind_param("s", $text);
-    $dup->execute();
-    $dup->store_result();
-    echo json_encode(["duplicate" => $dup->num_rows > 0]);
+
+
+// NEW: SMART DUPLICATE CHECK (৭ দিনের মধ্যে, similarity-based)
+if ($action === 'check_duplicate_smart') {
+    $token = $body['token'] ?? '';
+    if ($token !== 'admin_session') {
+        echo json_encode(['duplicate' => false, 'message' => 'unauthorized']);
+        exit();
+    }
+    $input = $body['content'] ?? '';
+    if (strlen(trim($input)) < 20) {
+        echo json_encode(['duplicate' => false]);
+        exit();
+    }
+    // Normalize/compact input
+    $inputCompact = preg_replace('/[\s]+/u', ' ', trim($input));
+    $inputLen = mb_strlen($inputCompact, 'utf-8');
+
+    // গত ৭ দিনের posts আনি
+    $since = (time() - 7 * 86400) * 1000;
+    $stmt = $db->prepare("SELECT id, text, compact_content, timeStr FROM posts WHERE created >= ? ORDER BY created DESC LIMIT 200");
+    $stmt->bind_param('i', $since);
+    $stmt->execute();
+    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    $bestMatch = null;
+    $bestSimilarity = 0;
+
+    foreach ($rows as $row) {
+        $dbCompact = $row['compact_content'] ?? '';
+        if (!$dbCompact) {
+            $dbCompact = preg_replace('/[\s]+/u', ' ', trim($row['text'] ?? ''));
+        }
+        if (strlen(trim($dbCompact)) < 10) continue;
+
+        // similar_text দিয়ে similarity check
+        similar_text($inputCompact, $dbCompact, $percent);
+        $percent = round($percent, 1);
+
+        if ($percent > $bestSimilarity) {
+            $bestSimilarity = $percent;
+            $bestMatch = ['id' => $row['id'], 'timeStr' => $row['timeStr'], 'similarity' => $percent];
+        }
+    }
+
+    if ($bestSimilarity >= 95) {
+        echo json_encode([
+            'duplicate' => true,
+            'similarity' => $bestSimilarity,
+            'matched_date' => $bestMatch['timeStr'] ?? '',
+            'message' => 'এই পোস্টটি গত ৭ দিনের মধ্যে প্রকাশিত একটি পোস্টের সাথে মিল রয়েছে।'
+        ]);
+    } else {
+        echo json_encode(['duplicate' => false, 'similarity' => $bestSimilarity]);
+    }
     exit();
 }
+
 $db->close();
 ?>
 
