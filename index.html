@@ -1067,7 +1067,6 @@
             <label class="form-label">পোস্টের বিবরণ <span style="color:red">*</span></label>
             <textarea class="form-textarea" id="postContent" rows="8" placeholder="এখানে নিয়োগ বিজ্ঞপ্তির সম্পূর্ণ লেখা পেস্ট করুন…" style="min-height:160px;"></textarea>
           </div>
-
           <div id="compactPreviewBox" style="display:none;background:rgba(5,5,125,0.04);border:1.5px solid rgba(5,5,125,0.15);border-radius:12px;padding:0.75rem 1rem;margin-bottom:0.85rem;">
             <div style="font-size:0.72rem;font-weight:700;color:#05057D;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">⚡ Compact Preview</div>
             <div id="compactPreviewText" style="font-size:0.82rem;color:#2a2d4a;line-height:1.6;word-break:break-word;"></div>
@@ -2117,12 +2116,10 @@ function updateSmartPreview() {
   }
 }
 
-// ── COMPACT HELPER ──────────────────────────────────────────
 function compactText(text) {
   return text.replace(/[\s]+/g, ' ').trim();
 }
 
-// ── REAL-TIME DUPLICATE CHECK ────────────────────────────────
 let _dupTimer = null;
 let _lastChecked = '';
 
@@ -2130,19 +2127,17 @@ async function checkDuplicateSmart() {
   const raw = document.getElementById('postContent').value;
   const compact = compactText(raw);
   const el = document.getElementById('postAlert');
-  const btn = document.getElementById('postBtnTxt')?.closest('button');
+  const btn = document.querySelector('button[onclick="submitPost()"]');
 
   if (compact.length < 20) {
     el.className = 'alert';
-    if (btn) btn.disabled = false;
+    if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
     return;
   }
-
-  // Same content হলে আবার check করব না
   if (compact === _lastChecked) return;
   _lastChecked = compact;
 
-  // Compact preview দেখাই
+  // Compact preview
   const previewEl = document.getElementById('compactPreviewBox');
   if (previewEl) {
     previewEl.style.display = 'block';
@@ -2157,7 +2152,7 @@ async function checkDuplicateSmart() {
     }).then(r => r.json());
 
     if (res.duplicate) {
-      el.innerHTML = \`⚠️ \${res.message}<br><span style="font-size:0.82rem;font-weight:600;color:#991b1b;">মিল: \${res.similarity}% &nbsp;|&nbsp; তারিখ: \${res.matched_date || '—'}</span>\`;
+      el.innerHTML = '⚠️ ' + res.message + '<br><span style="font-size:0.82rem;font-weight:600;color:#991b1b;">মিল: ' + res.similarity + '% &nbsp;|&nbsp; তারিখ: ' + (res.matched_date || '—') + '</span>';
       el.className = 'alert show alert-error';
       if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
     } else {
@@ -2170,11 +2165,11 @@ async function checkDuplicateSmart() {
 }
 
 document.getElementById('postContent').addEventListener('paste', function() {
-  setTimeout(() => { checkDuplicateSmart(); updateSmartPreview(); }, 150);
+  setTimeout(function() { checkDuplicateSmart(); updateSmartPreview(); }, 150);
 });
 document.getElementById('postContent').addEventListener('input', function() {
   clearTimeout(_dupTimer);
-  _dupTimer = setTimeout(() => { checkDuplicateSmart(); updateSmartPreview(); }, 600);
+  _dupTimer = setTimeout(function() { checkDuplicateSmart(); updateSmartPreview(); }, 600);
 });
 document.getElementById('postPosition')?.addEventListener('input', updateSmartPreview);
 document.getElementById('postAddress')?.addEventListener('input', updateSmartPreview);
