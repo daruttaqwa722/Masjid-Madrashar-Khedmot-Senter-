@@ -1838,7 +1838,7 @@ async function submitPost() {
   } else admShowAlert('postAlert', res.message || 'পোস্ট করা যায়নি।');
 }
 async function admLoadPosts() {
-  const res = await api('admin_get_posts', {limit: 10, offset: window._admOffset || 0});
+  const res = await api('admin_get_posts', {limit: 10, offset: 0});
   load72hBar('postsContainer');
   const c = document.getElementById('postsContainer');
   if (!res.success || !res.posts.length) { c.innerHTML = '<div class="adm-empty">কোনো পোস্ট নেই।</div>'; return; }
@@ -1852,82 +1852,28 @@ async function admLoadPosts() {
       </div>
       <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
     </div>`).join('');
-  window._admOffset = (window._admOffset || 0) + res.posts.length;
+  window._admOffset = res.posts.length;
+  window._admScrollState = {offset: res.posts.length, done: res.posts.length < 10, loading: false};
   if (res.posts.length >= 10) {
-    const admMore = document.createElement('div');
-    admMore.id = 'admLoadMore';
-    admMore.style = 'text-align:center;padding:1rem;';
-    admMore.innerHTML = '<button onclick="admLoadMorePosts()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;">খেদমতের খবর আরো দেখুন</button>';
-    c.appendChild(admMore);
-  }
-async function admLoadMorePosts() { const lm = document.getElementById("admLoadMore"); if (lm) lm.remove(); const btn = document.querySelector("#admLoadMore button"); if (btn) btn.textContent = "লোড হচ্ছে..."; const res = await api("admin_get_posts", {limit: 20, offset: window._admOffset || 10}); if (!res.success || !res.posts.length) return; const c = document.getElementById("postsContainer"); res.posts.forEach(p => { const div = document.createElement("div"); div.className = "post-item"; div.id = "postItem"+p.id; div.innerHTML = "<div class=adm-post-text>"+p.content+"</div>"; c.appendChild(div); }); window._admOffset = (window._admOffset || 10) + res.posts.length; if (res.posts.length >= 20) { const more = document.createElement("div"); more.id = "admLoadMore"; more.style = "text-align:center;padding:1rem;"; more.innerHTML = "<button onclick=admLoadMorePosts() style=background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;>খেদমতের খবর আরো দেখুন</button>"; c.appendChild(more); } }
-}
-function openEditPost(id, content) {
-  document.getElementById('editPostId').value = id;
-  document.getElementById('editPostContent').value = content;
-  document.getElementById('editPostModal').classList.add('open');
-}
-function closeEditPost() { document.getElementById('editPostModal').classList.remove('open'); }
-async function saveEditPost() {
-  const id=document.getElementById('editPostId').value, content=document.getElementById('editPostContent').value.trim();
-  if (!content) return;
-  const res = await api('admin_edit_post', {id: String(id), content});
-  if (res.success) { closeEditPost(); admLoadPosts(); newsLoaded=false; }
-}
-async function deletePost(id) {
-  if (!confirm('এই পোস্ট মুছে ফেলবেন?')) return;
-  const res = await api('admin_delete_post', {id});
-  if (res.success) { document.getElementById(`postItem${id}`)?.remove(); newsLoaded=false; admLoadPosts(); }
-}
-
-let admSearchTimer = null;
-let currentUserTab = 'all';
-function setUserTab(tab) {
-  currentUserTab = tab;
-  ['all','active','expired','pending'].forEach(t => {
-    const id = 'uTab' + t.charAt(0).toUpperCase() + t.slice(1);
-    const btn = document.getElementById(id);
-    if (btn) btn.classList.toggle('active', t === tab);
-  });
-  admLoadUsers();
-}
-function admSearchUsers() { clearTimeout(admSearchTimer); admSearchTimer = setTimeout(admLoadUsers, 400); }
-async function admLoadUsers() {
-  const search = document.getElementById('searchInput')?.value?.trim() || '';
-  const res = await api('admin_get_users', search ? {search} : {});
-  const c = document.getElementById('usersContainer');
-  if (!res.success) { c.innerHTML = '<div class="adm-empty">লোড করা যায়নি।</div>'; return; }
-  const now = Date.now();
-  let users = res.users || [];
-  if (currentUserTab === 'active') users = users.filter(u => u.expiresAt && u.expiresAt > now);
-  else if (currentUserTab === 'expired') users = users.filter(u => u.expiresAt && u.expiresAt <= now);
-  else if (currentUserTab === 'pending') users = users.filter(u => !u.expiresAt || u.expiresAt == 0);
-  if (!users.length) { c.innerHTML = `<div class="adm-empty">${search?'কোনো ইউজার পাওয়া যায়নি।':'এই বিভাগে কোনো ইউজার নেই।'}</div>`; return; }
-  c.innerHTML = users.map(u => {
-    const exp = admIsExpired(u.expiry_date);
-    return `<div class="user-card-adm" id="userCard${u.id}">
-      <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
-      <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
-      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>${u.expiresAt ? Math.ceil((u.expiresAt - Date.now()) / 86400000) + ' দিন বাকি' : 'মেয়াদ নেই'}</button><button class="btn btn-sm" style="background:#6c757d;color:#fff;" onclick="showUserPass('${u.id}',this)">👁 পাসওয়ার্ড</button><span id="pass_${u.id}" style="display:none;font-size:13px;background:#fff3cd;padding:2px 8px;border-radius:4px;margin-left:4px;"></span><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
-    </div>`;
-  }).join('');
-}
-async function showUserPass(id, btn) { if (btn.dataset.loaded) { const span = document.getElementById("pass_"+id); span.style.display = span.style.display==="inline" ? "none" : "inline"; btn.textContent = span.style.display==="inline" ? "🙈 লুকান" : "👁 পাসওয়ার্ড"; return; } const res = await api("admin_get_password", {id}); const span = document.getElementById("pass_"+id); if (res.success) { span.textContent = res.plain_pass || "(সেট নেই)"; span.style.display = "inline"; btn.textContent = "🙈 লুকান"; btn.dataset.loaded = "1"; } else { alert("পাসওয়ার্ড পাওয়া যায়নি"); } }
-async function showUserPass(id, btn) {
-  const span = document.getElementById('pass_'+id);
-  if (btn.dataset.loaded) {
-    span.style.display = span.style.display==='inline' ? 'none' : 'inline';
-    btn.textContent = span.style.display==='inline' ? '🙈 লুকান' : '👁 পাসওয়ার্ড';
-    return;
-  }
-  const res = await api('admin_get_password', {id});
-  if (res.success) {
-    span.textContent = res.plain_pass || '(সেট নেই)';
-    span.style.display = 'inline';
-    btn.textContent = '🙈 লুকান';
-    btn.dataset.loaded = '1';
-  } else {
-    alert('পাসওয়ার্ড পাওয়া যায়নি');
+    const admSen = document.createElement('div');
+    admSen.id = 'scroll_sentinel_postsContainer';
+    admSen.style.height = '10px';
+    c.appendChild(admSen);
+    const admObs = new IntersectionObserver(async (entries) => {
+      if (!entries[0].isIntersecting) return;
+      const st = window._admScrollState;
+      if (!st || st.done || st.loading) return;
+      st.loading = true;
+      const r2 = await api('admin_get_posts', {limit: 10, offset: st.offset});
+      if (r2.success && r2.posts.length) {
+        const h2 = r2.posts.map(p => `<div class="post-item" id="postItem${p.id}"><div class="post-item-date">${admFmtDt(p.created)}<div class="post-item-actions"><button class="btn btn-warning btn-sm" onclick="openEditPost('${p.id}', \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button><button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button></div></div><div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}</div></div>`).join('');
+        admSen.insertAdjacentHTML('beforebegin', h2);
+        st.offset += r2.posts.length;
+        if (r2.posts.length < 10) { st.done = true; admObs.disconnect(); admSen.remove(); }
+      } else { st.done = true; admObs.disconnect(); admSen.remove(); }
+      st.loading = false;
+    }, {rootMargin: '300px'});
+    admObs.observe(admSen);
   }
 }
 function openUserModal() {
