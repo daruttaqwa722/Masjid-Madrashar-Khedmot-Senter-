@@ -1070,6 +1070,14 @@
           <input type="hidden" id="postAddress">
 
           <div class="form-group">
+            <label class="form-label">বিভাগ <span style="color:red">*</span></label>
+            <select class="form-input" id="postCategory" style="height:44px;cursor:pointer;">
+              <option value="mosque">🕌 মসজিদের নিয়োগ বিজ্ঞপ্তি</option>
+              <option value="male-madrasa">📚 পুরুষ মাদ্রাসার নিয়োগ</option>
+              <option value="female-madrasa">🎓 মহিলা মাদ্রাসার নিয়োগ</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-label">পোস্টের বিবরণ <span style="color:red">*</span></label>
             <textarea class="form-textarea" id="postContent" rows="8" placeholder="এখানে নিয়োগ বিজ্ঞপ্তির সম্পূর্ণ লেখা পেস্ট করুন…" style="min-height:160px;"></textarea>
           </div>
@@ -1885,6 +1893,7 @@ function previewImg(input) {
 }
 async function submitPost() {
   const content = document.getElementById('postContent').value.trim();
+  const category = document.getElementById('postCategory')?.value || 'mosque';
   const dropVal = document.getElementById('admCatDropdown')?.value; if (dropVal) syncAdmCat(dropVal);
   const admCats = Array.from(document.querySelectorAll('.admCatChk:checked')).map(x=>x.value);
   if (!admCats.length) { document.getElementById('admCatError').style.display='block'; return; }
@@ -1896,7 +1905,7 @@ async function submitPost() {
   if (!content) { admShowAlert('postAlert','পোস্টের বিষয়বস্তু লিখুন।'); return; }
   const btn = document.getElementById('postBtnTxt');
   btn.innerHTML = '<span class="spinner-inline"></span> পোস্ট হচ্ছে…';
-  const title = document.getElementById('postTitle').value.trim(); const slug = document.getElementById('postSlug').value.trim(); const meta_title = document.getElementById('postMetaTitle').value.trim(); const meta_desc = document.getElementById('postMetaDesc').value.trim(); const position = document.getElementById('postPosition').value.trim(); const address = document.getElementById('postAddress').value.trim(); const res = await api('admin_create_post', {content, title, position, address, slug, meta_title, meta_desc, image_base64: admImgBase64, cats: admCats, category: admCats[0] || 'mosque'});
+  const title = document.getElementById('postTitle').value.trim(); const slug = document.getElementById('postSlug').value.trim(); const meta_title = document.getElementById('postMetaTitle').value.trim(); const meta_desc = document.getElementById('postMetaDesc').value.trim(); const position = document.getElementById('postPosition').value.trim(); const address = document.getElementById('postAddress').value.trim(); const res = await api('admin_create_post', {category,content, title, position, address, slug, meta_title, meta_desc, image_base64: admImgBase64, cats: admCats, category: admCats[0] || 'mosque'});
   btn.textContent = '📤 পোস্ট করুন';
   if (res.success) {
     document.getElementById('postContent').value = ''; document.getElementById('postTitle').value = ''; document.getElementById('postPosition').value = ''; document.getElementById('postAddress').value = ''; document.getElementById('postSlug').value = ''; document.getElementById('postMetaTitle').value = ''; document.getElementById('postMetaDesc').value = '';
