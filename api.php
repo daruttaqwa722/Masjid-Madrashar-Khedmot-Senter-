@@ -390,8 +390,8 @@ if ($action === 'admin_create_post') {
     if (!$slug)       $slug       = $autoSlug;
     if (!$meta_title) $meta_title = $autoMeta;
     if (!$meta_desc)  $meta_desc  = $autoDesc;
-    $position = $body["position"] ?? ""; $address = $body["address"] ?? ""; if (!$title) $title = trim(($position ? $position : "") . ($address ? " - " . $address : "") . " নিয়োগ " . date("Y")); $stmt = $db->prepare("INSERT INTO posts (id, text, compact_content, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc, position, address) VALUES (?,?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('ssssssssisssssssss', $id, $text, $compact, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $title, $slug, $category, $meta_title, $meta_desc, $position, $address);
+    $position = $body["position"] ?? ""; $address = $body["address"] ?? ""; if (!$title) $title = trim(($position ? $position : "") . ($address ? " - " . $address : "") . " নিয়োগ " . date("Y")); $stmt = $db->prepare("INSERT INTO posts (id, text, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc, position, address) VALUES (?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssssisssssssss', $id, $text, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $title, $slug, $category, $meta_title, $meta_desc, $position, $address);
     $stmt->execute();
     echo json_encode(['success' => true, 'id' => $id]);
     exit();
