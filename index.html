@@ -1665,7 +1665,7 @@ async function applyFilterUD(containerId) {
   if (!window._activeFilter[containerId]) window._activeFilter[containerId] = {hours: 72, cat: ""};
   const hours = window._activeFilter[containerId].hours || 72;
   const cat = window._activeFilter[containerId].cat || "";
-  const params = {limit: 200, offset: 0, hours: hours, mobile: window._userMobile || ""};
+  const params = {limit: 10, offset: 0, hours: hours, mobile: window._userMobile || ""};
   if (cat) params.category = cat;
   const res = await api("get_user_dashboard", params);
   if (!res.success) return;
@@ -1673,7 +1673,7 @@ async function applyFilterUD(containerId) {
   const catMap = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
   const wrap = document.getElementById(containerId);
   if (!wrap) return;
-  wrap.querySelectorAll(".ud-post-card, .post-card, .empty-state").forEach(c => c.remove());
+  wrap.querySelectorAll(".ud-post-card, .post-card, .empty-state, #scroll_sentinel_udMainContent").forEach(c => c.remove());
   const catMap2 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
   const html = posts.length ? posts.map(p => {
     const cats = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean);
@@ -1681,6 +1681,34 @@ async function applyFilterUD(containerId) {
     return `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${catTags?`<div style="margin:0.3rem 0.8rem;">${catTags}</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:''}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:''}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
   }).join('') : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এই ফিল্টারে কোনো পোস্ট নেই।</div></div>`;
   wrap.insertAdjacentHTML("beforeend", html);
+  window._udFilterState = {hours: hours, cat: cat, offset: posts.length, done: posts.length < 10, loading: false};
+  if (posts.length >= 10) {
+    const udSen = document.createElement('div');
+    udSen.id = 'scroll_sentinel_udMainContent';
+    udSen.style.height = '10px';
+    wrap.appendChild(udSen);
+    const udObs = new IntersectionObserver(async (entries) => {
+      if (!entries[0].isIntersecting) return;
+      const st = window._udFilterState;
+      if (!st || st.done || st.loading) return;
+      st.loading = true;
+      const p2 = {limit: 10, offset: st.offset, hours: st.hours, mobile: window._userMobile || ""};
+      if (st.cat) p2.category = st.cat;
+      const r2 = await api("get_user_dashboard", p2);
+      if (r2.success && r2.posts.length) {
+        const cm = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ"};
+        const h2 = r2.posts.map(p => {
+          const ct = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${cm[c]||c}</span>`).join('');
+          return `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${ct?`<div style="margin:0.3rem 0.8rem;">${ct}</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:''}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:''}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
+        }).join('');
+        udSen.insertAdjacentHTML('beforebegin', h2);
+        st.offset += r2.posts.length;
+        if (r2.posts.length < 10) { st.done = true; udObs.disconnect(); udSen.remove(); }
+      } else { st.done = true; udObs.disconnect(); udSen.remove(); }
+      st.loading = false;
+    }, {rootMargin: '300px'});
+    udObs.observe(udSen);
+  }
 }
 
 async function doUserLogout() {
