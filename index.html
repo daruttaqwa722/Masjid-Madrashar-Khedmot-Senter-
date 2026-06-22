@@ -1762,6 +1762,23 @@ async function admLoadUsers() {
     </div>`;
   }).join('');
 }
+async function showUserPass(id, btn) {
+  const span = document.getElementById('pass_'+id);
+  if (btn.dataset.loaded) {
+    span.style.display = span.style.display==='inline' ? 'none' : 'inline';
+    btn.textContent = span.style.display==='inline' ? '🙈 লুকান' : '👁 পাসওয়ার্ড';
+    return;
+  }
+  const res = await api('admin_get_password', {id});
+  if (res.success) {
+    span.textContent = res.plain_pass || '(সেট নেই)';
+    span.style.display = 'inline';
+    btn.textContent = '🙈 লুকান';
+    btn.dataset.loaded = '1';
+  } else {
+    alert('পাসওয়ার্ড পাওয়া যায়নি');
+  }
+}
 function admIsExpired(dateStr) { if (!dateStr) return true; if (typeof dateStr === 'string' && dateStr.includes('/')) { const p=dateStr.split('/'); dateStr=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(dateStr) < new Date(new Date().toDateString()); }
 function admShowAlert(id, msg, type='error') {
   const el = document.getElementById(id);
