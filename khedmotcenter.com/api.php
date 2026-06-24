@@ -377,7 +377,7 @@ if ($action === 'admin_create_post') {
     $created  = time() * 1000;
     $timeStr  = date('d/m/Y');
     if (!$text) { echo json_encode(['success' => false, 'message' => 'পোস্ট লিখুন।']); exit(); }
-    $dup = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
+    $dup = $db->prepare("SELECT id FROM posts WHERE compact_content=? LIMIT 1");
     $dup->bind_param('s', $text);
     $dup->execute();
     $dup->store_result();
@@ -644,11 +644,32 @@ switch ($r) {
 // CHECK DUPLICATE
 if ($action === "check_duplicate") {
     $text = $body["content"] ?? "";
-    $dup = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
-    $dup->bind_param("s", $text);
+    if (!$text) { echo json_encode(["duplicate" => false]); exit(); }
+
+    $seven_days_ago = (time() - 7 * 24 * 3600) * 1000;
+    $dup = $db->prepare("SELECT text FROM posts WHERE created >= ? AND text IS NOT NULL LIMIT 500");
+    $s = (string)$seven_days_ago; $dup->bind_param("s", $s);
     $dup->execute();
-    $dup->store_result();
-    echo json_encode(["duplicate" => $dup->num_rows > 0]);
+    $result = $dup->get_result();
+
+    function make_compact2($t) {
+        $t = mb_strtolower($t, "UTF-8");
+        $t = preg_replace("/\s+/", "", $t);
+        $t = preg_replace("/[^\p{L}\p{N}]/u", "", $t);
+        return $t;
+    }
+
+    $new_compact = make_compact2($text);
+    $is_duplicate = false;
+
+    while ($row = $result->fetch_assoc()) {
+        $existing_compact = make_compact2($row["text"]);
+        if (mb_strlen($existing_compact, "UTF-8") === 0) continue;
+        similar_text($new_compact, $existing_compact, $percent);
+        if ($percent >= 95) { $is_duplicate = true; break; }
+    }
+
+    echo json_encode(["duplicate" => $is_duplicate]);
     exit();
 }
 $db->close();

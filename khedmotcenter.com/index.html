@@ -2143,7 +2143,7 @@ function updateSmartPreview() {
 async function checkDuplicateNow() {
   const text = document.getElementById('postContent').value.trim();
   const el = document.getElementById('postAlert');
-  if (!text) { el.className = 'alert'; return; }
+  if (!text) { el.className = "alert"; return; }
   const res = await fetch('https://khedmotcenter.com/api.php', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -2153,7 +2153,7 @@ async function checkDuplicateNow() {
     el.textContent = '⚠️ এই পোস্টটি আগেই করা হয়েছে! ডুপ্লিকেট পোস্ট।';
     el.className = 'alert show alert-error';
   } else {
-    el.className = 'alert';
+    el.className = "alert";
   }
 }
 document.getElementById('postContent').addEventListener('paste', function(e) {
