@@ -1,0 +1,71 @@
+[33mcommit c485f9605752a1d8b7f27489e6e8b033ef20ad17[m
+Merge: 4400b79 2739906
+Author: root <root@ubuntu-cloudpanel.localhost>
+Date:   Thu Jun 25 08:08:04 2026 +0000
+
+    Keep server version - duplicate check fixed
+
+ .bash_history                                | 2000 [32m++++++++++++++[m
+ .bashrc                                      |   99 [32m+[m
+ .cache/composer/.htaccess                    |    1 [32m+[m
+ .cache/motd.legal-displayed                  |    0
+ .config/composer/.htaccess                   |    1 [32m+[m
+ .config/composer/keys.dev.pub                |   14 [32m+[m
+ .config/composer/keys.tags.pub               |   14 [32m+[m
+ .gitignore                                   |    1 [32m+[m
+ .lesshst                                     |    5 [32m+[m
+ .local/share/composer/.htaccess              |    1 [32m+[m
+ .../2021-12-31_12-18-53-2.2.3-old.phar       |  Bin [31m0[m -> [32m2354438[m bytes
+ .mysql_history                               |  169 [32m++[m
+ .profile                                     |    9 [32m+[m
+ .ssh/authorized_keys                         |    0
+ .ssh/known_hosts                             |    2 [32m+[m
+ .wget-hsts                                   |    4 [32m+[m
+ admin_photo.jpg                              |  Bin [31m0[m -> [32m7809[m bytes
+ api.php                                      |  188 [32m+[m[31m-[m
+ api.php.bak                                  |  568 [32m++++[m
+ api.php.before-filter-fix2.bak               |  575 [32m++++[m
+ api.php.before-seo.bak                       |  568 [32m++++[m
+ api.php.final-backup-20260618.bak            |  575 [32m++++[m
+ favicon-512.png                              |  Bin [31m0[m -> [32m259007[m bytes
+ favicon.ico                                  |  Bin [31m0[m -> [32m18056[m bytes
+ favicon.png                                  |  Bin [31m5860[m -> [32m274548[m bytes
+ fix_slugs.php                                |   30 [32m+[m
+ fix_slugs2.php                               |   30 [32m+[m
+ generate_slugs.php                           |   34 [32m+[m
+ hajera.png                                   |  Bin [31m258113[m -> [32m0[m bytes
+ hero_update.py.save                          |    2 [32m+[m
+ index.html                                   | 1004 [32m+++++[m[31m--[m
+ index.html.bak                               | 1926 [32m++++++++++++++[m
+ index.html.before-copyprotect.bak            | 2029 [32m++++++++++++++[m
+ index.html.before-seo.bak                    | 2028 [32m++++++++++++++[m
+ index.html.before-visitor-fix                | 2072 [32m+++++++++++++++[m
+ index.html.final-backup-20260618.bak         | 2029 [32m++++++++++++++[m
+ khedmotcenter.com/patch_admfilter.py         |   68 [32m+[m
+ khedmotcenter.com/patch_favicon.py           |   18 [32m+[m
+ khedmotcenter.com/patch_seo.py               |   56 [32m+[m
+ khedmotcenter.com/stash                      |    5 [32m+[m
+ khedmotcenter.com/uploads/test.txt           |    1 [32m+[m
+ logo.png                                     |  Bin [31m1898330[m -> [32m274548[m bytes
+ patch_admfilter.py                           |   68 [32m+[m
+ patch_admusers.py                            |   47 [32m+[m
+ patch_catfix.py                              |   58 [32m+[m
+ patch_dupcheck-1.py                          |   62 [32m+[m
+ patch_dupcheck.py                            |   25 [32m+[m
+ patch_dupcheck2.py                           |   52 [32m+[m
+ patch_dupcheck3.py                           |   57 [32m+[m
+ patch_favicon.py                             |   18 [32m+[m
+ patch_postactions.py                         |   30 [32m+[m
+ patch_postcategory.py                        |   45 [32m+[m
+ patch_returning.py                           |   35 [32m+[m
+ patch_scroll2.py                             |  107 [32m+[m
+ patch_seo.py                                 |   56 [32m+[m
+ patch_showpass.py                            |   30 [32m+[m
+ patch_users.py                               |   63 [32m+[m
+ patch_usertab2.py                            |   38 [32m+[m
+ post.php                                     |  120 [32m+[m
+ sitemap-generator.php                        |   24 [32m+[m
+ sitemap.php                                  |   19 [32m+[m
+ sitemap.xml                                  | 1446 [32m+++++++++[m[31m-[m
+ sitemap.xml.old-static.bak                   |    1 [32m+[m
+ 63 files changed, 18325 insertions(+), 202 deletions(-)
