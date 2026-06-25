@@ -330,11 +330,8 @@ if ($action === 'get_72h_counts') {
         $stmt->execute();
         $counts[$cat] = (int)$stmt->get_result()->fetch_assoc()['cnt'];
     }
-    // মোট সব পোস্ট ৭২ ঘন্টার
-    $stmtTotal = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE status='active' AND created>=?");
-    $stmtTotal->bind_param('s', $since);
-    $stmtTotal->execute();
-    $total = (int)$stmtTotal->get_result()->fetch_assoc()['cnt'];
+    // মোট = তিন ক্যাটাগরির যোগফল
+    $total = ($counts['mosque-jobs'] ?? 0) + ($counts['male-madrasa-jobs'] ?? 0) + ($counts['female-madrasa-jobs'] ?? 0);
     echo json_encode([
         'success' => true,
         'counts' => $counts,
