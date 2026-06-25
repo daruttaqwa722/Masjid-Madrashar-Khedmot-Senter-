@@ -79,14 +79,7 @@ function autoSEO($text, $category, $id, $position='', $address='') {
         $first_line = explode("\n", trim($text))[0];
         $title = mb_substr($first_line, 0, 55);
     }
-    $slugWords  = preg_split('/\s+/u', trim($title), -1, PREG_SPLIT_NO_EMPTY);
-    $slugWords  = array_slice($slugWords, 0, 6);
-    $slugBase   = implode('-', $slugWords);
-    $slugBase   = preg_replace('/[^\p{L}\p{N}\-]/u', '', $slugBase);
-    $slugBase   = preg_replace('/-+/', '-', $slugBase);
-    $slugBase   = trim($slugBase, '-');
-    if (empty($slugBase)) $slugBase = 'post';
-    $slug       = $slugBase . '-' . substr(md5($id), 0, 6);
+    $slug       = $id;
     $meta_title = mb_substr($title, 0, 55) . ' | খেদমত সেন্টার';
     $clean      = preg_replace('/\s+/', ' ', strip_tags($text));
     $meta_desc  = mb_substr($clean, 0, 150) . '...';
@@ -144,7 +137,7 @@ if ($action === 'user_login') {
         echo json_encode(['success' => false, 'message' => 'আপনার মেয়াদ শেষ হয়েছে।']);
         exit();
     }
-    unset($user['password']); $user['created_at'] = $user['createdAt'] ? date('d/m/Y', intval($user['createdAt']) / 1000) : ''; $user['expiry_date'] = $user['expiresAt'] ? date('d/m/Y', intval($user['expiresAt']) / 1000) : '';
+    unset($user['password']);
     echo json_encode(['success' => true, 'user' => $user]);
     exit();
 }
@@ -170,74 +163,6 @@ if ($action === 'register') {
     echo json_encode(['success' => true]);
     exit();
 }
-// VISITOR TRACKING
-if ($action === 'track_visitor') {
-    $vid = $body['visitor_id'] ?? '';
-    $source = $body['source'] ?? 'direct';
-    if (!$vid) { echo json_encode(['success'=>false]); exit(); }
-    $now = time() * 1000;
-    $check = $db->prepare("SELECT visitor_id FROM visitor_logs WHERE visitor_id=?");
-    $check->bind_param('s', $vid);
-    $check->execute();
-    $isNew = $check->get_result()->num_rows === 0;
-    $stmt = $db->prepare("INSERT INTO visitor_logs (visitor_id, first_visit, last_visit, visit_count, source) VALUES (?,?,?,1,?) ON DUPLICATE KEY UPDATE last_visit=?, visit_count=visit_count+1");
-    $stmt->bind_param('siisi', $vid, $now, $now, $source, $now);
-    $stmt->execute();
-    echo json_encode(['success'=>true, 'isNew'=>$isNew]);
-    exit();
-}
-// GET VISITOR STATS (ADMIN ONLY)
-if ($action === 'get_visitor_stats') {
-    $token = $body['token'] ?? '';
-    if ($token !== 'admin_session') {
-        echo json_encode(['success'=>false, 'message'=>'Unauthorized']);
-        exit();
-    }
-    $now = time();
-    $todayStart = strtotime('today') * 1000;
-    $yesterdayStart = strtotime('yesterday') * 1000;
-    $sevenDaysStart = ($now - 7*86400) * 1000;
-
-    function countVisitors($db, $since, $until, $isNew) {
-        if ($isNew) {
-            $sql = "SELECT COUNT(*) as cnt FROM visitor_logs WHERE first_visit>=? AND first_visit<?";
-            $stmt = $db->prepare($sql);
-            $stmt->bind_param('ii', $since, $until);
-        } else {
-            $sql = "SELECT COUNT(*) as cnt FROM visitor_logs WHERE last_visit>=? AND last_visit<? AND visit_count>1";
-            $stmt = $db->prepare($sql);
-            $stmt->bind_param('ii', $since, $until);
-        }
-        $stmt->execute();
-        return (int)$stmt->get_result()->fetch_assoc()['cnt'];
-    }
-
-    $nowMs = $now * 1000;
-    $todayNew = countVisitors($db, $todayStart, $nowMs, true);
-    $todayReturning = countVisitors($db, $todayStart, $nowMs, false);
-    $yestNew = countVisitors($db, $yesterdayStart, $todayStart, true);
-    $yestReturning = countVisitors($db, $yesterdayStart, $todayStart, false);
-    $weekNew = countVisitors($db, $sevenDaysStart, $nowMs, true);
-    $weekReturning = countVisitors($db, $sevenDaysStart, $nowMs, false);
-
-    $totalAll = (int)$db->query("SELECT COUNT(*) as cnt FROM visitor_logs")->fetch_assoc()['cnt'];
-    $totalReturning = (int)$db->query("SELECT COUNT(*) as cnt FROM visitor_logs WHERE visit_count>1")->fetch_assoc()['cnt'];
-    $totalNew = $totalAll - $totalReturning;
-
-    $sourceRows = $db->query("SELECT source, COUNT(*) as cnt FROM visitor_logs GROUP BY source ORDER BY cnt DESC")->fetch_all(MYSQLI_ASSOC);
-    $sources = [];
-    foreach ($sourceRows as $row) { $sources[$row['source']] = (int)$row['cnt']; }
-
-    echo json_encode([
-        'success'=>true,
-        'today_new'=>$todayNew, 'today_returning'=>$todayReturning,
-        'yesterday_new'=>$yestNew, 'yesterday_returning'=>$yestReturning,
-        'week_new'=>$weekNew, 'week_returning'=>$weekReturning,
-        'total'=>$totalAll, 'total_new'=>$totalNew, 'total_returning'=>$totalReturning,
-        'sources'=>$sources
-    ]);
-    exit();
-}
 if ($action === 'get_public_news') {
     $cat    = $body['category'] ?? $_GET['category'] ?? '';
     $hours  = intval($body['hours'] ?? $_GET['hours'] ?? 0);
@@ -246,7 +171,7 @@ if ($action === 'get_public_news') {
     $where  = "WHERE status='active'";
     $params = [];
     $types  = '';
-    if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
+    if ($cat) { $where .= " AND category=?"; $params[] = $cat; $types .= 's'; }
     if ($hours > 0) { $since = (time() - ($hours * 3600)) * 1000; $where .= " AND created >= ?"; $params[] = $since; $types .= 'i'; }
     $params[] = $limit;
     $params[] = $offset;
@@ -268,7 +193,7 @@ if ($action === 'get_user_dashboard') {
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
     if (!$user) { echo json_encode(['success' => false]); exit(); }
-    unset($user['password']); $user['created_at'] = $user['createdAt'] ? date('d/m/Y', intval($user['createdAt']) / 1000) : ''; $user['expiry_date'] = $user['expiresAt'] ? date('d/m/Y', intval($user['expiresAt']) / 1000) : '';
+    unset($user['password']);
     $now       = time() * 1000;
     $days_left = $user['expiresAt'] ? (int)(($user['expiresAt'] - $now) / 86400000) : 0;
     $is_active = $days_left >= 0;
@@ -277,14 +202,11 @@ if ($action === 'get_user_dashboard') {
     $where  = "WHERE status='active'";
     $params = [];
     $types  = '';
-    if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
+    if ($cat) { $where .= " AND category=?"; $params[] = $cat; $types .= 's'; }
     if ($hours > 0) { $since = (time() - ($hours * 3600)) * 1000; $where .= " AND created >= ?"; $params[] = $since; $types .= 'i'; }
-    $limit2 = intval($body['limit'] ?? 10);
-    $offset2 = intval($body['offset'] ?? 0);
-    $params[] = $limit2;
-    $params[] = $offset2;
-    $types   .= 'ii';
-    $stmt2 = $db->prepare("SELECT * FROM posts $where ORDER BY created DESC LIMIT ? OFFSET ?");
+    $params[] = 50;
+    $types   .= 'i';
+    $stmt2 = $db->prepare("SELECT * FROM posts $where ORDER BY created DESC LIMIT ?");
     $stmt2->bind_param($types, ...$params);
     $stmt2->execute();
     $rows  = $stmt2->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -347,19 +269,9 @@ if ($action === 'get_72h_counts') {
 }
 // ADMIN — GET POSTS
 if ($action === 'admin_get_posts') {
-    $limit  = intval($body['limit'] ?? 10);
-    $offset = intval($body['offset'] ?? 0);
-    $cat    = $body['category'] ?? '';
-    $where  = "WHERE status='active'";
-    if ($cat) { $where = "WHERE status='active' AND (category='$cat' OR cats LIKE '%$cat%')"; }
-    $total_stmt = $db->query("SELECT COUNT(*) as cnt FROM posts");
-    $total = (int)$total_stmt->fetch_assoc()['cnt'];
-    $stmt = $db->prepare("SELECT * FROM posts ORDER BY created DESC LIMIT ? OFFSET ?");
-    $stmt->bind_param('ii', $limit, $offset);
-    $stmt->execute();
-    $rows  = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $rows  = $db->query("SELECT * FROM posts ORDER BY created DESC")->fetch_all(MYSQLI_ASSOC);
     $posts = array_map(fn($r) => formatPost($r, false), $rows);
-    echo json_encode(['success' => true, 'posts' => $posts, 'total' => $total]);
+    echo json_encode(['success' => true, 'posts' => $posts]);
     exit();
 }
 
@@ -377,8 +289,11 @@ if ($action === 'admin_create_post') {
     $created  = time() * 1000;
     $timeStr  = date('d/m/Y');
     if (!$text) { echo json_encode(['success' => false, 'message' => 'পোস্ট লিখুন।']); exit(); }
-    // Compact version
-    $compact = preg_replace('/[\s]+/u', ' ', trim($text));
+    $dup = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
+    $dup->bind_param('s', $text);
+    $dup->execute();
+    $dup->store_result();
+    if ($dup->num_rows > 0) { echo json_encode(['success' => false, 'message' => '⚠️ এই পোস্টটি আগেই করা হয়েছে!']); exit(); }
     $title      = $body['title'] ?? '';
     $slug       = $body['slug'] ?? '';
     $meta_title = $body['meta_title'] ?? '';
@@ -638,41 +553,16 @@ switch ($r) {
         break;
 }
 
-
-
-// SMART DUPLICATE CHECK
-if ($action === 'check_duplicate_smart') {
-    $token = $body['token'] ?? '';
-    if ($token !== 'admin_session') { echo json_encode(['duplicate' => false]); exit(); }
-    $input = $body['content'] ?? '';
-    if (mb_strlen(trim($input), 'utf-8') < 20) { echo json_encode(['duplicate' => false]); exit(); }
-    $inputCompact = preg_replace('/[\s]+/u', ' ', trim($input));
-    $since = (time() - 7 * 86400) * 1000;
-    $stmt = $db->prepare("SELECT id, text, compact_content, timeStr FROM posts WHERE created >= ? ORDER BY created DESC LIMIT 200");
-    $stmt->bind_param('i', $since);
-    $stmt->execute();
-    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $bestSimilarity = 0;
-    $bestMatch = null;
-    foreach ($rows as $row) {
-        $dbCompact = $row['compact_content'] ?? '';
-        if (!$dbCompact) $dbCompact = preg_replace('/[\s]+/u', ' ', trim($row['text'] ?? ''));
-        if (mb_strlen(trim($dbCompact), 'utf-8') < 10) continue;
-        similar_text($inputCompact, $dbCompact, $percent);
-        $percent = round($percent, 1);
-        if ($percent > $bestSimilarity) {
-            $bestSimilarity = $percent;
-            $bestMatch = ['timeStr' => $row['timeStr'], 'similarity' => $percent];
-        }
-    }
-    if ($bestSimilarity >= 95) {
-        echo json_encode(['duplicate' => true, 'similarity' => $bestSimilarity, 'matched_date' => $bestMatch['timeStr'] ?? '', 'message' => 'এই পোস্টটি গত ৭ দিনের মধ্যে প্রকাশিত একটি পোস্টের সাথে মিল রয়েছে।']);
-    } else {
-        echo json_encode(['duplicate' => false, 'similarity' => $bestSimilarity]);
-    }
+// CHECK DUPLICATE
+if ($action === "check_duplicate") {
+    $text = $body["content"] ?? "";
+    $dup = $db->prepare("SELECT id FROM posts WHERE text=? LIMIT 1");
+    $dup->bind_param("s", $text);
+    $dup->execute();
+    $dup->store_result();
+    echo json_encode(["duplicate" => $dup->num_rows > 0]);
     exit();
 }
-
 $db->close();
 ?>
 

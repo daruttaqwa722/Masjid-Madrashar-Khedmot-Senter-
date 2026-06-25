@@ -6,24 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>খেদমত সেন্টার | মসজিদ, মাদ্রাসা ও ইসলামী খেদমতের নিয়োগ বিজ্ঞপ্তি</title>
 <meta name="description" content="বাংলাদেশের ৬৪ জেলার মসজিদের ইমাম, খতিব, মুয়াজ্জিন ও খাদেম, নূরানী, নাজেরা, হেফজ ও কিতাবখানা, পুরুষ ও মহিলা মাদ্রাসার শিক্ষক এবং বিভিন্ন ইসলামী খেদমতের নিয়োগ বিজ্ঞপ্তি প্রকাশ করা হয়।">
-<link rel="icon" type="image/png" href="logo.png">
-<meta property="og:site_name" content="খেদমত সেন্টার">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://khedmotcenter.com">
-<meta property="og:title" content="খেদমত সেন্টার">
-<meta property="og:description" content="বাংলাদেশের মসজিদ ও মাদ্রাসার নিয়োগ প্ল্যাটফর্ম">
-<meta property="og:image" content="https://khedmotcenter.com/favicon.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="খেদমত সেন্টার">
-<meta name="twitter:image" content="https://khedmotcenter.com/favicon.png">
-<meta name="application-name" content="খেদমত সেন্টার">
-<meta name="apple-mobile-web-app-title" content="খেদমত সেন্টার">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"খেদমত সেন্টার","alternateName":"Khedmot Center","url":"https://khedmotcenter.com/","logo":"https://khedmotcenter.com/logo.png"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"খেদমত সেন্টার","url":"https://khedmotcenter.com/"}
-</script>
+<link rel="icon" type="image/png" href="favicon-v2.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -76,12 +59,10 @@
     --radius: 16px;
 
     /* ── Status Colors ── */
-    --green: #05057D; --red: #dc2626; --orange: #ea580c;
+    --green: #15803d; --red: #dc2626; --orange: #ea580c;
   }
 
-  body { background: linear-gradient(160deg, #ECEFFE 0%, #F2F4FB 50%, #EEF0F8 100%); background-attachment: fixed; font-family: 'Noto Serif Bengali', serif; min-height: 100vh; color: var(--text); -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-  body.admin-mode { -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text; }
-  input, textarea, select { -webkit-user-select: text; -moz-user-select: text; user-select: text; }
+  body { background: linear-gradient(160deg, #ECEFFE 0%, #F2F4FB 50%, #EEF0F8 100%); background-attachment: fixed; font-family: 'Noto Serif Bengali', serif; min-height: 100vh; color: var(--text); }
 
   /* ══════════════════════════════════════
      PAGE SYSTEM
@@ -101,17 +82,17 @@
   }
   .hero-card { max-width: 560px; margin: 0 auto; background: #ffffff; border-radius: 24px; padding: 2rem 1.5rem 1.8rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(4,4,107,0.10), 0 2px 10px rgba(4,4,107,0.05); border: 1px solid rgba(4,4,107,0.06); }
   .hero-card::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 15% 20%, rgba(10,124,62,0.05) 0%, transparent 30%), radial-gradient(circle at 85% 15%, rgba(245,200,0,0.06) 0%, transparent 32%), radial-gradient(circle at 50% 95%, rgba(4,4,107,0.04) 0%, transparent 35%); pointer-events: none; }
-  .hero-card::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70%; height: 3px; border-radius: 0 0 6px 6px; background: linear-gradient(90deg, transparent, #05057D 25%, #F5C800 50%, #05057D 75%, transparent); }
+  .hero-card::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70%; height: 3px; border-radius: 0 0 6px 6px; background: linear-gradient(90deg, transparent, #0a7c3e 25%, #F5C800 50%, #0a7c3e 75%, transparent); }
   .hero-inner { position: relative; z-index: 1; }
   .hero-main-title {
     font-family: 'Noto Serif Bengali', serif;
     font-size: 1.9rem; font-weight: 700;
-    color: #05057D;
+    color: #0a7c3e;
     line-height: 1.45; margin-bottom: 1rem; position: relative; display: inline-block; padding-bottom: 0.5rem;
     text-shadow: 0 1px 4px rgba(10,124,62,0.15);
     letter-spacing: 0.01em;
   }
-  .hero-main-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 56px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, transparent, #05057D, transparent); }
+  .hero-main-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 56px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, transparent, #0a7c3e, transparent); }
   .bismillah {
     font-family: 'Noto Serif Bengali', serif; font-size: 1.75rem;
     color: var(--gold); letter-spacing: 0.05em; line-height: 1.5;
@@ -124,17 +105,17 @@
     display: inline-flex; align-items: center; gap: 6px;
     background: rgba(10,124,62,0.08); border: 1.5px solid rgba(10,124,62,0.30);
     border-radius: 30px; padding: 0.3rem 1.1rem;
-    font-size: 0.75rem; color: #05057D; letter-spacing: 0.06em;
+    font-size: 0.75rem; color: #0a7c3e; letter-spacing: 0.06em;
     margin-top: 0.6rem; text-transform: uppercase; font-weight: 700;
   }
   .hero-badge::before {
     content: ''; display: inline-block; width: 5px; height: 5px;
-    background: #05057D; border-radius: 50%; animation: pulse 2s infinite;
+    background: #0a7c3e; border-radius: 50%; animation: pulse 2s infinite;
     flex-shrink: 0;
   }
   .hero h1 {
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 1.75rem; font-weight: 700; color: #05057D;
+    font-size: 1.75rem; font-weight: 700; color: #0a7c3e;
     line-height: 1.45; margin-bottom: 1rem;
     letter-spacing: 0.02em;
     text-shadow: 0 1px 0 rgba(10,124,62,0.15);
@@ -144,9 +125,9 @@
   .hero h1::after {
     content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
     width: 60px; height: 2.5px; border-radius: 2px;
-    background: linear-gradient(90deg, transparent, #05057D, transparent);
+    background: linear-gradient(90deg, transparent, #0a7c3e, transparent);
   }
-  .hero h1 span { color: #05057D; }
+  .hero h1 span { color: #0a7c3e; }
   .hero-desc {
     font-size: 0.88rem; color: #4A5280;
     line-height: 1.85; margin-bottom: 0; font-weight: 450;
@@ -235,7 +216,7 @@
   .sh { padding: 0 1rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
   .sh .hero-sheet { background: linear-gradient(160deg, #030355 0%, #05057D 55%, #0A0A9E 100%); border-radius: 20px; text-align: center; padding: 1.6rem 1.2rem 1.4rem; position: relative; overflow: hidden; margin-bottom: 0; }
   .sh .hero-sheet::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% -10%, rgba(255,215,0,0.10) 0%, transparent 70%); pointer-events: none; }
-  .sh .hero-avatar { width: 56px; height: 56px; background: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.7rem; font-size: 1.5rem; box-shadow: 0 4px 20px rgba(255,215,0,0.35); }
+  .sh .hero-avatar { width: 56px; height: 56px; background: linear-gradient(135deg, #FFD700, #e6c000); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.7rem; font-size: 1.5rem; box-shadow: 0 4px 20px rgba(255,215,0,0.35); }
   .sh .hero-name { font-family: 'Noto Serif Bengali', serif; font-size: 1.1rem; font-weight: 700; color: #FFD700; line-height: 1.45; margin-bottom: 0.2rem; }
   .sh .hero-role { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 0.9rem; }
   .sh .hero-divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 0.9rem; width: min(240px, 80%); }
@@ -295,7 +276,7 @@
   .ls { padding: 0 1rem 2.5rem; display: flex; flex-direction: column; gap: 0; }
   .ls-hero { background: linear-gradient(160deg, #030355 0%, #05057D 55%, #0A0A9E 100%); border-radius: 20px; text-align: center; padding: 1.5rem 1.2rem 1.3rem; position: relative; overflow: hidden; margin-bottom: 1.2rem; }
   .ls-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% -10%, rgba(255,215,0,0.12) 0%, transparent 70%); pointer-events: none; }
-  .ls-logo { width: 60px; height: 60px; background: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-size: 1.6rem; box-shadow: 0 4px 18px rgba(255,215,0,0.35); }
+  .ls-logo { width: 60px; height: 60px; background: linear-gradient(135deg, #FFD700, #e6c000); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-size: 1.6rem; box-shadow: 0 4px 18px rgba(255,215,0,0.35); }
   .ls-title { font-family: 'Noto Serif Bengali', serif; font-size: 1.1rem; font-weight: 700; color: #FFD700; margin-bottom: 0.2rem; position: relative; z-index: 1; }
   .ls-sub { font-size: 0.78rem; color: rgba(255,255,255,0.6); position: relative; z-index: 1; }
   .ls-tabs { display: flex; gap: 8px; margin-bottom: 1.2rem; }
@@ -574,15 +555,6 @@
       <div class="btn-sub">নিয়োগ বিজ্ঞপ্তি দিন</div>
     </div>
   </div>
-  <!-- বিশেষ দ্রষ্টব্য -->
-  <div style="background:var(--card-bg);border:1.5px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:1.4rem 1.2rem;margin:0 1rem 1.2rem;">
-    <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:1rem;border-bottom:1.5px solid var(--border);padding-bottom:0.75rem;">
-      
-      <span style="font-weight:800;font-size:1.3rem;color:var(--navy);">বিশেষ দ্রষ্টব্য</span>
-    </div>
-    <p style="font-size:1rem;line-height:1.85;color:var(--text);margin-bottom:0.85rem;text-align:center;">আমাদের ওয়েবসাইটে শুধুমাত্র <span style="color:#b91c1c;font-weight:700;">সর্বশেষ ৭২ ঘণ্টার</span> খেদমতের খবরগুলো দেখা যাবে। ৭২ ঘণ্টার পূর্বের খেদমতের খবরগুলো প্রদর্শন করা হয় না, কারণ অধিকাংশ ক্ষেত্রে সেগুলো <span style="color:#b45309;font-weight:700;">ইতোমধ্যে পূরণ হয়ে যায়।</span></p>
-    <p style="font-size:1rem;line-height:1.85;color:var(--text);margin-bottom:0;text-align:center;">আপনারা <span style="color:#05057D;font-weight:700;">দ্রুত ও সহজে</span> উপযুক্ত খেদমত পাওয়ার সুবিধার্থে এই ব্যবস্থা চালু করা হয়েছে।</p>
-  </div>
 
   <!-- SOCIAL CARD -->
   <div class="section-label">যোগাযোগ</div>
@@ -608,7 +580,6 @@
       <a class="social-link" href="https://t.me/khadmot1" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Telegram চ্যানেল ফলো করুন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
     </div>
   </div>
-
 
   <!-- VIDEO CARD -->
   <div class="section-label">ভিডিও</div>
@@ -664,7 +635,7 @@
       <!-- HERO -->
       <div class="hero-sheet">
         <div style="position:relative;z-index:1;">
-          <div class="hero-avatar"><img src="admin_photo.jpg" style="width:56px;height:56px;object-fit:cover;border-radius:50%;"></div>
+          <div class="hero-avatar">👤</div>
           <div class="hero-name">হাফেজ ক্বারী মোহাম্মদ জিহাদুল ইসলাম</div>
           <div class="hero-role">খেদমত সেন্টারের এডমিন</div>
           <div class="hero-divider"><div class="hero-divider-line"></div><div class="hero-divider-dot"></div><div class="hero-divider-line"></div></div>
@@ -849,7 +820,7 @@
     <div class="sheet-close-row"><button class="sheet-close-btn" onclick="closeLogin()">✕</button></div>
     <div class="ls">
       <div class="ls-hero">
-        <div class="ls-logo"><img src="logo.png" style="width:60px;height:60px;object-fit:contain;border-radius:50%;"></div>
+        <div class="ls-logo">🕌</div>
         <div class="ls-title">মসজিদ মাদ্রাসার খেদমত সেন্টার</div>
         <div class="ls-sub">আপনার অ্যাকাউন্টে প্রবেশ করুন</div>
       </div>
@@ -1032,7 +1003,6 @@
     <div class="tabs">
       <button class="tab-btn active" onclick="admSwitchTab('posts')">📰 পোস্ট ম্যানেজমেন্ট</button>
       <button class="tab-btn" onclick="admSwitchTab('users')">👥 ইউজার ম্যানেজমেন্ট</button>
-      <button class="tab-btn" onclick="admSwitchTab('visitors')">📊 ভিজিটর এনালাইসিস</button>
     </div>
   </div>
   <div class="adm-main">
@@ -1040,6 +1010,21 @@
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">✏️</div><div class="adm-card-header-title">নতুন পোস্ট করুন</div></div>
         <div class="adm-card-body">
+
+          <div class="form-group">
+            <label class="form-label">ক্যাটাগরি <span style="color:red">*</span></label>
+            <div id="admCatError" style="display:none;color:red;font-size:0.78rem;margin-bottom:0.4rem;">কমপক্ষে একটি ক্যাটাগরি সিলেক্ট করুন।</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
+                <input type="checkbox" value="mosque-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> মসজিদের নিয়োগ বিজ্ঞপ্তি
+              </label>
+              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
+                <input type="checkbox" value="male-madrasa-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> পুরুষ মাদ্রাসার নিয়োগ
+              </label>
+              <label style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;background:#f8f9ff;font-size:0.9rem;font-weight:600;color:#05057D;">
+                <input type="checkbox" value="female-madrasa-jobs" class="admCatChk" style="width:18px;height:18px;accent-color:#05057D;cursor:pointer;flex-shrink:0;"> মহিলা মাদ্রাসার নিয়োগ
+              </label>
+            </div>
           </div>
 
           <div class="form-group">
@@ -1055,21 +1040,8 @@
           <input type="hidden" id="postAddress">
 
           <div class="form-group">
-            <label class="form-label">বিভাগ <span style="color:red">*</span></label>
-            <select class="form-input" id="postCategory" style="height:44px;cursor:pointer;">
-              <option value="">-- বিভাগ সিলেক্ট করুন --</option>
-              <option value="mosque">মসজিদের নিয়োগ বিজ্ঞপ্তি</option>
-              <option value="male-madrasa">পুরুষ মাদ্রাসার নিয়োগ</option>
-              <option value="female-madrasa">মহিলা মাদ্রাসার নিয়োগ</option>
-            </select>
-          </div>
-          <div class="form-group">
             <label class="form-label">পোস্টের বিবরণ <span style="color:red">*</span></label>
             <textarea class="form-textarea" id="postContent" rows="8" placeholder="এখানে নিয়োগ বিজ্ঞপ্তির সম্পূর্ণ লেখা পেস্ট করুন…" style="min-height:160px;"></textarea>
-          </div>
-          <div id="compactPreviewBox" style="display:none;background:rgba(5,5,125,0.04);border:1.5px solid rgba(5,5,125,0.15);border-radius:12px;padding:0.75rem 1rem;margin-bottom:0.85rem;">
-            <div style="font-size:0.72rem;font-weight:700;color:#05057D;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">⚡ Compact Preview</div>
-            <div id="compactPreviewText" style="font-size:0.82rem;color:#2a2d4a;line-height:1.6;word-break:break-word;"></div>
           </div>
 
           <div id="postAlert" class="alert" style="margin-bottom:0.5rem;"></div>
@@ -1088,12 +1060,6 @@
           <div class="search-wrap">
             <span class="search-icon">🔍</span>
             <input class="form-input" type="tel" id="searchInput" placeholder="মোবাইল নাম্বার দিয়ে খুঁজুন" oninput="admSearchUsers()">
-<div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap;" id="userTabBtns">
-  <button id="uTabAll" onclick="setUserTab('all')" class="tab-btn active" style="padding:0.4rem 1rem;font-size:0.85rem;border-radius:20px;font-weight:700;">সকল</button>
-  <button id="uTabActive" onclick="setUserTab('active')" class="tab-btn" style="padding:0.4rem 1rem;font-size:0.85rem;border-radius:20px;font-weight:700;">সক্রিয়</button>
-  <button id="uTabExpired" onclick="setUserTab('expired')" class="tab-btn" style="padding:0.4rem 1rem;font-size:0.85rem;border-radius:20px;font-weight:700;">মেয়াদ শেষ</button>
-  <button id="uTabPending" onclick="setUserTab('pending')" class="tab-btn" style="padding:0.4rem 1rem;font-size:0.85rem;border-radius:20px;font-weight:700;">রেজিস্ট্রেশন</button>
-</div>
           </div>
         </div>
       </div>
@@ -1101,16 +1067,7 @@
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">👥</div><div class="adm-card-header-title">সকল ইউজারসমূহ</div></div>
         <div class="adm-card-body"><div id="usersContainer"><div class="adm-empty">লোড হচ্ছে…</div></div></div>
-    </div>
       </div>
-    <div class="tab-panel" id="tabVisitors">
-      <div class="adm-card">
-        <div class="adm-card-header"><div class="adm-card-header-icon">📊</div><div class="adm-card-header-title">ভিজিটর স্ট্যাটস</div></div>
-        <div class="adm-card-body" id="visitorStatsContainer">
-          <div class="adm-empty">লোড হচ্ছে…</div>
-        </div>
-      </div>
-    </div>
     </div>
   </div>
 
@@ -1192,9 +1149,6 @@ function showPage(name) {
    SHARED API
 ══════════════════════════════════════ */
 let adminToken = '';
-// কপি প্রোটেকশন - এডমিন ছাড়া কেউ কপি করতে পারবে না
-document.addEventListener('contextmenu', function(e) { if (adminToken !== 'admin_session') e.preventDefault(); });
-document.addEventListener('copy', function(e) { if (adminToken !== 'admin_session') e.preventDefault(); });
 const api = (action, data={}) =>
   fetch('https://khedmotcenter.com/api.php', {
     method: 'POST',
@@ -1317,7 +1271,7 @@ function lsDoAdminLogin() {
   fetch('https://khedmotcenter.com/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin_login',email,password})})
     .then(r=>r.json()).then(data=>{
       btn.classList.remove('loading');
-      if(data.success){adminToken='admin_session';document.body.classList.add('admin-mode');closeLogin();showPage('admin');}
+      if(data.success){adminToken='admin_session';closeLogin();showPage('admin');}
       else{document.getElementById('adminAlertMsg').textContent=data.message||'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';al.classList.add('show');}
     }).catch(()=>{btn.classList.remove('loading');document.getElementById('adminAlertMsg').textContent='সংযোগ সমস্যা।';al.classList.add('show');});
 }
@@ -1411,7 +1365,7 @@ async function applyFilter(containerId) {
   const existingCards = wrap.querySelectorAll('.post-card, .post-item, .ud-post-card');
   existingCards.forEach(c => c.style.opacity = '0.4');
   // API call — time + category একসাথে
-  const params = {limit: 10, offset: 0, hours: hours};
+  const params = {limit: 200, offset: 0, hours: hours};
   if (cat) params.category = cat;
   const res = await api('get_public_news', params);
   if (!res.success) { existingCards.forEach(c => c.style.opacity = '1'); return; }
@@ -1431,39 +1385,6 @@ async function applyFilter(containerId) {
   wrap.insertAdjacentHTML('beforeend', html);
   // newsLoaded reset করি না — filter state ধরে রাখি
   if (containerId === 'newsPostsWrap') { newsLoaded = true; window._newsOffset = res.posts.length; }
-  // Infinite scroll for filter
-  window._filterState = window._filterState || {};
-  window._filterState[containerId] = {hours: hours, cat: cat, offset: res.posts.length, done: res.posts.length < 10, loading: false};
-  const oldSen2 = document.getElementById('scroll_sentinel_' + containerId);
-  if (oldSen2) oldSen2.remove();
-  if (res.posts.length >= 10) {
-    const sen2 = document.createElement('div');
-    sen2.id = 'scroll_sentinel_' + containerId;
-    sen2.style.height = '10px';
-    wrap.appendChild(sen2);
-    const obs2 = new IntersectionObserver(async (entries) => {
-      if (!entries[0].isIntersecting) return;
-      const st2 = window._filterState[containerId];
-      if (!st2 || st2.done || st2.loading) return;
-      st2.loading = true;
-      const p2 = {limit: 10, offset: st2.offset, hours: st2.hours};
-      if (st2.cat) p2.category = st2.cat;
-      const r3 = await api('get_public_news', p2);
-      if (r3.success && r3.posts.length) {
-        const isMasked3 = r3.masked || false;
-        const catMap3 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
-        const html3 = r3.posts.map(p => {
-          const ct3 = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(cc=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap3[cc]||cc}</span>`).join('');
-          return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${ct3?`<div style="padding:0.3rem 0.85rem;">${ct3}</div>`:''}<div class="post-body">${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${isMasked3?highlightMasked(escHtml(p.content)):escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
-        }).join('');
-        sen2.insertAdjacentHTML('beforebegin', html3);
-        st2.offset += r3.posts.length;
-        if (r3.posts.length < 10) { st2.done = true; obs2.disconnect(); sen2.remove(); }
-      } else { st2.done = true; obs2.disconnect(); sen2.remove(); }
-      st2.loading = false;
-    }, {rootMargin: '300px'});
-    obs2.observe(sen2);
-  }
 }
 
 function filterByCat(cat, containerId) {
@@ -1532,7 +1453,7 @@ async function filterByHours(hours, containerId) {
 }
 async function loadNews() {
   if (newsLoaded) return;
-  const res = await api('get_public_news', {limit: 10, offset: 0});
+  const res = await api('get_public_news', {limit: 20, offset: 0});
   const wrap = document.getElementById('newsPostsWrap');
   if (!res.success || !res.posts.length) {
     wrap.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>এখনো কোনো পোস্ট নেই।</div>';
@@ -1546,44 +1467,19 @@ async function loadNews() {
     return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${catTags?`<div style="padding:0.3rem 0.85rem;">${catTags}</div>`:""}<div class="post-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${isMasked ? highlightMasked(escHtml(p.content)) : escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path ? `<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">` : ''}</div></div>`;
   }).join('');
   newsLoaded = true;
-  window._newsOffset = res.posts.length;
+  window._newsOffset = 20;
   load72hBar('newsPostsWrap');
-  // Infinite scroll
-  window._filterState = window._filterState || {};
-  window._filterState['newsPostsWrap'] = {hours: 0, cat: '', offset: res.posts.length, done: res.posts.length < 10, loading: false};
-  const oldSen = document.getElementById('scroll_sentinel_newsPostsWrap');
-  if (oldSen) oldSen.remove();
-  if (res.posts.length >= 10) {
-    const sen = document.createElement('div');
-    sen.id = 'scroll_sentinel_newsPostsWrap';
-    sen.style.height = '10px';
-    document.getElementById('newsPostsWrap').appendChild(sen);
-    const obs = new IntersectionObserver(async (entries) => {
-      if (!entries[0].isIntersecting) return;
-      const st = window._filterState['newsPostsWrap'];
-      if (!st || st.done || st.loading) return;
-      st.loading = true;
-      const r2 = await api('get_public_news', {limit: 10, offset: st.offset});
-      if (r2.success && r2.posts.length) {
-        const isMasked2 = r2.masked || false;
-        const catMap2 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
-        const html2 = r2.posts.map(p => {
-          const ct = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(cc=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap2[cc]||cc}</span>`).join('');
-          return `<div class="post-card"><div class="post-date">${fmtDtNews(p.created)}</div>${ct?`<div style="padding:0.3rem 0.85rem;">${ct}</div>`:''}<div class="post-body">${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${isMasked2?highlightMasked(escHtml(p.content)):escHtml(p.content)}</div><div class="mask-info" onclick="showPage('home');setTimeout(openDetail,300)">🔒 সম্পূর্ণ নাম্বারসহ দেখতে পাসওয়ার্ড সংগ্রহ করুন</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
-        }).join('');
-        sen.insertAdjacentHTML('beforebegin', html2);
-        st.offset += r2.posts.length;
-        if (r2.posts.length < 10) { st.done = true; obs.disconnect(); sen.remove(); }
-      } else { st.done = true; obs.disconnect(); sen.remove(); }
-      st.loading = false;
-    }, {rootMargin: '300px'});
-    obs.observe(sen);
+  if (res.posts.length >= 20) {
+    document.getElementById('newsPostsWrap').insertAdjacentHTML('beforeend',
+      '<div id="newsLoadMore" style="text-align:center;padding:1rem;">' +
+      '<button onclick="loadMoreNews()" style="background:#05057D;color:#FFD700;border:none;border-radius:20px;padding:10px 30px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:inherit;">' +
+      'আরো দেখুন</button></div>');
   }
 }
 async function loadMoreNews() {
   const btn = document.querySelector('#newsLoadMore button');
   if (btn) btn.textContent = 'লোড হচ্ছে...';
-  const res = await api('get_public_news', {limit: 20, offset: window._newsOffset || 10});
+  const res = await api('get_public_news', {limit: 50, offset: window._newsOffset || 20});
   if (!res.success || !res.posts.length) {
     const lm = document.getElementById('newsLoadMore');
     if (lm) lm.remove();
@@ -1599,7 +1495,7 @@ async function loadMoreNews() {
   }).join('');
   if (lm) lm.insertAdjacentHTML('beforebegin', html);
   window._newsOffset = (window._newsOffset || 20) + res.posts.length;
-  if (res.posts.length < 20) {
+  if (res.posts.length < 50) {
     const lm2 = document.getElementById('newsLoadMore');
     if (lm2) lm2.remove();
   } else {
@@ -1610,7 +1506,7 @@ async function loadMoreNews() {
 /* ══════════════════════════════════════
    USER DASHBOARD PAGE
 ══════════════════════════════════════ */
-function formatDateUD(d) { if (!d) return '—'; if (typeof d==='string' && d.includes('/')) { const p=d.split('/'); d=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric'}); }
+function formatDateUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric'}); }
 function formatDatetimeUD(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
 
 async function loadUserDashboard() {
@@ -1619,59 +1515,29 @@ async function loadUserDashboard() {
   const {user, days_left, is_active, posts} = res;
   document.getElementById('udMainContent').innerHTML = `
     <div class="profile-card">
+      <div class="profile-header"><div class="profile-avatar">👤</div><div><div class="profile-name">${escHtml(user.name)}</div><div class="profile-mobile">📱 ${user.mobile}</div></div></div>
       <div class="profile-body">
-        <div class="info-row"><div class="info-icon">👤</div><div><div class="info-label">নাম</div><div class="info-value">${escHtml(user.name)}</div></div></div>
-        <div class="info-row"><div class="info-icon">📱</div><div><div class="info-label">মোবাইল</div><div class="info-value">${user.mobile}</div></div></div>
         <div class="info-row"><div class="info-icon">📍</div><div><div class="info-label">ঠিকানা</div><div class="info-value">${escHtml(user.address)}</div></div></div>
-        <div class="info-row"><div class="info-icon">⏳</div><div><div class="info-label">একাউন্ট তৈরির তারিখ</div><div class="info-value">${formatDateUD(user.created_at)}</div></div></div>
+        <div class="info-row"><div class="info-icon"></div><div><div class="info-label">একাউন্ট তৈরির তারিখ</div><div class="info-value">${formatDateUD(user.created_at)}</div></div></div>
         <div class="info-row"><div class="info-icon">⏳</div><div><div class="info-label">মেয়াদ শেষের তারিখ</div><div class="info-value">${formatDateUD(user.expiry_date)}</div></div></div>
       </div>
     </div>
     <div class="status-card">
       <div class="status-box ${is_active?'active':'expired'}"><div class="status-icon">${is_active?'✅':'❌'}</div><div class="status-label">স্ট্যাটাস</div><div class="status-value">${is_active?'Active':'Expired'}</div></div>
-      <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon"></div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
+      <div class="status-box ${days_left>=0?'active':'expired'}"><div class="status-icon">${days_left>=0?'📆':'🚫'}</div><div class="status-label">অবশিষ্ট সময়</div><div class="status-value">${Math.abs(days_left)}</div><div class="status-sub">${days_left>=0?'দিন বাকি':'দিন আগে শেষ'}</div></div>
     </div>
     <div class="section-header"><div class="section-header-icon">📰</div><div><div class="section-header-title">সর্বশেষ নিউজ ও পোস্টসমূহ</div><div class="section-header-sub">সম্পূর্ণ মোবাইল নাম্বারসহ</div></div></div>
     
     ${posts.length===0 ? '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এখনো কোনো পোস্ট নেই।</div></div>' : posts.map(p => `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?`<div style="margin:0.3rem 0.8rem;">`+(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;margin-top:2px;">${escHtml(p.title)}</div>`:""}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="পোস্টের ছবি" loading="lazy">`:''}  </div></div>`).join('')}
   `;
-  window._udOffset = posts.length;
   load72hBar('udMainContent');
-  window._udScrollState = {offset: posts.length, done: posts.length < 10, loading: false};
-  const oldUdSen = document.getElementById('scroll_sentinel_udMainContent');
-  if (oldUdSen) oldUdSen.remove();
-  if (posts.length >= 10) {
-    const udSen = document.createElement('div');
-    udSen.id = 'scroll_sentinel_udMainContent';
-    udSen.style.height = '10px';
-    document.getElementById('udMainContent').appendChild(udSen);
-    const udObs = new IntersectionObserver(async (entries) => {
-      if (!entries[0].isIntersecting) return;
-      const st = window._udScrollState;
-      if (!st || st.done || st.loading) return;
-      st.loading = true;
-      const r2 = await api('get_user_dashboard', {mobile: window._userMobile || '', limit: 10, offset: st.offset});
-      if (r2.success && r2.posts.length) {
-        const catMap2 = {'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ'};
-        const html2 = r2.posts.map(p => {
-          const ct = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${catMap2[c]||c}</span>`).join('');
-          return `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${ct?`<div style="margin:0.3rem 0.8rem;">${ct}</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:''}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:''}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
-        }).join('');
-        udSen.insertAdjacentHTML('beforebegin', html2);
-        st.offset += r2.posts.length;
-        if (r2.posts.length < 10) { st.done = true; udObs.disconnect(); udSen.remove(); }
-      } else { st.done = true; udObs.disconnect(); udSen.remove(); }
-      st.loading = false;
-    }, {rootMargin: '300px'});
-    udObs.observe(udSen);
-  }
 }
 async function applyFilterUD(containerId) {
   if (!window._activeFilter) window._activeFilter = {};
   if (!window._activeFilter[containerId]) window._activeFilter[containerId] = {hours: 72, cat: ""};
   const hours = window._activeFilter[containerId].hours || 72;
   const cat = window._activeFilter[containerId].cat || "";
-  const params = {limit: 10, offset: 0, hours: hours, mobile: window._userMobile || ""};
+  const params = {limit: 200, offset: 0, hours: hours, mobile: window._userMobile || ""};
   if (cat) params.category = cat;
   const res = await api("get_user_dashboard", params);
   if (!res.success) return;
@@ -1679,7 +1545,7 @@ async function applyFilterUD(containerId) {
   const catMap = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
   const wrap = document.getElementById(containerId);
   if (!wrap) return;
-  wrap.querySelectorAll(".ud-post-card, .post-card, .empty-state, #scroll_sentinel_udMainContent").forEach(c => c.remove());
+  wrap.querySelectorAll(".ud-post-card, .post-card, .empty-state").forEach(c => c.remove());
   const catMap2 = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ","mosque":"মসজিদের নিয়োগ","male-madrasa":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa":"মহিলা মাদ্রাসার নিয়োগ"};
   const html = posts.length ? posts.map(p => {
     const cats = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean);
@@ -1687,34 +1553,6 @@ async function applyFilterUD(containerId) {
     return `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${catTags?`<div style="margin:0.3rem 0.8rem;">${catTags}</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:''}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:''}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
   }).join('') : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">এই ফিল্টারে কোনো পোস্ট নেই।</div></div>`;
   wrap.insertAdjacentHTML("beforeend", html);
-  window._udFilterState = {hours: hours, cat: cat, offset: posts.length, done: posts.length < 10, loading: false};
-  if (posts.length >= 10) {
-    const udSen = document.createElement('div');
-    udSen.id = 'scroll_sentinel_udMainContent';
-    udSen.style.height = '10px';
-    wrap.appendChild(udSen);
-    const udObs = new IntersectionObserver(async (entries) => {
-      if (!entries[0].isIntersecting) return;
-      const st = window._udFilterState;
-      if (!st || st.done || st.loading) return;
-      st.loading = true;
-      const p2 = {limit: 10, offset: st.offset, hours: st.hours, mobile: window._userMobile || ""};
-      if (st.cat) p2.category = st.cat;
-      const r2 = await api("get_user_dashboard", p2);
-      if (r2.success && r2.posts.length) {
-        const cm = {"mosque-jobs":"মসজিদের নিয়োগ","male-madrasa-jobs":"পুরুষ মাদ্রাসার নিয়োগ","female-madrasa-jobs":"মহিলা মাদ্রাসার নিয়োগ"};
-        const h2 = r2.posts.map(p => {
-          const ct = (Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${cm[c]||c}</span>`).join('');
-          return `<div class="ud-post-card"><div class="ud-post-card-date">${formatDatetimeUD(p.created)}</div>${ct?`<div style="margin:0.3rem 0.8rem;">${ct}</div>`:''}<div class="ud-post-card-body">${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${escHtml(p.position)}</div>`:''}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${escHtml(p.address)}</div>`:''}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:6px;">${escHtml(p.title)}</div>`:''}<div class="post-text">${escHtml(p.content)}</div>${p.image_path?`<img class="post-img" src="${p.image_path}" alt="ছবি" loading="lazy">`:''}</div></div>`;
-        }).join('');
-        udSen.insertAdjacentHTML('beforebegin', h2);
-        st.offset += r2.posts.length;
-        if (r2.posts.length < 10) { st.done = true; udObs.disconnect(); udSen.remove(); }
-      } else { st.done = true; udObs.disconnect(); udSen.remove(); }
-      st.loading = false;
-    }, {rootMargin: '300px'});
-    udObs.observe(udSen);
-  }
 }
 
 async function doUserLogout() {
@@ -1728,54 +1566,70 @@ async function doUserLogout() {
 function admEsc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function admFmtDate(d) { if (!d) return '—'; if (typeof d === 'string' && d.includes('/')) { const p=d.split('/'); d=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric'}); }
 function admFmtDt(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('bn-BD',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
-let currentUserTab = 'all';
-let admSearchTimer;
-function setUserTab(tab) {
-  currentUserTab = tab;
-  ['all','active','expired','pending'].forEach(t => {
-    const id = 'uTab' + t.charAt(0).toUpperCase() + t.slice(1);
-    const btn = document.getElementById(id);
-    if (btn) btn.classList.toggle('active', t === tab);
-  });
-  admLoadUsers();
+function admIsExpired(dateStr) { if (!dateStr) return true; if (typeof dateStr === 'string' && dateStr.includes('/')) { const p=dateStr.split('/'); dateStr=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(dateStr) < new Date(new Date().toDateString()); }
+function admShowAlert(id, msg, type='error') {
+  const el = document.getElementById(id);
+  el.textContent = (type==='error'?'⚠️ ':'✅ ') + msg;
+  el.className = 'alert show alert-' + (type==='error'?'error':'success');
+  setTimeout(()=>el.classList.remove('show'), 4000);
 }
-function admSearchUsers() { clearTimeout(admSearchTimer); admSearchTimer = setTimeout(admLoadUsers, 400); }
-async function admLoadUsers() {
-  const search = document.getElementById('searchInput')?.value?.trim() || '';
-  const res = await api('admin_get_users', search ? {search} : {});
-  const c = document.getElementById('usersContainer');
-  if (!res.success) { c.innerHTML = '<div class="adm-empty">লোড করা যায়নি।</div>'; return; }
-  const now = Date.now();
-  let users = res.users || [];
-  if (currentUserTab === 'active') users = users.filter(u => u.expiresAt && u.expiresAt > now);
-  else if (currentUserTab === 'expired') users = users.filter(u => u.expiresAt && u.expiresAt <= now);
-  else if (currentUserTab === 'pending') users = users.filter(u => !u.expiresAt || u.expiresAt == 0);
-  if (!users.length) { c.innerHTML = `<div class="adm-empty">${search?'কোনো ইউজার পাওয়া যায়নি।':'এই বিভাগে কোনো ইউজার নেই।'}</div>`; return; }
-  c.innerHTML = users.map(u => {
-    const exp = admIsExpired(u.expiry_date);
-    return `<div class="user-card-adm" id="userCard${u.id}">
-      <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
-      <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
-      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>${u.expiresAt ? Math.ceil((u.expiresAt - Date.now()) / 86400000) + ' দিন বাকি' : 'মেয়াদ নেই'}</button><button class="btn btn-sm" style="background:#6c757d;color:#fff;" onclick="showUserPass('${u.id}',this)">👁 পাসওয়ার্ড</button><span id="pass_${u.id}" style="display:none;font-size:13px;background:#fff3cd;padding:2px 8px;border-radius:4px;margin-left:4px;"></span><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
-    </div>`;
-  }).join('');
+function admSwitchTab(tab) {
+  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')));
+  document.getElementById('tabPosts').classList.toggle('active', tab==='posts');
+  document.getElementById('tabUsers').classList.toggle('active', tab==='users');
+  if (tab==='users') admLoadUsers();
 }
-async function showUserPass(id, btn) {
-  const span = document.getElementById('pass_'+id);
-  if (btn.dataset.loaded) {
-    span.style.display = span.style.display==='inline' ? 'none' : 'inline';
-    btn.textContent = span.style.display==='inline' ? '🙈 লুকান' : '👁 পাসওয়ার্ড';
-    return;
-  }
-  const res = await api('admin_get_password', {id});
+
+let admImgBase64 = null;
+function previewImg(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => { admImgBase64=e.target.result; const prev=document.getElementById('imgPreview'); prev.src=admImgBase64; prev.style.display='block'; document.querySelector('.img-upload-text').textContent=file.name; };
+  reader.readAsDataURL(file);
+}
+async function submitPost() {
+  const content = document.getElementById('postContent').value.trim();
+  const dropVal = document.getElementById('admCatDropdown')?.value; if (dropVal) syncAdmCat(dropVal);
+  const admCats = Array.from(document.querySelectorAll('.admCatChk:checked')).map(x=>x.value);
+  if (!admCats.length) { document.getElementById('admCatError').style.display='block'; return; }
+  document.getElementById('admCatError').style.display='none';
+  const postTitleVal = document.getElementById('postTitle').value.trim();
+  if (!postTitleVal) { document.getElementById('postTitleError').style.display='block'; document.getElementById('postTitle').focus(); return; }
+  document.getElementById('postTitleError').style.display='none';
+  document.getElementById('postMetaTitle').value = postTitleVal;
+  if (!content) { admShowAlert('postAlert','পোস্টের বিষয়বস্তু লিখুন।'); return; }
+  const btn = document.getElementById('postBtnTxt');
+  btn.innerHTML = '<span class="spinner-inline"></span> পোস্ট হচ্ছে…';
+  const title = document.getElementById('postTitle').value.trim(); const slug = document.getElementById('postSlug').value.trim(); const meta_title = document.getElementById('postMetaTitle').value.trim(); const meta_desc = document.getElementById('postMetaDesc').value.trim(); const position = document.getElementById('postPosition').value.trim(); const address = document.getElementById('postAddress').value.trim(); const res = await api('admin_create_post', {content, title, position, address, slug, meta_title, meta_desc, image_base64: admImgBase64, cats: admCats, category: admCats[0] || 'mosque'});
+  btn.textContent = '📤 পোস্ট করুন';
   if (res.success) {
-    span.textContent = res.plain_pass || '(সেট নেই)';
-    span.style.display = 'inline';
-    btn.textContent = '🙈 লুকান';
-    btn.dataset.loaded = '1';
-  } else {
-    alert('পাসওয়ার্ড পাওয়া যায়নি');
-  }
+    document.getElementById('postContent').value = ''; document.getElementById('postTitle').value = ''; document.getElementById('postPosition').value = ''; document.getElementById('postAddress').value = ''; document.getElementById('postSlug').value = ''; document.getElementById('postMetaTitle').value = ''; document.getElementById('postMetaDesc').value = '';
+    document.querySelectorAll('.admCatChk').forEach(x=>x.checked=false);
+    const dd=document.getElementById('admCatDropdown'); if(dd) dd.value='';
+    document.getElementById('imgPreview').style.display = 'none';
+    document.getElementById('imgFileInput').value = '';
+    document.querySelector('.img-upload-text').textContent = 'ছবি যোগ করতে এখানে ট্যাপ করুন';
+    admImgBase64 = null;
+    admShowAlert('postAlert','পোস্ট সফলভাবে প্রকাশিত হয়েছে!','success');
+    admLoadPosts();
+    newsLoaded = false; // reset news cache
+  } else admShowAlert('postAlert', res.message || 'পোস্ট করা যায়নি।');
+}
+async function admLoadPosts() {
+  const res = await api('admin_get_posts');
+  load72hBar('postsContainer');
+  const c = document.getElementById('postsContainer');
+  if (!res.success || !res.posts.length) { c.innerHTML = '<div class="adm-empty">কোনো পোস্ট নেই।</div>'; return; }
+  c.innerHTML = res.posts.map(p => `
+    <div class="post-item" id="postItem${p.id}">
+      <div class="post-item-date">${admFmtDt(p.created)}
+        <div class="post-item-actions">
+          <button class="btn btn-warning btn-sm" onclick="openEditPost('${p.id}', \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
+    </div>`).join('');
 }
 function openEditPost(id, content) {
   document.getElementById('editPostId').value = id;
@@ -1792,162 +1646,41 @@ async function saveEditPost() {
 async function deletePost(id) {
   if (!confirm('এই পোস্ট মুছে ফেলবেন?')) return;
   const res = await api('admin_delete_post', {id});
-  if (res.success) { document.getElementById('postItem'+id)?.remove(); newsLoaded=false; admLoadPosts(); }
-}
-function admIsExpired(dateStr) { if (!dateStr) return true; if (typeof dateStr === 'string' && dateStr.includes('/')) { const p=dateStr.split('/'); dateStr=p[2]+'-'+p[1]+'-'+p[0]; } return new Date(dateStr) < new Date(new Date().toDateString()); }
-function admShowAlert(id, msg, type='error') {
-  const el = document.getElementById(id);
-  el.textContent = (type==='error'?'⚠️ ':'✅ ') + msg;
-  el.className = 'alert show alert-' + (type==='error'?'error':'success');
-  setTimeout(()=>el.classList.remove('show'), 4000);
-}
-function admSwitchTab(tab) {
-  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')||(i===2&&tab==='visitors')));
-  document.getElementById('tabPosts').classList.toggle('active', tab==='posts');
-  document.getElementById('tabUsers').classList.toggle('active', tab==='users');
-  document.getElementById('tabVisitors').classList.toggle('active', tab==='visitors');
-  if (tab==='users') admLoadUsers();
-  if (tab==='visitors') loadVisitorStats();
+  if (res.success) { document.getElementById(`postItem${id}`)?.remove(); newsLoaded=false; admLoadPosts(); }
 }
 
-async function loadVisitorStats() {
-  const res = await api('get_visitor_stats');
-  const cont = document.getElementById('visitorStatsContainer');
-  if (!res.success) { cont.innerHTML = '<div class="adm-empty">'+res.message+'</div>'; return; }
-  const h = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
-      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
-        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.today_new}</div>
-        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">আজকের নতুন ভিজিটর</div>
-      </div>
-      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
-        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.today_returning}</div>
-        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">আজকের রিটার্নিং ভিজিটর</div>
-      </div>
-      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
-        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.yesterday_new}</div>
-        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গতকালের নতুন ভিজিটর</div>
-      </div>
-      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
-        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.yesterday_returning}</div>
-        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গতকালের রিটার্নিং ভিজিটর</div>
-      </div>
-      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
-        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.week_new}</div>
-        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গত ৭ দিনের নতুন ভিজিটর</div>
-      </div>
-      <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
-        <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.week_returning}</div>
-        <div style="font-size:0.85rem;color:#666;margin-top:0.3rem;">গত ৭ দিনের রিটার্নিং ভিজিটর</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:12px;padding:1rem;text-align:center;color:#fff;">
-        <div style="font-size:2rem;font-weight:700;color:#FFD700;">${res.total}</div>
-        <div style="font-size:0.85rem;color:#fff;margin-top:0.3rem;opacity:0.9;">মোট ভিজিটর</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:12px;padding:1rem;text-align:center;color:#fff;">
-        <div style="font-size:2rem;font-weight:700;color:#FFD700;">${res.total_new}</div>
-        <div style="font-size:0.85rem;color:#fff;margin-top:0.3rem;opacity:0.9;">মোট নতুন ভিজিটর</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:12px;padding:1rem;text-align:center;color:#fff;">
-        <div style="font-size:2rem;font-weight:700;color:#FFD700;">${res.total_returning}</div>
-        <div style="font-size:0.85rem;color:#fff;margin-top:0.3rem;opacity:0.9;">মোট রিটার্নিং ভিজিটর</div>
-      </div>
-    </div>
-    <div class="adm-card" style="margin-top:1.5rem;">
-      <div class="adm-card-header"><div class="adm-card-header-icon">🌐</div><div class="adm-card-header-title">ট্রাফিক সোর্স</div></div>
-      <div class="adm-card-body">
-        ${Object.entries(res.sources || {}).map(([src,cnt])=>`<div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(0,0,0,0.05);"><span>${src}</span><strong>${cnt}</strong></div>`).join('')}
-      </div>
-    </div>
-  `;
-  cont.innerHTML = h;
+let admSearchTimer = null;
+function admSearchUsers() { clearTimeout(admSearchTimer); admSearchTimer = setTimeout(admLoadUsers, 400); }
+async function admLoadUsers() {
+  const search = document.getElementById('searchInput')?.value?.trim() || '';
+  const res = await api('admin_get_users', search ? {search} : {});
+  const c = document.getElementById('usersContainer');
+  if (!res.success || !res.users.length) { c.innerHTML = `<div class="adm-empty">${search?'কোনো ইউজার পাওয়া যায়নি।':'কোনো ইউজার নেই।'}</div>`; return; }
+  c.innerHTML = res.users.map(u => {
+    const exp = admIsExpired(u.expiry_date);
+    return `<div class="user-card-adm" id="userCard${u.id}">
+      <div class="user-card-row"><div><div class="user-name">${admEsc(u.name)}</div><div class="user-mobile-adm">📱 ${u.mobile}</div><div class="user-address-adm">📍 ${admEsc(u.address)}</div></div>
+      <div style="text-align:right"><span class="badge ${exp?'badge-expired':'badge-active'}">${exp?'Expired':'Active'}</span><div class="user-expiry" style="color:${exp?'var(--red)':'var(--green)'};margin-top:4px;">মেয়াদ: ${admFmtDate(u.expiry_date)}</div></div></div>
+      <div class="user-actions"><button class="btn btn-primary btn-sm" onclick='openEditUser(${JSON.stringify(u)})'>✏️ সম্পাদনা</button><button class="btn btn-warning btn-sm" onclick='openExtend(${u.id},"${admEsc(u.name)}","${u.mobile}","${u.expiry_date}")'>${u.expiresAt ? Math.ceil((u.expiresAt - Date.now()) / 86400000) + ' দিন বাকি' : 'মেয়াদ নেই'}</button><button class="btn btn-sm" style="background:#6c757d;color:#fff;" onclick="showUserPass('${u.id}',this)">👁 পাসওয়ার্ড</button><span id="pass_${u.id}" style="display:none;font-size:13px;background:#fff3cd;padding:2px 8px;border-radius:4px;margin-left:4px;"></span><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️ মুছুন</button></div>
+    </div>`;
+  }).join('');
 }
-async function trackVisitor() {
-  let vid = localStorage.getItem('visitor_id');
-  if (!vid) { vid = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2,9); localStorage.setItem('visitor_id', vid); }
-  let source = 'direct';
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('utm_source')) source = params.get('utm_source');
-  else if (document.referrer.includes('google')) source = 'google';
-  else if (document.referrer.includes('facebook')) source = 'facebook';
-  else if (document.referrer.includes('whatsapp')) source = 'whatsapp';
-  await api('track_visitor', {visitor_id: vid, source: source});
-}
-
-let admImgBase64 = null;
-function previewImg(input) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => { admImgBase64=e.target.result; const prev=document.getElementById('imgPreview'); prev.src=admImgBase64; prev.style.display='block'; document.querySelector('.img-upload-text').textContent=file.name; };
-  reader.readAsDataURL(file);
-}
-async function submitPost() {
-  const content = document.getElementById('postContent').value.trim();
-  const category = document.getElementById('postCategory')?.value || '';
-  if (!category) { admShowAlert('postAlert', 'বিভাগ সিলেক্ট করুন।'); return; }
-  const dropVal = document.getElementById('admCatDropdown')?.value; if (dropVal) syncAdmCat(dropVal);
-  const admCats = Array.from(document.querySelectorAll('.admCatChk:checked')).map(x=>x.value);
-  if (!admCats.length) { document.getElementById('admCatError').style.display='block'; return; }
-  document.getElementById('admCatError').style.display='none';
-  const postTitleVal = document.getElementById('postTitle').value.trim();
-  if (!postTitleVal) { document.getElementById('postTitleError').style.display='block'; document.getElementById('postTitle').focus(); return; }
-  document.getElementById('postTitleError').style.display='none';
-  document.getElementById('postMetaTitle').value = postTitleVal;
-  if (!content) { admShowAlert('postAlert','পোস্টের বিষয়বস্তু লিখুন।'); return; }
-  const btn = document.getElementById('postBtnTxt');
-  btn.innerHTML = '<span class="spinner-inline"></span> পোস্ট হচ্ছে…';
-  const title = document.getElementById('postTitle').value.trim(); const slug = document.getElementById('postSlug').value.trim(); const meta_title = document.getElementById('postMetaTitle').value.trim(); const meta_desc = document.getElementById('postMetaDesc').value.trim(); const position = document.getElementById('postPosition').value.trim(); const address = document.getElementById('postAddress').value.trim(); const res = await api('admin_create_post', {category,content, title, position, address, slug, meta_title, meta_desc, image_base64: admImgBase64, cats: admCats, category: admCats[0] || 'mosque'});
-  btn.textContent = '📤 পোস্ট করুন';
+async function showUserPass(id, btn) { if (btn.dataset.loaded) { const span = document.getElementById("pass_"+id); span.style.display = span.style.display==="inline" ? "none" : "inline"; btn.textContent = span.style.display==="inline" ? "🙈 লুকান" : "👁 পাসওয়ার্ড"; return; } const res = await api("admin_get_password", {id}); const span = document.getElementById("pass_"+id); if (res.success) { span.textContent = res.plain_pass || "(সেট নেই)"; span.style.display = "inline"; btn.textContent = "🙈 লুকান"; btn.dataset.loaded = "1"; } else { alert("পাসওয়ার্ড পাওয়া যায়নি"); } }
+async function showUserPass(id, btn) {
+  const span = document.getElementById('pass_'+id);
+  if (btn.dataset.loaded) {
+    span.style.display = span.style.display==='inline' ? 'none' : 'inline';
+    btn.textContent = span.style.display==='inline' ? '🙈 লুকান' : '👁 পাসওয়ার্ড';
+    return;
+  }
+  const res = await api('admin_get_password', {id});
   if (res.success) {
-    document.getElementById('postContent').value = ''; document.getElementById('postTitle').value = ''; document.getElementById('postPosition').value = ''; document.getElementById('postAddress').value = ''; document.getElementById('postSlug').value = ''; document.getElementById('postMetaTitle').value = ''; document.getElementById('postMetaDesc').value = '';
-    document.querySelectorAll('.admCatChk').forEach(x=>x.checked=false);
-    const dd=document.getElementById('admCatDropdown'); if(dd) dd.value='';
-    document.getElementById('imgPreview').style.display = 'none';
-    document.getElementById('imgFileInput').value = '';
-    document.querySelector('.img-upload-text').textContent = 'ছবি যোগ করতে এখানে ট্যাপ করুন';
-    admImgBase64 = null;
-    admShowAlert('postAlert','পোস্ট সফলভাবে প্রকাশিত হয়েছে!','success');
-    admLoadPosts();
-    newsLoaded = false; // reset news cache
-  } else admShowAlert('postAlert', res.message || 'পোস্ট করা যায়নি।');
-}
-async function admLoadPosts() {
-  const res = await api('admin_get_posts', {limit: 10, offset: 0});
-  load72hBar('postsContainer');
-  const c = document.getElementById('postsContainer');
-  if (!res.success || !res.posts.length) { c.innerHTML = '<div class="adm-empty">কোনো পোস্ট নেই।</div>'; return; }
-  c.innerHTML = res.posts.map(p => `
-    <div class="post-item" id="postItem${p.id}">
-      <div class="post-item-date">${admFmtDt(p.created)}
-        <div class="post-item-actions">
-          <button class="btn btn-warning btn-sm" onclick="openEditPost('${p.id}', \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button>
-          <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button>
-        </div>
-      </div>
-      <div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')?((Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ','mosque':'মসজিদের নিয়োগ','male-madrasa':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')+`<br>`):''}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}  </div>
-    </div>`).join('');
-  window._admOffset = res.posts.length;
-  window._admScrollState = {offset: res.posts.length, done: res.posts.length < 10, loading: false};
-  if (res.posts.length >= 10) {
-    const admSen = document.createElement('div');
-    admSen.id = 'scroll_sentinel_postsContainer';
-    admSen.style.height = '10px';
-    c.appendChild(admSen);
-    const admObs = new IntersectionObserver(async (entries) => {
-      if (!entries[0].isIntersecting) return;
-      const st = window._admScrollState;
-      if (!st || st.done || st.loading) return;
-      st.loading = true;
-      const r2 = await api('admin_get_posts', {limit: 10, offset: st.offset});
-      if (r2.success && r2.posts.length) {
-        const h2 = r2.posts.map(p => `<div class="post-item" id="postItem${p.id}"><div class="post-item-date">${admFmtDt(p.created)}<div class="post-item-actions"><button class="btn btn-warning btn-sm" onclick="openEditPost('${p.id}', \`${admEsc(p.content).replace(/\`/g,"'")}\`)">✏️</button><button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">🗑️</button></div></div><div class="post-item-body">${(Array.isArray(p.cats)&&p.cats.length?p.cats:[p.category]).filter(Boolean).map(c=>`<span style="background:#e6f4ea;color:#1a7a3c;font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${({'mosque-jobs':'মসজিদের নিয়োগ','male-madrasa-jobs':'পুরুষ মাদ্রাসার নিয়োগ','female-madrasa-jobs':'মহিলা মাদ্রাসার নিয়োগ'})[c]||c}</span>`).join('')}${p.position?`<div style="font-size:0.8rem;color:#1a7a3c;font-weight:600;margin-bottom:2px;">${admEsc(p.position)}</div>`:""}${p.address?`<div style="font-size:0.78rem;color:#888;margin-bottom:4px;">📍 ${admEsc(p.address)}</div>`:""}${p.title?`<div style="font-weight:700;color:#05057D;font-size:1rem;margin-bottom:4px;">${admEsc(p.title)}</div>`:""}<div class="adm-post-text">${admEsc(p.content)}</div>${p.image_path?`<img class="adm-post-img" src="${p.image_path}" loading="lazy">`:''}</div></div>`).join('');
-        admSen.insertAdjacentHTML('beforebegin', h2);
-        st.offset += r2.posts.length;
-        if (r2.posts.length < 10) { st.done = true; admObs.disconnect(); admSen.remove(); }
-      } else { st.done = true; admObs.disconnect(); admSen.remove(); }
-      st.loading = false;
-    }, {rootMargin: '300px'});
-    admObs.observe(admSen);
+    span.textContent = res.plain_pass || '(সেট নেই)';
+    span.style.display = 'inline';
+    btn.textContent = '🙈 লুকান';
+    btn.dataset.loaded = '1';
+  } else {
+    alert('পাসওয়ার্ড পাওয়া যায়নি');
   }
 }
 function openUserModal() {
@@ -2116,60 +1849,28 @@ function updateSmartPreview() {
   }
 }
 
-function compactText(text) {
-  return text.replace(/[\s]+/g, ' ').trim();
-}
-
-let _dupTimer = null;
-let _lastChecked = '';
-
-async function checkDuplicateSmart() {
-  const raw = document.getElementById('postContent').value;
-  const compact = compactText(raw);
+async function checkDuplicateNow() {
+  const text = document.getElementById('postContent').value.trim();
   const el = document.getElementById('postAlert');
-  const btn = document.querySelector('button[onclick="submitPost()"]');
-
-  if (compact.length < 20) {
-    el.className = 'alert';
-    if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
-    return;
-  }
-  if (compact === _lastChecked) return;
-  _lastChecked = compact;
-
-  // Compact preview
-  const previewEl = document.getElementById('compactPreviewBox');
-  if (previewEl) {
-    previewEl.style.display = 'block';
-    document.getElementById('compactPreviewText').textContent = compact.slice(0, 200) + (compact.length > 200 ? '…' : '');
-  }
-
-  try {
-    const res = await fetch('https://khedmotcenter.com/api.php', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'check_duplicate_smart', token: adminToken, content: compact})
-    }).then(r => r.json());
-
-    if (res.duplicate) {
-      el.innerHTML = '⚠️ ' + res.message + '<br><span style="font-size:0.82rem;font-weight:600;color:#991b1b;">মিল: ' + res.similarity + '% &nbsp;|&nbsp; তারিখ: ' + (res.matched_date || '—') + '</span>';
-      el.className = 'alert show alert-error';
-      if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
-    } else {
-      el.className = 'alert';
-      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
-    }
-  } catch(e) {
+  if (!text) { el.className = 'alert'; return; }
+  const res = await fetch('https://khedmotcenter.com/api.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action: 'check_duplicate', content: text})
+  }).then(r => r.json());
+  if (res.duplicate) {
+    el.textContent = '⚠️ এই পোস্টটি আগেই করা হয়েছে! ডুপ্লিকেট পোস্ট।';
+    el.className = 'alert show alert-error';
+  } else {
     el.className = 'alert';
   }
 }
-
-document.getElementById('postContent').addEventListener('paste', function() {
-  setTimeout(function() { checkDuplicateSmart(); updateSmartPreview(); }, 150);
+document.getElementById('postContent').addEventListener('paste', function(e) {
+  setTimeout(checkDuplicateNow, 100);
 });
-document.getElementById('postContent').addEventListener('input', function() {
-  clearTimeout(_dupTimer);
-  _dupTimer = setTimeout(function() { checkDuplicateSmart(); updateSmartPreview(); }, 600);
+document.getElementById('postContent').addEventListener('input', function(e) {
+  setTimeout(checkDuplicateNow, 100);
+  updateSmartPreview();
 });
 document.getElementById('postPosition')?.addEventListener('input', updateSmartPreview);
 document.getElementById('postAddress')?.addEventListener('input', updateSmartPreview);
@@ -2324,8 +2025,5 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
   .back-btn::before { content: '←'; font-size: 0.9rem; }
   </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', trackVisitor);
-</script>
 </body>
 </html>
