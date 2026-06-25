@@ -1,0 +1,187 @@
+0000000000000000000000000000000000000000 1547e08bf7b527381331723cc536e7348a61788b root <root@ubuntu-cloudpanel.localhost> 1780813768 +0000	clone: from https://github.com/daruttaqwa722/Masjid-Madrashar-Khedmot-Senter-
+1547e08bf7b527381331723cc536e7348a61788b d74a338cb0c65b47247072fbc1c43c95669e9ac1 root <root@ubuntu-cloudpanel.localhost> 1780855955 +0000	pull origin main: Fast-forward
+d74a338cb0c65b47247072fbc1c43c95669e9ac1 42b38c90f84bbb396066aff98f3fb5718daaab49 root <root@ubuntu-cloudpanel.localhost> 1780908295 +0000	reset: moving to origin/main
+42b38c90f84bbb396066aff98f3fb5718daaab49 c88d0443b9f6fb77395a87e3e2ce3834158b6240 root <root@ubuntu-cloudpanel.localhost> 1780970642 +0000	commit: remove: dark mode and notification buttons
+c88d0443b9f6fb77395a87e3e2ce3834158b6240 0d874b93444fa883786285f1a4e682764eefc33c root <root@ubuntu-cloudpanel.localhost> 1780985696 +0000	pull: Fast-forward
+0d874b93444fa883786285f1a4e682764eefc33c 8ea61813f2b25bc5762688ec759d4992f5d548c0 root <root@ubuntu-cloudpanel.localhost> 1780986423 +0000	pull: Fast-forward
+8ea61813f2b25bc5762688ec759d4992f5d548c0 d77bc8b8404c9ede4bc958970c34d379f350251c root <root@ubuntu-cloudpanel.localhost> 1780991652 +0000	pull: Fast-forward
+d77bc8b8404c9ede4bc958970c34d379f350251c 27484e1cde69349c0dc28bab39802170c73d340e root <root@ubuntu-cloudpanel.localhost> 1781065861 +0000	pull: Fast-forward
+27484e1cde69349c0dc28bab39802170c73d340e b3dc0bef6b5bf9f7dd374651f333e33f07636d98 root <root@ubuntu-cloudpanel.localhost> 1781068791 +0000	pull: Fast-forward
+b3dc0bef6b5bf9f7dd374651f333e33f07636d98 947c27dd364a48babcd38cf43487d8d5f616e784 root <root@ubuntu-cloudpanel.localhost> 1781070296 +0000	pull: Fast-forward
+947c27dd364a48babcd38cf43487d8d5f616e784 1ab61da4e6124ebe36de33eae49ad9a02895b5cf root <root@ubuntu-cloudpanel.localhost> 1781072217 +0000	pull: Fast-forward
+1ab61da4e6124ebe36de33eae49ad9a02895b5cf b66cdce7e046ad8c995200a0a3d901b84ae4e472 root <root@ubuntu-cloudpanel.localhost> 1781073605 +0000	pull: Fast-forward
+b66cdce7e046ad8c995200a0a3d901b84ae4e472 f5d9b841c14616ec47fd24052e76c64f1bbfb70f root <root@ubuntu-cloudpanel.localhost> 1781131373 +0000	pull: Fast-forward
+f5d9b841c14616ec47fd24052e76c64f1bbfb70f 425bbf83a67e230f11449165050e8971f3c9bdbc root <root@ubuntu-cloudpanel.localhost> 1781135377 +0000	pull: Fast-forward
+425bbf83a67e230f11449165050e8971f3c9bdbc 30e317286e4069a9740d23206b8a2f1601da3c30 root <root@ubuntu-cloudpanel.localhost> 1781140196 +0000	commit: Fix: admin login, edit, delete working
+30e317286e4069a9740d23206b8a2f1601da3c30 35e0573b6a16333edb8e19b1362d9b675d3e63c1 root <root@ubuntu-cloudpanel.localhost> 1781140830 +0000	commit: Fix: duplicate post check
+35e0573b6a16333edb8e19b1362d9b675d3e63c1 028d97c0b78ca3fde30d419ac32624017874b90a root <root@ubuntu-cloudpanel.localhost> 1781142321 +0000	commit: Fix: user address and expiry date
+028d97c0b78ca3fde30d419ac32624017874b90a 51dd6ca7b92b2d93e2364bcb1fe371438c3620a5 root <root@ubuntu-cloudpanel.localhost> 1781143955 +0000	commit: Fix: admin login from admins table
+51dd6ca7b92b2d93e2364bcb1fe371438c3620a5 8a5f5bee8d3844712dc28fb6b86483edd846d849 root <root@ubuntu-cloudpanel.localhost> 1781144713 +0000	commit: Fix: user address and expiry date save
+8a5f5bee8d3844712dc28fb6b86483edd846d849 53030fb3ec9489b4243f6df30ac4a24b412066b8 root <root@ubuntu-cloudpanel.localhost> 1781152461 +0000	commit: Fix: user edit id string
+53030fb3ec9489b4243f6df30ac4a24b412066b8 faa2e87d907eab353bf4fd55b18044023e1d9bba root <root@ubuntu-cloudpanel.localhost> 1781155133 +0000	commit: Fix: show remaining days in user card
+faa2e87d907eab353bf4fd55b18044023e1d9bba 7840f304bb73060b843708496a192e93c6c2ee8e root <root@ubuntu-cloudpanel.localhost> 1781158656 +0000	pull: Fast-forward
+7840f304bb73060b843708496a192e93c6c2ee8e 7347673d83656097f6bf204c7427d6a2fceccf81 root <root@ubuntu-cloudpanel.localhost> 1781162064 +0000	commit: fix: user login redirect + phone masking message
+7347673d83656097f6bf204c7427d6a2fceccf81 59252b42ee8efb314c6bfa095248875a5a1d5688 root <root@ubuntu-cloudpanel.localhost> 1781165188 +0000	commit: fix: pass mobile to user dashboard API
+59252b42ee8efb314c6bfa095248875a5a1d5688 717a7fae77910b8e573367ec66acee2620aee580 root <root@ubuntu-cloudpanel.localhost> 1781166965 +0000	commit: fix: phone masking all formats + highlight masked numbers
+717a7fae77910b8e573367ec66acee2620aee580 aef9aa81e5a9f7243288ee7800056eb3879d8e38 root <root@ubuntu-cloudpanel.localhost> 1781167974 +0000	commit: fix: mask last 2 digits, all phone formats supported
+aef9aa81e5a9f7243288ee7800056eb3879d8e38 ae011d10feadba527b0278522388368990a2e595 root <root@ubuntu-cloudpanel.localhost> 1781169057 +0000	commit: fix: show masked number in highlight span
+ae011d10feadba527b0278522388368990a2e595 55d2db3dc86833b300f4631e9e35b082d696a688 root <root@ubuntu-cloudpanel.localhost> 1781170608 +0000	commit: fix: highlight Bengali and all phone formats
+55d2db3dc86833b300f4631e9e35b082d696a688 7a1141d510ef3bda49f9f013ee228a7fb91a100a root <root@ubuntu-cloudpanel.localhost> 1781171941 +0000	commit: fix: mask-info styling, font upgrade, click to detail page
+7a1141d510ef3bda49f9f013ee228a7fb91a100a a2fd49b4359b41596e3b2c13a21ec22e0b34b150 root <root@ubuntu-cloudpanel.localhost> 1781172462 +0000	commit: fix: mask-info click goes to home then opens detail
+a2fd49b4359b41596e3b2c13a21ec22e0b34b150 93aeac9137908a9f5c7c37f7f9640a0f2dbb9631 root <root@ubuntu-cloudpanel.localhost> 1781173427 +0000	commit: fix: Noto Serif Bengali font for detail page
+93aeac9137908a9f5c7c37f7f9640a0f2dbb9631 44ca849be37bbd151e8035d4b04008c4399119e9 root <root@ubuntu-cloudpanel.localhost> 1781174746 +0000	commit: redesign: detail page premium UI upgrade
+44ca849be37bbd151e8035d4b04008c4399119e9 284ba3d0edcbf59a474d844742b8fb29bd3511c4 root <root@ubuntu-cloudpanel.localhost> 1781175514 +0000	commit: fix: remove emoji from highlight-pill, smaller checklist font
+284ba3d0edcbf59a474d844742b8fb29bd3511c4 255093fb82e5b42fbfd7a621ea3114326dfbade5 root <root@ubuntu-cloudpanel.localhost> 1781175671 +0000	commit: feat: disable copy/select for non-admin users
+255093fb82e5b42fbfd7a621ea3114326dfbade5 898f8b1e0cfb8ed95edc25f29e8a33e362374e2d root <root@ubuntu-cloudpanel.localhost> 1781224428 +0000	pull: Fast-forward
+898f8b1e0cfb8ed95edc25f29e8a33e362374e2d 49553980d0693ba2289991d1b1851e16c5d5bb17 root <root@ubuntu-cloudpanel.localhost> 1781256797 +0000	commit: fix: date font size and Noto Serif Bengali
+49553980d0693ba2289991d1b1851e16c5d5bb17 e9f799929023ce108595c16fa7eba286fb1a9540 root <root@ubuntu-cloudpanel.localhost> 1781258647 +0000	commit: revert: back to working version
+e9f799929023ce108595c16fa7eba286fb1a9540 83c5fc18eae9636f7a8e9da3919dcf2b2fce0f25 root <root@ubuntu-cloudpanel.localhost> 1781258929 +0000	commit: fix: Noto Serif Bengali font for all
+83c5fc18eae9636f7a8e9da3919dcf2b2fce0f25 eda0c37d9e43fbe6eee54b27b23d86affe212b62 root <root@ubuntu-cloudpanel.localhost> 1781259452 +0000	commit: fix: date format long month Bengali
+eda0c37d9e43fbe6eee54b27b23d86affe212b62 72ab8c188469e55d74b1cf74f224142821e13b0c root <root@ubuntu-cloudpanel.localhost> 1781260857 +0000	commit: fix: all dates with time
+72ab8c188469e55d74b1cf74f224142821e13b0c 51e7097e8c3262333539fdd761a7770de7d499f8 root <root@ubuntu-cloudpanel.localhost> 1781261484 +0000	pull: Fast-forward
+51e7097e8c3262333539fdd761a7770de7d499f8 bbf30ac642c61966c11a6b99ef5c2e8fc1296fbb root <root@ubuntu-cloudpanel.localhost> 1781261587 +0000	commit: feat: add favicon
+bbf30ac642c61966c11a6b99ef5c2e8fc1296fbb f880cded32a6b74ba646dd976d1a396afc829175 root <root@ubuntu-cloudpanel.localhost> 1781261780 +0000	commit: fix: font, date, favicon update
+f880cded32a6b74ba646dd976d1a396afc829175 98cee776d861a3c31a753093159218e045aa8422 root <root@ubuntu-cloudpanel.localhost> 1781267304 +0000	commit: feat: SEO title and meta description
+98cee776d861a3c31a753093159218e045aa8422 986d79af58cd39a77b12ccf01e3426b6377e56d2 root <root@ubuntu-cloudpanel.localhost> 1781268257 +0000	commit: feat: SEO - robots.txt, sitemap.xml, canonical URL
+986d79af58cd39a77b12ccf01e3426b6377e56d2 12d452d2b16d4c2d8393aecc4a5dbe21dfcc95ec root <root@ubuntu-cloudpanel.localhost> 1781298782 +0000	pull origin main: Fast-forward
+12d452d2b16d4c2d8393aecc4a5dbe21dfcc95ec 015ec3afc0d6100d510f7fac7cf81a3e51c4cf3d root <root@ubuntu-cloudpanel.localhost> 1781305998 +0000	pull origin main: Fast-forward
+015ec3afc0d6100d510f7fac7cf81a3e51c4cf3d 9c47f5a849bdb8facee49591042e3c988d9032be root <root@ubuntu-cloudpanel.localhost> 1781310133 +0000	commit: Add category filter and tags
+9c47f5a849bdb8facee49591042e3c988d9032be 978102a7b234fea50bd168f744d1cf62b1e3f387 root <root@ubuntu-cloudpanel.localhost> 1781310516 +0000	commit: Fix job post category submit and reset
+978102a7b234fea50bd168f744d1cf62b1e3f387 a83a2224bd876d2e1d227fd9dfe218685b9ee490 root <root@ubuntu-cloudpanel.localhost> 1781330723 +0000	commit: Add plain_pass feature, fix date/expired display
+a83a2224bd876d2e1d227fd9dfe218685b9ee490 3e3849dd627b8e173a09576b78f34c07c03fe031 root <root@ubuntu-cloudpanel.localhost> 1781331267 +0000	commit: Add delete post confirmation
+3e3849dd627b8e173a09576b78f34c07c03fe031 8e0bd6fc5435b4573ec0529981f7d89bd0573bf0 root <root@ubuntu-cloudpanel.localhost> 1781337618 +0000	commit: api.php ও index.html আপডেট
+8e0bd6fc5435b4573ec0529981f7d89bd0573bf0 20479f433b642dcad6c65d7d789e90d6f180b669 root <root@ubuntu-cloudpanel.localhost> 1781342586 +0000	pull origin main: Fast-forward
+20479f433b642dcad6c65d7d789e90d6f180b669 929933439af1c50f89ea1b9d7780f06569d4c947 root <root@ubuntu-cloudpanel.localhost> 1781342705 +0000	pull origin main: Fast-forward
+929933439af1c50f89ea1b9d7780f06569d4c947 a89f505141654ac194a284e2a2f5c99606450f1d root <root@ubuntu-cloudpanel.localhost> 1781343177 +0000	pull origin main: Fast-forward
+a89f505141654ac194a284e2a2f5c99606450f1d b28ec41bdb8e1abac1d2af84b5e15bbdddba97de root <root@ubuntu-cloudpanel.localhost> 1781343459 +0000	pull origin main: Fast-forward
+b28ec41bdb8e1abac1d2af84b5e15bbdddba97de 78632a87fd207f04a294b10068df12e10754ac37 root <root@ubuntu-cloudpanel.localhost> 1781343766 +0000	pull origin main: Fast-forward
+78632a87fd207f04a294b10068df12e10754ac37 df52ffe84f1d32f78d508d5838d0ce0951940f4d root <root@ubuntu-cloudpanel.localhost> 1781344481 +0000	reset: moving to origin/main
+df52ffe84f1d32f78d508d5838d0ce0951940f4d ad45cee4c9cebaafac6bf574f063ad86b63d01f2 root <root@ubuntu-cloudpanel.localhost> 1781345314 +0000	reset: moving to origin/main
+ad45cee4c9cebaafac6bf574f063ad86b63d01f2 e896e172db26b34a390a8769e04e1dc62b4d7aa5 root <root@ubuntu-cloudpanel.localhost> 1781358029 +0000	commit: duplicate check on paste, API cleanup
+e896e172db26b34a390a8769e04e1dc62b4d7aa5 66cb08d16e06e02e2a9c8b03ca1df0688bdd7382 root <root@ubuntu-cloudpanel.localhost> 1781358583 +0000	commit: fix API URL for GitHub Pages
+66cb08d16e06e02e2a9c8b03ca1df0688bdd7382 aef56f7860fd7b2b0850a999b0931602fa1d1290 root <root@ubuntu-cloudpanel.localhost> 1781361309 +0000	commit: add filter bar to user dashboard
+aef56f7860fd7b2b0850a999b0931602fa1d1290 d5ef87052f2225dbabbe6f59a758a14e8524a8ea root <root@ubuntu-cloudpanel.localhost> 1781392884 +0000	commit: Fix filter bar duplicate in user dashboard
+d5ef87052f2225dbabbe6f59a758a14e8524a8ea aef56f7860fd7b2b0850a999b0931602fa1d1290 root <root@ubuntu-cloudpanel.localhost> 1781395913 +0000	reset: moving to aef56f7
+aef56f7860fd7b2b0850a999b0931602fa1d1290 681bec0ac6e8b5db1d9ecb747e0e8edcf9454014 root <root@ubuntu-cloudpanel.localhost> 1781397997 +0000	commit: সর্বশেষ পরিবর্তন
+681bec0ac6e8b5db1d9ecb747e0e8edcf9454014 8350f4eaf6ca7418691a73f416a455beb33a7ae8 root <root@ubuntu-cloudpanel.localhost> 1781398230 +0000	reset: moving to origin/main
+8350f4eaf6ca7418691a73f416a455beb33a7ae8 7a4f22c98d525404c7d9c571009fc4f206cb08a9 root <root@ubuntu-cloudpanel.localhost> 1781398645 +0000	reset: moving to origin/main
+7a4f22c98d525404c7d9c571009fc4f206cb08a9 3f5b16e12e429d55a9bb060468d29555fe28e111 root <root@ubuntu-cloudpanel.localhost> 1781398809 +0000	reset: moving to origin/main
+3f5b16e12e429d55a9bb060468d29555fe28e111 9e4d2871027f2722accc62afa22d86377526c569 root <root@ubuntu-cloudpanel.localhost> 1781399130 +0000	reset: moving to origin/main
+9e4d2871027f2722accc62afa22d86377526c569 bc4b197a034259a2001f78661647ec84d0f8227b root <root@ubuntu-cloudpanel.localhost> 1781399762 +0000	reset: moving to origin/main
+bc4b197a034259a2001f78661647ec84d0f8227b 7a9aa3e5167ba0c2c43ce02290d4b957dd86787c root <root@ubuntu-cloudpanel.localhost> 1781399935 +0000	revert: Revert "পেস্ট করলে পোস্ট অটো-ফরম্যাট হবে"
+7a9aa3e5167ba0c2c43ce02290d4b957dd86787c aafb99e7438d45eecef271bcf1b768496f7e0d39 root <root@ubuntu-cloudpanel.localhost> 1781400093 +0000	reset: moving to origin/main
+aafb99e7438d45eecef271bcf1b768496f7e0d39 8415e7dd77937547b13d5490e0328a74db31550f root <root@ubuntu-cloudpanel.localhost> 1781400211 +0000	revert: Revert "অটো-ফরম্যাট যোগ করা হয়েছে"
+8415e7dd77937547b13d5490e0328a74db31550f 6be6bdbbf9a837d7391f307c2143b2283d5db1db root <root@ubuntu-cloudpanel.localhost> 1781400790 +0000	reset: moving to origin/main
+6be6bdbbf9a837d7391f307c2143b2283d5db1db 7b2275ec358763a575f4b7853931680ca10f9adc root <root@ubuntu-cloudpanel.localhost> 1781411046 +0000	commit: Update api.php from server
+7b2275ec358763a575f4b7853931680ca10f9adc 7645aaffb9ac6c993bea8e342b117f08c6fde4c0 root <root@ubuntu-cloudpanel.localhost> 1781411829 +0000	commit: Fix: category bug fixed in submitPost
+7645aaffb9ac6c993bea8e342b117f08c6fde4c0 72d344d85a0ae7b6f4a997a64b24e3f1da6f8109 root <root@ubuntu-cloudpanel.localhost> 1781414209 +0000	commit: Add: live update section with 72h post counts
+72d344d85a0ae7b6f4a997a64b24e3f1da6f8109 6c2f7951af761b90e25291f1da3735b5313d4d25 root <root@ubuntu-cloudpanel.localhost> 1781414970 +0000	commit: Fix: live update mobile friendly + JS fix
+6c2f7951af761b90e25291f1da3735b5313d4d25 6d963cbd936c726b837865b479321ee32afd586f root <root@ubuntu-cloudpanel.localhost> 1781415624 +0000	commit: Fix: live update JS inside script tag
+6d963cbd936c726b837865b479321ee32afd586f 7c63aba35770d61ac8483e496792ead1b0472d6d root <root@ubuntu-cloudpanel.localhost> 1781417891 +0000	reset: moving to origin/main
+7c63aba35770d61ac8483e496792ead1b0472d6d 1f7b337af3d24faa354f260ef97c8cd538b84803 root <root@ubuntu-cloudpanel.localhost> 1781418139 +0000	reset: moving to origin/main
+1f7b337af3d24faa354f260ef97c8cd538b84803 7a04686aa2a9388ae7c3814ef955af41101db749 root <root@ubuntu-cloudpanel.localhost> 1781418614 +0000	reset: moving to origin/main
+7a04686aa2a9388ae7c3814ef955af41101db749 9f7c9a7cb342fe73726863d1aeb351aa5f8c309e root <root@ubuntu-cloudpanel.localhost> 1781418791 +0000	reset: moving to origin/main
+9f7c9a7cb342fe73726863d1aeb351aa5f8c309e 7645aaffb9ac6c993bea8e342b117f08c6fde4c0 root <root@ubuntu-cloudpanel.localhost> 1781418955 +0000	reset: moving to 7645aaf
+7645aaffb9ac6c993bea8e342b117f08c6fde4c0 1decaa3a97bbd5e8c17b39d89ad4cd0dd5f48dfd root <root@ubuntu-cloudpanel.localhost> 1781419096 +0000	reset: moving to origin/main
+1decaa3a97bbd5e8c17b39d89ad4cd0dd5f48dfd 7645aaffb9ac6c993bea8e342b117f08c6fde4c0 root <root@ubuntu-cloudpanel.localhost> 1781419285 +0000	reset: moving to 7645aaf
+7645aaffb9ac6c993bea8e342b117f08c6fde4c0 cfe9e217ff65642889e47983c5946a72a7a9f30c root <root@ubuntu-cloudpanel.localhost> 1781419572 +0000	reset: moving to origin/main
+cfe9e217ff65642889e47983c5946a72a7a9f30c cfd6c5aa86dfbea23415f595e2e2dfd364fcf886 root <root@ubuntu-cloudpanel.localhost> 1781420045 +0000	reset: moving to origin/main
+cfd6c5aa86dfbea23415f595e2e2dfd364fcf886 2dc483da3dfa9218ddbc8fc29d9f674e52285922 root <root@ubuntu-cloudpanel.localhost> 1781420464 +0000	reset: moving to origin/main
+2dc483da3dfa9218ddbc8fc29d9f674e52285922 e5b7040432ad64b1bc90099a2a50ae1323554a1c root <root@ubuntu-cloudpanel.localhost> 1781437261 +0000	reset: moving to origin/main
+e5b7040432ad64b1bc90099a2a50ae1323554a1c b22f55cfa21e8fcfe7c5c5b58c589cd1a741f005 root <root@ubuntu-cloudpanel.localhost> 1781437548 +0000	reset: moving to origin/main
+b22f55cfa21e8fcfe7c5c5b58c589cd1a741f005 e5b7040432ad64b1bc90099a2a50ae1323554a1c root <root@ubuntu-cloudpanel.localhost> 1781437652 +0000	reset: moving to e5b7040
+e5b7040432ad64b1bc90099a2a50ae1323554a1c 2699592b9a02d4750b6120ababb321b43d65f720 root <root@ubuntu-cloudpanel.localhost> 1781437819 +0000	reset: moving to origin/main
+2699592b9a02d4750b6120ababb321b43d65f720 cfe9e217ff65642889e47983c5946a72a7a9f30c root <root@ubuntu-cloudpanel.localhost> 1781438896 +0000	reset: moving to cfe9e21
+cfe9e217ff65642889e47983c5946a72a7a9f30c 2699592b9a02d4750b6120ababb321b43d65f720 root <root@ubuntu-cloudpanel.localhost> 1781443803 +0000	pull origin main: Fast-forward
+2699592b9a02d4750b6120ababb321b43d65f720 57c16341d79a4f6add2d13fef43b8e717d53fd43 root <root@ubuntu-cloudpanel.localhost> 1781445295 +0000	revert: Revert "অ্যাডমিন ফর্ম আপডেট - Dropdown ও নতুন ডিজাইন"
+57c16341d79a4f6add2d13fef43b8e717d53fd43 2d3dc186bdd70acd6d87cf0365053f26e00b6c48 root <root@ubuntu-cloudpanel.localhost> 1781450834 +0000	commit: ডিলিট confirmation dialog যোগ
+2d3dc186bdd70acd6d87cf0365053f26e00b6c48 6353df290c359c640819699f21fcbeb22c964eb6 root <root@ubuntu-cloudpanel.localhost> 1781452313 +0000	commit: ডিলিট dialog button fix
+6353df290c359c640819699f21fcbeb22c964eb6 c11abf1ab5a1a7bf8e733d71d65924994943ef86 root <root@ubuntu-cloudpanel.localhost> 1781453338 +0000	commit: রেজিস্ট্রেশন ৩ মিনিট মেয়াদ সেট
+c11abf1ab5a1a7bf8e733d71d65924994943ef86 73ee2e679db4911d2702ff1121f02f5258206a33 root <root@ubuntu-cloudpanel.localhost> 1781480017 +0000	commit: রেজিস্ট্রেশন আপডেট: পাসওয়ার্ড ছাড়া, ২০ দিন মেয়াদ
+73ee2e679db4911d2702ff1121f02f5258206a33 57dc7cc2a9a83b523f9057d6182b17ff883a598f root <root@ubuntu-cloudpanel.localhost> 1781480161 +0000	commit: কপি প্রোটেকশন যোগ
+57dc7cc2a9a83b523f9057d6182b17ff883a598f e5b7040432ad64b1bc90099a2a50ae1323554a1c root <root@ubuntu-cloudpanel.localhost> 1781482932 +0000	reset: moving to e5b7040
+e5b7040432ad64b1bc90099a2a50ae1323554a1c 6dfcee5ddec2c9341a084405bb088ab3a9a2c31f root <root@ubuntu-cloudpanel.localhost> 1781484086 +0000	reset: moving to origin/main
+6dfcee5ddec2c9341a084405bb088ab3a9a2c31f b5d33053cd0fbe45aeb751b1f949eb2926baa2d3 root <root@ubuntu-cloudpanel.localhost> 1781484334 +0000	reset: moving to origin/main
+b5d33053cd0fbe45aeb751b1f949eb2926baa2d3 a7e42f768b817219e2dc03965b757a5dd84f12a1 root <root@ubuntu-cloudpanel.localhost> 1781484729 +0000	reset: moving to origin/main
+a7e42f768b817219e2dc03965b757a5dd84f12a1 ad950892bc34d4c4358c6265a57a2921024316fd root <root@ubuntu-cloudpanel.localhost> 1781485242 +0000	reset: moving to origin/main
+ad950892bc34d4c4358c6265a57a2921024316fd 1a485177b129d7b9413007240a705e675b17b260 root <root@ubuntu-cloudpanel.localhost> 1781486147 +0000	reset: moving to origin/main
+1a485177b129d7b9413007240a705e675b17b260 fa9bfc7a0699027dfd1d23397b13a459609293b5 root <root@ubuntu-cloudpanel.localhost> 1781501803 +0000	pull: Fast-forward
+fa9bfc7a0699027dfd1d23397b13a459609293b5 e4f7c58cb8e05e57fc6e3b32afae8a5a5d2acd67 root <root@ubuntu-cloudpanel.localhost> 1781517352 +0000	reset: moving to origin/main
+e4f7c58cb8e05e57fc6e3b32afae8a5a5d2acd67 77f87db669f6f846db1177a0a866d8130e183693 root <root@ubuntu-cloudpanel.localhost> 1781518523 +0000	reset: moving to origin/main
+77f87db669f6f846db1177a0a866d8130e183693 1a485177b129d7b9413007240a705e675b17b260 root <root@ubuntu-cloudpanel.localhost> 1781518659 +0000	reset: moving to 1a48517
+1a485177b129d7b9413007240a705e675b17b260 b55a62f2b69f66c7abcc08666dcae11c46595e2a root <root@ubuntu-cloudpanel.localhost> 1781518936 +0000	reset: moving to origin/main
+b55a62f2b69f66c7abcc08666dcae11c46595e2a 7feddc2f2c0364693730076c67c85069b4fbe389 root <root@ubuntu-cloudpanel.localhost> 1781519292 +0000	reset: moving to origin/main
+7feddc2f2c0364693730076c67c85069b4fbe389 aa42bf9c47dd9b69de625812a13f2318ab9881e0 root <root@ubuntu-cloudpanel.localhost> 1781519737 +0000	reset: moving to origin/main
+aa42bf9c47dd9b69de625812a13f2318ab9881e0 28429c97fc705cb8b5619d713357e8da4f3e5d61 root <root@ubuntu-cloudpanel.localhost> 1781520833 +0000	reset: moving to origin/main
+28429c97fc705cb8b5619d713357e8da4f3e5d61 d7ed12c6b2bdc78fe7acdc8a3796f14fe647e81a root <root@ubuntu-cloudpanel.localhost> 1781546733 +0000	commit: Add copy protection - admin only can copy
+d7ed12c6b2bdc78fe7acdc8a3796f14fe647e81a 5b6fe8c733fb53f24a53390b1b3b3174f0057227 root <root@ubuntu-cloudpanel.localhost> 1781571444 +0000	commit: Registration without password - notify user to contact admin
+5b6fe8c733fb53f24a53390b1b3b3174f0057227 467e442de9953d40b8a5783783278a091f693abc root <root@ubuntu-cloudpanel.localhost> 1781576042 +0000	commit: Fix: category filter API call + mosque name fix
+467e442de9953d40b8a5783783278a091f693abc 72de9f57a550565c4962130377e75e059d7fc1a5 root <root@ubuntu-cloudpanel.localhost> 1781579750 +0000	reset: moving to origin/main
+72de9f57a550565c4962130377e75e059d7fc1a5 5cc25e9b0c9d9c63462450a384f236619caddf2c root <root@ubuntu-cloudpanel.localhost> 1781580063 +0000	reset: moving to origin/main
+5cc25e9b0c9d9c63462450a384f236619caddf2c 7d78adf9f1db139a0405419d3c8f1e7d1af7ca1a root <root@ubuntu-cloudpanel.localhost> 1781580400 +0000	commit: সকল আপডেট সম্পন্ন
+7d78adf9f1db139a0405419d3c8f1e7d1af7ca1a beb039f6ce2d09838bef270b7050ef1bebf739c7 root <root@ubuntu-cloudpanel.localhost> 1781580461 +0000	commit: অপ্রয়োজনীয় ফাইল মুছে দেওয়া হয়েছে
+beb039f6ce2d09838bef270b7050ef1bebf739c7 85c6a8b938d4a043991976b220ba0f741e697784 root <root@ubuntu-cloudpanel.localhost> 1781580812 +0000	reset: moving to origin/main
+85c6a8b938d4a043991976b220ba0f741e697784 f9ca7b848a9b46337b9dbdc2e7323f2157e5a941 root <root@ubuntu-cloudpanel.localhost> 1781582124 +0000	reset: moving to origin/main
+f9ca7b848a9b46337b9dbdc2e7323f2157e5a941 1d3acf1c005ec096892cb3947b45c4cb33d5ee5f root <root@ubuntu-cloudpanel.localhost> 1781582207 +0000	reset: moving to origin/main
+1d3acf1c005ec096892cb3947b45c4cb33d5ee5f e3fe6e2a2995bd4d439e00439bd4716258ce211d root <root@ubuntu-cloudpanel.localhost> 1781582639 +0000	reset: moving to origin/main
+e3fe6e2a2995bd4d439e00439bd4716258ce211d cf9db4a413c008733765658323b936bc81c05e09 root <root@ubuntu-cloudpanel.localhost> 1781606885 +0000	commit: fix: category+time filter sync - API call on filter, status=active in counts
+cf9db4a413c008733765658323b936bc81c05e09 dd49386d54b276a5a0edc65e0b4306d90859177d root <root@ubuntu-cloudpanel.localhost> 1781612406 +0000	commit: fix: user dashboard category+time filter via applyFilterUD
+dd49386d54b276a5a0edc65e0b4306d90859177d 7989adab07ec6d7c447fe4ab9283924a80807c1f root <root@ubuntu-cloudpanel.localhost> 1781612679 +0000	commit: fix: category badge in user dashboard filter
+7989adab07ec6d7c447fe4ab9283924a80807c1f 7a531280f473bba34bbbb3916edcbdf3ddda0ed9 root <root@ubuntu-cloudpanel.localhost> 1781649394 +0000	commit: redesign: hero section premium Islamic style
+7a531280f473bba34bbbb3916edcbdf3ddda0ed9 7ca4cc9f9629bc1db6b26d4b91631aa66e94559c root <root@ubuntu-cloudpanel.localhost> 1781651586 +0000	commit: fix: hero section - remove stats, subtitle, one line title
+7ca4cc9f9629bc1db6b26d4b91631aa66e94559c 407c2a32724e3533007e2363ceadf406bd2c253a root <root@ubuntu-cloudpanel.localhost> 1781652190 +0000	commit: redesign: hero title white box, remove bismillah
+407c2a32724e3533007e2363ceadf406bd2c253a fc436dd5f4b6818bd9cc4d4572ba24ea74c2841e root <root@ubuntu-cloudpanel.localhost> 1781653083 +0000	commit: fix: hero title style, reduce padding, cat-grid 2/3 visible
+fc436dd5f4b6818bd9cc4d4572ba24ea74c2841e 143a4f0da9e8d1a82ab15602e516f330ecc6600e root <root@ubuntu-cloudpanel.localhost> 1781653661 +0000	commit: redesign: hero+live-update white theme, navy text
+143a4f0da9e8d1a82ab15602e516f330ecc6600e 83a2ad437db591f9ff75b9fb41e6e5a511893911 root <root@ubuntu-cloudpanel.localhost> 1781654260 +0000	commit: fix: hero white bg, clear navy text colors
+83a2ad437db591f9ff75b9fb41e6e5a511893911 6c922993e505c91c69ef3155447f70d65d651d2a root <root@ubuntu-cloudpanel.localhost> 1781654575 +0000	commit: fix: hero title green, badge green style
+6c922993e505c91c69ef3155447f70d65d651d2a 7fabf3a20629f6920ae35008831f4393ba474e67 root <root@ubuntu-cloudpanel.localhost> 1781654972 +0000	commit: fix: hero-badge CSS override removed, news-hero scoped
+7fabf3a20629f6920ae35008831f4393ba474e67 a6115b79a927f0222da346aebab28c197f925025 root <root@ubuntu-cloudpanel.localhost> 1781655294 +0000	commit: fix: hero h1 color green, was white on white bg
+a6115b79a927f0222da346aebab28c197f925025 2184395be133012193d871f607c2c654aba53a48 root <root@ubuntu-cloudpanel.localhost> 1781655507 +0000	commit: style: hero h1 professional font, underline accent
+2184395be133012193d871f607c2c654aba53a48 cb304770de09bc2a7e9c8ed2b16fae1cf2b9c094 root <root@ubuntu-cloudpanel.localhost> 1781656457 +0000	commit: fix: checklist items single line
+cb304770de09bc2a7e9c8ed2b16fae1cf2b9c094 3e78e5dca07b397825e7dae5efe6a0e6491cddc0 root <root@ubuntu-cloudpanel.localhost> 1781676584 +0000	commit: feat: add উদ্দেশ্য section to homepage, remove heart/calendar emojis
+3e78e5dca07b397825e7dae5efe6a0e6491cddc0 9289732dff696c4695ad5a6e052213191202378b root <root@ubuntu-cloudpanel.localhost> 1781677330 +0000	commit: fix: add standalone CSS for homepage card/diamond-list section (was scoped to .sh only)
+9289732dff696c4695ad5a6e052213191202378b ed3d4678d4a79bd3f6e6e61ac697e2d2c3551b49 root <root@ubuntu-cloudpanel.localhost> 1781679235 +0000	commit: fix: favicon cache busting via new filename
+ed3d4678d4a79bd3f6e6e61ac697e2d2c3551b49 cb4ba6314721a175ddb27c199b3a52b1d5de85d5 root <root@ubuntu-cloudpanel.localhost> 1781739607 +0000	commit: feat: SEO improvements - individual post pages, dynamic sitemap, readable slugs
+cb4ba6314721a175ddb27c199b3a52b1d5de85d5 5914dc4071e4c14710238551770d8b85a92fa588 root <root@ubuntu-cloudpanel.localhost> 1781742824 +0000	commit: redesign: hero section premium card with geometric pattern and gradient accent
+5914dc4071e4c14710238551770d8b85a92fa588 73dc849f37cae26c74da93e6661ecb289c5721bd root <root@ubuntu-cloudpanel.localhost> 1781743473 +0000	commit: fix: remove fade overlay on category numbers, show clearly
+73dc849f37cae26c74da93e6661ecb289c5721bd de41804a9a3b42f555dcc6e3888c13d841099fc8 root <root@ubuntu-cloudpanel.localhost> 1781761508 +0000	commit: feat: copy protection for visitors, admin can still copy/select text
+de41804a9a3b42f555dcc6e3888c13d841099fc8 1ca1a812fdb03d891f7c0da5884d59a839f36c13 root <root@ubuntu-cloudpanel.localhost> 1781832433 +0000	commit: Add Google Site Name SEO for খেদমত সেন্টার
+1ca1a812fdb03d891f7c0da5884d59a839f36c13 4590f5e32d76e9e73a10d3b043c05cb6095ebafe root <root@ubuntu-cloudpanel.localhost> 1781833316 +0000	commit: Category filter fix - cats JSON field check
+4590f5e32d76e9e73a10d3b043c05cb6095ebafe 19933d2d310482a4567835e52b541795ae1646db root <root@ubuntu-cloudpanel.localhost> 1781870320 +0000	commit: feat: pagination 10+20, category filter fix, copy protection, admin pagination
+19933d2d310482a4567835e52b541795ae1646db db6f1e3fc6773119a5fddcc54a9dfc41d9488d19 root <root@ubuntu-cloudpanel.localhost> 1781912891 +0000	commit: Add Visitor Analytics - Admin Dashboard with stats and tracking
+db6f1e3fc6773119a5fddcc54a9dfc41d9488d19 152cf8bf39387282910ea2427a3d560095e97273 root <root@ubuntu-cloudpanel.localhost> 1781913703 +0000	commit: Fix visitor stats auth - use token instead of session
+152cf8bf39387282910ea2427a3d560095e97273 4ee2dea0f6b7a4cd59882ee75797a0fb47cfd0f8 root <root@ubuntu-cloudpanel.localhost> 1781914083 +0000	commit: Visitor Analytics System Complete
+4ee2dea0f6b7a4cd59882ee75797a0fb47cfd0f8 15e8bd435d97f0a4b059df809c89760741237363 root <root@ubuntu-cloudpanel.localhost> 1781915335 +0000	commit: Add Real-time Duplicate Check
+15e8bd435d97f0a4b059df809c89760741237363 f6f0783681ce0696fb7d3572f18a5f1a2cd5a819 root <root@ubuntu-cloudpanel.localhost> 1781917145 +0000	revert: Revert "Add Real-time Duplicate Check"
+f6f0783681ce0696fb7d3572f18a5f1a2cd5a819 0de68a7bb5cd0a1655b22becc0817ea165eaff77 root <root@ubuntu-cloudpanel.localhost> 1781918656 +0000	commit: feat: user dashboard pagination with load more button
+0de68a7bb5cd0a1655b22becc0817ea165eaff77 d17189360430c31a61f82f81516227ce0d029125 root <root@ubuntu-cloudpanel.localhost> 1781935269 +0000	pull origin main: Fast-forward
+d17189360430c31a61f82f81516227ce0d029125 6ff78ce8255f4ca7cd1435f5439ebf80d2d46565 root <root@ubuntu-cloudpanel.localhost> 1781935429 +0000	commit: update favicon
+6ff78ce8255f4ca7cd1435f5439ebf80d2d46565 aefbfcddd8e0b47f30261249ff9d67533f574702 root <root@ubuntu-cloudpanel.localhost> 1781936070 +0000	commit: green to blue
+aefbfcddd8e0b47f30261249ff9d67533f574702 74e956661c1ce37d927ac7c7ace673bd79a7606e root <root@ubuntu-cloudpanel.localhost> 1781936411 +0000	commit: green to blue hero
+74e956661c1ce37d927ac7c7ace673bd79a7606e f5e5dee730572d6f78f1a721c602b05d5a3f8ba2 root <root@ubuntu-cloudpanel.localhost> 1781936684 +0000	commit: logo in login page
+f5e5dee730572d6f78f1a721c602b05d5a3f8ba2 1cd0ef011807c22b2e5e383830d3ef41e42dbf11 root <root@ubuntu-cloudpanel.localhost> 1781937227 +0000	pull origin main: Fast-forward
+1cd0ef011807c22b2e5e383830d3ef41e42dbf11 3b4ff2611f462545696ee05f50488856bb33c880 root <root@ubuntu-cloudpanel.localhost> 1781937227 +0000	commit: update logo
+3b4ff2611f462545696ee05f50488856bb33c880 07c4bd8d2a2b210e111e3e50b490b2fb3017e807 root <root@ubuntu-cloudpanel.localhost> 1781937460 +0000	commit: white logo bg
+07c4bd8d2a2b210e111e3e50b490b2fb3017e807 66b4341c495b9bf5816c10abf087e73f58dc5895 root <root@ubuntu-cloudpanel.localhost> 1781937978 +0000	pull origin main: Fast-forward
+66b4341c495b9bf5816c10abf087e73f58dc5895 dd1de076b9f1dd7777dbe85935cf6388a44013b0 root <root@ubuntu-cloudpanel.localhost> 1781938133 +0000	commit: admin photo added
+dd1de076b9f1dd7777dbe85935cf6388a44013b0 f2eee32daee441796d77538a17bd4481d1147d21 root <root@ubuntu-cloudpanel.localhost> 1781938891 +0000	commit: fix user date fields
+f2eee32daee441796d77538a17bd4481d1147d21 13864866f96a183fade07a5213a8b57dfd4d479e root <root@ubuntu-cloudpanel.localhost> 1781939308 +0000	commit: fix expiry date
+13864866f96a183fade07a5213a8b57dfd4d479e c3094066bad9ddf362a29ad69feb78b6fec82993 root <root@ubuntu-cloudpanel.localhost> 1781939558 +0000	commit: name mobile separate rows
+c3094066bad9ddf362a29ad69feb78b6fec82993 abf7fef31ad46df0ef6ea13af80fa7a0ade577fa root <root@ubuntu-cloudpanel.localhost> 1781940167 +0000	commit: fix profile card layout
+abf7fef31ad46df0ef6ea13af80fa7a0ade577fa d798e319023bb4a7b2fcdf7a12c9854b8d92ca8f root <root@ubuntu-cloudpanel.localhost> 1781941680 +0000	commit: remove calendar emoji
+d798e319023bb4a7b2fcdf7a12c9854b8d92ca8f 603b11156406ea06ac694a71590ea56339d0cb11 root <root@ubuntu-cloudpanel.localhost> 1781943782 +0000	commit: add emoji to created date
+603b11156406ea06ac694a71590ea56339d0cb11 a861e118cb088ad5278beb288655dae719c54951 root <root@ubuntu-cloudpanel.localhost> 1781957270 +0000	commit: favicon to logo.png
+a861e118cb088ad5278beb288655dae719c54951 2560bc18708f4fe6b6b72b49d93d5477aff40d8b root <root@ubuntu-cloudpanel.localhost> 1781958724 +0000	commit: user filter tabs
+2560bc18708f4fe6b6b72b49d93d5477aff40d8b e4cc52ff79609ad53280da8faf4948f0943c38f2 root <root@ubuntu-cloudpanel.localhost> 1781958785 +0000	pull origin main --rebase (finish): refs/heads/main onto 214d80178bae6258f8a9fb950526749cdb40f43b
+e4cc52ff79609ad53280da8faf4948f0943c38f2 3fce86baf1c435833815938d111593987d21136a root <root@ubuntu-cloudpanel.localhost> 1781963283 +0000	commit: fix user tab buttons
+3fce86baf1c435833815938d111593987d21136a 5bf12b06352de5e3a2ef76236ee01cb891504bc9 root <root@ubuntu-cloudpanel.localhost> 1781963331 +0000	pull origin main --rebase (finish): refs/heads/main onto c461d1f13ecbd2a2d96cb7cec77d468ba895f0b4
+5bf12b06352de5e3a2ef76236ee01cb891504bc9 8d50cafb0bf12fece4e997fc2d2d7662db2d119f root <root@ubuntu-cloudpanel.localhost> 1781964872 +0000	commit: fix returning visitor count
+8d50cafb0bf12fece4e997fc2d2d7662db2d119f 5178d252a837e58eba134bccf89b9ebdbc0d192a root <root@ubuntu-cloudpanel.localhost> 1781964946 +0000	pull origin main --rebase (finish): refs/heads/main onto 3076569c54d6f7d1fa362e6b9854549a3e087186
+5178d252a837e58eba134bccf89b9ebdbc0d192a 0d206dad3bfa331cc6e77034c7f8e9c44ad823f1 root <root@ubuntu-cloudpanel.localhost> 1782026120 +0000	commit: infinite scroll
+0d206dad3bfa331cc6e77034c7f8e9c44ad823f1 a223b0bf91a561cb47e510eef99129b907b8eb20 root <root@ubuntu-cloudpanel.localhost> 1782049440 +0000	commit: user dashboard infinite scroll
+a223b0bf91a561cb47e510eef99129b907b8eb20 1c472c75e55344c66bad13fa509e256a3e733673 root <root@ubuntu-cloudpanel.localhost> 1782050508 +0000	commit: remove load more buttons
+1c472c75e55344c66bad13fa509e256a3e733673 9a054a910a4ec052440d54d32da6ed68bc06872c root <root@ubuntu-cloudpanel.localhost> 1782084212 +0000	commit: infinite scroll news and filter
+9a054a910a4ec052440d54d32da6ed68bc06872c 164e37296c9ecdc7cfcb9951508159ad915cc8f4 root <root@ubuntu-cloudpanel.localhost> 1782084249 +0000	pull origin main --rebase (finish): refs/heads/main onto 13e0e2c4ec2ffd6cbc4c07fc8c9f46be51b156b2
+164e37296c9ecdc7cfcb9951508159ad915cc8f4 64cb8e99b598ab7b897a9cd4a1b21af7a31d934e root <root@ubuntu-cloudpanel.localhost> 1782087985 +0000	commit: Add Infinite Scroll to User Dashboard - remove udLoadMorePosts button
+64cb8e99b598ab7b897a9cd4a1b21af7a31d934e 19477a35e4a80653c6b5c1592f98b9362f660dc5 root <root@ubuntu-cloudpanel.localhost> 1782088865 +0000	commit: Add Infinite Scroll to all User Dashboard filters (24h, 48h, 72h, categories)
+19477a35e4a80653c6b5c1592f98b9362f660dc5 da300015077a1e1c111e44f713af1db081c60ac7 root <root@ubuntu-cloudpanel.localhost> 1782091014 +0000	commit: Add Infinite Scroll to Admin Dashboard posts

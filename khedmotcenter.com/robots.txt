@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api.php
+Disallow: /patch_*
+
+Sitemap: https://khedmotcenter.com/sitemap.xml
