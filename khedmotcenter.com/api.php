@@ -301,10 +301,6 @@ if ($action === 'get_filter_counts') {
     $cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
     foreach ($hours as $h) {
         $since = (time() - $h * 3600) * 1000;
-        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE status='active' AND created>=?");
-        $stmt->bind_param('s', $since);
-        $stmt->execute();
-        $result[$h] = (int)$stmt->get_result()->fetch_assoc()['cnt'];
         // ক্যাটাগরি অনুযায়ী কাউন্ট
         foreach ($cats as $cat) {
             $stmt2 = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE status='active' AND created>=? AND (category=? OR cats LIKE ?)");
@@ -313,6 +309,8 @@ if ($action === 'get_filter_counts') {
             $stmt2->execute();
             $result['cat'][$h][$cat] = (int)$stmt2->get_result()->fetch_assoc()['cnt'];
         }
+        // মোট = তিন ক্যাটাগরির যোগফল
+        $result[$h] = ($result['cat'][$h]['mosque-jobs'] ?? 0) + ($result['cat'][$h]['male-madrasa-jobs'] ?? 0) + ($result['cat'][$h]['female-madrasa-jobs'] ?? 0);
     }
     echo json_encode(['success' => true, 'counts' => $result]);
     exit();
