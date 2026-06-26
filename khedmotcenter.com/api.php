@@ -247,7 +247,17 @@ if ($action === 'get_public_news') {
     $params = [];
     $types  = '';
     if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
-    if ($hours > 0) { $since = (time() - ($hours * 3600)) * 1000; $where .= " AND created >= ?"; $params[] = $since; $types .= 'i'; }
+    if ($hours > 0) {
+        // রাত ২টা থেকে হিসাব করি
+        $now = time();
+        $today2am = mktime(2, 0, 0, date('n',$now), date('j',$now), date('Y',$now));
+        if ($now < $today2am) $today2am -= 86400; // আজ রাত ২টা না হলে গতকালের রাত ২টা
+        $since = ($today2am - (($hours/24) * 86400 - 86400)) * 1000;
+        // সহজ: আজকের রাত ২টার পর থেকে দেখাও, hours অনুযায়ী দিন পিছাও
+        $days = ceil($hours / 24);
+        $since = ($today2am - ($days - 1) * 86400) * 1000;
+        $where .= " AND created >= ?"; $params[] = $since; $types .= 'i';
+    }
     $params[] = $limit;
     $params[] = $offset;
     $types   .= 'ii';
@@ -278,7 +288,17 @@ if ($action === 'get_user_dashboard') {
     $params = [];
     $types  = '';
     if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
-    if ($hours > 0) { $since = (time() - ($hours * 3600)) * 1000; $where .= " AND created >= ?"; $params[] = $since; $types .= 'i'; }
+    if ($hours > 0) {
+        // রাত ২টা থেকে হিসাব করি
+        $now = time();
+        $today2am = mktime(2, 0, 0, date('n',$now), date('j',$now), date('Y',$now));
+        if ($now < $today2am) $today2am -= 86400; // আজ রাত ২টা না হলে গতকালের রাত ২টা
+        $since = ($today2am - (($hours/24) * 86400 - 86400)) * 1000;
+        // সহজ: আজকের রাত ২টার পর থেকে দেখাও, hours অনুযায়ী দিন পিছাও
+        $days = ceil($hours / 24);
+        $since = ($today2am - ($days - 1) * 86400) * 1000;
+        $where .= " AND created >= ?"; $params[] = $since; $types .= 'i';
+    }
     $limit2 = intval($body['limit'] ?? 10);
     $offset2 = intval($body['offset'] ?? 0);
     $params[] = $limit2;
