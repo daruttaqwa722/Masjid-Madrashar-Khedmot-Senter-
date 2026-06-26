@@ -2104,6 +2104,12 @@ async function submitJobPost() {
   btnTxt.innerHTML = 'নিয়োগ বিজ্ঞপ্তি জমা দিন';
 }
 
+let admSearchTimer = null;
+function admSearchUsers() {
+  clearTimeout(admSearchTimer);
+  admSearchTimer = setTimeout(admLoadUsers, 400);
+}
+
 async function admLoadUsers() {
   const search = document.getElementById('searchInput')?.value?.trim() || '';
   const res = await api('admin_get_users', search ? {search} : {});
