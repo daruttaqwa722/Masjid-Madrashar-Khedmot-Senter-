@@ -1074,6 +1074,7 @@
       <button class="tab-btn active" onclick="admSwitchTab('posts')">📰 পোস্ট ম্যানেজমেন্ট</button>
       <button class="tab-btn" onclick="admSwitchTab('users')">👥 ইউজার ম্যানেজমেন্ট</button>
       <button class="tab-btn" onclick="admSwitchTab('visitors')">📊 ভিজিটর এনালাইসিস</button>
+      <button class="tab-btn" onclick="admSwitchTab('hourlystats')">⏱️ ঘণ্টাওয়ারি পোস্ট</button>
     </div>
   </div>
   <div class="adm-main">
@@ -1148,6 +1149,12 @@
         <div class="adm-card-body"><div id="usersContainer"><div class="adm-empty">লোড হচ্ছে…</div></div></div>
     </div>
       </div>
+    <div class="tab-panel" id="tabHourlystats" style="display:none;">
+      <div class="adm-card">
+        <div class="adm-card-header"><div class="adm-card-header-icon">⏱️</div><div class="adm-card-header-title">ঘণ্টাওয়ারি পোস্ট বিশ্লেষণ (গত ২৪ ঘন্টা)</div></div>
+        <div class="adm-card-body" id="hourlyStatsContainer"><div class="adm-empty">লোড হচ্ছে…</div></div>
+      </div>
+    </div>
     <div class="tab-panel" id="tabVisitors">
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">📊</div><div class="adm-card-header-title">ভিজিটর স্ট্যাটস</div></div>
@@ -1783,12 +1790,35 @@ function admShowAlert(id, msg, type='error') {
   setTimeout(()=>el.classList.remove('show'), 4000);
 }
 function admSwitchTab(tab) {
-  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')||(i===2&&tab==='visitors')));
+  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')||(i===2&&tab==='visitors')||(i===3&&tab==='hourlystats')));
   document.getElementById('tabPosts').classList.toggle('active', tab==='posts');
   document.getElementById('tabUsers').classList.toggle('active', tab==='users');
   document.getElementById('tabVisitors').classList.toggle('active', tab==='visitors');
+  const tabHourly = document.getElementById('tabHourlystats');
+  if (tabHourly) { tabHourly.style.display = tab==='hourlystats' ? 'block' : 'none'; }
   if (tab==='users') admLoadUsers();
   if (tab==='visitors') loadVisitorStats();
+  if (tab==='hourlystats') loadHourlyStats();
+}
+
+async function loadHourlyStats() {
+  const cont = document.getElementById('hourlyStatsContainer');
+  const res = await api('get_hourly_stats', {token: 'admin_session'});
+  if (!res.success) { cont.innerHTML = '<div class="adm-empty">লোড হয়নি।</div>'; return; }
+  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  let html = '<div style="display:flex;flex-direction:column;gap:0.5rem;">';
+  res.stats.forEach(s => {
+    const w = Math.min(100, s.count * 5);
+    html += `<div style="display:flex;align-items:center;gap:10px;">
+      <div style="min-width:70px;font-size:0.82rem;color:#05057D;font-weight:600;">${toBn(s.hour)} ঘন্টা আগে</div>
+      <div style="flex:1;background:#f0f4ff;border-radius:8px;height:28px;position:relative;">
+        <div style="width:${w}%;background:#05057D;height:100%;border-radius:8px;"></div>
+      </div>
+      <div style="min-width:30px;font-size:0.88rem;font-weight:700;color:#05057D;">${toBn(s.count)}</div>
+    </div>`;
+  });
+  html += '</div>';
+  cont.innerHTML = html;
 }
 
 async function loadVisitorStats() {

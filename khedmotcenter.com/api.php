@@ -636,6 +636,23 @@ switch ($r) {
         break;
 }
 
+if ($action === 'get_hourly_stats') {
+    $token = $body['token'] ?? '';
+    if ($token !== 'admin_session') { echo json_encode(['success'=>false]); exit(); }
+    $result = [];
+    for ($h = 1; $h <= 24; $h++) {
+        $from = (time() - $h * 3600) * 1000;
+        $to   = (time() - ($h-1) * 3600) * 1000;
+        $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE created >= ? AND created < ?");
+        $stmt->bind_param('ii', $from, $to);
+        $stmt->execute();
+        $cnt = (int)$stmt->get_result()->fetch_assoc()['cnt'];
+        $result[] = ['hour' => $h, 'count' => $cnt];
+    }
+    echo json_encode(['success' => true, 'stats' => $result]);
+    exit();
+}
+
 // CHECK DUPLICATE
 if ($action === "check_duplicate") {
     $text = trim($body["content"] ?? "");
