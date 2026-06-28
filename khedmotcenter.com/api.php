@@ -370,19 +370,23 @@ if ($action === 'admin_get_posts') {
     $limit  = intval($body['limit'] ?? 10);
     $offset = intval($body['offset'] ?? 0);
     $cat    = $body['category'] ?? '';
+    $hours  = intval($body['hours'] ?? 0);
     $where  = "WHERE status='active'";
-    if ($cat) { $where = "WHERE status='active' AND (category='$cat' OR cats LIKE '%$cat%')"; }
-    $total_stmt = $db->query("SELECT COUNT(*) as cnt FROM posts");
+    $extra  = '';
+    if ($cat) { $where .= " AND (category='$cat' OR cats LIKE '%$cat%')"; }
+    if ($hours > 0) { $since = (time() - $hours * 3600) * 1000; $where .= " AND created >= $since"; }
+    if ($cat || $hours > 0) { $limit = 99999; $offset = 0; }
+    $total_stmt = $db->query("SELECT COUNT(*) as cnt FROM posts $where");
     $total = (int)$total_stmt->fetch_assoc()['cnt'];
-    $stmt = $db->prepare("SELECT * FROM posts ORDER BY created DESC LIMIT ? OFFSET ?");
+    $stmt = $db->prepare("SELECT * FROM posts $where ORDER BY created DESC LIMIT ? OFFSET ?");
     $stmt->bind_param('ii', $limit, $offset);
     $stmt->execute();
     $rows  = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $posts = array_map(fn($r) => formatPost($r, false), $rows);
     echo json_encode(['success' => true, 'posts' => $posts, 'total' => $total]);
     exit();
+    exit();
 }
-
 // ADMIN — CREATE POST
 if ($action === 'admin_create_post') {
     $id       = uniqid('p_', true);
