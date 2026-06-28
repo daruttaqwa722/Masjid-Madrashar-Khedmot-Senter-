@@ -180,12 +180,14 @@
   /* ── BUTTON GRID ── */
   .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 1rem 0.5rem; }
   .service-btn {
-    background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-md);
+    background: var(--card-bg); border: 1.5px solid rgba(5,5,125,0.2); border-radius: var(--radius-md);
     padding: 1.1rem 0.8rem 0.9rem; text-align: center; cursor: pointer;
-    box-shadow: var(--shadow-md); transition: transform 0.2s cubic-bezier(.22,.68,0,1.4), box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(5,5,125,0.1); transition: transform 0.2s cubic-bezier(.22,.68,0,1.4), box-shadow 0.2s;
     display: flex; flex-direction: column; align-items: center; justify-content: space-between;
     min-height: 148px; position: relative; overflow: hidden; text-decoration: none;
+    animation: btnGlow 2s ease-in-out infinite;
   }
+  @keyframes btnGlow { 0%,100% { box-shadow: 0 4px 15px rgba(5,5,125,0.1); } 50% { box-shadow: 0 4px 20px rgba(5,5,125,0.25); } }
   .service-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy)); opacity: 0; transition: opacity 0.2s; }
   .service-btn:hover { transform: translateY(-4px) scale(1.015); box-shadow: var(--shadow-lg); border-color: rgba(5,5,125,0.22); }
   .service-btn:hover::before { opacity: 1; }
@@ -193,7 +195,8 @@
   .btn-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 0.55rem; flex-shrink: 0; }
   .btn-icon svg { width: 18px; height: 18px; fill: var(--gold); }
   .btn-main { font-size: 0.83rem; font-weight: 700; color: var(--navy); line-height: 1.6; flex: 1; display: flex; align-items: center; justify-content: center; }
-  .btn-sub { font-size: 0.7rem; color: var(--text-sub); background: rgba(5,5,125,0.05); border-radius: 8px; padding: 3px 8px; margin-top: 8px; width: 100%; font-weight: 500; }
+  .btn-sub { font-size: 0.7rem; color: #05057D; background: rgba(5,5,125,0.08); border-radius: 8px; padding: 4px 8px; margin-top: 8px; width: 100%; font-weight: 700; border: 1px solid rgba(5,5,125,0.15); }
+  .btn-sub::after { content: " →"; }
 
   /* ── SOCIAL CARD ── */
   .social-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.4rem 1.1rem 1.1rem; margin: 0 1rem; position: relative; overflow: hidden; }
@@ -380,7 +383,8 @@
   .post-body { padding: 0.9rem; }
   .post-text { font-size: 1.05rem; line-height: 2; color: var(--text); white-space: pre-wrap; font-family: "Noto Serif Bengali", serif; }
   .post-img { width: 100%; border-radius: 12px; margin-top: 0.75rem; max-height: 320px; object-fit: cover; }
-  .mask-info { display: inline-flex; align-items: center; gap: 6px; background: #dc2626; border: none; border-radius: 8px; padding: 0.3rem 0.8rem; font-size: 0.8rem; font-weight: 700; color: #ffffff; margin-top: 0.7rem; cursor: pointer; }
+  .mask-info { display: inline-flex; align-items: center; gap: 6px; background: #05057D; border: none; border-radius: 8px; padding: 0.3rem 0.8rem; font-size: 0.8rem; font-weight: 700; color: #ffffff; margin-top: 0.7rem; cursor: pointer; animation: maskPulse 1.5s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(5,5,125,0.7); }
+  @keyframes maskPulse { 0% { box-shadow: 0 0 0 0 rgba(5,5,125,0.7); } 70% { box-shadow: 0 0 0 8px rgba(5,5,125,0); } 100% { box-shadow: 0 0 0 0 rgba(5,5,125,0); } }
   .cta-card { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); border-radius: var(--radius-lg); padding: 1.4rem 1.2rem; text-align: center; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
   .cta-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,215,0,0.12) 0%, transparent 65%); pointer-events: none; }
   .cta-inner { position: relative; z-index: 1; }
@@ -591,19 +595,19 @@
           <div style="width:34px;height:34px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M3 21h18M5 21V10l-2 1 9-7 9 7-2-1v11M9 21v-6h6v6"/></svg>
           </div>
-          <span style="font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.4;">মসজিদের<br>নিয়োগ<br>বিজ্ঞপ্তি</span>
+          <span style="font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.4;">মসজিদের<br>নিয়োগ<br>বিজ্ঞপ্তি</span><span style="font-size:0.65rem;color:#05057D;font-weight:700;margin-top:4px;">টাচ করুন →</span>
         </div>
         <div onclick="showPage('news');setTimeout(()=>filterByCat('male-madrasa-jobs','newsPostsWrap'),500)" style="flex:1;background:#f8f9ff;border:1px solid var(--border);border-radius:14px;padding:0.9rem 0.4rem;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;">
           <div style="width:34px;height:34px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.42A12.02 12.02 0 0112 21a12.02 12.02 0 01-6.16-10.42L12 14z"/></svg>
           </div>
-          <span style="font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.4;">পুরুষ<br>মাদ্রাসার নিয়োগ</span>
+          <span style="font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.4;">পুরুষ<br>মাদ্রাসার নিয়োগ</span><span style="font-size:0.65rem;color:#05057D;font-weight:700;margin-top:4px;">টাচ করুন →</span>
         </div>
         <div onclick="showPage('news');setTimeout(()=>filterByCat('female-madrasa-jobs','newsPostsWrap'),500)" style="flex:1;background:#f8f9ff;border:1px solid var(--border);border-radius:14px;padding:0.9rem 0.4rem;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;">
           <div style="width:34px;height:34px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.42A12.02 12.02 0 0112 21a12.02 12.02 0 01-6.16-10.42L12 14z"/></svg>
           </div>
-          <span style="font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.4;">মহিলা<br>মাদ্রাসার নিয়োগ</span>
+          <span style="font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.4;">মহিলা<br>মাদ্রাসার নিয়োগ</span><span style="font-size:0.65rem;color:#05057D;font-weight:700;margin-top:4px;">টাচ করুন →</span>
         </div>
       </div>
       <div style="background:linear-gradient(135deg,rgba(5,5,125,.06) 0%,rgba(5,5,125,.10) 100%);border:1.5px solid rgba(5,5,125,.16);border-radius:16px;padding:1.1rem 1.2rem;margin-bottom:0.8rem;">
@@ -648,15 +652,18 @@
       <a class="social-link" href="https://t.me/MadrasharJob" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Telegram গ্রুপে যোগ দিন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
       <a class="social-link" href="https://t.me/khadmot1" target="_blank" rel="noopener noreferrer"><span class="social-link-label">Telegram চ্যানেল ফলো করুন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
     </div>
+    <div class="social-group">
+      <div class="social-group-title">YouTube</div>
+      <a class="social-link" href="https://youtube.com/@khedmotcenter?si=lATeuk_4iWM3hYIS" target="_blank" rel="noopener noreferrer"><span class="social-link-label">YouTube চ্যানেল সাবস্ক্রাইব করুন</span><span class="social-link-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></span></a>
+    </div>
   </div>
 
 
   <!-- VIDEO CARD -->
   <div class="section-label">ভিডিও</div>
   <div class="video-card">
-    <div class="card-title">
-      <div class="card-title-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      আমাদের ভিডিও দেখুন
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#05057D;margin:0;line-height:1.8;">ওয়েবসাইটের সম্পূর্ণ গাইডলাইন ও রেজিস্ট্রেশন করার নিয়ম</h3>
     </div>
     <div class="video-wrap">
       <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
@@ -667,8 +674,7 @@
   <div class="section-label">উদ্দেশ্য</div>
   <div class="card">
     <div class="card-header">
-      <div class="card-header-icon"></div>
-      <div class="card-header-title">আমাদের ওয়েবসাইটের উদ্দেশ্য</div>
+      <div class="card-header-title" style="font-size:1.1rem;white-space:nowrap;text-align:center;width:100%;">আমাদের ওয়েবসাইটের উদ্দেশ্য</div>
     </div>
     <div class="card-body">
       <div class="diamond-list">
@@ -743,7 +749,6 @@
         </div>
       </div>
 
-      <!-- উদ্দেশ্য -->
       <div class="section-label">উদ্দেশ্য</div>
       <div class="card">
         <div class="card-header">
@@ -1072,12 +1077,21 @@
     </div>
     <div class="tabs">
       <button class="tab-btn active" onclick="admSwitchTab('posts')">📰 পোস্ট ম্যানেজমেন্ট</button>
+      <button class="tab-btn" onclick="admSwitchTab('pending')">⏳ পেন্ডিং পোস্ট</button>
       <button class="tab-btn" onclick="admSwitchTab('users')">👥 ইউজার ম্যানেজমেন্ট</button>
       <button class="tab-btn" onclick="admSwitchTab('visitors')">📊 ভিজিটর এনালাইসিস</button>
       <button class="tab-btn" onclick="admSwitchTab('hourlystats')">⏱️ ঘণ্টাওয়ারি পোস্ট</button>
     </div>
   </div>
   <div class="adm-main">
+    <div class="tab-panel" id="tabPending">
+      <div class="adm-card">
+        <div class="adm-card-header"><div class="adm-card-header-icon">⏳</div><div class="adm-card-header-title">পেন্ডিং পোস্ট (এডিট করে এপ্রুভ করুন)</div></div>
+        <div class="adm-card-body">
+          <div id="pendingPostsContainer"><div class="adm-empty">লোড হচ্ছে…</div></div>
+        </div>
+      </div>
+    </div>
     <div class="tab-panel active" id="tabPosts">
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">✏️</div><div class="adm-card-header-title">নতুন পোস্ট করুন</div></div>
@@ -1410,13 +1424,13 @@ async function load72hBar(containerId) {
   if (cres.success) {
     const cc = cres.counts;
     catHtml = `<div id="catBar_${containerId}" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
-      <div onclick="filterByCat('mosque-jobs','${containerId}')" id="ccat_mosque_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
+      <div onclick="filterByCat('mosque-jobs','${containerId}')" id="ccat_mosque_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#05057D;border:2px solid #05057D;border-radius:25px;padding:12px 20px;font-weight:700;font-size:0.9rem;color:white;font-family:inherit;cursor:pointer;transition:all 0.3s;box-shadow:0 2px 8px rgba(5,5,125,0.2);">
         <span>মসজিদের নিয়োগ বিজ্ঞপ্তি</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['mosque-jobs']||0}</span>
       </div>
-      <div onclick="filterByCat('male-madrasa-jobs','${containerId}')" id="ccat_male_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
+      <div onclick="filterByCat('male-madrasa-jobs','${containerId}')" id="ccat_male_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#05057D;border:2px solid #05057D;border-radius:25px;padding:12px 20px;font-weight:700;font-size:0.9rem;color:white;font-family:inherit;cursor:pointer;transition:all 0.3s;box-shadow:0 2px 8px rgba(5,5,125,0.2);">
         <span>পুরুষ মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['male-madrasa-jobs']||0}</span>
       </div>
-      <div onclick="filterByCat('female-madrasa-jobs','${containerId}')" id="ccat_female_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#f0f4ff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:0.85rem;color:#05057D;font-family:inherit;cursor:pointer;transition:all 0.2s;">
+      <div onclick="filterByCat('female-madrasa-jobs','${containerId}')" id="ccat_female_${containerId}" style="display:flex;justify-content:space-between;align-items:center;background:#05057D;border:2px solid #05057D;border-radius:25px;padding:12px 20px;font-weight:700;font-size:0.9rem;color:white;font-family:inherit;cursor:pointer;transition:all 0.3s;box-shadow:0 2px 8px rgba(5,5,125,0.2);">
         <span>মহিলা মাদ্রাসার নিয়োগ</span><span style="background:#05057D;color:#fff;border-radius:20px;padding:2px 12px;">${cc['female-madrasa-jobs']||0}</span>
       </div>
     </div>`;
@@ -1790,15 +1804,52 @@ function admShowAlert(id, msg, type='error') {
   setTimeout(()=>el.classList.remove('show'), 4000);
 }
 function admSwitchTab(tab) {
-  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='users')||(i===2&&tab==='visitors')||(i===3&&tab==='hourlystats')));
+  document.querySelectorAll('#pageAdminDashboard .tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='posts')||(i===1&&tab==='pending')||(i===2&&tab==='users')||(i===3&&tab==='visitors')||(i===4&&tab==='hourlystats')));
   document.getElementById('tabPosts').classList.toggle('active', tab==='posts');
+  document.getElementById('tabPending').classList.toggle('active', tab==='pending');
   document.getElementById('tabUsers').classList.toggle('active', tab==='users');
   document.getElementById('tabVisitors').classList.toggle('active', tab==='visitors');
   const tabHourly = document.getElementById('tabHourlystats');
   if (tabHourly) { tabHourly.style.display = tab==='hourlystats' ? 'block' : 'none'; }
+  if (tab==='pending') loadPendingPosts();
   if (tab==='users') admLoadUsers();
   if (tab==='visitors') loadVisitorStats();
   if (tab==='hourlystats') loadHourlyStats();
+}
+async function loadPendingPosts() {
+  const cont = document.getElementById('pendingPostsContainer');
+  cont.innerHTML = '<div class="adm-empty">লোড হচ্ছে…</div>';
+  const res = await api('admin_get_pending_posts');
+  if (!res.success || !res.posts.length) { cont.innerHTML = '<div class="adm-empty">কোনো পেন্ডিং পোস্ট নেই।</div>'; return; }
+  cont.innerHTML = res.posts.map(p => `
+    <div class="post-item" style="margin-bottom:1rem;border:1.5px solid #FFD700;border-radius:12px;padding:1rem;">
+      <div style="font-size:0.78rem;color:#888;margin-bottom:0.5rem;">📱 ${admEsc(p.mobile)} • ${admEsc(p.timeStr)}</div>
+      <textarea class="form-textarea" id="pend_text_${p.id}" style="min-height:100px;width:100%;">${admEsc(p.text)}</textarea>
+      <div class="form-group" style="margin-top:0.5rem;">
+        <select class="form-input" id="pend_cat_${p.id}">
+          <option value="mosque" ${p.mainCat==='mosque-jobs'?'selected':''}>মসজিদের নিয়োগ বিজ্ঞপ্তি</option>
+          <option value="male-madrasa" ${p.mainCat==='male-madrasa-jobs'?'selected':''}>পুরুষ মাদ্রাসার নিয়োগ</option>
+          <option value="female-madrasa" ${p.mainCat==='female-madrasa-jobs'?'selected':''}>মহিলা মাদ্রাসার নিয়োগ</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:0.5rem;">
+        <button class="btn btn-primary" style="flex:1;" onclick="approvePending('${p.id}')">✅ এপ্রুভ করুন</button>
+        <button class="btn btn-danger" style="flex:1;" onclick="rejectPending('${p.id}')">❌ বাতিল করুন</button>
+      </div>
+    </div>
+  `).join('');
+}
+async function approvePending(id) {
+  const content = document.getElementById('pend_text_'+id).value.trim();
+  const category = document.getElementById('pend_cat_'+id).value;
+  if (!content) { alert('পোস্ট খালি রাখা যাবে না।'); return; }
+  const res = await api('admin_approve_post', {id, content, category});
+  if (res.success) { loadPendingPosts(); } else { alert(res.message || 'সমস্যা হয়েছে।'); }
+}
+async function rejectPending(id) {
+  if (!confirm('এই পোস্ট বাতিল করবেন?')) return;
+  const res = await api('admin_reject_post', {id});
+  if (res.success) { loadPendingPosts(); } else { alert(res.message || 'সমস্যা হয়েছে।'); }
 }
 
 async function loadHourlyStats() {
@@ -2076,7 +2127,6 @@ function openJobPost() {
   document.getElementById('jobSuccessBox').style.display = 'none';
   document.getElementById('jobFormBox').style.display = 'block';
   document.getElementById('jobNoticeField').value = '';
-  document.getElementById('jobMobile').value = '';
   document.getElementById('jobCharCount').textContent = '0 / 2000';
   document.getElementById('jobAlert').style.display = 'none';
   document.body.style.overflow = 'hidden';
@@ -2100,15 +2150,16 @@ function jobShowAlert(msg) {
 }
 async function submitJobPost() {
   const notice = document.getElementById('jobNoticeField').value.trim();
-  const mobile = document.getElementById('jobMobile').value.trim();
   const btn = document.getElementById('jobSubmitBtn');
   const btnTxt = document.getElementById('jobSubmitBtnTxt');
 
   if (!notice) { jobShowAlert('বিস্তারিত নিয়োগ বিজ্ঞপ্তি লিখুন।'); return; }
   if (notice.length < 30) { jobShowAlert('নিয়োগ বিজ্ঞপ্তি কমপক্ষে ৩০ অক্ষর হতে হবে।'); return; }
-  if (!mobile) { jobShowAlert('মোবাইল নম্বর দেওয়া বাধ্যতামূলক।'); return; }
-  const mobileClean = mobile.replace(/\s/g, '');
-  if (!/^(?:\+?88)?0[13-9]\d{8}$/.test(mobileClean)) { jobShowAlert('সঠিক বাংলাদেশী মোবাইল নম্বর দিন।'); return; }
+
+  const banToEn = s => s.replace(/[০-৯]/g, d => '০১২৩৪৫৬৭৮৯'.indexOf(d));
+  const phoneMatch = banToEn(notice).match(/(?:\+?88)?01[3-9]\d{8}/);
+  if (!phoneMatch) { jobShowAlert('আপনার বিজ্ঞপ্তির মধ্যে একটি সঠিক মোবাইল নম্বর দেওয়া বাধ্যতামূলক।'); return; }
+  const mobileClean = phoneMatch[0];
 
   btn.disabled = true;
   btnTxt.innerHTML = '<span class="job-spinner"></span> জমা হচ্ছে…';
@@ -2121,7 +2172,6 @@ async function submitJobPost() {
       document.getElementById('jobSuccessBox').style.display = 'flex';
       document.querySelectorAll('.jobCatChk').forEach(x=>x.checked=false);
       document.getElementById('jobNoticeField').value='';
-      document.getElementById('jobMobile').value='';
     } else {
       jobShowAlert(res?.message || 'কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।');
     }
@@ -2133,6 +2183,7 @@ async function submitJobPost() {
   btn.disabled = false;
   btnTxt.innerHTML = 'নিয়োগ বিজ্ঞপ্তি জমা দিন';
 }
+
 
 let admSearchTimer = null;
 function admSearchUsers() {
@@ -2249,7 +2300,7 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
         <div class="hero-sheet" style="background:linear-gradient(160deg,#030355 0%,#05057D 55%,#0A0A9E 100%);border-radius:20px;text-align:center;padding:1.6rem 1.2rem 1.4rem;position:relative;overflow:hidden;">
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% -10%,rgba(255,215,0,.10) 0%,transparent 70%);pointer-events:none;"></div>
           <div style="position:relative;z-index:1;">
-            <div style="width:60px;height:60px;background:linear-gradient(135deg,#FFD700,#e6c000);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;font-size:1.7rem;box-shadow:0 4px 20px rgba(255,215,0,.35);">📋</div>
+            <div style="width:60px;height:60px;background:linear-gradient(135deg,#FFD700,#e6c000);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;box-shadow:0 4px 20px rgba(255,215,0,.35);overflow:hidden;"><img src="favicon-512.png" style="width:60px;height:60px;object-fit:cover;border-radius:50%;"></div>
             <div style="font-family:'Noto Serif Bengali',serif;font-size:1.2rem;font-weight:700;color:#FFD700;margin-bottom:0.3rem;text-shadow:0 2px 12px rgba(255,215,0,.28);">নিয়োগ বিজ্ঞপ্তি প্রকাশ করুন</div>
             <div style="font-size:0.8rem;color:rgba(255,255,255,.65);line-height:1.55;max-width:280px;margin:0 auto;">মসজিদ, মাদ্রাসা, ইমাম, মুয়াজ্জিন, খাদেম ও শিক্ষক নিয়োগের বিজ্ঞপ্তি জমা দিন</div>
             <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:0.9rem auto 0;width:min(240px,80%);">
@@ -2290,33 +2341,6 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
             </div>
           </div>
 
-          <!-- Field 2 -->
-          <div class="card" style="background:#fff;border:1.5px solid rgba(5,5,125,.12);border-radius:20px;box-shadow:0 6px 28px rgba(5,5,125,.12);overflow:hidden;">
-            <div style="background:linear-gradient(100deg,#05057D,#0A0A9E);padding:0.75rem 1rem;display:flex;align-items:center;gap:10px;">
-              <div style="width:30px;height:30px;background:rgba(255,215,0,.18);border:1px solid rgba(255,215,0,.35);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;">📱</div>
-              <div style="font-size:0.95rem;font-weight:700;color:#FFD700;">মোবাইল নম্বর <span style="color:rgba(255,100,100,.9);font-size:0.85rem;">*</span></div>
-            </div>
-            <div style="padding:1rem;">
-              <input id="jobMobile" type="tel" inputmode="numeric"
-                placeholder="01XXXXXXXXX"
-                style="width:100%;border:1.5px solid rgba(5,5,125,.13);border-radius:14px;padding:0.85rem 1rem;font-family:'Hind Siliguri',sans-serif;font-size:1rem;color:#1a1d3a;background:rgba(5,5,125,.02);outline:none;transition:border-color .2s;"
-                onfocus="this.style.borderColor='rgba(5,5,125,.4)'" onblur="this.style.borderColor='rgba(5,5,125,.13)'" />
-              <div style="font-size:0.72rem;color:#5a6080;opacity:.7;margin-top:0.45rem;padding:0 2px;">যোগাযোগের জন্য মোবাইল নম্বর দেওয়া বাধ্যতামূলক</div>
-            </div>
-          </div>
-
-          <!-- Notice Card -->
-          <div style="background:linear-gradient(135deg,rgba(5,5,125,.06) 0%,rgba(5,5,125,.10) 100%);border:1.5px solid rgba(5,5,125,.18);border-radius:18px;padding:1.1rem 1.1rem;position:relative;overflow:hidden;backdrop-filter:blur(4px);">
-            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#05057D,#FFD700,#05057D);opacity:.6;"></div>
-            <div style="display:flex;align-items:flex-start;gap:10px;">
-              <div style="width:34px;height:34px;background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;box-shadow:0 3px 10px rgba(5,5,125,.25);">🔔</div>
-              <div>
-                <div style="font-size:0.82rem;font-weight:700;color:#05057D;margin-bottom:0.3rem;letter-spacing:.01em;">গুরুত্বপূর্ণ নোটিশ</div>
-                <div style="font-size:0.82rem;line-height:1.7;color:#2a2d4a;">আপনার বিজ্ঞপ্তি <strong style="color:#05057D;">সরাসরি প্রকাশ হবে না।</strong> এডমিন যাচাই ও অনুমোদনের পর ওয়েবসাইটে প্রকাশ করা হবে।</div>
-              </div>
-            </div>
-          </div>
-
           <!-- Submit Button -->
           <button id="jobSubmitBtn" onclick="submitJobPost()"
             style="width:100%;padding:1rem;border:none;border-radius:16px;background:linear-gradient(135deg,#030355 0%,#05057D 55%,#0A0A9E 100%);color:#FFD700;font-family:'Hind Siliguri',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(5,5,125,.30);letter-spacing:.02em;transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;"
@@ -2332,11 +2356,13 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
         </div><!-- /jobFormBox -->
 
         <!-- SUCCESS BOX -->
-        <div id="jobSuccessBox" style="display:none;flex-direction:column;align-items:center;padding:2rem 1rem 2.5rem;text-align:center;">
-          <div class="job-success-ring" style="width:90px;height:90px;background:linear-gradient(135deg,#05057D,#0A0A9E);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;box-shadow:0 8px 32px rgba(5,5,125,.30);margin-bottom:1.2rem;animation:jobPopIn .5s cubic-bezier(.22,.68,0,1.4) both;">✅</div>
-          <div style="font-family:'Noto Serif Bengali',serif;font-size:1.15rem;font-weight:700;color:#FFD700;margin-bottom:0.65rem;animation:jobFadeUp .45s .1s both;">আলহামদুলিল্লাহ!</div>
-          <div style="font-size:0.88rem;line-height:1.75;color:#2a2d4a;max-width:300px;animation:jobFadeUp .45s .2s both;">আপনার নিয়োগ বিজ্ঞপ্তি সফলভাবে জমা হয়েছে। এডমিন অনুমোদনের পর ওয়েবসাইটে প্রকাশ করা হবে।</div>
-          <button onclick="closeJobPost()" style="margin-top:1.4rem;padding:0.75rem 2rem;border:none;border-radius:50px;background:linear-gradient(135deg,#030355,#05057D);color:#FFD700;font-family:'Hind Siliguri',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(5,5,125,.25);animation:jobFadeUp .45s .3s both;">ঠিক আছে</button>
+        <div id="jobSuccessBox" style="display:none;flex-direction:column;align-items:center;padding:2.2rem 1.3rem 2.5rem;text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f6f8ff 100%);border-radius:20px;">
+          <div class="job-success-ring" style="width:84px;height:84px;background:linear-gradient(135deg,#1fae5c,#0f8a47);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(15,138,71,.35);margin-bottom:1.3rem;animation:jobPopIn .5s cubic-bezier(.22,.68,0,1.4) both;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="font-family:'Noto Serif Bengali',serif;font-size:1.25rem;font-weight:800;color:#05057D;margin-bottom:0.7rem;animation:jobFadeUp .45s .1s both;">আলহামদুলিল্লাহ!</div>
+          <div style="font-size:0.92rem;line-height:1.85;color:#3a3d5c;max-width:300px;animation:jobFadeUp .45s .2s both;">আপনার নিয়োগ বিজ্ঞপ্তি সফলভাবে জমা হয়েছে। <strong style="color:#05057D;">এডমিন যাচাই-বাছাই করার পর</strong> আপনার বিজ্ঞপ্তিটি ওয়েবসাইটে প্রকাশ করা হবে।</div>
+          <button onclick="closeJobPost()" style="margin-top:1.5rem;padding:0.8rem 2.4rem;border:none;border-radius:50px;background:linear-gradient(135deg,#030355,#05057D);color:#FFD700;font-family:'Hind Siliguri',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(5,5,125,.25);animation:jobFadeUp .45s .3s both;">ঠিক আছে</button>
         </div>
 
       </div>

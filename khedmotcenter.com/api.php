@@ -16,6 +16,15 @@ if ($db->connect_error) { echo json_encode(['success' => false, 'message' => 'DB
 $body   = json_decode(file_get_contents('php://input'), true) ?? [];
 $action = $body['action'] ?? $_GET['action'] ?? '';
 
+
+function get2amCutoff($hours) {
+    $now = time();
+    $today2am = mktime(2, 0, 0, date('n',$now), date('j',$now), date('Y',$now));
+    if ($now < $today2am) $today2am -= 86400;
+    $days = ceil($hours / 24);
+    return ($today2am - $days * 86400) * 1000;
+}
+
 function maskPhone($text) {
     $text = preg_replace_callback(
         '/(\+?880|0)(1[3-9])(\d{2})([\s\-]?)(\d{3})([\s\-]?)(\d{3})/u',
@@ -248,14 +257,12 @@ if ($action === 'get_public_news') {
     $types  = '';
     if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
     if ($hours > 0) {
-        // রাত ২টা থেকে হিসাব করি
+        // প্রতি রাত ২টায় জানালা জুলায় -- দিন হিসাবে cutoff
         $now = time();
         $today2am = mktime(2, 0, 0, date('n',$now), date('j',$now), date('Y',$now));
-        if ($now < $today2am) $today2am -= 86400; // আজ রাত ২টা না হলে গতকালের রাত ২টা
-        $since = ($today2am - (($hours/24) * 86400 - 86400)) * 1000;
-        // সহজ: আজকের রাত ২টার পর থেকে দেখাও, hours অনুযায়ী দিন পিছাও
+        if ($now < $today2am) $today2am -= 86400; // আজ রাত ২টা পার না হলে গতকালের রাত ২টা ধরী
         $days = ceil($hours / 24);
-        $since = ($today2am - ($days - 1) * 86400) * 1000;
+        $since = ($today2am - $days * 86400) * 1000;
         $where .= " AND created >= ?"; $params[] = $since; $types .= 'i';
     }
     $params[] = $limit;
@@ -289,14 +296,12 @@ if ($action === 'get_user_dashboard') {
     $types  = '';
     if ($cat) { $where .= " AND (category=? OR cats LIKE ?)"; $params[] = $cat; $params[] = '%'.$cat.'%'; $types .= 'ss'; }
     if ($hours > 0) {
-        // রাত ২টা থেকে হিসাব করি
+        // প্রতি রাত ২টায় জানালা জুলায় -- দিন হিসাবে cutoff
         $now = time();
         $today2am = mktime(2, 0, 0, date('n',$now), date('j',$now), date('Y',$now));
-        if ($now < $today2am) $today2am -= 86400; // আজ রাত ২টা না হলে গতকালের রাত ২টা
-        $since = ($today2am - (($hours/24) * 86400 - 86400)) * 1000;
-        // সহজ: আজকের রাত ২টার পর থেকে দেখাও, hours অনুযায়ী দিন পিছাও
+        if ($now < $today2am) $today2am -= 86400; // আজ রাত ২টা পার না হলে গতকালের রাত ২টা ধরী
         $days = ceil($hours / 24);
-        $since = ($today2am - ($days - 1) * 86400) * 1000;
+        $since = ($today2am - $days * 86400) * 1000;
         $where .= " AND created >= ?"; $params[] = $since; $types .= 'i';
     }
     $limit2 = intval($body['limit'] ?? 10);
@@ -320,7 +325,7 @@ if ($action === 'get_filter_counts') {
     $result = [];
     $cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
     foreach ($hours as $h) {
-        $since = (time() - $h * 3600) * 1000;
+        $since = get2amCutoff($h);
         // ক্যাটাগরি অনুযায়ী কাউন্ট
         foreach ($cats as $cat) {
             $stmt2 = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE status='active' AND created>=? AND (category=? OR cats LIKE ?)");
@@ -338,7 +343,7 @@ if ($action === 'get_filter_counts') {
 
 // ৭২ ঘণ্টার পোস্ট count
 if ($action === 'get_72h_counts') {
-    $since = (time() - 72 * 3600) * 1000;
+    $since = get2amCutoff(72);
     $cats = ['mosque-jobs', 'male-madrasa-jobs', 'female-madrasa-jobs'];
     $counts = [];
     foreach ($cats as $cat) {
@@ -449,6 +454,63 @@ if ($action === 'admin_delete_post') {
 }
 
 // ADMIN — GET USERS
+// ADMIN -- GET PENDING POSTS
+if ($action === 'admin_get_pending_posts') {
+    $rows = $db->query("SELECT * FROM pending_posts WHERE status='pending' ORDER BY created DESC")->fetch_all(MYSQLI_ASSOC);
+    foreach ($rows as &$row) {
+        $row['cats'] = json_decode($row['cats'], true);
+    }
+    echo json_encode(['success' => true, 'posts' => $rows]);
+    exit();
+}
+// ADMIN -- APPROVE PENDING POST (with edit)
+if ($action === 'admin_approve_post') {
+    $pid      = $body['id'] ?? '';
+    $text     = $body['content'] ?? '';
+    $category = $body['category'] ?? 'mosque';
+    $position = $body['position'] ?? '';
+    $address  = $body['address'] ?? '';
+    if (!$pid || !$text) { echo json_encode(['success' => false, 'message' => 'id ও content প্রয়োজন']); exit(); }
+
+    $get = $db->prepare("SELECT * FROM pending_posts WHERE id=? LIMIT 1");
+    $get->bind_param('s', $pid);
+    $get->execute();
+    $pending = $get->get_result()->fetch_assoc();
+    if (!$pending) { echo json_encode(['success' => false, 'message' => 'পোস্ট খুঁজে পাওয়া যায়নি']); exit(); }
+
+    $newId   = uniqid('p_', true);
+    $author  = 'Admin';
+    $cats    = json_encode([$category . '-jobs']);
+    $mainCat = $category;
+    $subCat  = '';
+    $created = time() * 1000;
+    $timeStr = date('d/m/Y');
+    $imgUrl  = '';
+    $hasNum  = 1;
+
+    list($autoTitle, $autoSlug, $autoMeta, $autoDesc) = autoSEO($text, $category, $newId, $position, $address);
+
+    $stmt = $db->prepare("INSERT INTO posts (id, text, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc, position, address) VALUES (?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssssisssssssss', $newId, $text, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $autoTitle, $autoSlug, $category, $autoMeta, $autoDesc, $position, $address);
+    $stmt->execute();
+
+    $del = $db->prepare("DELETE FROM pending_posts WHERE id=?");
+    $del->bind_param('s', $pid);
+    $del->execute();
+
+    echo json_encode(['success' => true, 'id' => $newId]);
+    exit();
+}
+// ADMIN -- REJECT PENDING POST
+if ($action === 'admin_reject_post') {
+    $pid = $body['id'] ?? '';
+    if (!$pid) { echo json_encode(['success' => false, 'message' => 'id প্রয়োজন']); exit(); }
+    $stmt = $db->prepare("DELETE FROM pending_posts WHERE id=?");
+    $stmt->bind_param('s', $pid);
+    $stmt->execute();
+    echo json_encode(['success' => true]);
+    exit();
+}
 if ($action === 'admin_get_users') {
     $search = $body['search'] ?? '';
     if ($search) {
@@ -566,14 +628,17 @@ if ($action === 'admin_extend_expiry') {
 
 // SUBMIT JOB POST (pending)
 if ($action === 'submit_job_post') {
-    $id      = uniqid('pnd_', true);
-    $text    = $body['content'] ?? '';
-    $mobile  = $body['mobile'] ?? '';
-    $name    = $body['name'] ?? '';
-    $created = time() * 1000;
+    $id       = uniqid('pnd_', true);
+    $text     = $body['notice'] ?? $body['content'] ?? '';
+    $mobile   = $body['mobile'] ?? '';
+    $catsArr  = $body['categories'] ?? [];
+    $cats     = json_encode($catsArr);
+    $mainCat  = $catsArr[0] ?? '';
+    $timeStr  = date('d/m/Y');
+    $created  = time() * 1000;
     if (!$text) { echo json_encode(['success' => false, 'message' => 'পোস্ট লিখুন।']); exit(); }
-    $stmt = $db->prepare("INSERT INTO pending_posts (id, text, mobile, name, created) VALUES (?,?,?,?,?)");
-    $stmt->bind_param('ssssi', $id, $text, $mobile, $name, $created);
+    $stmt = $db->prepare("INSERT INTO pending_posts (id, text, mobile, cats, mainCat, timeStr, created, status) VALUES (?,?,?,?,?,?,?,'pending')");
+    $stmt->bind_param('ssssssi', $id, $text, $mobile, $cats, $mainCat, $timeStr, $created);
     $stmt->execute();
     echo json_encode(['success' => true]);
     exit();
