@@ -468,6 +468,7 @@ if ($action === 'admin_approve_post') {
     $pid      = $body['id'] ?? '';
     $text     = $body['content'] ?? '';
     $category = $body['category'] ?? 'mosque';
+    $title    = $body['title'] ?? '';
     $position = $body['position'] ?? '';
     $address  = $body['address'] ?? '';
     if (!$pid || !$text) { echo json_encode(['success' => false, 'message' => 'id ও content প্রয়োজন']); exit(); }
@@ -489,6 +490,7 @@ if ($action === 'admin_approve_post') {
     $hasNum  = 1;
 
     list($autoTitle, $autoSlug, $autoMeta, $autoDesc) = autoSEO($text, $category, $newId, $position, $address);
+    if ($title) $autoTitle = $title;
 
     $stmt = $db->prepare("INSERT INTO posts (id, text, author, cats, mainCat, subCat, created, timeStr, likes, views, imgUrl, hasNumber, title, slug, category, meta_title, meta_desc, position, address) VALUES (?,?,?,?,?,?,?,?,0,0,?,?,?,?,?,?,?,?,?)");
     $stmt->bind_param('sssssssisssssssss', $newId, $text, $author, $cats, $mainCat, $subCat, $created, $timeStr, $imgUrl, $hasNum, $autoTitle, $autoSlug, $category, $autoMeta, $autoDesc, $position, $address);

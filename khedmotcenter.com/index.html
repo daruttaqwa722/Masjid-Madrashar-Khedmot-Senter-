@@ -1824,6 +1824,7 @@ async function loadPendingPosts() {
   cont.innerHTML = res.posts.map(p => `
     <div class="post-item" style="margin-bottom:1rem;border:1.5px solid #FFD700;border-radius:12px;padding:1rem;">
       <div style="font-size:0.78rem;color:#888;margin-bottom:0.5rem;">📱 ${admEsc(p.mobile)} • ${admEsc(p.timeStr)}</div>
+      <input class="form-input" id="pend_title_${p.id}" placeholder="টাইটেল লিখুন (SEO এর জন্য)" style="width:100%;margin-bottom:0.5rem;">
       <textarea class="form-textarea" id="pend_text_${p.id}" style="min-height:100px;width:100%;">${admEsc(p.text)}</textarea>
       <div class="form-group" style="margin-top:0.5rem;">
         <select class="form-input" id="pend_cat_${p.id}">
@@ -1841,9 +1842,10 @@ async function loadPendingPosts() {
 }
 async function approvePending(id) {
   const content = document.getElementById('pend_text_'+id).value.trim();
+  const title = document.getElementById('pend_title_'+id).value.trim();
   const category = document.getElementById('pend_cat_'+id).value;
   if (!content) { alert('পোস্ট খালি রাখা যাবে না।'); return; }
-  const res = await api('admin_approve_post', {id, content, category});
+  const res = await api('admin_approve_post', {id, content, title, category});
   if (res.success) { loadPendingPosts(); } else { alert(res.message || 'সমস্যা হয়েছে।'); }
 }
 async function rejectPending(id) {
@@ -2313,8 +2315,6 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
 
         <!-- FORM BOX -->
         <div id="jobFormBox">
-          <!-- Alert -->
-          <div id="jobAlert" style="display:none;background:rgba(220,38,38,.08);border:1.5px solid rgba(220,38,38,.25);border-radius:12px;padding:0.7rem 1rem;font-size:0.84rem;color:#dc2626;text-align:center;"></div>
 
           <!-- Field 1 -->
           <div class="card" style="background:#fff;border:1.5px solid rgba(5,5,125,.12);border-radius:20px;box-shadow:0 6px 28px rgba(5,5,125,.12);overflow:hidden;">
@@ -2341,6 +2341,8 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
             </div>
           </div>
 
+          <!-- Alert -->
+          <div id="jobAlert" style="display:none;background:rgba(220,38,38,.08);border:2px solid rgba(220,38,38,.3);border-radius:14px;padding:1rem 1.2rem;font-size:0.9rem;font-weight:600;color:#dc2626;text-align:center;margin-bottom:1rem;">⚠️ </div>
           <!-- Submit Button -->
           <button id="jobSubmitBtn" onclick="submitJobPost()"
             style="width:100%;padding:1rem;border:none;border-radius:16px;background:linear-gradient(135deg,#030355 0%,#05057D 55%,#0A0A9E 100%);color:#FFD700;font-family:'Hind Siliguri',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(5,5,125,.30);letter-spacing:.02em;transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;"
