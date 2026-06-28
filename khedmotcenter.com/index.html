@@ -1227,14 +1227,17 @@
         <input class="form-input" type="text" id="editPostTitle" placeholder="পোস্টের শিরোনাম লিখুন">
       </div>
       <div class="form-group">
-        <label style="font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:6px;display:block;">ক্যাটাগরি (একাধিক সিলেক্ট করা যাবে)</label>
+        <label style="font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:6px;display:block;">ক্যাটাগরি</label>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <button type="button" id="editCat_mosque" onclick="toggleEditCat('mosque')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;">মসজিদের নিয়োগ</button>
-          <button type="button" id="editCat_male" onclick="toggleEditCat('male-madrasa-jobs')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;">পুরুষ মাদ্রাসার নিয়োগ</button>
-          <button type="button" id="editCat_female" onclick="toggleEditCat('female-madrasa-jobs')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;">মহিলা মাদ্রাসার নিয়োগ</button>
+          <button type="button" id="editCat_mosque" onclick="toggleEditCat('mosque')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;">মসজিদের নিয়োগ</button>
+          <button type="button" id="editCat_male" onclick="toggleEditCat('male-madrasa-jobs')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;">পুরুষ মাদ্রাসার নিয়োগ</button>
+          <button type="button" id="editCat_female" onclick="toggleEditCat('female-madrasa-jobs')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;">মহিলা মাদ্রাসার নিয়োগ</button>
         </div>
       </div>
-      <div class="form-group"><label style="font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:4px;display:block;">বিবরণ</label><textarea class="form-textarea" id="editPostContent" style="min-height:130px"></textarea></div>
+      <div class="form-group">
+        <label style="font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:4px;display:block;">বিবরণ</label>
+        <textarea class="form-textarea" id="editPostContent" style="min-height:130px"></textarea>
+      </div>
       <div class="modal-footer">
         <button class="btn btn-primary" style="flex:1" onclick="saveEditPost()">💾 আপডেট করুন</button>
         <button class="btn" style="background:rgba(5,5,125,0.08);color:var(--navy);flex:0.5" onclick="closeEditPost()">বাতিল</button>
@@ -2065,11 +2068,11 @@ let editSelectedCats = [];
 function toggleEditCat(cat) {
   const idx = editSelectedCats.indexOf(cat);
   if (idx === -1) { editSelectedCats.push(cat); } else { editSelectedCats.splice(idx, 1); }
-  const catMap = {'mosque':'editCat_mosque','male-madrasa-jobs':'editCat_male','female-madrasa-jobs':'editCat_female'};
-  Object.entries(catMap).forEach(([k,btnId]) => {
+  ['mosque','male-madrasa-jobs','female-madrasa-jobs'].forEach(function(k) {
+    const btnId = k==='mosque'?'editCat_mosque':k==='male-madrasa-jobs'?'editCat_male':'editCat_female';
     const btn = document.getElementById(btnId);
     if (!btn) return;
-    if (editSelectedCats.includes(k)) {
+    if (editSelectedCats.indexOf(k) !== -1) {
       btn.style.background='#05057D'; btn.style.color='#fff'; btn.style.borderColor='#05057D';
     } else {
       btn.style.background='#f5f5f5'; btn.style.color='#555'; btn.style.borderColor='#ddd';
@@ -2081,23 +2084,22 @@ function openEditPost(id, content, title, cats) {
   document.getElementById('editPostId').value = id;
   document.getElementById('editPostContent').value = content;
   document.getElementById('editPostTitle').value = title || '';
-  const catMap = {'mosque':'editCat_mosque','male-madrasa-jobs':'editCat_male','female-madrasa-jobs':'editCat_female'};
-  Object.values(catMap).forEach(btnId => {
+  ['mosque','male-madrasa-jobs','female-madrasa-jobs'].forEach(function(k) {
+    const btnId = k==='mosque'?'editCat_mosque':k==='male-madrasa-jobs'?'editCat_male':'editCat_female';
     const btn = document.getElementById(btnId);
     if (btn) { btn.style.background='#f5f5f5'; btn.style.color='#555'; btn.style.borderColor='#ddd'; }
   });
-  if (cats && cats.length) {
-    cats.forEach(c => { if (catMap[c]) toggleEditCat(c); });
-  }
+  if (cats && cats.length) { cats.forEach(function(c) { toggleEditCat(c); }); }
   document.getElementById('editPostModal').classList.add('open');
 }
 function closeEditPost() { document.getElementById('editPostModal').classList.remove('open'); }
 async function saveEditPost() {
-  const id=document.getElementById('editPostId').value, content=document.getElementById('editPostContent').value.trim();
+  const id=document.getElementById('editPostId').value;
+  const content=document.getElementById('editPostContent').value.trim();
   const title=document.getElementById('editPostTitle').value.trim();
   if (!content) return;
   const cats = editSelectedCats.length ? editSelectedCats : ['mosque'];
-  const res = await api('admin_edit_post', {id: String(id), content, title, category: cats[0], cats});
+  const res = await api('admin_edit_post', {id: String(id), content, title, category: cats[0], cats: cats});
   if (res.success) { closeEditPost(); admLoadPosts(); newsLoaded=false; }
 }
 async function deletePost(id) {
