@@ -1841,12 +1841,13 @@ async function loadPendingPosts() {
       <div style="font-size:0.78rem;color:#888;margin-bottom:0.5rem;">📱 ${admEsc(p.mobile)} • ${admEsc(p.timeStr)}</div>
       <input class="form-input" id="pend_title_${p.id}" placeholder="টাইটেল লিখুন (SEO এর জন্য)" style="width:100%;margin-bottom:0.5rem;">
       <textarea class="form-textarea" id="pend_text_${p.id}" style="min-height:100px;width:100%;">${admEsc(p.text)}</textarea>
-      <div class="form-group" style="margin-top:0.5rem;">
-        <select class="form-input" id="pend_cat_${p.id}">
-          <option value="mosque" ${p.mainCat==='mosque-jobs'?'selected':''}>মসজিদের নিয়োগ বিজ্ঞপ্তি</option>
-          <option value="male-madrasa" ${p.mainCat==='male-madrasa-jobs'?'selected':''}>পুরুষ মাদ্রাসার নিয়োগ</option>
-          <option value="female-madrasa" ${p.mainCat==='female-madrasa-jobs'?'selected':''}>মহিলা মাদ্রাসার নিয়োগ</option>
-        </select>
+      <div style="margin-top:0.5rem;">
+        <div style="font-size:0.82rem;font-weight:600;color:#05057D;margin-bottom:6px;">ক্যাটাগরি</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" id="pend_cat_mosque_${p.id}" onclick="togglePendCat('${p.id}','mosque-jobs')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;">মসজিদের নিয়োগ বিজ্ঞপ্তি</button>
+          <button type="button" id="pend_cat_male_${p.id}" onclick="togglePendCat('${p.id}','male-madrasa-jobs')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;">পুরুষ মাদ্রাসার নিয়োগ</button>
+          <button type="button" id="pend_cat_female_${p.id}" onclick="togglePendCat('${p.id}','female-madrasa-jobs')" style="padding:6px 12px;border-radius:20px;border:2px solid #ddd;background:#f5f5f5;color:#555;font-family:inherit;font-size:0.8rem;font-weight:600;cursor:pointer;">মহিলা মাদ্রাসার নিয়োগ</button>
+        </div>
       </div>
       <div style="display:flex;gap:0.5rem;margin-top:0.5rem;">
         <button class="btn btn-primary" style="flex:1;" onclick="approvePending('${p.id}')">✅ এপ্রুভ করুন</button>
@@ -1855,13 +1856,28 @@ async function loadPendingPosts() {
     </div>
   `).join('');
 }
+window._pendCats = {};
+function togglePendCat(id, cat) {
+  if (!window._pendCats[id]) window._pendCats[id] = [];
+  const arr = window._pendCats[id];
+  const idx = arr.indexOf(cat);
+  if (idx === -1) { arr.push(cat); } else { arr.splice(idx, 1); }
+  const btnMap = {'mosque-jobs':'pend_cat_mosque_','male-madrasa-jobs':'pend_cat_male_','female-madrasa-jobs':'pend_cat_female_'};
+  Object.entries(btnMap).forEach(function(e) {
+    const btn = document.getElementById(e[1]+id);
+    if (!btn) return;
+    if (arr.indexOf(e[0]) !== -1) { btn.style.background='#05057D'; btn.style.color='#fff'; btn.style.borderColor='#05057D'; }
+    else { btn.style.background='#f5f5f5'; btn.style.color='#555'; btn.style.borderColor='#ddd'; }
+  });
+}
 async function approvePending(id) {
   const content = document.getElementById('pend_text_'+id).value.trim();
   const title = document.getElementById('pend_title_'+id).value.trim();
-  const category = document.getElementById('pend_cat_'+id).value;
+  const cats = window._pendCats[id] && window._pendCats[id].length ? window._pendCats[id] : ['mosque-jobs'];
+  const category = cats[0];
   if (!content) { alert('পোস্ট খালি রাখা যাবে না।'); return; }
-  const res = await api('admin_approve_post', {id, content, title, category});
-  if (res.success) { loadPendingPosts(); } else { alert(res.message || 'সমস্যা হয়েছে।'); }
+  const res = await api('admin_approve_post', {id, content, title, category, cats});
+  if (res.success) { delete window._pendCats[id]; loadPendingPosts(); } else { alert(res.message || 'সমস্যা হয়েছে।'); }
 }
 async function rejectPending(id) {
   if (!confirm('এই পোস্ট বাতিল করবেন?')) return;

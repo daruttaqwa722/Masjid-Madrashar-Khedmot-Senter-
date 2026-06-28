@@ -483,7 +483,11 @@ if ($action === 'admin_approve_post') {
 
     $newId   = uniqid('p_', true);
     $author  = 'Admin';
-    $cats    = json_encode([$category . '-jobs']);
+    $catsArr = $body['cats'] ?? [$category];
+    if (!is_array($catsArr) || !count($catsArr)) $catsArr = [$category];
+    $cats = json_encode(array_values($catsArr), JSON_UNESCAPED_UNICODE);
+    if (!is_array($catsArr) || !count($catsArr)) $catsArr = [$category];
+    $cats = json_encode(array_values($catsArr), JSON_UNESCAPED_UNICODE);
     $mainCat = $category;
     $subCat  = '';
     $created = time() * 1000;
