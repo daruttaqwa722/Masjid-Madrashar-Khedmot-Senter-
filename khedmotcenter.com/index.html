@@ -2096,7 +2096,7 @@ function openEditPost(id) {
     const btn = document.getElementById(btnId);
     if (btn) { btn.style.background='#f5f5f5'; btn.style.color='#555'; btn.style.borderColor='#ddd'; }
   });
-  const cats = Array.isArray(p.cats)&&p.cats.length ? p.cats : [p.category||'mosque'];
+  let rawCats = p.cats; if (typeof rawCats === 'string') { try { rawCats = JSON.parse(rawCats); } catch(e) { rawCats = [rawCats]; } } const cats = Array.isArray(rawCats)&&rawCats.length ? rawCats : [p.category||'mosque'];
   cats.forEach(function(c) { toggleEditCat(c); });
   document.getElementById('editPostModal').classList.add('open');
 }
