@@ -435,8 +435,10 @@ if ($action === 'admin_edit_post') {
         if (!$meta_title) $meta_title = $autoMeta;
         if (!$meta_desc)  $meta_desc  = $autoDesc;
     }
-    $stmt = $db->prepare("UPDATE posts SET text=?, title=?, category=?, meta_title=?, meta_desc=? WHERE id=?");
-    $stmt->bind_param('ssssss', $text, $title, $category, $meta_title, $meta_desc, $id);
+    $cats = $body['cats'] ?? [];
+    $cats_json = json_encode(array_values($cats), JSON_UNESCAPED_UNICODE);
+    $stmt = $db->prepare("UPDATE posts SET text=?, title=?, category=?, cats=?, meta_title=?, meta_desc=? WHERE id=?");
+    $stmt->bind_param('sssssss', $text, $title, $category, $cats_json, $meta_title, $meta_desc, $id);
     $stmt->execute();
     echo json_encode(['success' => true]);
     exit();
