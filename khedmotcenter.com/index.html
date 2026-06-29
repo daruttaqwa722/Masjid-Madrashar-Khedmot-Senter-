@@ -1912,6 +1912,20 @@ async function loadVisitorStats() {
   const cont = document.getElementById('visitorStatsContainer');
   if (!res.success) { cont.innerHTML = '<div class="adm-empty">'+res.message+'</div>'; return; }
   const h = `
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
+      <div style="background:rgba(5,5,125,0.08);border-radius:12px;padding:0.8rem;text-align:center;">
+        <div style="font-size:1.6rem;font-weight:700;color:#05057D;">${res.today_new + res.today_returning}</div>
+        <div style="font-size:0.75rem;color:#666;margin-top:0.3rem;">আজকে মোট</div>
+      </div>
+      <div style="background:rgba(5,5,125,0.08);border-radius:12px;padding:0.8rem;text-align:center;">
+        <div style="font-size:1.6rem;font-weight:700;color:#05057D;">${res.yesterday_new + res.yesterday_returning}</div>
+        <div style="font-size:0.75rem;color:#666;margin-top:0.3rem;">গতকাল মোট</div>
+      </div>
+      <div style="background:rgba(5,5,125,0.08);border-radius:12px;padding:0.8rem;text-align:center;">
+        <div style="font-size:1.6rem;font-weight:700;color:#05057D;">${res.week_new + res.week_returning}</div>
+        <div style="font-size:0.75rem;color:#666;margin-top:0.3rem;">এক সপ্তাহ মোট</div>
+      </div>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
       <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
         <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.today_new}</div>
@@ -1953,7 +1967,11 @@ async function loadVisitorStats() {
     <div class="adm-card" style="margin-top:1.5rem;">
       <div class="adm-card-header"><div class="adm-card-header-icon">🌐</div><div class="adm-card-header-title">ট্রাফিক সোর্স</div></div>
       <div class="adm-card-body">
-        ${Object.entries(res.sources || {}).map(([src,cnt])=>`<div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(0,0,0,0.05);"><span>${src}</span><strong>${cnt}</strong></div>`).join('')}
+        ${Object.entries(res.sources || {}).sort((a,b)=>b[1]-a[1]).map(([src,cnt])=>{
+          const icons={'facebook':'📘','google':'🔍','direct':'🔗','whatsapp':'💬','youtube':'▶️','telegram':'✈️','twitter':'🐦','instagram':'📸'};
+          const icon = icons[src.toLowerCase()] || '🌐';
+          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid rgba(0,0,0,0.05);"><span>${icon} ${src}</span><strong>${cnt}</strong></div>`;
+        }).join('')}
       </div>
     </div>
   `;
