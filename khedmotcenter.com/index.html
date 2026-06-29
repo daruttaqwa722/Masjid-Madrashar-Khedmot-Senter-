@@ -2271,12 +2271,10 @@ async function submitJobPost() {
   btnTxt.innerHTML = '<span class="job-spinner"></span> জমা হচ্ছে…';
 
   try {
-    const jobCats = Array.from(document.querySelectorAll('.jobCatChk:checked')).map(x=>x.value);
-    const res = await api('submit_job_post', { notice, mobile: mobileClean, categories: jobCats });
+    const res = await api('submit_job_post', { notice, mobile: mobileClean, categories: [] });
     if (res && res.success) {
       document.getElementById('jobFormBox').style.display = 'none';
       document.getElementById('jobSuccessBox').style.display = 'flex';
-      document.querySelectorAll('.jobCatChk').forEach(x=>x.checked=false);
       document.getElementById('jobNoticeField').value='';
     } else {
       jobShowAlert(res?.message || 'কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।');
@@ -2427,13 +2425,6 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
               <div style="font-size:0.95rem;font-weight:700;color:#FFD700;">বিস্তারিত নিয়োগ বিজ্ঞপ্তি <span style="color:rgba(255,100,100,.9);font-size:0.85rem;">*</span></div>
             </div>
             <div style="padding:1rem;">
-              <div style="margin-bottom:1rem;">
-<div style="font-size:0.88rem;font-weight:700;color:#05057D;margin-bottom:0.6rem;">ক্যাটাগরি সিলেক্ট করুন <span style="color:red">*</span></div>
-<div id="jobCatError" style="display:none;color:red;font-size:0.78rem;margin-bottom:0.5rem;">অন্তত একটি ক্যাটাগরি সিলেক্ট করুন।</div>
-<label style="display:flex;align-items:center;gap:8px;padding:0.6rem 0.8rem;border:1.5px solid rgba(5,5,125,.13);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;background:#fff;"><input type="checkbox" value="mosque-jobs" class="jobCatChk" style="width:16px;height:16px;accent-color:#05057D;"> মসজিদের নিয়োগ বিজ্ঞপ্তি</label>
-<label style="display:flex;align-items:center;gap:8px;padding:0.6rem 0.8rem;border:1.5px solid rgba(5,5,125,.13);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;background:#fff;"><input type="checkbox" value="male-madrasa-jobs" class="jobCatChk" style="width:16px;height:16px;accent-color:#05057D;"> পুরুষ মাদ্রাসার নিয়োগ</label>
-<label style="display:flex;align-items:center;gap:8px;padding:0.6rem 0.8rem;border:1.5px solid rgba(5,5,125,.13);border-radius:10px;margin-bottom:0.4rem;cursor:pointer;background:#fff;"><input type="checkbox" value="female-madrasa-jobs" class="jobCatChk" style="width:16px;height:16px;accent-color:#05057D;"> মহিলা মাদ্রাসার নিয়োগ</label>
-</div>
               <textarea id="jobNoticeField" oninput="jobUpdateChar()" maxlength="2000"
                 style="width:100%;min-height:180px;border:1.5px solid rgba(5,5,125,.13);border-radius:14px;padding:0.85rem;font-family:'Hind Siliguri',sans-serif;font-size:0.88rem;line-height:1.75;color:#1a1d3a;resize:vertical;background:rgba(5,5,125,.02);outline:none;transition:border-color .2s;"
                 onfocus="this.style.borderColor='rgba(5,5,125,.4)'" onblur="this.style.borderColor='rgba(5,5,125,.13)'"
