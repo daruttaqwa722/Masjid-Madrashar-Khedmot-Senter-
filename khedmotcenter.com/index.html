@@ -1170,6 +1170,10 @@
       </div>
     </div>
     <div class="tab-panel" id="tabVisitors">
+      <div class="adm-card" style="margin-bottom:1rem;">
+        <div class="adm-card-header"><div class="adm-card-header-icon">🟢</div><div class="adm-card-header-title">এখন অনলাইন</div></div>
+        <div class="adm-card-body" id="liveVisitorBox"><div class="adm-empty">লোড হচ্ছে…</div></div>
+      </div>
       <div class="adm-card">
         <div class="adm-card-header"><div class="adm-card-header-icon">📊</div><div class="adm-card-header-title">ভিজিটর স্ট্যাটস</div></div>
         <div class="adm-card-body" id="visitorStatsContainer">
@@ -1830,7 +1834,7 @@ function admSwitchTab(tab) {
   if (tabHourly) { tabHourly.style.display = tab==='hourlystats' ? 'block' : 'none'; }
   if (tab==='pending') loadPendingPosts();
   if (tab==='users') admLoadUsers();
-  if (tab==='visitors') loadVisitorStats();
+  if (tab==='visitors') { loadVisitorStats(); loadLiveVisitors(); }
   if (tab==='hourlystats') loadHourlyStats();
 }
 async function loadPendingPosts() {
@@ -1909,6 +1913,28 @@ async function loadHourlyStats() {
   cont.innerHTML = html;
 }
 
+async function loadLiveVisitors() {
+  const res = await api('get_live_visitors', {token: 'admin_session'});
+  if (!res.success) return;
+  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  const pageNames = {'home':'হোম','news':'নিউজ','user':'ইউজার'};
+  let html = `<div style="background:linear-gradient(135deg,#1a7a3c,#0d5c2e);border-radius:12px;padding:1rem;margin-bottom:1rem;color:#fff;">
+    <div style="font-size:0.85rem;opacity:0.85;margin-bottom:0.3rem;">🟢 এখন সাইটে আছেন</div>
+    <div style="font-size:2.5rem;font-weight:700;color:#FFD700;">${toBn(res.total)}</div>
+    <div style="font-size:0.8rem;opacity:0.8;">জন ভিজিটর</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:1rem;">`;
+  ['home','news','user'].forEach(p => {
+    const cnt = res.pages[p] || 0;
+    html += `<div style="background:rgba(26,122,60,0.1);border:1px solid rgba(26,122,60,0.2);border-radius:10px;padding:0.6rem;text-align:center;">
+      <div style="font-size:1.4rem;font-weight:700;color:#1a7a3c;">${toBn(cnt)}</div>
+      <div style="font-size:0.75rem;color:#666;">${pageNames[p]||p}</div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('liveVisitorBox').innerHTML = html;
+  setTimeout(loadLiveVisitors, 30000);
+}
 async function loadVisitorStats() {
   const res = await api('get_visitor_stats');
   const cont = document.getElementById('visitorStatsContainer');
@@ -1984,6 +2010,17 @@ async function loadVisitorStats() {
   `;
   cont.innerHTML = h;
 }
+function startLivePing() {
+  const vid = localStorage.getItem('visitor_id') || 'v_anon';
+  const pages = {'home':'হোম','news':'নিউজ','user':'ইউজার'};
+  function ping() {
+    const page = document.querySelector('[data-page].active')?.dataset?.page || 'home';
+    api('live_ping', {visitor_id: vid, page: page});
+  }
+  ping();
+  setInterval(ping, 30000);
+}
+startLivePing();
 async function trackVisitor() {
   let vid = localStorage.getItem('visitor_id');
   if (!vid) { vid = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2,9); localStorage.setItem('visitor_id', vid); }

@@ -802,5 +802,34 @@ if ($action === "check_duplicate") {
     exit();
 }
 $db->close();
+
+// LIVE VISITOR PING
+if ($action === 'live_ping') {
+    $vid  = $body['visitor_id'] ?? '';
+    $page = $body['page'] ?? 'home';
+    if (!$vid) { echo json_encode(['success'=>false]); exit(); }
+    $now = time() * 1000;
+    $stmt = $db->prepare("INSERT INTO live_visitors (visitor_id, page, last_ping) VALUES (?,?,?) ON DUPLICATE KEY UPDATE page=?, last_ping=?");
+    $stmt->bind_param('ssisi', $vid, $page, $now, $page, $now);
+    $stmt->execute();
+    echo json_encode(['success'=>true]);
+    exit();
+}
+
+// LIVE VISITOR STATS
+if ($action === 'get_live_visitors') {
+    $token = $body['token'] ?? '';
+    if ($token !== 'admin_session') { echo json_encode(['success'=>false]); exit(); }
+    $cutoff = (time() - 60) * 1000;
+    $db->query("DELETE FROM live_visitors WHERE last_ping < $cutoff");
+    $rows = $db->query("SELECT page, COUNT(*) as cnt FROM live_visitors GROUP BY page")->fetch_all(MYSQLI_ASSOC);
+    $pages = [];
+    $total = 0;
+    foreach ($rows as $r) { $pages[$r['page']] = (int)$r['cnt']; $total += (int)$r['cnt']; }
+    echo json_encode(['success'=>true, 'pages'=>$pages, 'total'=>$total]);
+    exit();
+}
+
+$db->close();
 ?>
 
