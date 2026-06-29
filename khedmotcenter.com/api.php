@@ -246,6 +246,15 @@ if ($action === 'get_visitor_stats') {
     $sourceRows = $db->query("SELECT source, COUNT(*) as cnt FROM visitor_logs GROUP BY source ORDER BY cnt DESC")->fetch_all(MYSQLI_ASSOC);
     $sources = [];
     foreach ($sourceRows as $row) { $sources[$row['source']] = (int)$row['cnt']; }
+    $sourceDetail = [];
+    $allSources = array_keys($sources);
+    foreach ($allSources as $src) {
+        $todayCnt = (int)$db->query("SELECT COUNT(*) as cnt FROM visitor_logs WHERE source='$src' AND first_visit>=$todayStart")->fetch_assoc()['cnt'];
+        $yestCnt = (int)$db->query("SELECT COUNT(*) as cnt FROM visitor_logs WHERE source='$src' AND first_visit>=$yesterdayStart AND first_visit<$todayStart")->fetch_assoc()['cnt'];
+        $weekCnt = (int)$db->query("SELECT COUNT(*) as cnt FROM visitor_logs WHERE source='$src' AND first_visit>=$sevenDaysStart")->fetch_assoc()['cnt'];
+        $totalCnt = (int)$sources[$src];
+        $sourceDetail[$src] = ['today'=>$todayCnt, 'yesterday'=>$yestCnt, 'week'=>$weekCnt, 'total'=>$totalCnt];
+    }
 
     echo json_encode([
         'success'=>true,
@@ -253,7 +262,8 @@ if ($action === 'get_visitor_stats') {
         'yesterday_new'=>$yestNew, 'yesterday_returning'=>$yestReturning,
         'week_new'=>$weekNew, 'week_returning'=>$weekReturning,
         'total'=>$totalAll, 'total_new'=>$totalNew, 'total_returning'=>$totalReturning,
-        'sources'=>$sources
+        'sources'=>$sources,
+        'source_detail'=>$sourceDetail
     ]);
     exit();
 }
