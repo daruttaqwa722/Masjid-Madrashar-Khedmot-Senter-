@@ -1892,11 +1892,13 @@ async function loadHourlyStats() {
   const res = await api('get_hourly_stats', {token: 'admin_session'});
   if (!res.success) { cont.innerHTML = '<div class="adm-empty">লোড হয়নি।</div>'; return; }
   const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  const toTimeBn = t => t.replace(/[0-9]/g, d=>'০১২৩৪৫৬৭৮৯'[d]).replace('AM','AM').replace('PM','PM');
   let html = '<div style="display:flex;flex-direction:column;gap:0.5rem;">';
   res.stats.forEach(s => {
     const w = Math.min(100, s.count * 5);
+    const label = s.from && s.to ? `${toTimeBn(s.from)} - ${toTimeBn(s.to)}` : `${toBn(s.hour)} ঘন্টা আগে`;
     html += `<div style="display:flex;align-items:center;gap:10px;">
-      <div style="min-width:70px;font-size:0.82rem;color:#05057D;font-weight:600;">${toBn(s.hour)} ঘন্টা আগে</div>
+      <div style="min-width:110px;font-size:0.78rem;color:#05057D;font-weight:600;">${label}</div>
       <div style="flex:1;background:#f0f4ff;border-radius:8px;height:28px;position:relative;">
         <div style="width:${w}%;background:#05057D;height:100%;border-radius:8px;"></div>
       </div>
