@@ -1348,7 +1348,9 @@ function lsDoLogin() {
   if (password.length < 4) { document.getElementById('lsGrpPw').classList.add('err'); ok = false; }
   if (!ok) return;
   btn.classList.add('loading');
-  fetch('https://khedmotcenter.com/api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'user_login', mobile, password})})
+  let deviceToken = localStorage.getItem('kc_device_token');
+  if (!deviceToken) { deviceToken = 'dt_' + Math.random().toString(36).substr(2,16) + '_' + Date.now(); localStorage.setItem('kc_device_token', deviceToken); }
+  fetch('https://khedmotcenter.com/api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'user_login', mobile, password, device_token: deviceToken})})
     .then(r => r.json())
     .then(data => {
       btn.classList.remove('loading');

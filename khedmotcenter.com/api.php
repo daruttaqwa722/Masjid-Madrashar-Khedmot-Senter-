@@ -137,8 +137,9 @@ if ($action === 'logout') {
 
 // USER LOGIN
 if ($action === 'user_login') {
-    $mobile = $body['mobile'] ?? '';
-    $pass   = $body['password'] ?? '';
+    $mobile       = $body['mobile'] ?? '';
+    $pass         = $body['password'] ?? '';
+    $device_token = $body['device_token'] ?? '';
     if (!$mobile || !$pass) { echo json_encode(['success' => false, 'message' => 'মোবাইল ও পাসওয়ার্ড দিন।']); exit(); }
     $stmt = $db->prepare("SELECT * FROM users WHERE mobile=? LIMIT 1");
     $stmt->bind_param('s', $mobile);
@@ -152,6 +153,15 @@ if ($action === 'user_login') {
     if ($user['expiresAt'] && $user['expiresAt'] < $now) {
         echo json_encode(['success' => false, 'message' => 'আপনার মেয়াদ শেষ হয়েছে।']);
         exit();
+    }
+    if ($user['device_token'] && $device_token && $user['device_token'] !== $device_token) {
+        echo json_encode(['success' => false, 'message' => 'এই একাউন্ট অন্য ডিভাইস থেকে ব্যবহার হচ্ছে। যোগাযোগ করুন।']);
+        exit();
+    }
+    if (!$user['device_token'] && $device_token) {
+        $upd = $db->prepare("UPDATE users SET device_token=? WHERE id=?");
+        $upd->bind_param('ss', $device_token, $user['id']);
+        $upd->execute();
     }
     unset($user['password']); $user['created_at'] = $user['createdAt'] ? date('d/m/Y', intval($user['createdAt']) / 1000) : ''; $user['expiry_date'] = $user['expiresAt'] ? date('d/m/Y', intval($user['expiresAt']) / 1000) : '';
     echo json_encode(['success' => true, 'user' => $user]);
@@ -576,7 +586,7 @@ if ($action === 'admin_edit_user') {
     $expiresAt = $expiry ? strtotime(str_replace('/', '-', $expiry)) * 1000 : 0;
     if ($pass) {
         $hash = password_hash($pass, PASSWORD_DEFAULT);
-        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, password=?, plain_pass=?, expiresAt=? WHERE id=?");
+        $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, password=?, plain_pass=?, expiresAt=?, device_token=NULL WHERE id=?");
         $stmt->bind_param('sssssis', $name, $mobile, $address, $hash, $pass, $expiresAt, $id);
     } else {
         $stmt = $db->prepare("UPDATE users SET name=?, mobile=?, address=?, expiresAt=? WHERE id=?");
