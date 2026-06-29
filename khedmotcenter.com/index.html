@@ -1912,20 +1912,6 @@ async function loadVisitorStats() {
   const cont = document.getElementById('visitorStatsContainer');
   if (!res.success) { cont.innerHTML = '<div class="adm-empty">'+res.message+'</div>'; return; }
   const h = `
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
-      <div style="background:rgba(5,5,125,0.08);border-radius:12px;padding:0.8rem;text-align:center;">
-        <div style="font-size:1.6rem;font-weight:700;color:#05057D;">${res.today_new + res.today_returning}</div>
-        <div style="font-size:0.75rem;color:#666;margin-top:0.3rem;">আজকে মোট</div>
-      </div>
-      <div style="background:rgba(5,5,125,0.08);border-radius:12px;padding:0.8rem;text-align:center;">
-        <div style="font-size:1.6rem;font-weight:700;color:#05057D;">${res.yesterday_new + res.yesterday_returning}</div>
-        <div style="font-size:0.75rem;color:#666;margin-top:0.3rem;">গতকাল মোট</div>
-      </div>
-      <div style="background:rgba(5,5,125,0.08);border-radius:12px;padding:0.8rem;text-align:center;">
-        <div style="font-size:1.6rem;font-weight:700;color:#05057D;">${res.week_new + res.week_returning}</div>
-        <div style="font-size:0.75rem;color:#666;margin-top:0.3rem;">এক সপ্তাহ মোট</div>
-      </div>
-    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
       <div style="background:rgba(5,5,125,0.05);border-radius:12px;padding:1rem;text-align:center;">
         <div style="font-size:2rem;font-weight:700;color:#05057D;">${res.today_new}</div>
@@ -1986,6 +1972,8 @@ async function trackVisitor() {
   else if (document.referrer.includes('google')) source = 'google';
   else if (document.referrer.includes('facebook')) source = 'facebook';
   else if (document.referrer.includes('whatsapp')) source = 'whatsapp';
+  else if (document.referrer.includes('youtube')) source = 'youtube';
+  else if (document.referrer.includes('youtu.be')) source = 'youtube';
   await api('track_visitor', {visitor_id: vid, source: source});
 }
 
