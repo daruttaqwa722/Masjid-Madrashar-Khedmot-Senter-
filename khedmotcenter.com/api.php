@@ -757,21 +757,19 @@ if ($action === 'get_hourly_stats') {
     $token = $body['token'] ?? '';
     if ($token !== 'admin_session') { echo json_encode(['success'=>false]); exit(); }
     date_default_timezone_set('Asia/Dhaka');
+    $bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+    $toBnNum = function($n) use ($bn) { $s=''; foreach(str_split((string)$n) as $c) $s.=is_numeric($c)?$bn[$c]:$c; return $s; };
+    $bdPeriod = function($h) { if($h>=0&&$h<4) return 'রাত'; elseif($h<6) return 'ভোর'; elseif($h<12) return 'সকাল'; elseif($h==12) return 'দুপুর'; elseif($h<17) return 'বিকেল'; elseif($h<20) return 'সন্ধ্যা'; else return 'রাত'; };
     $result = [];
     for ($h = 1; $h <= 24; $h++) {
         $from = (time() - $h * 3600) * 1000;
         $to   = (time() - ($h-1) * 3600) * 1000;
-        $fromHour = date('H', time() - $h * 3600);
-        $toHour   = date('H', time() - ($h-1) * 3600);
         $fromTs = time() - $h * 3600;
         $toTs   = time() - ($h-1) * 3600;
         $fromHr = (int)date('G', $fromTs);
         $toHr   = (int)date('G', $toTs);
-        $bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-        function toBnNum($n) { global $bn; $s=''; foreach(str_split((string)$n) as $c) $s.=is_numeric($c)?$bn[$c]:$c; return $s; }
-        function bdPeriod($h) { if($h>=0&&$h<4) return 'রাত'; elseif($h<6) return 'ভোর'; elseif($h<12) return 'সকাল'; elseif($h==12) return 'দুপুর'; elseif($h<17) return 'বিকেল'; elseif($h<20) return 'সন্ধ্যা'; else return 'রাত'; }
-        $fromLabel = bdPeriod($fromHr).' '.toBnNum(date('g', $fromTs)).':'.toBnNum(date('i', $fromTs));
-        $toLabel   = bdPeriod($toHr).' '.toBnNum(date('g', $toTs)).':'.toBnNum(date('i', $toTs));
+        $fromLabel = $bdPeriod($fromHr).' '.$toBnNum(date('g', $fromTs)).':'.$toBnNum(date('i', $fromTs));
+        $toLabel   = $bdPeriod($toHr).' '.$toBnNum(date('g', $toTs)).':'.$toBnNum(date('i', $toTs));
         $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM posts WHERE created >= ? AND created < ?");
         $stmt->bind_param('ii', $from, $to);
         $stmt->execute();
