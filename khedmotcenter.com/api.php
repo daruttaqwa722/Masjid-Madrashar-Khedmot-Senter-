@@ -801,7 +801,6 @@ if ($action === "check_duplicate") {
     echo json_encode(["duplicate" => $is_dup]);
     exit();
 }
-$db->close();
 
 // LIVE VISITOR PING
 if ($action === 'live_ping') {
