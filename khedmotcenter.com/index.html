@@ -2014,7 +2014,9 @@ function startLivePing() {
   const vid = localStorage.getItem('visitor_id') || 'v_anon';
   const pages = {'home':'হোম','news':'নিউজ','user':'ইউজার'};
   function ping() {
-    const page = document.querySelector('[data-page].active')?.dataset?.page || 'home';
+    const activeEl = document.querySelector('.page.active');
+    const idMap = {pageHome:'home', pageNews:'news', pageUserDashboard:'user', pageAdminDashboard:'admin'};
+    const page = (activeEl && idMap[activeEl.id]) || 'home';
     api('live_ping', {visitor_id: vid, page: page});
   }
   ping();
