@@ -1249,6 +1249,16 @@
     </div>
   </div>
 </div><!-- /#pageAdminDashboard -->
+<!-- SAFETY REMINDER POPUP -->
+<div id="safetyPopupOverlay" style="display:none;position:fixed;inset:0;background:rgba(11,31,140,0.55);z-index:9999;align-items:center;justify-content:center;padding:1rem;">
+  <div id="safetyPopupBox" style="background:#fff;width:100%;max-width:360px;border-radius:22px;box-shadow:0 20px 60px rgba(11,31,140,0.35);padding:1.6rem 1.4rem;text-align:center;opacity:0;transform:scale(0.92);transition:opacity 300ms ease,transform 300ms ease;">
+    <div style="width:64px;height:64px;border-radius:50%;background:#0B1F8C;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.8rem;">🛡️</div>
+    <div style="font-weight:700;font-size:1.05rem;color:#0B1F8C;line-height:1.6;margin-bottom:0.8rem;">নিরাপদ খেদমত নিশ্চিত করতে আপনার সহযোগিতা প্রয়োজন</div>
+    <div style="font-size:0.88rem;color:#444;line-height:1.8;margin-bottom:1.3rem;">কোনো মসজিদ, মাদ্রাসা বা নিয়োগ বিজ্ঞপ্তিতে প্রতারণা, বাটপারি, ভুয়া তথ্য, স্প্যাম বা সন্দেহজনক কিছু দেখতে পেলে অনুগ্রহ করে আমাদের জানান। আপনার একটি রিপোর্ট আপনাকে এবং অন্যান্য সেবাগ্রহীতাদের প্রতারণার হাত থেকে রক্ষা করতে সহায়তা করবে। যেকোনো সমস্যা পেলে এডমিনের হোয়াটসঅ্যাপ নাম্বারে জানিয়ে দিন, এডমিন সঠিক পদক্ষেপ নিবেন।</div>
+    <button onclick="closeSafetyPopup()" style="width:100%;padding:0.75rem;border-radius:12px;background:#fff;border:2px solid #0B1F8C;color:#0B1F8C;font-weight:700;font-size:0.92rem;cursor:pointer;">পরে দেখব</button>
+  </div>
+</div>
+<!-- /SAFETY REMINDER POPUP -->
 
 
 <script>
@@ -1314,6 +1324,28 @@ function closeLogin() {
   document.getElementById('loginSheet').classList.remove('open');
   document.body.style.overflow = '';
 }
+function closeSafetyPopup() {
+  const overlay = document.getElementById("safetyPopupOverlay");
+  const box = document.getElementById("safetyPopupBox");
+  box.style.opacity = "0";
+  box.style.transform = "scale(0.92)";
+  setTimeout(() => { overlay.style.display = "none"; }, 300);
+}
+function showSafetyPopup() {
+  const overlay = document.getElementById("safetyPopupOverlay");
+  const box = document.getElementById("safetyPopupBox");
+  overlay.style.display = "flex";
+  setTimeout(() => { box.style.opacity = "1"; box.style.transform = "scale(1)"; }, 10);
+  localStorage.setItem("kc_last_safety_popup", Date.now());
+function checkAndShowSafetyPopup() {
+  const lastPopup = localStorage.getItem("kc_last_safety_popup");
+  const now = Date.now();
+  const twelveHours = 12 * 60 * 60 * 1000;
+  if (!lastPopup || (now - parseInt(lastPopup)) >= twelveHours) {
+    setTimeout(showSafetyPopup, 60000);
+  }
+}
+}
 function lsTogglePw(inputId, iconId) {
   const inp = document.getElementById(inputId);
   const icon = document.getElementById(iconId);
@@ -1363,6 +1395,7 @@ function lsDoLogin() {
         window._userMobile = mobile;
         closeLogin();
         showPage('user');
+        checkAndShowSafetyPopup();
       } else {
         document.getElementById('userAlertMsg').textContent = data.message || 'মোবাইল নাম্বার বা পাসওয়ার্ড সঠিক নয়।';
         alert_el.classList.add('show');
