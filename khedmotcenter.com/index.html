@@ -2580,6 +2580,28 @@ document.getElementById('postAddress')?.addEventListener('input', updateSmartPre
 <script>
 document.addEventListener('DOMContentLoaded', trackVisitor);
 </script>
+<!-- SAFETY REPORT POPUP - Only for logged-in users -->
+<div id="safetyPopupOverlay" style="display:none;position:fixed;inset:0;background:rgba(11,31,140,0.55);z-index:9999;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;width:100%;max-width:360px;border-radius:22px;box-shadow:0 20px 60px rgba(11,31,140,0.35);overflow:hidden;">
+    <div style="background:linear-gradient(135deg,#0B1F8C,#1212C0);padding:24px 20px;text-align:center;position:relative;">
+      <button onclick="closeSafetyPopup()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;background:rgba(255,255,255,0.2);color:#fff;font-size:24px;border-radius:50%;cursor:pointer;">×</button>
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:32px;">🛡️</div>
+      <div style="font-size:1.05rem;font-weight:700;color:#D4AF37;line-height:1.6;">নিরাপদ খেদমত নিশ্চিত করতে আপনার সহযোগিতা প্রয়োজন</div>
+    </div>
+    <div style="padding:24px 20px;">
+      <div style="font-size:0.92rem;color:#545454;line-height:1.8;margin-bottom:20px;">কোনো মসজিদ, মাদ্রাসা বা নিয়োগ বিজ্ঞপ্তিতে প্রতারণা, বাটপারি, ভুয়া তথ্য, স্প্যাম বা সন্দেহজনক কিছু দেখতে পেলে অনুগ্রহ করে আমাদের জানান। আপনার একটি রিপোর্ট আপনাকে এবং অন্যান্য সেবাগ্রহীতাদের প্রতারণার হাত থেকে রক্ষা করতে সহায়তা করবে।</div>
+      <div style="background:rgba(212,175,55,0.08);border-left:3px solid #D4AF37;padding:12px 14px;border-radius:6px;font-size:0.88rem;color:#0B1F8C;line-height:1.6;">আপনার সহযোগিতাই নিরাপদ খেদমত নিশ্চিত করতে আমাদের সবচেয়ে বড় শক্তি।</div>
+    </div>
+    <div style="padding:20px;border-top:1px solid rgba(11,31,140,0.08);">
+      <button onclick="closeSafetyPopup()" style="width:100%;padding:12px 20px;background:linear-gradient(135deg,#0B1F8C,#1212C0);color:#D4AF37;border:none;border-radius:12px;font-size:0.95rem;font-weight:700;cursor:pointer;">বন্ধ করুন</button>
+    </div>
+  </div>
+</div>
+<script>
+function showSafetyPopup(){var e=document.getElementById("safetyPopupOverlay");e&&(e.style.display="flex")}
+function closeSafetyPopup(){var e=document.getElementById("safetyPopupOverlay");e&&(e.style.display="none",localStorage.setItem("kc_last_safety_popup",Date.now()))}
+document.getElementById("safetyPopupOverlay")&&document.getElementById("safetyPopupOverlay").addEventListener("click",function(e){e.target===this&&closeSafetyPopup()}),document.addEventListener("keydown",function(e){"Escape"===e.key&&closeSafetyPopup()}),window.addEventListener("load",function(){if(document.querySelector(".page.active")&&"pageUserDashboard"===document.querySelector(".page.active").id){var e=localStorage.getItem("kc_last_safety_popup"),t=Date.now(),o=12*60*60*1e3;!e||t-parseInt(e)>=o?setTimeout(showSafetyPopup,6e4):closeSafetyPopup()}});
+</script>
 </body>
 </html>
 
