@@ -2600,7 +2600,7 @@ document.addEventListener('DOMContentLoaded', trackVisitor);
 <script>
 function showSafetyPopup(){var e=document.getElementById("safetyPopupOverlay");e&&(e.style.display="flex",localStorage.setItem("kc_last_safety_popup",Date.now()))}
 function closeSafetyPopup(){var e=document.getElementById("safetyPopupOverlay");e&&(e.style.display="none")}
-document.getElementById("safetyPopupOverlay")&&document.getElementById("safetyPopupOverlay").addEventListener("click",function(e){e.target===this&&closeSafetyPopup()}),document.addEventListener("keydown",function(e){"Escape"===e.key&&closeSafetyPopup()}),window.addEventListener("load",function(){var e=localStorage.getItem("kc_user_session");if(e){var t=localStorage.getItem("kc_last_safety_popup"),o=Date.now(),l=12*60*60*1e3;!t||o-parseInt(t)>=l?setTimeout(showSafetyPopup,6e4):closeSafetyPopup()}else closeSafetyPopup()});
+document.getElementById("safetyPopupOverlay")&&document.getElementById("safetyPopupOverlay").addEventListener("click",function(e){e.target===this&&closeSafetyPopup()}),document.addEventListener("keydown",function(e){"Escape"===e.key&&closeSafetyPopup()}),window.addEventListener("load",function(){alert("DEBUG: Page loaded");var e=localStorage.getItem("kc_user_session");alert("DEBUG: kc_user_session = " + e);if(e){alert("DEBUG: User logged in");var t=localStorage.getItem("kc_last_safety_popup"),o=Date.now(),l=12*60*60*1e3;console.log("DEBUG: Last popup time =",t);console.log("DEBUG: Current time =",o);console.log("DEBUG: Time diff (hours) =",(o-parseInt(t||0))/3600000);!t||o-parseInt(t)>=l?(console.log("DEBUG: Showing popup in 60 seconds"),setTimeout(showSafetyPopup,6e4)):closeSafetyPopup()}else{console.log("DEBUG: User NOT logged in");closeSafetyPopup()}});
 </script>
 </body>
 </html>
