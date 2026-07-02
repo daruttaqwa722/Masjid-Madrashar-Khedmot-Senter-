@@ -2600,7 +2600,7 @@ document.addEventListener('DOMContentLoaded', trackVisitor);
 <script>
 function showSafetyPopup(){var e=document.getElementById("safetyPopupOverlay");e&&(e.style.display="flex")}
 function closeSafetyPopup(){var e=document.getElementById("safetyPopupOverlay");e&&(e.style.display="none",localStorage.setItem("kc_last_safety_popup",Date.now()))}
-document.getElementById("safetyPopupOverlay")&&document.getElementById("safetyPopupOverlay").addEventListener("click",function(e){e.target===this&&closeSafetyPopup()}),document.addEventListener("keydown",function(e){"Escape"===e.key&&closeSafetyPopup()}),window.addEventListener("load",function(){if(document.querySelector(".page.active")&&"pageUserDashboard"===document.querySelector(".page.active").id){var e=localStorage.getItem("kc_last_safety_popup"),t=Date.now(),o=12*60*60*1e3;!e||t-parseInt(e)>=o?setTimeout(showSafetyPopup,6e4):closeSafetyPopup()}});
+document.getElementById("safetyPopupOverlay")&&document.getElementById("safetyPopupOverlay").addEventListener("click",function(e){e.target===this&&closeSafetyPopup()}),document.addEventListener("keydown",function(e){"Escape"===e.key&&closeSafetyPopup()}),window.addEventListener("load",function(){alert("DEBUG: Page loaded");var p=document.querySelector(".page.active");alert("DEBUG: Active page = " + (p?p.id:"NONE"));if(p&&"pageUserDashboard"===p.id){var e=localStorage.getItem("kc_last_safety_popup"),t=Date.now(),o=12*60*60*1e3;!e||t-parseInt(e)>=o?setTimeout(showSafetyPopup,6e4):closeSafetyPopup()}});
 </script>
 </body>
 </html>
